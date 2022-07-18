@@ -24,7 +24,7 @@ public class StdRegForm extends javax.swing.JFrame {
      */
     
     Connection con= null;
-    Statement stmt = null;
+//    Statement stmt = null;
     ResultSet rset = null;
     PreparedStatement pstmt=null;
     
@@ -351,6 +351,7 @@ public class StdRegForm extends javax.swing.JFrame {
 
                                                 pstmt.execute();
                                                 System.out.println("query successfully executed");
+                                                JOptionPane.showMessageDialog(null, "query successfully executed");
 
                                             } catch (SQLException e) {
 
