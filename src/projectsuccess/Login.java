@@ -178,7 +178,7 @@ public class Login extends javax.swing.JFrame {
      String username=uNameTxt.getText();
      String password=String.valueOf(passWordArea.getPassword());
 
-     if (username.equals("123")&& password.equals("123"))
+     if (username.equals("")&& password.equals(""))
      {  
         // Component frame = null;
     // JOptionPane.showMessageDialog(frame, "you are sucessfully login") ;  
@@ -186,18 +186,20 @@ public class Login extends javax.swing.JFrame {
      this.dispose();
        HomeWindowV2 h1=new  HomeWindowV2();
        h1.setVisible(true);
-    }//GEN-LAST:event_btnLinActionPerformed
-     else{
+     }  
+       else{
          Component frame = null;
       JOptionPane.showMessageDialog(frame, "invaild username or password") ;  
      
      
       
- 
+               }
     
-     }
      
-    }
+    }//GEN-LAST:event_btnLinActionPerformed
+     
+     
+  
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
