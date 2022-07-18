@@ -114,7 +114,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addComponent(btnLin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
-                .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(BGLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(passWord, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
