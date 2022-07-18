@@ -180,8 +180,8 @@ public class Login extends javax.swing.JFrame {
 
      if (username.equals("123")&& password.equals("123"))
      {  
-         Component frame = null;
-     JOptionPane.showMessageDialog(frame, "you are sucessfully login") ;  
+        // Component frame = null;
+    // JOptionPane.showMessageDialog(frame, "you are sucessfully login") ;  
      
      this.dispose();
        HomeWindowV2 h1=new  HomeWindowV2();
