@@ -5,13 +5,14 @@
  */
 package projectsuccess;
 
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.awt.*;
+//import java.awt.Toolkit;
+import java.sql.*;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
+
+//import javax.swing.JOptionPane;
 //import javax.swing.JOptionPane;
 
 /**
@@ -21,13 +22,12 @@ import javax.swing.ImageIcon;
 public class TcherRegForm extends javax.swing.JFrame {
 
     Connection conn=null;
-    Statement sta= null;
-    ResultSet rst= null;
-    
+    Statement stmt; 
     /**
      * Creates new form regForm
      */
-    public TcherRegForm() {
+    public TcherRegForm()
+    {conn = DBConnect.connect();
         initComponents();
         
         ImageIcon myImage=new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/regicon.png")));
@@ -252,45 +252,53 @@ public class TcherRegForm extends javax.swing.JFrame {
 
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
         // TODO add your handling code here:
-         try{
-           sta=conn.createStatement();
+        
+        //   sta=conn.createStatement();
              
         int TchrID=Integer.parseInt(Tchr_ID.getText());
         String TchrName = Tchr_Name.getText();
         String Namewith_Initials = Name_with_Initials.getText();
-        String  Address1 = Address.getText();
+        String Address1 = Address.getText();
+        String DOB1 = DOB.getText();
         String Phoneno = Phone_no.getText();
         String gender = (String) sex.getSelectedItem();
         String NIC1 = NIC.getText();
         String SubjName = Subj_Name.getText();
         String PaymentFees = Payment_Fees.getText();
-        String DOB1 = DOB.getText();
         
-        String sql;
-             sql = "INSERT INTO tchr_info_table VALUES(Tchr_ID,Tchr_Name,Name_with_Initials,Address,Phone_no,sex,NIC,Subj_Name,Payment_Fees,DOB) (?,?,?,?,?,?,?,?,?,?)";
+        
+         if(!TchrName.isEmpty() && !Namewith_Initials.isEmpty() && !Address1.isEmpty() && !DOB1.isEmpty() && !Phoneno.isEmpty() && !gender.isEmpty() && !NIC1.isEmpty() && !SubjName.isEmpty() && !PaymentFees.isEmpty()){
+        
+         try{
+        
+         
+            String sql = "INSERT INTO tchr_info_table(Tchr_ID,Tchr_Name,Name_with_Initials,Address,Phone_no,sex,NIC,Subj_Name,Payment_Fees,DOB) VALUES(?,?,?,?,?,?,?,?,?,?)";
             
-        PreparedStatement pst=conn.prepareStatement(sql);
-        pst.setInt(1, TchrID);
-        pst.setString(2, TchrName);
-        pst.setString(3,Namewith_Initials);
-        pst.setString(4,Address1);
-        pst.setString(5,Phoneno);
-        pst.setString(6,gender);
-        pst.setString(7,NIC1);
-        pst.setString(8,SubjName);
-        pst.setString(9,PaymentFees);
-        pst.setString(10,DOB1);
+        PreparedStatement pstmt=conn.prepareStatement(sql);
+        pstmt.setInt(1,TchrID);
+        pstmt.setString(2,TchrName);
+        pstmt.setString(3,Namewith_Initials);
+        pstmt.setString(4,Address1);
+        pstmt.setString(5,Phoneno);
+        pstmt.setString(6,gender);
+        pstmt.setString(7,NIC1);
+        pstmt.setString(8,SubjName);
+        pstmt.setString(9,PaymentFees);
+        pstmt.setString(10,DOB1);
         
-        pst.execute();
-        
-
+        pstmt.execute();
+            JOptionPane.showMessageDialog(null,"Successfully saved");
+         
         }
         catch(Exception e){ 
         System.out.println(e);
     }//GEN-LAST:event_createBtnActionPerformed
-
+         }
+         else{
+                JOptionPane.showMessageDialog(null, "Please Fill the Required Fields","Error Occurred!",JOptionPane.ERROR_MESSAGE);
+            }
     }
-
+    
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
