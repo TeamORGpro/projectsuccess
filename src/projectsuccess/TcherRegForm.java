@@ -187,6 +187,11 @@ public class TcherRegForm extends javax.swing.JFrame {
         jPanel1.add(Subj_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, 388, -1));
 
         Payment_Fees.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        Payment_Fees.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Payment_FeesKeyTyped(evt);
+            }
+        });
         jPanel1.add(Payment_Fees, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 430, 388, -1));
 
         fn.setText("Full Name");
@@ -269,7 +274,7 @@ public class TcherRegForm extends javax.swing.JFrame {
         String PaymentFees = Payment_Fees.getText();
         
         
-         if(!TchrName.isEmpty() && !Namewith_Initials.isEmpty() && !Address1.isEmpty() && !DOB1.isEmpty() && !Phoneno.isEmpty() && !gender.isEmpty() && !NIC1.isEmpty() && !SubjName.isEmpty() && !PaymentFees.isEmpty()){
+        if(!TchrName.isEmpty() && !Namewith_Initials.isEmpty() && !Address1.isEmpty() && !DOB1.isEmpty() && !Phoneno.isEmpty() && !gender.isEmpty() && !NIC1.isEmpty() && !SubjName.isEmpty() && !PaymentFees.isEmpty()){
         
          try{
         
@@ -294,12 +299,21 @@ public class TcherRegForm extends javax.swing.JFrame {
         }
         catch(Exception e){ 
         System.out.println(e);
-    }//GEN-LAST:event_createBtnActionPerformed
-         }
-         else{
+        }
+        }
+        else{
                 JOptionPane.showMessageDialog(null, "Please Fill the Required Fields","Error Occurred!",JOptionPane.ERROR_MESSAGE);
             }
-    }
+        
+    }//GEN-LAST:event_createBtnActionPerformed
+
+    private void Payment_FeesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Payment_FeesKeyTyped
+        // TODO add your handling code here:
+        if(!Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_Payment_FeesKeyTyped
+         
     
 
     public static void main(String args[]) {

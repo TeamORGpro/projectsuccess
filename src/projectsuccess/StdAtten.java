@@ -258,14 +258,15 @@ public class StdAtten extends javax.swing.JFrame {
                                 .addComponent(txtStatuslb, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(attmarkPanlLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(attmarkPanlLayout.createSequentialGroup()
-                        .addComponent(createBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(newBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(cnslBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(5, 5, 5))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, attmarkPanlLayout.createSequentialGroup()
+                .addComponent(createBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(newBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(cnslBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         attmarkPanlLayout.setVerticalGroup(
             attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,11 +285,11 @@ public class StdAtten extends javax.swing.JFrame {
                 .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtStdID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(stdID))
-                .addGap(11, 11, 11)
+                .addGap(18, 18, 18)
                 .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtStdName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(stdName))
-                .addGap(11, 11, 11)
+                .addGap(18, 18, 18)
                 .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtStatuslb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -296,7 +297,7 @@ public class StdAtten extends javax.swing.JFrame {
                     .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(presentRB)
                         .addComponent(absentRB)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -427,11 +428,7 @@ public class StdAtten extends javax.swing.JFrame {
         String specNote=txtNotes.getText();
         String status=txtStatuslb.getText();
         
-//        String[] tblHead={"Student ID","Student Name","Subject Name","Status"};
-//        
-//        JTable tbl=new JTable(dtm);
-
-        
+    
         
         try {
                                                 
@@ -439,20 +436,24 @@ public class StdAtten extends javax.swing.JFrame {
 
             pstmt2 = con.prepareStatement(query);
 
-//                                                pstmt2.setInt(1, Std_ID);
+
             pstmt2.setString(1, date);
             pstmt2.setString(2, subject);
             pstmt2.setString(3, techerName);
             pstmt2.setInt(4, Std_ID);
             pstmt2.setString(5, Std_Name);
             pstmt2.setString(6, status);
-            pstmt2.setString(7, specNote);
             
-
-
+            
+            if (!(specNote.equals("Special Note"))){
+                pstmt2.setString(7, specNote);
+            }
+            else{
+                
+                pstmt2.setString(7, "");
+            }
 
             pstmt2.execute();
-            System.out.println("query successfully executed");
             JOptionPane.showMessageDialog(null, "query successfully executed");
 
         } catch (SQLException e) {

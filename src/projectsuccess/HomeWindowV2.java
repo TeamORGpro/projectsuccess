@@ -6,6 +6,7 @@
 package projectsuccess;
 
 import java.awt.Color;
+import java.sql.*;
 import javax.swing.JPanel;
 
 /**
@@ -17,8 +18,14 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     /**
      * Creates new form HomeWindow
      */
+        Connection con= null;
+        ResultSet rset = null;
+        PreparedStatement pstmt=null;
+    
     public HomeWindowV2() {
         initComponents();
+        
+        con = DBConnect.connect();
     }
 
     /**
@@ -826,6 +833,20 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
     private void btnstdInfoAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnstdInfoAllActionPerformed
         mainPnl.setSelectedIndex(2);
+        
+        try {
+            String studentID ="SELECT Std_ID FROM std_info_table;";
+//            pstmt = con.prepareStatement(studentID);
+            Statement st = con.createStatement();
+            
+            ResultSet executeQuery = st.executeQuery(studentID);
+            
+            String id=executeQuery.getString("Std_ID");
+            
+            System.out.println(id);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_btnstdInfoAllActionPerformed
 
     private void btnAttnInfoAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttnInfoAllActionPerformed
