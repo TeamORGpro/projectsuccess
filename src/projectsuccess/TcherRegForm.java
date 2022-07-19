@@ -37,6 +37,7 @@ public class TcherRegForm extends javax.swing.JFrame {
         ImageIcon i=new ImageIcon(img2);
         
         registerIcn1.setIcon(i);
+        Tchr_ID.setEnabled(false);
     }
 
     /**
@@ -57,6 +58,7 @@ public class TcherRegForm extends javax.swing.JFrame {
         NIC.setText("");
         Subj_Name.setText("");
         Payment_Fees.setText("");
+        Tchr_ID.setEnabled(false);
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -73,7 +75,7 @@ public class TcherRegForm extends javax.swing.JFrame {
         tcherregisterTitle = new javax.swing.JLabel();
         registerIcn1 = new javax.swing.JLabel();
         Name_with_Initials = new javax.swing.JTextField();
-        clearBtn = new javax.swing.JButton();
+        newBtn = new javax.swing.JButton();
         Address = new javax.swing.JTextField();
         Tchr_ID = new javax.swing.JTextField();
         Subj_Name = new javax.swing.JTextField();
@@ -162,18 +164,18 @@ public class TcherRegForm extends javax.swing.JFrame {
         Name_with_Initials.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel1.add(Name_with_Initials, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 388, -1));
 
-        clearBtn.setBackground(new java.awt.Color(255, 255, 153));
-        clearBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        clearBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/clear.png"))); // NOI18N
-        clearBtn.setText("Clear");
-        clearBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        clearBtn.setIconTextGap(6);
-        clearBtn.addActionListener(new java.awt.event.ActionListener() {
+        newBtn.setBackground(new java.awt.Color(255, 255, 153));
+        newBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        newBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/new.png"))); // NOI18N
+        newBtn.setText("New");
+        newBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        newBtn.setIconTextGap(6);
+        newBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearBtnActionPerformed(evt);
+                newBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(clearBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 480, 100, 36));
+        jPanel1.add(newBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 480, 100, 36));
 
         Address.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel1.add(Address, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 388, -1));
@@ -232,11 +234,11 @@ public class TcherRegForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
+    private void newBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newBtnActionPerformed
         // TODO add your handling code here:
         
         reset();
-    }//GEN-LAST:event_clearBtnActionPerformed
+    }//GEN-LAST:event_newBtnActionPerformed
 
 
     private void cnslBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnslBtnActionPerformed
@@ -255,7 +257,7 @@ public class TcherRegForm extends javax.swing.JFrame {
         
         //   sta=conn.createStatement();
              
-        int TchrID=Integer.parseInt(Tchr_ID.getText());
+//        int TchrID=Integer.parseInt(Tchr_ID.getText());
         String TchrName = Tchr_Name.getText();
         String Namewith_Initials = Name_with_Initials.getText();
         String Address1 = Address.getText();
@@ -272,19 +274,19 @@ public class TcherRegForm extends javax.swing.JFrame {
          try{
         
          
-            String sql = "INSERT INTO tchr_info_table(Tchr_ID,Tchr_Name,Name_with_Initials,Address,Phone_no,sex,NIC,Subj_Name,Payment_Fees,DOB) VALUES(?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO tchr_info_table(Tchr_Name,Name_with_Initials,Address,Phone_no,sex,NIC,Subj_Name,Payment_Fees,DOB) VALUES(?,?,?,?,?,?,?,?,?)";
             
         PreparedStatement pstmt=conn.prepareStatement(sql);
-        pstmt.setInt(1,TchrID);
-        pstmt.setString(2,TchrName);
-        pstmt.setString(3,Namewith_Initials);
-        pstmt.setString(4,Address1);
-        pstmt.setString(5,Phoneno);
-        pstmt.setString(6,gender);
-        pstmt.setString(7,NIC1);
-        pstmt.setString(8,SubjName);
-        pstmt.setString(9,PaymentFees);
-        pstmt.setString(10,DOB1);
+//        pstmt.setInt(1,TchrID);
+        pstmt.setString(1,TchrName);
+        pstmt.setString(2,Namewith_Initials);
+        pstmt.setString(3,Address1);
+        pstmt.setString(4,Phoneno);
+        pstmt.setString(5,gender);
+        pstmt.setString(6,NIC1);
+        pstmt.setString(7,SubjName);
+        pstmt.setString(8,PaymentFees);
+        pstmt.setString(9,DOB1);
         
         pstmt.execute();
             JOptionPane.showMessageDialog(null,"Successfully saved");
@@ -348,7 +350,6 @@ public class TcherRegForm extends javax.swing.JFrame {
     private javax.swing.JTextField Tchr_ID;
     private javax.swing.JTextField Tchr_Name;
     private javax.swing.JLabel adders;
-    private javax.swing.JButton clearBtn;
     private javax.swing.JButton cnslBtn;
     private javax.swing.JButton createBtn;
     private javax.swing.JLabel db;
@@ -356,6 +357,7 @@ public class TcherRegForm extends javax.swing.JFrame {
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton newBtn;
     private javax.swing.JLabel nic;
     private javax.swing.JLabel nwi;
     private javax.swing.JLabel pNo;

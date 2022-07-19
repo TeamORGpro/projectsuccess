@@ -65,7 +65,7 @@ public class PaymentDetails extends javax.swing.JFrame {
         monthCB = new javax.swing.JComboBox<>();
         displayFee = new javax.swing.JLabel();
         createBtn = new javax.swing.JButton();
-        clearBtn = new javax.swing.JButton();
+        newBtn = new javax.swing.JButton();
         cnslBtn = new javax.swing.JButton();
         txtTchrName = new javax.swing.JTextField();
         txtSbjName = new javax.swing.JTextField();
@@ -151,18 +151,18 @@ public class PaymentDetails extends javax.swing.JFrame {
         createBtn.setIconTextGap(6);
         addpaymentDetails.add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 347, 100, 36));
 
-        clearBtn.setBackground(new java.awt.Color(255, 255, 153));
-        clearBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        clearBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/clear.png"))); // NOI18N
-        clearBtn.setText("Clear");
-        clearBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        clearBtn.setIconTextGap(6);
-        clearBtn.addActionListener(new java.awt.event.ActionListener() {
+        newBtn.setBackground(new java.awt.Color(255, 255, 153));
+        newBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        newBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/new.png"))); // NOI18N
+        newBtn.setText("New");
+        newBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        newBtn.setIconTextGap(6);
+        newBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearBtnActionPerformed(evt);
+                newBtnActionPerformed(evt);
             }
         });
-        addpaymentDetails.add(clearBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 347, 100, 36));
+        addpaymentDetails.add(newBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 347, 100, 36));
 
         cnslBtn.setBackground(new java.awt.Color(255, 102, 102));
         cnslBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -202,10 +202,10 @@ public class PaymentDetails extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3MouseClicked
 
-    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
+    private void newBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newBtnActionPerformed
         // TODO add your handling code here:
         reset();
-    }//GEN-LAST:event_clearBtnActionPerformed
+    }//GEN-LAST:event_newBtnActionPerformed
 
     private void cnslBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnslBtnActionPerformed
         // TODO add your handling code here:
@@ -260,7 +260,6 @@ public class PaymentDetails extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addpaymentDetails;
-    private javax.swing.JButton clearBtn;
     private javax.swing.JButton cnslBtn;
     private javax.swing.JButton createBtn;
     private javax.swing.JLabel displayFee;
@@ -268,6 +267,7 @@ public class PaymentDetails extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> gradeCB;
     private javax.swing.JLabel month;
     private javax.swing.JComboBox<String> monthCB;
+    private javax.swing.JButton newBtn;
     private javax.swing.JLabel paymentIcn1;
     private javax.swing.JLabel pmntDetails;
     private javax.swing.JLabel pmntFee;

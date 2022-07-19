@@ -6,11 +6,13 @@
 package projectsuccess;
 
 import java.awt.*;
+import java.sql.*;
 import javax.swing.*;
 //import java.awt.Image;
 //import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.table.*;
 
 
 
@@ -23,6 +25,10 @@ public class StdAtten extends javax.swing.JFrame {
     /**
      * Creates new form stdAtten
      */
+    Connection con= null;
+    ResultSet rset = null;
+    PreparedStatement pstmt2=null;
+    
     public StdAtten() {
         initComponents();
         
@@ -35,6 +41,9 @@ public class StdAtten extends javax.swing.JFrame {
         ImageIcon i=new ImageIcon(img2);
         
         attenIcn1.setIcon(i);
+        
+        con = DBConnect.connect();
+        
     }
 
     /**
@@ -60,6 +69,9 @@ public class StdAtten extends javax.swing.JFrame {
         txtStdName.setText("");
         buttonGroup1.clearSelection();
         txtNotes.setText("");
+        txtStatuslb.setText("");
+        txtStatuslb.setEnabled(true);
+        txtNotes.setText("Special Note");
 
     }
     
@@ -86,8 +98,10 @@ public class StdAtten extends javax.swing.JFrame {
         txtSbjName = new javax.swing.JTextField();
         txtTcherName = new javax.swing.JTextField();
         createBtn = new javax.swing.JButton();
-        clearBtn = new javax.swing.JButton();
+        newBtn = new javax.swing.JButton();
         cnslBtn = new javax.swing.JButton();
+        txtStatuslb = new javax.swing.JTextField();
+        statuslb = new javax.swing.JLabel();
         tblPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -141,6 +155,11 @@ public class StdAtten extends javax.swing.JFrame {
         buttonGroup1.add(absentRB);
         absentRB.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         absentRB.setText("Absent");
+        absentRB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                absentRBActionPerformed(evt);
+            }
+        });
 
         txtNotes.setColumns(20);
         txtNotes.setForeground(new java.awt.Color(153, 153, 153));
@@ -166,16 +185,21 @@ public class StdAtten extends javax.swing.JFrame {
         createBtn.setText("Save");
         createBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         createBtn.setIconTextGap(5);
-
-        clearBtn.setBackground(new java.awt.Color(255, 255, 153));
-        clearBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        clearBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/clear.png"))); // NOI18N
-        clearBtn.setText("Clear");
-        clearBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        clearBtn.setIconTextGap(6);
-        clearBtn.addActionListener(new java.awt.event.ActionListener() {
+        createBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearBtnActionPerformed(evt);
+                createBtnActionPerformed(evt);
+            }
+        });
+
+        newBtn.setBackground(new java.awt.Color(255, 255, 153));
+        newBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        newBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/new.png"))); // NOI18N
+        newBtn.setText("New");
+        newBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        newBtn.setIconTextGap(6);
+        newBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newBtnActionPerformed(evt);
             }
         });
 
@@ -190,6 +214,9 @@ public class StdAtten extends javax.swing.JFrame {
                 cnslBtnActionPerformed(evt);
             }
         });
+
+        statuslb.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        statuslb.setText("Status");
 
         javax.swing.GroupLayout attmarkPanlLayout = new javax.swing.GroupLayout(attmarkPanl);
         attmarkPanl.setLayout(attmarkPanlLayout);
@@ -210,28 +237,34 @@ public class StdAtten extends javax.swing.JFrame {
                                 .addComponent(stdID))
                             .addGroup(attmarkPanlLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(tchrName)))
-                        .addGap(10, 10, 10)
+                                .addComponent(tchrName))
+                            .addGroup(attmarkPanlLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(statuslb)))
                         .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtStdID, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTcherName, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSbjName, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtStdName, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(attmarkPanlLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(createBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(cnslBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(attmarkPanlLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtStdID, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTcherName, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtSbjName, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtStdName, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, attmarkPanlLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(presentRB)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(absentRB)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtStatuslb, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(attmarkPanlLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(attmarkPanlLayout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(presentRB)
-                        .addGap(35, 35, 35)
-                        .addComponent(absentRB)))
+                        .addComponent(createBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(newBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(cnslBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(5, 5, 5))
         );
         attmarkPanlLayout.setVerticalGroup(
@@ -257,58 +290,29 @@ public class StdAtten extends javax.swing.JFrame {
                     .addComponent(stdName))
                 .addGap(11, 11, 11)
                 .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(presentRB)
-                    .addComponent(absentRB))
-                .addGap(18, 18, 18)
+                    .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtStatuslb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(statuslb))
+                    .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(presentRB)
+                        .addComponent(absentRB)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(39, 39, 39)
                 .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(createBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cnslBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(newBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cnslBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28))
         );
 
-        bgPnl.add(attmarkPanl, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 370, 410));
+        bgPnl.add(attmarkPanl, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 370, 440));
 
         tblPanel.setBackground(new java.awt.Color(153, 204, 255));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Student ID", "Student Name", "Subject Name", "Status"
@@ -381,14 +385,24 @@ public class StdAtten extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtNotesFocusLost
 
-    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
+    private void newBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newBtnActionPerformed
         // TODO add your handling code here:
         
         reset();
-    }//GEN-LAST:event_clearBtnActionPerformed
+    }//GEN-LAST:event_newBtnActionPerformed
 
     private void presentRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_presentRBActionPerformed
         // TODO add your handling code here:
+       
+            if (presentRB.isSelected()== (true)){
+                String c = "Present";
+                
+                txtStatuslb.setText(c);
+                txtStatuslb.setEnabled(false);
+
+                
+            }
+           
     }//GEN-LAST:event_presentRBActionPerformed
 
     private void cnslBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnslBtnActionPerformed
@@ -396,6 +410,71 @@ public class StdAtten extends javax.swing.JFrame {
         
         this.dispose();
     }//GEN-LAST:event_cnslBtnActionPerformed
+
+    private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
+        // TODO add your handling code here:
+                String[] columns={txtStdID.getText(), txtStdName.getText(), txtSbjName.getText(), txtStatuslb.getText() };
+                DefaultTableModel dtm= (DefaultTableModel)jTable1.getModel();
+                dtm.addRow(columns);
+        
+        String b="Absent";
+        String a="Present";
+        int Std_ID=Integer.parseInt(txtStdID.getText());
+        String Std_Name=txtStdName.getText();
+        String date=txtAttnDate.getText();
+        String subject=txtSbjName.getText();
+        String techerName=txtTcherName.getText();
+        String specNote=txtNotes.getText();
+        String status=txtStatuslb.getText();
+        
+//        String[] tblHead={"Student ID","Student Name","Subject Name","Status"};
+//        
+//        JTable tbl=new JTable(dtm);
+
+        
+        
+        try {
+                                                
+            String query ="insert into attndance_table(Date,Subj_Name,Tchr_Name,Std_ID,Std_Name,Status,Spc_Note)values(?,?,?,?,?,?,?)";
+
+            pstmt2 = con.prepareStatement(query);
+
+//                                                pstmt2.setInt(1, Std_ID);
+            pstmt2.setString(1, date);
+            pstmt2.setString(2, subject);
+            pstmt2.setString(3, techerName);
+            pstmt2.setInt(4, Std_ID);
+            pstmt2.setString(5, Std_Name);
+            pstmt2.setString(6, status);
+            pstmt2.setString(7, specNote);
+            
+
+
+
+            pstmt2.execute();
+            System.out.println("query successfully executed");
+            JOptionPane.showMessageDialog(null, "query successfully executed");
+
+        } catch (SQLException e) {
+
+            System.out.println(e.getMessage());
+        }
+        
+    }//GEN-LAST:event_createBtnActionPerformed
+
+    private void absentRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_absentRBActionPerformed
+        // TODO add your handling code here:
+        
+        if (absentRB.isSelected()== (true)){
+                String b = "Absent";
+                
+                txtStatuslb.setText(b);
+                txtStatuslb.setEnabled(false);
+
+                
+            }
+        
+    }//GEN-LAST:event_absentRBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -443,15 +522,16 @@ public class StdAtten extends javax.swing.JFrame {
     private javax.swing.JLabel attnDate;
     private javax.swing.JPanel bgPnl;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton clearBtn;
     private javax.swing.JButton cnslBtn;
     private javax.swing.JButton createBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton newBtn;
     private javax.swing.JRadioButton presentRB;
     private javax.swing.JLabel sbjName;
+    private javax.swing.JLabel statuslb;
     private javax.swing.JLabel stdID;
     private javax.swing.JLabel stdName;
     private javax.swing.JPanel tblPanel;
@@ -459,6 +539,7 @@ public class StdAtten extends javax.swing.JFrame {
     private javax.swing.JTextField txtAttnDate;
     private javax.swing.JTextArea txtNotes;
     private javax.swing.JTextField txtSbjName;
+    private javax.swing.JTextField txtStatuslb;
     private javax.swing.JTextField txtStdID;
     private javax.swing.JTextField txtStdName;
     private javax.swing.JTextField txtTcherName;
