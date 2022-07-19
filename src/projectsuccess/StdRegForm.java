@@ -24,7 +24,6 @@ public class StdRegForm extends javax.swing.JFrame {
      */
     
     Connection con= null;
-//    Statement stmt = null;
     ResultSet rset = null;
     PreparedStatement pstmt=null;
     
@@ -302,10 +301,7 @@ public class StdRegForm extends javax.swing.JFrame {
     }//GEN-LAST:event_newBtnActionPerformed
 
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
-        
 
-
-//            int Std_ID=Integer.parseInt(txtStdID.getText());
             String Std_Name=txtstdName.getText();
             String Name_with_Initials=txtstdNameShort.getText();
             String Address=txtAddress.getText();
@@ -341,7 +337,7 @@ public class StdRegForm extends javax.swing.JFrame {
 
                                                 pstmt = con.prepareStatement(query);
 
-//                                                pstmt.setInt(1, Std_ID);
+
                                                 pstmt.setString(1, Std_Name);
                                                 pstmt.setString(2, Name_with_Initials);
                                                 pstmt.setString(3, Address);
