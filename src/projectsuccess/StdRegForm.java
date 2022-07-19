@@ -41,6 +41,7 @@ public class StdRegForm extends javax.swing.JFrame {
         registerIcn1.setIcon(i);
 
         con = DBConnect.connect();
+        txtStdID.setEnabled(false);
 
     }
     //  add date format
@@ -69,9 +70,12 @@ public class StdRegForm extends javax.swing.JFrame {
         cboxSex.setSelectedItem("Male");
         txtguardiansName.setText("");
         txtgphoneNo.setText("");
+        txtStdID.setEnabled(false);
         
     }
-    
+//    private void stID(){
+//        txtStdID.setEnabled(false);
+//    }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -98,7 +102,7 @@ public class StdRegForm extends javax.swing.JFrame {
         registerIcn1 = new javax.swing.JLabel();
         stdNameShort = new javax.swing.JLabel();
         txtstdNameShort = new javax.swing.JTextField();
-        clearBtn = new javax.swing.JButton();
+        newBtn = new javax.swing.JButton();
         txtAddress = new javax.swing.JTextField();
         stdID = new javax.swing.JLabel();
         txtStdID = new javax.swing.JTextField();
@@ -251,18 +255,18 @@ public class StdRegForm extends javax.swing.JFrame {
         txtstdNameShort.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel1.add(txtstdNameShort, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 97, 388, -1));
 
-        clearBtn.setBackground(new java.awt.Color(255, 255, 153));
-        clearBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        clearBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/clear.png"))); // NOI18N
-        clearBtn.setText("Clear");
-        clearBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        clearBtn.setIconTextGap(6);
-        clearBtn.addActionListener(new java.awt.event.ActionListener() {
+        newBtn.setBackground(new java.awt.Color(255, 255, 153));
+        newBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        newBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/new.png"))); // NOI18N
+        newBtn.setText("New");
+        newBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        newBtn.setIconTextGap(6);
+        newBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearBtnActionPerformed(evt);
+                newBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(clearBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 480, 100, 36));
+        jPanel1.add(newBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 480, 100, 36));
 
         txtAddress.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel1.add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 177, 388, -1));
@@ -291,17 +295,17 @@ public class StdRegForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
+    private void newBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newBtnActionPerformed
         // TODO add your handling code here:
 
         reset();    
-    }//GEN-LAST:event_clearBtnActionPerformed
+    }//GEN-LAST:event_newBtnActionPerformed
 
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
         
 
 
-            int Std_ID=Integer.parseInt(txtStdID.getText());
+//            int Std_ID=Integer.parseInt(txtStdID.getText());
             String Std_Name=txtstdName.getText();
             String Name_with_Initials=txtstdNameShort.getText();
             String Address=txtAddress.getText();
@@ -333,20 +337,20 @@ public class StdRegForm extends javax.swing.JFrame {
                                             
                                             try {
                                                 
-                                                String query ="insert into std_info_table(Std_ID,Std_Name,Name_with_Initials,Address,DOB,Grade,Phone_no,sex,Grd_name,Grd_Phone_no)values(?,?,?,?,?,?,?,?,?,?)";
+                                                String query ="insert into std_info_table(Std_Name,Name_with_Initials,Address,DOB,Grade,Phone_no,sex,Grd_name,Grd_Phone_no)values(?,?,?,?,?,?,?,?,?)";
 
                                                 pstmt = con.prepareStatement(query);
 
-                                                pstmt.setInt(1, Std_ID);
-                                                pstmt.setString(2, Std_Name);
-                                                pstmt.setString(3, Name_with_Initials);
-                                                pstmt.setString(4, Address);
-                                                pstmt.setString(5, DOB);
-                                                pstmt.setString(6, Grade);
-                                                pstmt.setString(7, Phone_no);
-                                                pstmt.setString(8, sex);
-                                                pstmt.setString(9, Grd_name);
-                                                pstmt.setString(10, Grd_Phone_no);
+//                                                pstmt.setInt(1, Std_ID);
+                                                pstmt.setString(1, Std_Name);
+                                                pstmt.setString(2, Name_with_Initials);
+                                                pstmt.setString(3, Address);
+                                                pstmt.setString(4, DOB);
+                                                pstmt.setString(5, Grade);
+                                                pstmt.setString(6, Phone_no);
+                                                pstmt.setString(7, sex);
+                                                pstmt.setString(8, Grd_name);
+                                                pstmt.setString(9, Grd_Phone_no);
 
 
                                                 pstmt.execute();
@@ -471,7 +475,6 @@ public class StdRegForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel address;
     private javax.swing.JComboBox<String> cboxSex;
-    private javax.swing.JButton clearBtn;
     private javax.swing.JButton cnslBtn;
     private javax.swing.JButton createBtn;
     private javax.swing.JLabel dob;
@@ -480,6 +483,7 @@ public class StdRegForm extends javax.swing.JFrame {
     private javax.swing.JLabel guardiansName;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton newBtn;
     private javax.swing.JLabel phoneNo;
     private javax.swing.JLabel registerIcn1;
     private javax.swing.JLabel registerTitle;
