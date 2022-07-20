@@ -7,11 +7,18 @@ package projectsuccess;
 
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.WindowAdapter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.*;
 
 
 public class PaymentDetails extends javax.swing.JFrame {
+    
+    Connection con= null;
+    ResultSet rset = null;
+    PreparedStatement pstmt2=null;
 
 
     public PaymentDetails() {
@@ -24,6 +31,8 @@ public class PaymentDetails extends javax.swing.JFrame {
         ImageIcon i=new ImageIcon(img2);
         
         paymentIcn1.setIcon(i);
+        
+        con = DBConnect.connect();
     }
    
 
@@ -149,6 +158,11 @@ public class PaymentDetails extends javax.swing.JFrame {
         createBtn.setText("Save");
         createBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         createBtn.setIconTextGap(6);
+        createBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createBtnActionPerformed(evt);
+            }
+        });
         addpaymentDetails.add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 347, 100, 36));
 
         clearBtn.setBackground(new java.awt.Color(255, 255, 153));
@@ -212,6 +226,40 @@ public class PaymentDetails extends javax.swing.JFrame {
         
         this.dispose();
     }//GEN-LAST:event_cnslBtnActionPerformed
+
+    private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
+        // TODO add your handling code here:
+        int Std_ID=Integer.parseInt(txtstdID.getText());
+        String Std_Name=txtstdName.getText();
+        String Tchr_Name=txtTchrName.getText();
+        String Subj_Name=txtSbjName.getText();
+        String Grade=gradeCB.getItemAt(6);
+     //   String paymet=displayFee.getText();
+        String Month=monthCB.getItemAt(10);
+        
+        try{
+            
+            String query="insert into payment_table(Std_ID,Std_Name,Tchr_Name,Subj_Name,Grade,Month)values(?,?,?,?,?,?)";
+            
+            pstmt2 = con.prepareStatement(query);
+            
+            pstmt2.setInt(1,Std_ID);
+            pstmt2.setString(2,Std_Name);
+            pstmt2.setString(3,Tchr_Name);
+            pstmt2.setString(4,Subj_Name);
+            pstmt2.setString(5,Grade);
+            pstmt2.setString(6,Month);
+            
+            pstmt2.execute();
+            JOptionPane.showMessageDialog(null, "query successfully executed");
+            
+            } catch (SQLException e) {
+                System.out.println(e);
+            
+        }
+        
+        
+    }//GEN-LAST:event_createBtnActionPerformed
 
     /**
      * @param args the command line arguments

@@ -395,6 +395,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
         restBtn.setBackground(new java.awt.Color(255, 255, 102));
         restBtn.setText("Reset");
+        restBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout attnFilterPnlLayout = new javax.swing.GroupLayout(attnFilterPnl);
         attnFilterPnl.setLayout(attnFilterPnlLayout);
@@ -866,6 +871,10 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_restBtn1MouseReleased
+
+    private void restBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_restBtnActionPerformed
 
     private void onClick(JPanel panel){
         panel.setBackground(new Color(48,203,220));
