@@ -121,6 +121,16 @@ public class TcherRegForm extends javax.swing.JFrame {
         jPanel1.add(DOB, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 388, -1));
 
         Phone_no.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        Phone_no.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Phone_noActionPerformed(evt);
+            }
+        });
+        Phone_no.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Phone_noKeyTyped(evt);
+            }
+        });
         jPanel1.add(Phone_no, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 388, -1));
 
         NIC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -258,11 +268,7 @@ public class TcherRegForm extends javax.swing.JFrame {
 
 
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
-        // TODO add your handling code here:
-        
-        //   sta=conn.createStatement();
-             
-//        int TchrID=Integer.parseInt(Tchr_ID.getText());
+
         String TchrName = Tchr_Name.getText();
         String Namewith_Initials = Name_with_Initials.getText();
         String Address1 = Address.getText();
@@ -282,7 +288,6 @@ public class TcherRegForm extends javax.swing.JFrame {
             String sql = "INSERT INTO tchr_info_table(Tchr_Name,Name_with_Initials,Address,Phone_no,sex,NIC,Subj_Name,Payment_Fees,DOB) VALUES(?,?,?,?,?,?,?,?,?)";
             
         PreparedStatement pstmt=conn.prepareStatement(sql);
-//        pstmt.setInt(1,TchrID);
         pstmt.setString(1,TchrName);
         pstmt.setString(2,Namewith_Initials);
         pstmt.setString(3,Address1);
@@ -295,8 +300,9 @@ public class TcherRegForm extends javax.swing.JFrame {
         
         pstmt.execute();
             JOptionPane.showMessageDialog(null,"Successfully saved");
-         
+        pstmt.close();
         }
+         
         catch(Exception e){ 
         System.out.println(e);
         }
@@ -313,6 +319,18 @@ public class TcherRegForm extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_Payment_FeesKeyTyped
+
+    private void Phone_noActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Phone_noActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Phone_noActionPerformed
+
+    private void Phone_noKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Phone_noKeyTyped
+        // TODO add your handling code here:
+        
+        if(!Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_Phone_noKeyTyped
          
     
 

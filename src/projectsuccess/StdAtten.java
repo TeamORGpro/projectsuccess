@@ -455,7 +455,7 @@ public class StdAtten extends javax.swing.JFrame {
 
             pstmt2.execute();
             JOptionPane.showMessageDialog(null, "query successfully executed");
-
+pstmt2.close();
         } catch (SQLException e) {
 
             System.out.println(e.getMessage());
