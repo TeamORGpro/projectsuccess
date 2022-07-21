@@ -204,35 +204,45 @@ public class TcherRegForm extends javax.swing.JFrame {
         });
         jPanel1.add(Payment_Fees, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 430, 388, -1));
 
+        fn.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         fn.setText("Full Name");
         jPanel1.add(fn, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 74, 100, 20));
 
+        nwi.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         nwi.setText("Name with Initials");
-        jPanel1.add(nwi, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 110, 20));
+        jPanel1.add(nwi, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 120, 20));
 
+        tID.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         tID.setText("Teacher ID");
-        jPanel1.add(tID, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 110, -1));
+        jPanel1.add(tID, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 155, 110, -1));
 
+        adders.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         adders.setText("Address");
-        jPanel1.add(adders, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 194, 110, 20));
+        jPanel1.add(adders, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 110, 20));
 
+        db.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         db.setText("Date of Birth");
         jPanel1.add(db, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 100, 20));
 
+        pNo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         pNo.setText("Phone No");
         jPanel1.add(pNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 120, 20));
 
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel1.setText("Sex");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 70, 20));
 
+        nic.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         nic.setText("NIC");
         jPanel1.add(nic, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 70, 20));
 
+        sbj.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         sbj.setText("Subject");
         jPanel1.add(sbj, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 70, 20));
 
-        sbjfee.setText("Subject Fee");
-        jPanel1.add(sbjfee, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 70, 20));
+        sbjfee.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        sbjfee.setText("Subject Fee (Rs.)");
+        jPanel1.add(sbjfee, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 120, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -276,9 +286,36 @@ public class TcherRegForm extends javax.swing.JFrame {
         String Phoneno = Phone_no.getText();
         String gender = (String) sex.getSelectedItem();
         String NIC1 = NIC.getText();
-        String SubjName = Subj_Name.getText();
+        String SubjName = Subj_Name.getText().toLowerCase();
         String PaymentFees = Payment_Fees.getText();
         
+        
+
+            char[] charArray = SubjName.toCharArray();
+            boolean foundSpace = true;
+
+            for(int i = 0; i < charArray.length; i++) {
+
+
+              if(Character.isLetter(charArray[i])) {
+
+
+                if(foundSpace) {
+
+
+                  charArray[i] = Character.toUpperCase(charArray[i]);
+                  foundSpace = false;
+                }
+              }
+
+              else {
+         
+                foundSpace = true;
+              }
+            }
+   
+            SubjName = String.valueOf(charArray);
+
         
         if(!TchrName.isEmpty() && !Namewith_Initials.isEmpty() && !Address1.isEmpty() && !DOB1.isEmpty() && !Phoneno.isEmpty() && !gender.isEmpty() && !NIC1.isEmpty() && !SubjName.isEmpty() && !PaymentFees.isEmpty()){
         
