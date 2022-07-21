@@ -421,6 +421,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
         restBtn.setBackground(new java.awt.Color(255, 255, 102));
         restBtn.setText("Reset");
+        restBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restBtnActionPerformed(evt);
+            }
+        });
 
         updateBtn.setBackground(new java.awt.Color(153, 204, 255));
         updateBtn.setText("Update");
@@ -1007,10 +1012,12 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
     }//GEN-LAST:event_restBtn1MouseReleased
 
+
     private void btnLoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoutActionPerformed
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_btnLoutActionPerformed
+
 
     private void onClick(JPanel panel){
         panel.setBackground(new Color(48,203,220));

@@ -5,12 +5,18 @@
  */
 package projectsuccess;
 
+
 import java.awt.*;
 import java.sql.*;
+
 import javax.swing.*;
 
 
 public class PaymentDetails extends javax.swing.JFrame {
+    
+    Connection con= null;
+    ResultSet rset = null;
+    PreparedStatement pstmt2=null;
 
     
     Connection con= null;
@@ -25,9 +31,9 @@ public class PaymentDetails extends javax.swing.JFrame {
         ImageIcon i=new ImageIcon(img2);
         
         paymentIcn1.setIcon(i);
+
         txtSbjPymnetFee.setEnabled(false);
-        
- 
+ main
         con = DBConnect.connect();
     }
    
@@ -152,6 +158,11 @@ public class PaymentDetails extends javax.swing.JFrame {
         createBtn.setText("Save");
         createBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         createBtn.setIconTextGap(6);
+        createBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createBtnActionPerformed(evt);
+            }
+        });
         addpaymentDetails.add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 347, 100, 36));
 
         newBtn.setBackground(new java.awt.Color(255, 255, 153));
@@ -242,6 +253,7 @@ public class PaymentDetails extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_cnslBtnActionPerformed
 
+
 //    public class function{
 //        
 //    }
@@ -304,6 +316,7 @@ public class PaymentDetails extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_searchBtn02ActionPerformed
+
 
     /**
      * @param args the command line arguments
