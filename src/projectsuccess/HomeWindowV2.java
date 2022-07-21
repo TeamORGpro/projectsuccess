@@ -7,7 +7,6 @@ package projectsuccess;
 
 import java.awt.Color;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -915,7 +914,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 dt.addRow(v);
             }
             rs.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -941,7 +940,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 dt1.addRow(v1);
             }
             rs1.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         
@@ -955,20 +954,21 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             Statement s3 = con.createStatement();
             ResultSet rs3 = s3.executeQuery("select * from payment_table");
             while (rs3.next()) {
-                Vector v1 = new Vector();
-                v1.add(rs3.getInt("Std_ID"));
-                v1.add(rs3.getString("Std_Name"));
-                v1.add(rs3.getString("Subj_Name"));
-                v1.add(rs3.getString("Tchr_Name"));
-                v1.add(rs3.getString("Payment_fee"));
-                v1.add(rs3.getString("Month"));
+                Vector v3 = new Vector();
+                v3.add(rs3.getInt("Std_ID"));
+                v3.add(rs3.getString("Std_Name"));
+                v3.add(rs3.getString("Subj_Name"));
+                v3.add(rs3.getString("Tchr_Name"));
+                v3.add(rs3.getString("Payment_fee"));
+                v3.add(rs3.getString("Month"));
 
-                dt3.addRow(v1);
+                dt3.addRow(v3);
             }
             rs3.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
         
     }//GEN-LAST:event_btnPaymentInfoAll1ActionPerformed
 
@@ -995,7 +995,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 dt2.addRow(v2);
             }
             rs2.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         
