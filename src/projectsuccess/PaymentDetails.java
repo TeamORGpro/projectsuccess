@@ -15,6 +15,7 @@ public class PaymentDetails extends javax.swing.JFrame {
     
     Connection con= null;
 
+
     public PaymentDetails() {
         initComponents();
         
@@ -28,6 +29,9 @@ public class PaymentDetails extends javax.swing.JFrame {
         
  
         con = DBConnect.connect();
+        
+        getSubject();
+         
     }
    
 
@@ -43,9 +47,8 @@ public class PaymentDetails extends javax.swing.JFrame {
         txtstdID.setText("");
         txtstdName.setText("");
         txtTchrName.setText("");
-        txtSbjName.setText("");
         gradeCB.setSelectedItem("Grade 6");
-        jLabel1.setText("0.00");
+        feeLbl.setText("0.00");
 
         
     }
@@ -71,10 +74,10 @@ public class PaymentDetails extends javax.swing.JFrame {
         newBtn = new javax.swing.JButton();
         cnslBtn = new javax.swing.JButton();
         txtTchrName = new javax.swing.JTextField();
-        txtSbjName = new javax.swing.JTextField();
         searchBtn01 = new javax.swing.JButton();
         searchBtn02 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        feeLbl = new javax.swing.JLabel();
+        subCB = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Payment Details");
@@ -151,6 +154,11 @@ public class PaymentDetails extends javax.swing.JFrame {
         createBtn.setText("Save");
         createBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         createBtn.setIconTextGap(6);
+        createBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createBtnActionPerformed(evt);
+            }
+        });
         addpaymentDetails.add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 347, 100, 36));
 
         newBtn.setBackground(new java.awt.Color(255, 255, 153));
@@ -182,9 +190,6 @@ public class PaymentDetails extends javax.swing.JFrame {
         txtTchrName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         addpaymentDetails.add(txtTchrName, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 179, 360, -1));
 
-        txtSbjName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        addpaymentDetails.add(txtSbjName, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 139, 250, -1));
-
         searchBtn01.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         searchBtn01.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Search.png"))); // NOI18N
         searchBtn01.setText("Search");
@@ -205,10 +210,13 @@ public class PaymentDetails extends javax.swing.JFrame {
                 searchBtn02ActionPerformed(evt);
             }
         });
-        addpaymentDetails.add(searchBtn02, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 133, 100, 30));
+        addpaymentDetails.add(searchBtn02, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 134, 100, 30));
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        addpaymentDetails.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 120, 20));
+        feeLbl.setBackground(new java.awt.Color(255, 255, 255));
+        feeLbl.setText("0.00");
+        addpaymentDetails.add(feeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 120, 20));
+
+        addpaymentDetails.add(subCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 140, 250, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -247,8 +255,8 @@ public class PaymentDetails extends javax.swing.JFrame {
     private void searchBtn01ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtn01ActionPerformed
         // TODO add your handling code here:
 
-        ResultSet rs = null;
-        PreparedStatement pstmt=null;
+        ResultSet rs;
+        PreparedStatement pstmt;
         try {
             String studentID=txtstdID.getText();
             pstmt = con.prepareStatement("SELECT * FROM std_info_table WHERE Std_ID = ?");
@@ -267,7 +275,7 @@ public class PaymentDetails extends javax.swing.JFrame {
             pstmt.close();
             rs.close();
 
-        } catch (Exception e) {
+        } catch (HeadlessException | SQLException e) {
             System.out.println(e.getMessage());
         }
         
@@ -275,11 +283,11 @@ public class PaymentDetails extends javax.swing.JFrame {
 
     private void searchBtn02ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtn02ActionPerformed
         // TODO add your handling code here:
-
-        ResultSet rs2 = null;
-        PreparedStatement pstmt2=null;
+   
+        ResultSet rs2;
+        PreparedStatement pstmt2;
         try {
-            String subject=txtSbjName.getText();
+            String subject=(String) subCB.getSelectedItem();
             pstmt2 = con.prepareStatement("SELECT * FROM tchr_info_table WHERE Subj_Name = ?");
             pstmt2.setString(1, subject);
             rs2 = pstmt2.executeQuery();
@@ -288,21 +296,87 @@ public class PaymentDetails extends javax.swing.JFrame {
             String TeacherName =rs2.getString("Tchr_Name");
             String paymentfee = rs2.getString("Payment_Fees");
             txtTchrName.setText(TeacherName);
-            jLabel1.setText(paymentfee+".00");
+            feeLbl.setText(paymentfee+".00");
         }
             else{
                 JOptionPane.showMessageDialog(null, "Please Enter Valid Subject Name");
                 txtTchrName.setText("");
-                jLabel1.setText("");
+                feeLbl.setText("");
             }
             pstmt2.close();
             rs2.close();
 
-        } catch (Exception e) {
+        } catch (HeadlessException | SQLException e) {
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_searchBtn02ActionPerformed
 
+    private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
+        // TODO add your handling code here:
+        int Std_ID=Integer.parseInt(txtstdID.getText());
+        String Std_Name=txtstdName.getText();
+        String subject=(String) subCB.getSelectedItem();
+        String techerName=txtTchrName.getText();
+        String grd=(String) gradeCB.getSelectedItem();
+        String fee=feeLbl.getText();
+        String mnth=(String) monthCB.getSelectedItem();
+        
+    
+        
+        ResultSet rs3;
+        PreparedStatement pstmt3;
+        
+        try {
+                                                
+            String query ="insert into payment_table(Std_ID,Std_Name,Tchr_Name,Subj_Name,Payment_fee,Grade,Month)values(?,?,?,?,?,?,?)";
+
+            pstmt3 = con.prepareStatement(query);
+
+
+            pstmt3.setInt(1, Std_ID);
+            pstmt3.setString(2, Std_Name);
+            pstmt3.setString(3, techerName);
+            pstmt3.setString(4, subject);
+            pstmt3.setString(5, fee);
+            pstmt3.setString(6, grd);
+            pstmt3.setString(7, mnth);
+            
+            pstmt3.execute();
+            JOptionPane.showMessageDialog(null, "Data successfully Saved!");
+            
+            pstmt3.close();
+        }
+        catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        
+        
+                
+    }//GEN-LAST:event_createBtnActionPerformed
+
+    
+    public void getSubject(){
+    
+        ResultSet rsSub;
+        PreparedStatement psSub;
+        
+        String query1="SELECT Subj_Name FROM tchr_info_table;";
+        
+        try {
+            
+            psSub = con.prepareStatement(query1);
+            rsSub=psSub.executeQuery();
+            while (rsSub.next()){
+                String subjname= rsSub.getString("Subj_Name");
+                subCB.addItem(subjname);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+}
+    
     /**
      * @param args the command line arguments
      */
@@ -352,9 +426,9 @@ public class PaymentDetails extends javax.swing.JFrame {
     private javax.swing.JPanel addpaymentDetails;
     private javax.swing.JButton cnslBtn;
     private javax.swing.JButton createBtn;
+    private javax.swing.JLabel feeLbl;
     private javax.swing.JLabel grade;
     private javax.swing.JComboBox<String> gradeCB;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel month;
     private javax.swing.JComboBox<String> monthCB;
     private javax.swing.JButton newBtn;
@@ -366,8 +440,8 @@ public class PaymentDetails extends javax.swing.JFrame {
     private javax.swing.JButton searchBtn02;
     private javax.swing.JLabel stdID;
     private javax.swing.JLabel stdName;
+    private javax.swing.JComboBox<String> subCB;
     private javax.swing.JLabel tcherName;
-    private javax.swing.JTextField txtSbjName;
     private javax.swing.JTextField txtTchrName;
     private javax.swing.JTextField txtstdID;
     private javax.swing.JTextField txtstdName;
