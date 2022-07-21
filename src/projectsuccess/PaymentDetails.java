@@ -1,4 +1,4 @@
-/*
+/*  259
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -25,7 +25,6 @@ public class PaymentDetails extends javax.swing.JFrame {
         ImageIcon i=new ImageIcon(img2);
         
         paymentIcn1.setIcon(i);
-        txtSbjPymnetFee.setEnabled(false);
         
  
         con = DBConnect.connect();
@@ -46,8 +45,8 @@ public class PaymentDetails extends javax.swing.JFrame {
         txtTchrName.setText("");
         txtSbjName.setText("");
         gradeCB.setSelectedItem("Grade 6");
-        txtSbjPymnetFee.setText("0.00");
-        monthCB.setSelectedItem("January");
+        jLabel1.setText("0.00");
+
         
     }
     
@@ -73,9 +72,9 @@ public class PaymentDetails extends javax.swing.JFrame {
         cnslBtn = new javax.swing.JButton();
         txtTchrName = new javax.swing.JTextField();
         txtSbjName = new javax.swing.JTextField();
-        txtSbjPymnetFee = new javax.swing.JTextField();
         searchBtn01 = new javax.swing.JButton();
         searchBtn02 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Payment Details");
@@ -181,14 +180,10 @@ public class PaymentDetails extends javax.swing.JFrame {
         addpaymentDetails.add(cnslBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 347, 100, 36));
 
         txtTchrName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        addpaymentDetails.add(txtTchrName, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 179, 360, 20));
+        addpaymentDetails.add(txtTchrName, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 179, 360, -1));
 
         txtSbjName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         addpaymentDetails.add(txtSbjName, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 139, 250, -1));
-
-        txtSbjPymnetFee.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtSbjPymnetFee.setText("0.00");
-        addpaymentDetails.add(txtSbjPymnetFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 259, 360, -1));
 
         searchBtn01.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         searchBtn01.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Search.png"))); // NOI18N
@@ -211,6 +206,9 @@ public class PaymentDetails extends javax.swing.JFrame {
             }
         });
         addpaymentDetails.add(searchBtn02, new org.netbeans.lib.awtextra.AbsoluteConstraints(465, 133, 100, 30));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        addpaymentDetails.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 120, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -290,12 +288,12 @@ public class PaymentDetails extends javax.swing.JFrame {
             String TeacherName =rs2.getString("Tchr_Name");
             String paymentfee = rs2.getString("Payment_Fees");
             txtTchrName.setText(TeacherName);
-            txtSbjPymnetFee.setText(paymentfee);
+            jLabel1.setText(paymentfee+".00");
         }
             else{
                 JOptionPane.showMessageDialog(null, "Please Enter Valid Subject Name");
                 txtTchrName.setText("");
-                txtSbjPymnetFee.setText("");
+                jLabel1.setText("");
             }
             pstmt2.close();
             rs2.close();
@@ -356,6 +354,7 @@ public class PaymentDetails extends javax.swing.JFrame {
     private javax.swing.JButton createBtn;
     private javax.swing.JLabel grade;
     private javax.swing.JComboBox<String> gradeCB;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel month;
     private javax.swing.JComboBox<String> monthCB;
     private javax.swing.JButton newBtn;
@@ -369,7 +368,6 @@ public class PaymentDetails extends javax.swing.JFrame {
     private javax.swing.JLabel stdName;
     private javax.swing.JLabel tcherName;
     private javax.swing.JTextField txtSbjName;
-    private javax.swing.JTextField txtSbjPymnetFee;
     private javax.swing.JTextField txtTchrName;
     private javax.swing.JTextField txtstdID;
     private javax.swing.JTextField txtstdName;
