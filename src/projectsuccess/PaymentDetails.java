@@ -7,6 +7,7 @@ package projectsuccess;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -233,9 +234,9 @@ public class PaymentDetails extends javax.swing.JFrame {
         String Std_Name=txtstdName.getText();
         String Tchr_Name=txtTchrName.getText();
         String Subj_Name=txtSbjName.getText();
-        String Grade=gradeCB.getItemAt(6);
+        String Grade=(String)gradeCB.getSelectedItem();
      //   String paymet=displayFee.getText();
-        String Month=monthCB.getItemAt(10);
+        String Month=(String)monthCB.getSelectedItem();
         
         try{
             
@@ -260,7 +261,8 @@ public class PaymentDetails extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_createBtnActionPerformed
-
+    
+    
     /**
      * @param args the command line arguments
      */
