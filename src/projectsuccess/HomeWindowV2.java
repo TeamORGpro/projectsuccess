@@ -81,6 +81,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
         restBtn = new javax.swing.JButton();
+        updateBtn = new javax.swing.JButton();
         stdInfo = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -93,6 +94,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         deleteBtn1 = new javax.swing.JButton();
         restBtn1 = new javax.swing.JButton();
+        updateBtn2 = new javax.swing.JButton();
         tcherInfo = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -105,6 +107,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         deleteBtn2 = new javax.swing.JButton();
         restBtn2 = new javax.swing.JButton();
+        updateBtn3 = new javax.swing.JButton();
         pymntInfo = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -117,6 +120,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         deleteBtn3 = new javax.swing.JButton();
         restBtn3 = new javax.swing.JButton();
+        updateBtn4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Success Educational Institute");
@@ -311,6 +315,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
         btnLout.setBackground(new java.awt.Color(255, 102, 102));
         btnLout.setText("Log Out");
+        btnLout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoutActionPerformed(evt);
+            }
+        });
         home.add(btnLout, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 560, 97, 29));
 
         tcherregFormBtn.setBackground(new java.awt.Color(230, 244, 246));
@@ -371,7 +380,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -414,6 +427,9 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             }
         });
 
+        updateBtn.setBackground(new java.awt.Color(153, 204, 255));
+        updateBtn.setText("Update");
+
         javax.swing.GroupLayout attnFilterPnlLayout = new javax.swing.GroupLayout(attnFilterPnl);
         attnFilterPnl.setLayout(attnFilterPnlLayout);
         attnFilterPnlLayout.setHorizontalGroup(
@@ -427,7 +443,9 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addComponent(jButton5)
                 .addGap(18, 18, 18)
                 .addComponent(restBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(updateBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(deleteBtn)
                 .addContainerGap())
         );
@@ -440,7 +458,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(jButton5)
                     .addComponent(deleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(restBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(restBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(updateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(40, 40, 40))
         );
 
@@ -532,6 +551,9 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             }
         });
 
+        updateBtn2.setBackground(new java.awt.Color(153, 204, 255));
+        updateBtn2.setText("Update");
+
         javax.swing.GroupLayout stdFilterPnlLayout = new javax.swing.GroupLayout(stdFilterPnl);
         stdFilterPnl.setLayout(stdFilterPnlLayout);
         stdFilterPnlLayout.setHorizontalGroup(
@@ -545,7 +567,9 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addComponent(jButton6)
                 .addGap(18, 18, 18)
                 .addComponent(restBtn1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(updateBtn2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(deleteBtn1)
                 .addContainerGap())
         );
@@ -558,7 +582,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(jButton6)
                     .addComponent(deleteBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(restBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(restBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(updateBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -639,6 +664,9 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         restBtn2.setBackground(new java.awt.Color(255, 255, 102));
         restBtn2.setText("Reset");
 
+        updateBtn3.setBackground(new java.awt.Color(153, 204, 255));
+        updateBtn3.setText("Update");
+
         javax.swing.GroupLayout tcherFilterPnlLayout = new javax.swing.GroupLayout(tcherFilterPnl);
         tcherFilterPnl.setLayout(tcherFilterPnlLayout);
         tcherFilterPnlLayout.setHorizontalGroup(
@@ -652,7 +680,9 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addComponent(jButton7)
                 .addGap(18, 18, 18)
                 .addComponent(restBtn2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(updateBtn3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(deleteBtn2)
                 .addContainerGap())
         );
@@ -665,7 +695,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(jButton7)
                     .addComponent(deleteBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(restBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(restBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(updateBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -738,6 +769,9 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         restBtn3.setBackground(new java.awt.Color(255, 255, 102));
         restBtn3.setText("Reset");
 
+        updateBtn4.setBackground(new java.awt.Color(153, 204, 255));
+        updateBtn4.setText("Update");
+
         javax.swing.GroupLayout pymntFilterPnlLayout = new javax.swing.GroupLayout(pymntFilterPnl);
         pymntFilterPnl.setLayout(pymntFilterPnlLayout);
         pymntFilterPnlLayout.setHorizontalGroup(
@@ -751,7 +785,9 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addComponent(jButton8)
                 .addGap(18, 18, 18)
                 .addComponent(restBtn3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(updateBtn4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(deleteBtn3)
                 .addContainerGap())
         );
@@ -764,7 +800,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(jButton8)
                     .addComponent(deleteBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(restBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(restBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(updateBtn4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -865,6 +902,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         try {
             DefaultTableModel dt = (DefaultTableModel) jTable3.getModel();
             dt.setRowCount(0);
+            
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery("select * from std_info_table ");
             while (rs.next()) {
@@ -881,6 +919,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 v.add(rs.getString("Grd_Phone_no"));
                 dt.addRow(v);
             }
+            rs.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -906,6 +945,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 v1.add(rs1.getString("Spc_Note"));
                 dt1.addRow(v1);
             }
+            rs1.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -938,9 +978,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 v2.add(rs2.getString("NIC"));
                 dt2.addRow(v2);
             }
+            rs2.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
     }//GEN-LAST:event_btntcherInfoAllActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -970,9 +1012,12 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
     }//GEN-LAST:event_restBtn1MouseReleased
 
-    private void restBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restBtnActionPerformed
+
+    private void btnLoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoutActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_restBtnActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnLoutActionPerformed
+
 
     private void onClick(JPanel panel){
         panel.setBackground(new Color(48,203,220));
@@ -1095,5 +1140,9 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JPanel tcherFilterPnl;
     private javax.swing.JPanel tcherInfo;
     private javax.swing.JPanel tcherregFormBtn;
+    private javax.swing.JButton updateBtn;
+    private javax.swing.JButton updateBtn2;
+    private javax.swing.JButton updateBtn3;
+    private javax.swing.JButton updateBtn4;
     // End of variables declaration//GEN-END:variables
 }
