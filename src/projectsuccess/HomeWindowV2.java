@@ -358,11 +358,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Date", "Subject Name", "Teacher's Name", "Student ID", "Student Name", "Status", "Special Notes"
+                "Date", "Subject Name", "Student ID", "Student Name", "Teacher's Name", "Status", "Special Notes"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 true, true, true, true, true, false, true
@@ -953,9 +953,9 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 Vector v1 = new Vector();
                 v1.add(rs1.getString("Date"));
                 v1.add(rs1.getString("Subj_Name"));
-                v1.add(rs1.getString("Tchr_Name"));
                 v1.add(rs1.getInt("Std_ID"));
                 v1.add(rs1.getString("Std_Name"));
+                v1.add(rs1.getString("Tchr_Name"));
                 v1.add(rs1.getString("Status"));
                 v1.add(rs1.getString("Spc_Note"));
                 dt1.addRow(v1);
