@@ -527,7 +527,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         stdFilterPnl.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jLabel14.setText("Enter Student ID :");
+        jLabel14.setText("Search in Here :");
 
         stdSearchField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -657,7 +657,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         tcherFilterPnl.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
-        jLabel15.setText("Enter Teacher ID :");
+        jLabel15.setText("Search in Here :");
 
         tchrSearchField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
