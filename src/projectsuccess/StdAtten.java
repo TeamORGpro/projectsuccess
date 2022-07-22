@@ -43,6 +43,7 @@ public class StdAtten extends javax.swing.JFrame {
         attenIcn1.setIcon(i);
         
         con = DBConnect.connect();
+        getSubject();
         
     }
 
@@ -62,8 +63,6 @@ public class StdAtten extends javax.swing.JFrame {
     }
     
     private void reset(){
-        txtSbjName.setText("");
-        txtTcherName.setText("");
         txtStdID.setText("");
         txtStdID.setText("");
         txtStdName.setText("");
@@ -95,13 +94,14 @@ public class StdAtten extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtNotes = new javax.swing.JTextArea();
         tchrName = new javax.swing.JLabel();
-        txtSbjName = new javax.swing.JTextField();
         txtTcherName = new javax.swing.JTextField();
         createBtn = new javax.swing.JButton();
         newBtn = new javax.swing.JButton();
         cnslBtn = new javax.swing.JButton();
         txtStatuslb = new javax.swing.JTextField();
         statuslb = new javax.swing.JLabel();
+        subCB = new javax.swing.JComboBox<>();
+        searchBtn01 = new javax.swing.JButton();
         tblPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -132,18 +132,22 @@ public class StdAtten extends javax.swing.JFrame {
         attmarkPanl.setBackground(new java.awt.Color(198, 228, 255));
         attmarkPanl.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 5, 5, new java.awt.Color(102, 102, 102)));
 
-        sbjName.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        sbjName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         sbjName.setText("Subject Name");
 
-        stdID.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        stdID.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         stdID.setText("Student ID");
 
-        stdName.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        stdName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         stdName.setText("Student Name");
+
+        txtStdID.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+
+        txtStdName.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
         presentRB.setBackground(new java.awt.Color(198, 228, 255));
         buttonGroup1.add(presentRB);
-        presentRB.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        presentRB.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         presentRB.setText("Present");
         presentRB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,7 +157,7 @@ public class StdAtten extends javax.swing.JFrame {
 
         absentRB.setBackground(new java.awt.Color(198, 228, 255));
         buttonGroup1.add(absentRB);
-        absentRB.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        absentRB.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         absentRB.setText("Absent");
         absentRB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,6 +166,7 @@ public class StdAtten extends javax.swing.JFrame {
         });
 
         txtNotes.setColumns(20);
+        txtNotes.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtNotes.setForeground(new java.awt.Color(153, 153, 153));
         txtNotes.setLineWrap(true);
         txtNotes.setRows(5);
@@ -176,11 +181,13 @@ public class StdAtten extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(txtNotes);
 
-        tchrName.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        tchrName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         tchrName.setText("Teacher's Name");
 
+        txtTcherName.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+
         createBtn.setBackground(new java.awt.Color(102, 255, 102));
-        createBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        createBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         createBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/add-user.png"))); // NOI18N
         createBtn.setText("Save");
         createBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -192,7 +199,7 @@ public class StdAtten extends javax.swing.JFrame {
         });
 
         newBtn.setBackground(new java.awt.Color(255, 255, 153));
-        newBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        newBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         newBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/new.png"))); // NOI18N
         newBtn.setText("New");
         newBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -204,7 +211,7 @@ public class StdAtten extends javax.swing.JFrame {
         });
 
         cnslBtn.setBackground(new java.awt.Color(255, 102, 102));
-        cnslBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        cnslBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cnslBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/x.png"))); // NOI18N
         cnslBtn.setText("Cancel");
         cnslBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -215,15 +222,44 @@ public class StdAtten extends javax.swing.JFrame {
             }
         });
 
-        statuslb.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        txtStatuslb.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        txtStatuslb.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
+        statuslb.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         statuslb.setText("Status");
+
+        subCB.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        subCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Subject" }));
+        subCB.setPreferredSize(new java.awt.Dimension(27, 20));
+        subCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subCBActionPerformed(evt);
+            }
+        });
+
+        searchBtn01.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        searchBtn01.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Search.png"))); // NOI18N
+        searchBtn01.setText("Search");
+        searchBtn01.setIconTextGap(5);
+        searchBtn01.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtn01ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout attmarkPanlLayout = new javax.swing.GroupLayout(attmarkPanl);
         attmarkPanl.setLayout(attmarkPanlLayout);
         attmarkPanlLayout.setHorizontalGroup(
             attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(attmarkPanlLayout.createSequentialGroup()
-                .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(attmarkPanlLayout.createSequentialGroup()
+                        .addComponent(createBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(newBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cnslBtn))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(attmarkPanlLayout.createSequentialGroup()
                         .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(attmarkPanlLayout.createSequentialGroup()
@@ -242,62 +278,54 @@ public class StdAtten extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addComponent(statuslb)))
                         .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(attmarkPanlLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtStdID, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtTcherName, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtSbjName, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtStdName, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, attmarkPanlLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(8, 8, 8)
                                 .addComponent(presentRB)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(absentRB)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtStatuslb, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(attmarkPanlLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(5, 5, 5))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, attmarkPanlLayout.createSequentialGroup()
-                .addComponent(createBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(newBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(cnslBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                                .addComponent(txtStatuslb, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(attmarkPanlLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtStdName)
+                                    .addGroup(attmarkPanlLayout.createSequentialGroup()
+                                        .addComponent(txtStdID, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                                        .addComponent(searchBtn01))
+                                    .addComponent(txtTcherName)
+                                    .addComponent(subCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addGap(0, 18, Short.MAX_VALUE))
         );
         attmarkPanlLayout.setVerticalGroup(
             attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(attmarkPanlLayout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(attmarkPanlLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(sbjName))
-                    .addComponent(txtSbjName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sbjName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(subCB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTcherName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tchrName))
-                .addGap(18, 18, 18)
+                    .addComponent(txtTcherName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tchrName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
                 .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtStdID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(stdID))
-                .addGap(18, 18, 18)
+                    .addComponent(txtStdID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stdID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchBtn01, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtStdName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(stdName))
+                    .addComponent(txtStdName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stdName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtStatuslb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(statuslb))
+                        .addComponent(txtStatuslb, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(statuslb, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(presentRB)
-                        .addComponent(absentRB)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(presentRB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(absentRB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,7 +335,7 @@ public class StdAtten extends javax.swing.JFrame {
                 .addGap(28, 28, 28))
         );
 
-        bgPnl.add(attmarkPanl, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 370, 440));
+        bgPnl.add(attmarkPanl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 410, 440));
 
         tblPanel.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -414,21 +442,21 @@ public class StdAtten extends javax.swing.JFrame {
 
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
         // TODO add your handling code here:
-                String[] columns={txtStdID.getText(), txtStdName.getText(), txtSbjName.getText(), txtStatuslb.getText() };
-                DefaultTableModel dtm= (DefaultTableModel)jTable1.getModel();
-                dtm.addRow(columns);
+                
         
         String b="Absent";
         String a="Present";
         int Std_ID=Integer.parseInt(txtStdID.getText());
         String Std_Name=txtStdName.getText();
         String date=txtAttnDate.getText();
-        String subject=txtSbjName.getText();
+        String subject=(String) subCB.getSelectedItem();
         String techerName=txtTcherName.getText();
         String specNote=txtNotes.getText();
         String status=txtStatuslb.getText();
         
-    
+                String[] columns={txtStdID.getText(), Std_Name, subject, status};
+                DefaultTableModel dtm= (DefaultTableModel)jTable1.getModel();
+                dtm.addRow(columns);
         
         try {
                                                 
@@ -477,6 +505,92 @@ public class StdAtten extends javax.swing.JFrame {
         
     }//GEN-LAST:event_absentRBActionPerformed
 
+    private void searchBtn01ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtn01ActionPerformed
+        // TODO add your handling code here:
+
+        ResultSet rs;
+        PreparedStatement pstmt;
+        try {
+            String studentID=txtStdID.getText();
+            pstmt = con.prepareStatement("SELECT * FROM std_info_table WHERE Std_ID = ?");
+            pstmt.setString(1, studentID);
+            rs = pstmt.executeQuery();
+
+            if(rs.next()){
+                String studentName =rs.getString("Std_Name");
+                txtStdName.setText(studentName);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Please Enter Valid Student ID");
+                txtStdName.setText("");
+
+            }
+            pstmt.close();
+            rs.close();
+
+        } catch (HeadlessException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }//GEN-LAST:event_searchBtn01ActionPerformed
+
+    private void subCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subCBActionPerformed
+        // TODO add your handling code here:
+        ResultSet rs2;
+        PreparedStatement pstmt3;
+        try {
+            String subject=(String) subCB.getSelectedItem();
+            pstmt3 = con.prepareStatement("SELECT * FROM tchr_info_table WHERE Subj_Name = ?");
+            pstmt3.setString(1, subject);
+            rs2 = pstmt3.executeQuery();
+            
+            if(rs2.next()){
+            String TeacherName =rs2.getString("Tchr_Name");
+            String paymentfee = rs2.getString("Payment_Fees");
+            txtTcherName.setText(TeacherName);
+        }
+            else{
+                JOptionPane.showMessageDialog(null, "Please Enter Valid Subject Name");
+                txtTcherName.setText("");
+
+            }
+            pstmt3.close();
+            rs2.close();
+
+        } catch (HeadlessException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_subCBActionPerformed
+
+    
+    public void getSubject(){
+    
+        ResultSet rsSub;
+        PreparedStatement psSub;
+        
+        String query1="SELECT Subj_Name FROM tchr_info_table;";
+        
+        try {
+            
+            psSub = con.prepareStatement(query1);
+            rsSub=psSub.executeQuery();
+            while (rsSub.next()){
+                String subjname= rsSub.getString("Subj_Name");
+                subCB.addItem(subjname);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+}
+    
+//public void fillTchrName(){
+//    
+//        
+//    
+//    
+//}    
     /**
      * @param args the command line arguments
      */
@@ -532,14 +646,15 @@ public class StdAtten extends javax.swing.JFrame {
     private javax.swing.JButton newBtn;
     private javax.swing.JRadioButton presentRB;
     private javax.swing.JLabel sbjName;
+    private javax.swing.JButton searchBtn01;
     private javax.swing.JLabel statuslb;
     private javax.swing.JLabel stdID;
     private javax.swing.JLabel stdName;
+    private javax.swing.JComboBox<String> subCB;
     private javax.swing.JPanel tblPanel;
     private javax.swing.JLabel tchrName;
     private javax.swing.JTextField txtAttnDate;
     private javax.swing.JTextArea txtNotes;
-    private javax.swing.JTextField txtSbjName;
     private javax.swing.JTextField txtStatuslb;
     private javax.swing.JTextField txtStdID;
     private javax.swing.JTextField txtStdName;
