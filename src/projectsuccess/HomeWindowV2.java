@@ -8,8 +8,9 @@ package projectsuccess;
 import java.awt.Color;
 import java.sql.*;
 import java.util.Vector;
-import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
+import javax.swing.event.*;
+import javax.swing.table.*;
 
 /**
  *
@@ -89,8 +90,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         stdFilterPnl = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
+        searchField = new javax.swing.JTextField();
         deleteBtn1 = new javax.swing.JButton();
         restBtn1 = new javax.swing.JButton();
         updateBtn2 = new javax.swing.JButton();
@@ -526,7 +526,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jLabel14.setText("Enter Student ID :");
 
-        jButton6.setText("Search");
+        searchField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                searchFieldFocusGained(evt);
+            }
+        });
 
         deleteBtn1.setBackground(new java.awt.Color(255, 153, 51));
         deleteBtn1.setText("Delete Record");
@@ -556,14 +560,12 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton6)
+                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(restBtn1)
                 .addGap(18, 18, 18)
                 .addComponent(updateBtn2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                 .addComponent(deleteBtn1)
                 .addContainerGap())
         );
@@ -573,8 +575,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(stdFilterPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                    .addComponent(jButton6)
+                    .addComponent(searchField, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(deleteBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(restBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(updateBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1033,6 +1034,44 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnLoutActionPerformed
 
+    private void searchFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchFieldFocusGained
+        // TODO add your handling code here:
+        
+        TableRowSorter<TableModel> sort = new TableRowSorter<>(jTable3.getModel());
+        jTable3.setRowSorter(sort);
+        
+        searchField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                String str = searchField.getText();
+                if (str.trim().length()== 0 ){
+                    sort.setRowFilter(null);
+                }
+                else{
+                    sort.setRowFilter(RowFilter.regexFilter("(?i)" + str));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                String str = searchField.getText();
+                if (str.trim().length() == 0) {
+                    sort.setRowFilter(null);
+                
+                }
+                else{
+                    sort.setRowFilter(RowFilter.regexFilter("(?i)" + str));
+                    
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                
+            }
+        });
+    }//GEN-LAST:event_searchFieldFocusGained
+
     private void onClick(JPanel panel){
         panel.setBackground(new Color(48,203,220));
     }
@@ -1100,7 +1139,6 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
@@ -1135,7 +1173,6 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JPanel logo;
@@ -1146,6 +1183,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JButton restBtn1;
     private javax.swing.JButton restBtn2;
     private javax.swing.JButton restBtn3;
+    private javax.swing.JTextField searchField;
     private javax.swing.JPanel stdAttenBtn;
     private javax.swing.JPanel stdFilterPnl;
     private javax.swing.JPanel stdInfo;
