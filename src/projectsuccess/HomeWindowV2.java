@@ -77,8 +77,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         attnFilterPnl = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        attnSearchField = new javax.swing.JTextField();
         deleteBtn = new javax.swing.JButton();
         restBtn = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
@@ -90,7 +89,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         stdFilterPnl = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        searchField = new javax.swing.JTextField();
+        stdSearchField = new javax.swing.JTextField();
         deleteBtn1 = new javax.swing.JButton();
         restBtn1 = new javax.swing.JButton();
         updateBtn2 = new javax.swing.JButton();
@@ -102,8 +101,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         tcherFilterPnl = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton7 = new javax.swing.JButton();
+        tchrSearchField = new javax.swing.JTextField();
         deleteBtn2 = new javax.swing.JButton();
         restBtn2 = new javax.swing.JButton();
         updateBtn3 = new javax.swing.JButton();
@@ -115,8 +113,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         pymntFilterPnl = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jButton8 = new javax.swing.JButton();
+        pymtSearchField = new javax.swing.JTextField();
         deleteBtn3 = new javax.swing.JButton();
         restBtn3 = new javax.swing.JButton();
         updateBtn4 = new javax.swing.JButton();
@@ -413,13 +410,22 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jLabel2.setText("Search in Here :");
 
-        jButton5.setText("Search");
+        attnSearchField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                attnSearchFieldFocusGained(evt);
+            }
+        });
 
         deleteBtn.setBackground(new java.awt.Color(255, 153, 51));
         deleteBtn.setText("Delete Record");
 
         restBtn.setBackground(new java.awt.Color(255, 255, 102));
         restBtn.setText("Reset");
+        restBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restBtnActionPerformed(evt);
+            }
+        });
 
         updateBtn.setBackground(new java.awt.Color(153, 204, 255));
         updateBtn.setText("Update");
@@ -432,14 +438,12 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton5)
+                .addComponent(attnSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(restBtn)
                 .addGap(18, 18, 18)
                 .addComponent(updateBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                 .addComponent(deleteBtn)
                 .addContainerGap())
         );
@@ -449,8 +453,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(attnFilterPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                    .addComponent(jButton5)
+                    .addComponent(attnSearchField, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(deleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(restBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(updateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -526,9 +529,9 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jLabel14.setText("Enter Student ID :");
 
-        searchField.addFocusListener(new java.awt.event.FocusAdapter() {
+        stdSearchField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                searchFieldFocusGained(evt);
+                stdSearchFieldFocusGained(evt);
             }
         });
 
@@ -548,6 +551,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 restBtn1MouseReleased(evt);
             }
         });
+        restBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restBtn1ActionPerformed(evt);
+            }
+        });
 
         updateBtn2.setBackground(new java.awt.Color(153, 204, 255));
         updateBtn2.setText("Update");
@@ -560,7 +568,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(stdSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(restBtn1)
                 .addGap(18, 18, 18)
@@ -575,7 +583,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(stdFilterPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(searchField, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(stdSearchField, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(deleteBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(restBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(updateBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -651,13 +659,22 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jLabel15.setText("Enter Teacher ID :");
 
-        jButton7.setText("Search");
+        tchrSearchField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tchrSearchFieldFocusGained(evt);
+            }
+        });
 
         deleteBtn2.setBackground(new java.awt.Color(255, 153, 51));
         deleteBtn2.setText("Delete Record");
 
         restBtn2.setBackground(new java.awt.Color(255, 255, 102));
         restBtn2.setText("Reset");
+        restBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restBtn2ActionPerformed(evt);
+            }
+        });
 
         updateBtn3.setBackground(new java.awt.Color(153, 204, 255));
         updateBtn3.setText("Update");
@@ -670,14 +687,12 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton7)
+                .addComponent(tchrSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(restBtn2)
                 .addGap(18, 18, 18)
                 .addComponent(updateBtn3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                 .addComponent(deleteBtn2)
                 .addContainerGap())
         );
@@ -687,8 +702,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(tcherFilterPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                    .addComponent(jButton7)
+                    .addComponent(tchrSearchField, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(deleteBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(restBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(updateBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -756,13 +770,22 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
         jLabel16.setText("Search in Here :");
 
-        jButton8.setText("Search");
+        pymtSearchField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                pymtSearchFieldFocusGained(evt);
+            }
+        });
 
         deleteBtn3.setBackground(new java.awt.Color(255, 153, 51));
         deleteBtn3.setText("Delete Record");
 
         restBtn3.setBackground(new java.awt.Color(255, 255, 102));
         restBtn3.setText("Reset");
+        restBtn3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                restBtn3ActionPerformed(evt);
+            }
+        });
 
         updateBtn4.setBackground(new java.awt.Color(153, 204, 255));
         updateBtn4.setText("Update");
@@ -775,14 +798,12 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton8)
+                .addComponent(pymtSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(restBtn3)
                 .addGap(18, 18, 18)
                 .addComponent(updateBtn4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                 .addComponent(deleteBtn3)
                 .addContainerGap())
         );
@@ -792,8 +813,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pymntFilterPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                    .addComponent(jButton8)
+                    .addComponent(pymtSearchField, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(deleteBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(restBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(updateBtn4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1034,16 +1054,16 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnLoutActionPerformed
 
-    private void searchFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchFieldFocusGained
+    private void stdSearchFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_stdSearchFieldFocusGained
         // TODO add your handling code here:
         
         TableRowSorter<TableModel> sort = new TableRowSorter<>(jTable3.getModel());
         jTable3.setRowSorter(sort);
         
-        searchField.getDocument().addDocumentListener(new DocumentListener() {
+        stdSearchField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent de) {
-                String str = searchField.getText();
+                String str = stdSearchField.getText();
                 if (str.trim().length()== 0 ){
                     sort.setRowFilter(null);
                 }
@@ -1054,7 +1074,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
             @Override
             public void removeUpdate(DocumentEvent de) {
-                String str = searchField.getText();
+                String str = stdSearchField.getText();
                 if (str.trim().length() == 0) {
                     sort.setRowFilter(null);
                 
@@ -1070,7 +1090,146 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 
             }
         });
-    }//GEN-LAST:event_searchFieldFocusGained
+    }//GEN-LAST:event_stdSearchFieldFocusGained
+
+    private void attnSearchFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_attnSearchFieldFocusGained
+        // TODO add your handling code here:
+        
+        TableRowSorter<TableModel> attnSort = new TableRowSorter<>(jTable1.getModel());
+        jTable1.setRowSorter(attnSort);
+        
+        attnSearchField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                String attnStr = attnSearchField.getText();
+                if (attnStr.trim().length()== 0 ){
+                    attnSort.setRowFilter(null);
+                }
+                else{
+                    attnSort.setRowFilter(RowFilter.regexFilter("(?i)" + attnStr));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                String attnStr = attnSearchField.getText();
+                if (attnStr.trim().length() == 0) {
+                    attnSort.setRowFilter(null);
+                
+                }
+                else{
+                    attnSort.setRowFilter(RowFilter.regexFilter("(?i)" + attnStr));
+                    
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                
+            }
+        });
+    }//GEN-LAST:event_attnSearchFieldFocusGained
+
+    private void tchrSearchFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tchrSearchFieldFocusGained
+        // TODO add your handling code here:
+        TableRowSorter<TableModel> tchrSort = new TableRowSorter<>(jTable4.getModel());
+        jTable4.setRowSorter(tchrSort);
+        
+        tchrSearchField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                String tchrStr = tchrSearchField.getText();
+                if (tchrStr.trim().length()== 0 ){
+                    tchrSort.setRowFilter(null);
+                }
+                else{
+                    tchrSort.setRowFilter(RowFilter.regexFilter("(?i)" + tchrStr));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                String tchrStr = tchrSearchField.getText();
+                if (tchrStr.trim().length() == 0) {
+                    tchrSort.setRowFilter(null);
+                
+                }
+                else{
+                    tchrSort.setRowFilter(RowFilter.regexFilter("(?i)" + tchrStr));
+                    
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                
+            }
+        });
+        
+    }//GEN-LAST:event_tchrSearchFieldFocusGained
+
+    private void pymtSearchFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pymtSearchFieldFocusGained
+        // TODO add your handling code here:
+        TableRowSorter<TableModel> pymntSort = new TableRowSorter<>(jTable2.getModel());
+        jTable2.setRowSorter(pymntSort);
+        
+        pymtSearchField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                String pymntStr = pymtSearchField.getText();
+                if (pymntStr.trim().length()== 0 ){
+                    pymntSort.setRowFilter(null);
+                }
+                else{
+                    pymntSort.setRowFilter(RowFilter.regexFilter("(?i)" + pymntStr));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                String pymntStr = pymtSearchField.getText();
+                if (pymntStr.trim().length() == 0) {
+                    pymntSort.setRowFilter(null);
+                
+                }
+                else{
+                    pymntSort.setRowFilter(RowFilter.regexFilter("(?i)" + pymntStr));
+                    
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                
+            }
+        });
+        
+        
+    }//GEN-LAST:event_pymtSearchFieldFocusGained
+
+    private void restBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restBtnActionPerformed
+        // TODO add your handling code here:
+        
+        attnSearchField.setText("");
+    }//GEN-LAST:event_restBtnActionPerformed
+
+    private void restBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restBtn1ActionPerformed
+        // TODO add your handling code here:
+        
+        stdSearchField.setText("");
+    }//GEN-LAST:event_restBtn1ActionPerformed
+
+    private void restBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restBtn2ActionPerformed
+        // TODO add your handling code here:
+        
+        tchrSearchField.setText("");
+    }//GEN-LAST:event_restBtn2ActionPerformed
+
+    private void restBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restBtn3ActionPerformed
+        // TODO add your handling code here:
+        
+        pymtSearchField.setText("");
+    }//GEN-LAST:event_restBtn3ActionPerformed
 
     private void onClick(JPanel panel){
         panel.setBackground(new Color(48,203,220));
@@ -1121,6 +1280,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel attnFilterPnl;
     private javax.swing.JPanel attnInfo;
+    private javax.swing.JTextField attnSearchField;
     private javax.swing.JPanel bgPnl;
     private javax.swing.JButton btnAttnInfoAll;
     private javax.swing.JButton btnHome;
@@ -1138,9 +1298,6 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1172,26 +1329,25 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JPanel logo;
     private javax.swing.JTabbedPane mainPnl;
     private javax.swing.JPanel pymntFilterPnl;
     private javax.swing.JPanel pymntInfo;
+    private javax.swing.JTextField pymtSearchField;
     private javax.swing.JButton restBtn;
     private javax.swing.JButton restBtn1;
     private javax.swing.JButton restBtn2;
     private javax.swing.JButton restBtn3;
-    private javax.swing.JTextField searchField;
     private javax.swing.JPanel stdAttenBtn;
     private javax.swing.JPanel stdFilterPnl;
     private javax.swing.JPanel stdInfo;
+    private javax.swing.JTextField stdSearchField;
     private javax.swing.JPanel stdpymntformbtn;
     private javax.swing.JPanel stdregformbtn;
     private javax.swing.JPanel tcherFilterPnl;
     private javax.swing.JPanel tcherInfo;
     private javax.swing.JPanel tcherregFormBtn;
+    private javax.swing.JTextField tchrSearchField;
     private javax.swing.JButton updateBtn;
     private javax.swing.JButton updateBtn2;
     private javax.swing.JButton updateBtn3;

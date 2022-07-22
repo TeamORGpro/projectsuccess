@@ -702,14 +702,12 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" pref="105" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jTextField1" min="-2" pref="183" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                              <Component id="attnSearchField" min="-2" pref="183" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="restBtn" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="updateBtn" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="56" max="32767" attributes="0"/>
+                              <EmptySpace pref="139" max="32767" attributes="0"/>
                               <Component id="deleteBtn" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -721,8 +719,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel2" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="jTextField1" alignment="3" pref="28" max="32767" attributes="0"/>
-                                  <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="attnSearchField" alignment="3" pref="28" max="32767" attributes="0"/>
                                   <Component id="deleteBtn" max="32767" attributes="0"/>
                                   <Component id="restBtn" alignment="3" max="32767" attributes="0"/>
                                   <Component id="updateBtn" alignment="3" max="32767" attributes="0"/>
@@ -741,12 +738,10 @@
                         <Property name="text" type="java.lang.String" value="Search in Here :"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField1">
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton5">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Search"/>
-                      </Properties>
+                    <Component class="javax.swing.JTextField" name="attnSearchField">
+                      <Events>
+                        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="attnSearchFieldFocusGained"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="deleteBtn">
                       <Properties>
@@ -763,6 +758,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Reset"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="restBtnActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="updateBtn">
                       <Properties>
@@ -954,7 +952,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel14" min="-2" pref="105" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="searchField" min="-2" pref="183" max="-2" attributes="0"/>
+                              <Component id="stdSearchField" min="-2" pref="183" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="restBtn1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -971,7 +969,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel14" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="searchField" alignment="3" pref="28" max="32767" attributes="0"/>
+                                  <Component id="stdSearchField" alignment="3" pref="28" max="32767" attributes="0"/>
                                   <Component id="deleteBtn1" alignment="3" max="32767" attributes="0"/>
                                   <Component id="restBtn1" alignment="3" max="32767" attributes="0"/>
                                   <Component id="updateBtn2" alignment="3" max="32767" attributes="0"/>
@@ -990,9 +988,9 @@
                         <Property name="text" type="java.lang.String" value="Enter Student ID :"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="searchField">
+                    <Component class="javax.swing.JTextField" name="stdSearchField">
                       <Events>
-                        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="searchFieldFocusGained"/>
+                        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="stdSearchFieldFocusGained"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="deleteBtn1">
@@ -1014,6 +1012,7 @@
                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="restBtn1MouseClicked"/>
                         <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="restBtn1MousePressed"/>
                         <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="restBtn1MouseReleased"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="restBtn1ActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="updateBtn2">
@@ -1206,14 +1205,12 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel15" min="-2" pref="105" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jTextField3" min="-2" pref="183" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButton7" min="-2" max="-2" attributes="0"/>
+                              <Component id="tchrSearchField" min="-2" pref="183" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="restBtn2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="updateBtn3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="56" max="32767" attributes="0"/>
+                              <EmptySpace pref="139" max="32767" attributes="0"/>
                               <Component id="deleteBtn2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -1225,8 +1222,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel15" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="jTextField3" alignment="3" pref="28" max="32767" attributes="0"/>
-                                  <Component id="jButton7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tchrSearchField" alignment="3" pref="28" max="32767" attributes="0"/>
                                   <Component id="deleteBtn2" alignment="3" max="32767" attributes="0"/>
                                   <Component id="restBtn2" alignment="3" max="32767" attributes="0"/>
                                   <Component id="updateBtn3" alignment="3" max="32767" attributes="0"/>
@@ -1245,12 +1241,10 @@
                         <Property name="text" type="java.lang.String" value="Enter Teacher ID :"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField3">
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton7">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Search"/>
-                      </Properties>
+                    <Component class="javax.swing.JTextField" name="tchrSearchField">
+                      <Events>
+                        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tchrSearchFieldFocusGained"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="deleteBtn2">
                       <Properties>
@@ -1267,6 +1261,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Reset"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="restBtn2ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="updateBtn3">
                       <Properties>
@@ -1400,14 +1397,12 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel16" min="-2" pref="105" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jTextField4" min="-2" pref="183" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButton8" min="-2" max="-2" attributes="0"/>
+                              <Component id="pymtSearchField" min="-2" pref="183" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="restBtn3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="updateBtn4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="56" max="32767" attributes="0"/>
+                              <EmptySpace pref="139" max="32767" attributes="0"/>
                               <Component id="deleteBtn3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -1419,8 +1414,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel16" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="jTextField4" alignment="3" pref="28" max="32767" attributes="0"/>
-                                  <Component id="jButton8" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="pymtSearchField" alignment="3" pref="28" max="32767" attributes="0"/>
                                   <Component id="deleteBtn3" alignment="3" max="32767" attributes="0"/>
                                   <Component id="restBtn3" alignment="3" max="32767" attributes="0"/>
                                   <Component id="updateBtn4" alignment="3" max="32767" attributes="0"/>
@@ -1439,12 +1433,10 @@
                         <Property name="text" type="java.lang.String" value="Search in Here :"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField4">
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton8">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Search"/>
-                      </Properties>
+                    <Component class="javax.swing.JTextField" name="pymtSearchField">
+                      <Events>
+                        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="pymtSearchFieldFocusGained"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="deleteBtn3">
                       <Properties>
@@ -1461,6 +1453,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Reset"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="restBtn3ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="updateBtn4">
                       <Properties>
