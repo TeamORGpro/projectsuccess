@@ -608,9 +608,9 @@
                               <Table columnCount="7" rowCount="4">
                                 <Column editable="true" title="Date" type="java.lang.Integer"/>
                                 <Column editable="true" title="Subject Name" type="java.lang.String"/>
-                                <Column editable="true" title="Teacher&apos;s Name" type="java.lang.String"/>
                                 <Column editable="true" title="Student ID" type="java.lang.Integer"/>
                                 <Column editable="true" title="Student Name" type="java.lang.String"/>
+                                <Column editable="true" title="Teacher&apos;s Name" type="java.lang.String"/>
                                 <Column editable="false" title="Status" type="java.lang.String"/>
                                 <Column editable="true" title="Special Notes" type="java.lang.String"/>
                               </Table>
