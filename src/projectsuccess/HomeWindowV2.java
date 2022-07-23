@@ -6,8 +6,12 @@
 package projectsuccess;
 
 import java.awt.Color;
+import java.awt.HeadlessException;
 import java.sql.*;
+import java.util.Arrays;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
@@ -365,7 +369,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                true, true, true, true, true, false, true
+                false, false, false, false, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -377,10 +381,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             }
         });
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(6).setResizable(false);
-        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -429,6 +431,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
         updateBtn.setBackground(new java.awt.Color(153, 204, 255));
         updateBtn.setText("Update");
+        updateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout attnFilterPnlLayout = new javax.swing.GroupLayout(attnFilterPnl);
         attnFilterPnl.setLayout(attnFilterPnlLayout);
@@ -537,6 +544,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
         deleteBtn1.setBackground(new java.awt.Color(255, 153, 51));
         deleteBtn1.setText("Delete Record");
+        deleteBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtn1ActionPerformed(evt);
+            }
+        });
 
         restBtn1.setBackground(new java.awt.Color(255, 255, 102));
         restBtn1.setText("Reset");
@@ -559,6 +571,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
         updateBtn2.setBackground(new java.awt.Color(153, 204, 255));
         updateBtn2.setText("Update");
+        updateBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBtn2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout stdFilterPnlLayout = new javax.swing.GroupLayout(stdFilterPnl);
         stdFilterPnl.setLayout(stdFilterPnlLayout);
@@ -678,6 +695,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
         updateBtn3.setBackground(new java.awt.Color(153, 204, 255));
         updateBtn3.setText("Update");
+        updateBtn3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBtn3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout tcherFilterPnlLayout = new javax.swing.GroupLayout(tcherFilterPnl);
         tcherFilterPnl.setLayout(tcherFilterPnlLayout);
@@ -723,23 +745,31 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Student ID", "Student  Name", "Subject", "Teacher's Name", "Subject Fee", "Last Paid Month"
+                "Student ID", "Student  Name", "Subject", "Teacher's Name", "Subject Fee", "Last Paid Month", "Paid Date"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
+        jTable2.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -789,6 +819,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
         updateBtn4.setBackground(new java.awt.Color(153, 204, 255));
         updateBtn4.setText("Update");
+        updateBtn4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBtn4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pymntFilterPnlLayout = new javax.swing.GroupLayout(pymntFilterPnl);
         pymntFilterPnl.setLayout(pymntFilterPnlLayout);
@@ -919,22 +954,22 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             dt.setRowCount(0);
             
             Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("select * from std_info_table ");
-            while (rs.next()) {
-                Vector v = new Vector();
-                v.add(rs.getString("Std_ID"));
-                v.add(rs.getString("Std_Name"));
-                v.add(rs.getString("Name_with_Initials"));
-                v.add(rs.getString("Address"));
-                v.add(rs.getString("DOB"));
-                v.add(rs.getString("Grade"));
-                v.add(rs.getString("Phone_no"));
-                v.add(rs.getString("sex"));
-                v.add(rs.getString("Grd_name"));
-                v.add(rs.getString("Grd_Phone_no"));
-                dt.addRow(v);
+            try (ResultSet rs = s.executeQuery("select * from std_info_table ")) {
+                while (rs.next()) {
+                    Vector v = new Vector();
+                    v.add(rs.getString("Std_ID"));
+                    v.add(rs.getString("Std_Name"));
+                    v.add(rs.getString("Name_with_Initials"));
+                    v.add(rs.getString("Address"));
+                    v.add(rs.getString("DOB"));
+                    v.add(rs.getString("Grade"));
+                    v.add(rs.getString("Phone_no"));
+                    v.add(rs.getString("sex"));
+                    v.add(rs.getString("Grd_name"));
+                    v.add(rs.getString("Grd_Phone_no"));
+                    dt.addRow(v);
+                }
             }
-            rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -948,19 +983,19 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             DefaultTableModel dt1 = (DefaultTableModel) jTable1.getModel();
             dt1.setRowCount(0);
             Statement s1 = con.createStatement();
-            ResultSet rs1 = s1.executeQuery("select * from attndance_table ");
-            while (rs1.next()) {
-                Vector v1 = new Vector();
-                v1.add(rs1.getString("Date"));
-                v1.add(rs1.getString("Subj_Name"));
-                v1.add(rs1.getInt("Std_ID"));
-                v1.add(rs1.getString("Std_Name"));
-                v1.add(rs1.getString("Tchr_Name"));
-                v1.add(rs1.getString("Status"));
-                v1.add(rs1.getString("Spc_Note"));
-                dt1.addRow(v1);
+            try (ResultSet rs1 = s1.executeQuery("select * from attndance_table ")) {
+                while (rs1.next()) {
+                    Vector v1 = new Vector();
+                    v1.add(rs1.getString("Date"));
+                    v1.add(rs1.getString("Subj_Name"));
+                    v1.add(rs1.getInt("Std_ID"));
+                    v1.add(rs1.getString("Std_Name"));
+                    v1.add(rs1.getString("Tchr_Name"));
+                    v1.add(rs1.getString("Status"));
+                    v1.add(rs1.getString("Spc_Note"));
+                    dt1.addRow(v1);
+                }
             }
-            rs1.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -973,19 +1008,20 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             DefaultTableModel dt3 = (DefaultTableModel) jTable2.getModel();
             dt3.setRowCount(0);
             Statement s3 = con.createStatement();
-            ResultSet rs3 = s3.executeQuery("select * from payment_table");
-            while (rs3.next()) {
-                Vector v3 = new Vector();
-                v3.add(rs3.getInt("Std_ID"));
-                v3.add(rs3.getString("Std_Name"));
-                v3.add(rs3.getString("Subj_Name"));
-                v3.add(rs3.getString("Tchr_Name"));
-                v3.add(rs3.getString("Payment_fee"));
-                v3.add(rs3.getString("Month"));
-
-                dt3.addRow(v3);
+            try (ResultSet rs3 = s3.executeQuery("select * from payment_table")) {
+                while (rs3.next()) {
+                    Vector v3 = new Vector();
+                    v3.add(rs3.getInt("Std_ID"));
+                    v3.add(rs3.getString("Std_Name"));
+                    v3.add(rs3.getString("Subj_Name"));
+                    v3.add(rs3.getString("Tchr_Name"));
+                    v3.add(rs3.getString("Payment_fee"));
+                    v3.add(rs3.getString("Month"));
+                    v3.add(rs3.getString("Date_paid"));
+                    
+                    dt3.addRow(v3);
+                }
             }
-            rs3.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -1000,25 +1036,26 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             DefaultTableModel dt2 = (DefaultTableModel) jTable4.getModel();
             dt2.setRowCount(0);
             Statement s2 = con.createStatement();
-            ResultSet rs2 = s2.executeQuery("select * from tchr_info_table ");
-            while (rs2.next()) {
-                Vector v2 = new Vector();
-                v2.add(rs2.getInt("Tchr_ID"));
-                v2.add(rs2.getString("Subj_Name"));
-                v2.add(rs2.getString("Name_with_Initials"));
-                v2.add(rs2.getString("Tchr_Name"));
-                v2.add(rs2.getString("Payment_Fees"));
-                v2.add(rs2.getString("Address"));
-                v2.add(rs2.getString("DOB"));
-                v2.add(rs2.getString("Phone_no"));
-                v2.add(rs2.getString("sex"));
-                v2.add(rs2.getString("NIC"));
-                dt2.addRow(v2);
+            try (ResultSet rs2 = s2.executeQuery("select * from tchr_info_table ")) {
+                while (rs2.next()) {
+                    Vector v2 = new Vector();
+                    v2.add(rs2.getInt("Tchr_ID"));
+                    v2.add(rs2.getString("Subj_Name"));
+                    v2.add(rs2.getString("Name_with_Initials"));
+                    v2.add(rs2.getString("Tchr_Name"));
+                    v2.add(rs2.getString("Payment_Fees"));
+                    v2.add(rs2.getString("Address"));
+                    v2.add(rs2.getString("DOB"));
+                    v2.add(rs2.getString("Phone_no"));
+                    v2.add(rs2.getString("sex"));
+                    v2.add(rs2.getString("NIC"));
+                    dt2.addRow(v2);
+                }
             }
-            rs2.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         
     }//GEN-LAST:event_btntcherInfoAllActionPerformed
 
@@ -1230,6 +1267,151 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         
         pymtSearchField.setText("");
     }//GEN-LAST:event_restBtn3ActionPerformed
+
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
+        // TODO add your handling code here:
+        
+        Statement upSt;
+        DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
+        
+        try {
+            upSt = con.createStatement();
+            
+            for (int i = 0;i<model.getRowCount();i++){
+                String date = model.getValueAt(i, 0).toString();
+                String subjName = model.getValueAt(i, 1).toString();
+                int stuID = Integer.valueOf(model.getValueAt(i, 2).toString());
+                String status = model.getValueAt(i, 5).toString();
+                String spcNote = model.getValueAt(i, 6).toString();
+                
+                String updateQuery="UPDATE attndance_table SET Status='"+status+"',Spc_Note='"+spcNote+"' WHERE `Date`='"+date+"'AND Subj_Name='"+subjName+"'AND Std_ID="+stuID;
+
+                upSt.addBatch(updateQuery);
+            }
+            
+            upSt.executeBatch();
+            JOptionPane.showMessageDialog(null, "Table Successfully Updated");
+        } catch (HeadlessException | NumberFormatException | SQLException e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_updateBtnActionPerformed
+
+    private void updateBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtn2ActionPerformed
+        // TODO add your handling code here:
+        
+        Statement upSt1;
+        DefaultTableModel model1=(DefaultTableModel) jTable3.getModel();
+        
+        try {
+            upSt1 = con.createStatement();
+            
+            for (int i = 0; i<model1.getRowCount(); i++){
+                int stuID = Integer.valueOf(model1.getValueAt(i, 0).toString());
+                String fname = model1.getValueAt(i, 1).toString();
+                String nameWithIN = model1.getValueAt(i, 2).toString();
+                String addr = model1.getValueAt(i, 3).toString();
+                String dob = model1.getValueAt(i, 4).toString();
+                String grd = model1.getValueAt(i, 5).toString();
+                String pNo = model1.getValueAt(i, 6).toString();
+                String sex = model1.getValueAt(i, 7).toString();
+                String gName = model1.getValueAt(i, 8).toString();
+                String gPNo = model1.getValueAt(i, 9).toString();
+                
+                String updateQuery="UPDATE `std_info_table` SET `Std_Name`='"+fname+"',`Name_with_Initials`='"+nameWithIN+"',`Address`='"+addr+"',`DOB`='"+dob+"',`Grade`='"+grd+"',`Phone_no`='"+pNo+"',`sex`='"+sex+"',`Grd_name`='"+gName+"',`Grd_Phone_no`='"+gPNo+"' WHERE `Std_ID`="+stuID;
+
+                upSt1.addBatch(updateQuery);
+            }
+
+            upSt1.executeBatch();
+            JOptionPane.showMessageDialog(null, "Table Successfully Updated");
+        } catch (HeadlessException | NumberFormatException | SQLException e) {
+            e.getMessage();
+        }
+    }//GEN-LAST:event_updateBtn2ActionPerformed
+
+    private void updateBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtn3ActionPerformed
+        // TODO add your handling code here:
+        Statement upSt2;
+        DefaultTableModel model2=(DefaultTableModel) jTable4.getModel();
+        
+            try {
+                upSt2 = con.createStatement();
+                
+                for (int i = 0; i<model2.getRowCount(); i++){
+                    int tchrID= Integer.valueOf(model2.getValueAt(i, 0).toString());
+                    String subjName = model2.getValueAt(i, 1).toString();
+                    String namewithIn = model2.getValueAt(i, 2).toString();
+                    String fname = model2.getValueAt(i, 3).toString();
+                    String fee = model2.getValueAt(i, 4).toString();
+                    String addr = model2.getValueAt(i, 5).toString();
+                    String dateofbirth = model2.getValueAt(i, 6).toString();
+                    String pNo = model2.getValueAt(i, 7).toString();
+                    String sex = model2.getValueAt(i, 8).toString();
+                    String nic = model2.getValueAt(i, 9).toString();
+                    
+                    String updateQuery="UPDATE `tchr_info_table` SET `Tchr_Name`='"+fname+"',`Name_with_Initials`='"+namewithIn+"',`Address`='"+addr+"',`Phone_no`='"+pNo+"',`sex`='"+sex+"',`NIC`='"+nic+"',`Subj_Name`='"+subjName+"',`Payment_Fees`='"+fee+"',`DOB`='"+dateofbirth+"' WHERE `Tchr_ID`="+tchrID;
+                    
+                    
+                    upSt2.addBatch(updateQuery);
+                    
+                    
+                }
+                upSt2.executeBatch();
+                JOptionPane.showMessageDialog(null, "Table Successfully Updated");
+
+            } catch (SQLException ex) {
+                ex.getMessage();
+            }
+        
+    }//GEN-LAST:event_updateBtn3ActionPerformed
+
+    private void updateBtn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtn4ActionPerformed
+        // TODO add your handling code here:
+        Statement upSt3;
+        DefaultTableModel model3=(DefaultTableModel) jTable2.getModel();
+        
+        try {
+            upSt3 = con.createStatement();
+            
+            for (int i = 0; i<model3.getRowCount(); i++){
+                int stuID = Integer.valueOf(model3.getValueAt(i, 0).toString());
+                String subject = model3.getValueAt(i, 2).toString();
+                String fee = model3.getValueAt(i, 4).toString();
+                String month = model3.getValueAt(i, 5).toString();
+                String date = model3.getValueAt(i, 6).toString();
+                
+                
+                String updateQuery="UPDATE `payment_table` SET `Month`='"+month+"' WHERE `Std_ID`="+stuID+" AND `Subj_Name`='"+subject+"' AND `Date_paid`='"+date+"'";
+
+                upSt3.addBatch(updateQuery);
+            }
+
+            upSt3.executeBatch();
+            JOptionPane.showMessageDialog(null, "Table Successfully Updated");
+        } catch (HeadlessException | NumberFormatException | SQLException e) {
+            e.getMessage();
+        }
+    }//GEN-LAST:event_updateBtn4ActionPerformed
+
+    private void deleteBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtn1ActionPerformed
+        // TODO add your handling code here:
+        PreparedStatement ps;
+        
+        DefaultTableModel stdtbmodel = (DefaultTableModel) jTable3.getModel();
+        int row = jTable3.getSelectedRow();
+        String eve = (String) jTable3.getModel().getValueAt(row, 0);
+        
+        String delRow = "DELETE FROM `std_info_table` WHERE `Std_ID`= "+eve;
+            try {
+                ps=con.prepareStatement(delRow);
+                ps.execute();
+                JOptionPane.showMessageDialog(null, "Row Successfully Deleted");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null,  ex.getMessage());
+            }
+        
+        
+    }//GEN-LAST:event_deleteBtn1ActionPerformed
 
     private void onClick(JPanel panel){
         panel.setBackground(new Color(48,203,220));

@@ -7,6 +7,7 @@ package projectsuccess;
 
 import java.awt.*;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import javax.swing.*;
 
 
@@ -31,7 +32,7 @@ public class PaymentDetails extends javax.swing.JFrame {
         con = DBConnect.connect();
         
         getSubject();
-         
+        dt(); 
     }
    
 
@@ -46,9 +47,17 @@ public class PaymentDetails extends javax.swing.JFrame {
     private void reset(){
         txtstdID.setText("");
         lblstdName.setText("");
-        feeLbl.setText("0.00");
 
         
+    }
+    
+    public void dt(){
+        java.util.Date d = new java.util.Date();
+        
+        SimpleDateFormat sdat = new SimpleDateFormat("yyyy-MM-dd");
+        
+        String dd= sdat.format(d);
+         dateLbl.setText(dd);
     }
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -75,6 +84,8 @@ public class PaymentDetails extends javax.swing.JFrame {
         subCB = new javax.swing.JComboBox<>();
         lblTchrName = new javax.swing.JLabel();
         lblstdName = new javax.swing.JLabel();
+        attnDate = new javax.swing.JLabel();
+        dateLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Payment Details");
@@ -212,6 +223,13 @@ public class PaymentDetails extends javax.swing.JFrame {
         lblstdName.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         addpaymentDetails.add(lblstdName, new org.netbeans.lib.awtextra.AbsoluteConstraints(203, 110, 357, 30));
 
+        attnDate.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        attnDate.setText("Date :");
+        addpaymentDetails.add(attnDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, 40, 30));
+
+        dateLbl.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        addpaymentDetails.add(dateLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, 90, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -284,7 +302,7 @@ public class PaymentDetails extends javax.swing.JFrame {
         String grd=(String) gradeCB.getSelectedItem();
         String fee=feeLbl.getText();
         String mnth=(String) monthCB.getSelectedItem();
-        
+        String date=dateLbl.getText();
     
         
         ResultSet rs3;
@@ -292,7 +310,7 @@ public class PaymentDetails extends javax.swing.JFrame {
         
         try {
                                                 
-            String query ="insert into payment_table(Std_ID,Std_Name,Tchr_Name,Subj_Name,Payment_fee,Grade,Month)values(?,?,?,?,?,?,?)";
+            String query ="insert into payment_table(Std_ID,Std_Name,Tchr_Name,Subj_Name,Payment_fee,Grade,Month,Date)values(?,?,?,?,?,?,?,?)";
 
             pstmt3 = con.prepareStatement(query);
 
@@ -304,6 +322,7 @@ public class PaymentDetails extends javax.swing.JFrame {
             pstmt3.setString(5, fee);
             pstmt3.setString(6, grd);
             pstmt3.setString(7, mnth);
+            pstmt3.setString(8, date);
             
             pstmt3.execute();
             JOptionPane.showMessageDialog(null, "Data successfully Saved!");
@@ -333,7 +352,7 @@ public class PaymentDetails extends javax.swing.JFrame {
             String paymentfee = rs2.getString("Payment_Fees");
             lblTchrName.setText(TeacherName);
             feeLbl.setText(paymentfee+".00");
-        }
+            }
             else{
                 JOptionPane.showMessageDialog(null, "Please Enter Valid Subject Name");
                 lblTchrName.setText("");
@@ -417,8 +436,10 @@ public class PaymentDetails extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addpaymentDetails;
+    private javax.swing.JLabel attnDate;
     private javax.swing.JButton cnslBtn;
     private javax.swing.JButton createBtn;
+    private javax.swing.JLabel dateLbl;
     private javax.swing.JLabel feeLbl;
     private javax.swing.JLabel grade;
     private javax.swing.JComboBox<String> gradeCB;

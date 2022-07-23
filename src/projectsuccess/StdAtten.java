@@ -41,7 +41,7 @@ public class StdAtten extends javax.swing.JFrame {
         ImageIcon i=new ImageIcon(img2);
         
         attenIcn1.setIcon(i);
-        
+        txtStatuslb.setEnabled(false);
         con = DBConnect.connect();
         getSubject();
         
@@ -65,11 +65,11 @@ public class StdAtten extends javax.swing.JFrame {
     private void reset(){
         txtStdID.setText("");
         txtStdID.setText("");
-        txtStdName.setText("");
+        lblstdName.setText("");
         buttonGroup1.clearSelection();
         txtNotes.setText("");
         txtStatuslb.setText("");
-        txtStatuslb.setEnabled(true);
+        txtStatuslb.setEnabled(false);
         txtNotes.setText("Special Note");
 
     }
@@ -88,13 +88,11 @@ public class StdAtten extends javax.swing.JFrame {
         stdID = new javax.swing.JLabel();
         stdName = new javax.swing.JLabel();
         txtStdID = new javax.swing.JTextField();
-        txtStdName = new javax.swing.JTextField();
         presentRB = new javax.swing.JRadioButton();
         absentRB = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtNotes = new javax.swing.JTextArea();
         tchrName = new javax.swing.JLabel();
-        txtTcherName = new javax.swing.JTextField();
         createBtn = new javax.swing.JButton();
         newBtn = new javax.swing.JButton();
         cnslBtn = new javax.swing.JButton();
@@ -102,6 +100,8 @@ public class StdAtten extends javax.swing.JFrame {
         statuslb = new javax.swing.JLabel();
         subCB = new javax.swing.JComboBox<>();
         searchBtn01 = new javax.swing.JButton();
+        lblstdName = new javax.swing.JLabel();
+        lblTchrName = new javax.swing.JLabel();
         tblPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -143,8 +143,6 @@ public class StdAtten extends javax.swing.JFrame {
 
         txtStdID.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
-        txtStdName.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-
         presentRB.setBackground(new java.awt.Color(198, 228, 255));
         buttonGroup1.add(presentRB);
         presentRB.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -183,8 +181,6 @@ public class StdAtten extends javax.swing.JFrame {
 
         tchrName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         tchrName.setText("Teacher's Name");
-
-        txtTcherName.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
         createBtn.setBackground(new java.awt.Color(102, 255, 102));
         createBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -247,6 +243,10 @@ public class StdAtten extends javax.swing.JFrame {
             }
         });
 
+        lblstdName.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+
+        lblTchrName.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+
         javax.swing.GroupLayout attmarkPanlLayout = new javax.swing.GroupLayout(attmarkPanl);
         attmarkPanl.setLayout(attmarkPanlLayout);
         attmarkPanlLayout.setHorizontalGroup(
@@ -277,7 +277,7 @@ public class StdAtten extends javax.swing.JFrame {
                             .addGroup(attmarkPanlLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(statuslb)))
-                        .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, attmarkPanlLayout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addComponent(presentRB)
@@ -288,13 +288,15 @@ public class StdAtten extends javax.swing.JFrame {
                             .addGroup(attmarkPanlLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtStdName)
                                     .addGroup(attmarkPanlLayout.createSequentialGroup()
                                         .addComponent(txtStdID, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                                         .addComponent(searchBtn01))
-                                    .addComponent(txtTcherName)
-                                    .addComponent(subCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                    .addComponent(subCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblstdName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(attmarkPanlLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(lblTchrName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addGap(0, 18, Short.MAX_VALUE))
         );
         attmarkPanlLayout.setVerticalGroup(
@@ -304,20 +306,20 @@ public class StdAtten extends javax.swing.JFrame {
                 .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sbjName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(subCB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTcherName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tchrName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
+                    .addComponent(tchrName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTchrName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
                 .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtStdID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(stdID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchBtn01, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addGap(17, 17, 17)
                 .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtStdName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(stdName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(stdName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblstdName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtStatuslb, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -325,7 +327,7 @@ public class StdAtten extends javax.swing.JFrame {
                     .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(presentRB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(absentRB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -447,10 +449,10 @@ public class StdAtten extends javax.swing.JFrame {
         String b="Absent";
         String a="Present";
         int Std_ID=Integer.parseInt(txtStdID.getText());
-        String Std_Name=txtStdName.getText();
+        String Std_Name=lblstdName.getText();
         String date=txtAttnDate.getText();
         String subject=(String) subCB.getSelectedItem();
-        String techerName=txtTcherName.getText();
+        String techerName=lblTchrName.getText();
         String specNote=txtNotes.getText();
         String status=txtStatuslb.getText();
         
@@ -518,11 +520,11 @@ public class StdAtten extends javax.swing.JFrame {
 
             if(rs.next()){
                 String studentName =rs.getString("Std_Name");
-                txtStdName.setText(studentName);
+                lblstdName.setText(studentName);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Please Enter Valid Student ID");
-                txtStdName.setText("");
+                lblstdName.setText("");
 
             }
             pstmt.close();
@@ -547,11 +549,11 @@ public class StdAtten extends javax.swing.JFrame {
             if(rs2.next()){
             String TeacherName =rs2.getString("Tchr_Name");
             String paymentfee = rs2.getString("Payment_Fees");
-            txtTcherName.setText(TeacherName);
+            lblTchrName.setText(TeacherName);
         }
             else{
                 JOptionPane.showMessageDialog(null, "Please Enter Valid Subject Name");
-                txtTcherName.setText("");
+                lblTchrName.setText("");
 
             }
             pstmt3.close();
@@ -643,6 +645,8 @@ public class StdAtten extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblTchrName;
+    private javax.swing.JLabel lblstdName;
     private javax.swing.JButton newBtn;
     private javax.swing.JRadioButton presentRB;
     private javax.swing.JLabel sbjName;
@@ -657,7 +661,5 @@ public class StdAtten extends javax.swing.JFrame {
     private javax.swing.JTextArea txtNotes;
     private javax.swing.JTextField txtStatuslb;
     private javax.swing.JTextField txtStdID;
-    private javax.swing.JTextField txtStdName;
-    private javax.swing.JTextField txtTcherName;
     // End of variables declaration//GEN-END:variables
 }

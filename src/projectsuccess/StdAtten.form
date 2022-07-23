@@ -158,7 +158,7 @@
                                       <Component id="statuslb" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                       <Component id="presentRB" min="-2" max="-2" attributes="0"/>
@@ -170,15 +170,18 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="txtStdName" max="32767" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="txtStdID" min="-2" pref="149" max="-2" attributes="0"/>
                                               <EmptySpace pref="15" max="32767" attributes="0"/>
                                               <Component id="searchBtn01" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="txtTcherName" alignment="0" max="32767" attributes="0"/>
                                           <Component id="subCB" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="lblstdName" alignment="0" max="32767" attributes="0"/>
                                       </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="lblTchrName" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -195,23 +198,23 @@
                           <Component id="sbjName" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="subCB" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtTcherName" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="tchrName" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="lblTchrName" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
+                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtStdID" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="stdID" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="searchBtn01" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtStdName" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="stdName" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="lblstdName" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="txtStatuslb" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -222,7 +225,7 @@
                               <Component id="absentRB" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="8" max="32767" attributes="0"/>
+                      <EmptySpace pref="10" max="32767" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -261,13 +264,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtStdID">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Times New Roman" size="14" style="1"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtStdName">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Times New Roman" size="14" style="1"/>
@@ -341,13 +337,6 @@
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Teacher&apos;s Name"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtTcherName">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Times New Roman" size="14" style="1"/>
-                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="createBtn">
@@ -464,6 +453,20 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchBtn01ActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblstdName">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="14" style="1"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblTchrName">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="14" style="1"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

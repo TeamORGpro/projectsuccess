@@ -64,7 +64,7 @@ public class StdRegForm extends javax.swing.JFrame {
         txtStdID.setText("");
         txtAddress.setText("");
         txtDob.setText("");
-        txtGrade.setText("");
+        gradeCB.setSelectedItem("Grade 6");
         txtPhoneNo.setText("");
         cboxSex.setSelectedItem("Male");
         txtguardiansName.setText("");
@@ -90,7 +90,6 @@ public class StdRegForm extends javax.swing.JFrame {
         gPhoneNo = new javax.swing.JLabel();
         txtstdName = new javax.swing.JTextField();
         txtDob = new javax.swing.JTextField();
-        txtGrade = new javax.swing.JTextField();
         txtPhoneNo = new javax.swing.JTextField();
         txtguardiansName = new javax.swing.JTextField();
         txtgphoneNo = new javax.swing.JTextField();
@@ -105,6 +104,7 @@ public class StdRegForm extends javax.swing.JFrame {
         txtAddress = new javax.swing.JTextField();
         stdID = new javax.swing.JLabel();
         txtStdID = new javax.swing.JTextField();
+        gradeCB = new javax.swing.JComboBox<>();
 
         jDialog1.setTitle("Massage");
 
@@ -188,9 +188,6 @@ public class StdRegForm extends javax.swing.JFrame {
         });
         jPanel1.add(txtDob, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 217, 388, -1));
 
-        txtGrade.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel1.add(txtGrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 257, 388, -1));
-
         txtPhoneNo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtPhoneNo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -241,7 +238,7 @@ public class StdRegForm extends javax.swing.JFrame {
         jPanel1.add(cnslBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 480, 100, 36));
 
         registerTitle.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 24)); // NOI18N
-        registerTitle.setText("Register Form");
+        registerTitle.setText("Student Register Form");
         jPanel1.add(registerTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 11, -1, 35));
         jPanel1.add(registerIcn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 11, 40, 35));
 
@@ -279,6 +276,10 @@ public class StdRegForm extends javax.swing.JFrame {
         txtStdID.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel1.add(txtStdID, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 137, 388, -1));
 
+        gradeCB.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        gradeCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Grade 6", "Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12" }));
+        jPanel1.add(gradeCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 255, 128, 25));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -306,7 +307,7 @@ public class StdRegForm extends javax.swing.JFrame {
             String Name_with_Initials=txtstdNameShort.getText();
             String Address=txtAddress.getText();
             String DOB=txtDob.getText();
-            String Grade=txtGrade.getText();
+            String Grade=(String) gradeCB.getSelectedItem();
             String Phone_no=txtPhoneNo.getText();
             String sex=(String) cboxSex.getSelectedItem();
             String Grd_name=txtguardiansName.getText();
@@ -476,6 +477,7 @@ public class StdRegForm extends javax.swing.JFrame {
     private javax.swing.JLabel dob;
     private javax.swing.JLabel gPhoneNo;
     private javax.swing.JLabel grade;
+    private javax.swing.JComboBox<String> gradeCB;
     private javax.swing.JLabel guardiansName;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JPanel jPanel1;
@@ -489,7 +491,6 @@ public class StdRegForm extends javax.swing.JFrame {
     private javax.swing.JLabel stdNameShort;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtDob;
-    private javax.swing.JTextField txtGrade;
     private javax.swing.JTextField txtPhoneNo;
     private javax.swing.JTextField txtStdID;
     private javax.swing.JTextField txtgphoneNo;
