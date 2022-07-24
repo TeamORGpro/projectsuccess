@@ -310,7 +310,7 @@ public class PaymentDetails extends javax.swing.JFrame {
         
         try {
                                                 
-            String query ="insert into payment_table(Std_ID,Std_Name,Tchr_Name,Subj_Name,Payment_fee,Grade,Month,Date)values(?,?,?,?,?,?,?,?)";
+            String query ="insert into payment_table(Std_ID,Std_Name,Tchr_Name,Subj_Name,Payment_fee,Grade,Month,Date_paid)values(?,?,?,?,?,?,?,?)";
 
             pstmt3 = con.prepareStatement(query);
 

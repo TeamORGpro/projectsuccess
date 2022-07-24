@@ -8,10 +8,7 @@ package projectsuccess;
 import java.awt.Color;
 import java.awt.HeadlessException;
 import java.sql.*;
-import java.util.Arrays;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
@@ -420,6 +417,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
         deleteBtn.setBackground(new java.awt.Color(255, 153, 51));
         deleteBtn.setText("Delete Record");
+        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtnActionPerformed(evt);
+            }
+        });
 
         restBtn.setBackground(new java.awt.Color(255, 255, 102));
         restBtn.setText("Reset");
@@ -684,6 +686,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
         deleteBtn2.setBackground(new java.awt.Color(255, 153, 51));
         deleteBtn2.setText("Delete Record");
+        deleteBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtn2ActionPerformed(evt);
+            }
+        });
 
         restBtn2.setBackground(new java.awt.Color(255, 255, 102));
         restBtn2.setText("Reset");
@@ -808,6 +815,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
         deleteBtn3.setBackground(new java.awt.Color(255, 153, 51));
         deleteBtn3.setText("Delete Record");
+        deleteBtn3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBtn3ActionPerformed(evt);
+            }
+        });
 
         restBtn3.setBackground(new java.awt.Color(255, 255, 102));
         restBtn3.setText("Reset");
@@ -1293,7 +1305,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Table Successfully Updated");
         } catch (HeadlessException | NumberFormatException | SQLException e) {
             System.out.println(e);
-        }
+        } 
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void updateBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtn2ActionPerformed
@@ -1361,8 +1373,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
             } catch (SQLException ex) {
                 ex.getMessage();
-            }
-        
+            } 
     }//GEN-LAST:event_updateBtn3ActionPerformed
 
     private void updateBtn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtn4ActionPerformed
@@ -1406,12 +1417,75 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 ps=con.prepareStatement(delRow);
                 ps.execute();
                 JOptionPane.showMessageDialog(null, "Row Successfully Deleted");
+                ps.close();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null,  ex.getMessage());
             }
         
         
     }//GEN-LAST:event_deleteBtn1ActionPerformed
+
+    private void deleteBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtn2ActionPerformed
+        // TODO add your handling code here:
+        PreparedStatement pst;
+        
+        DefaultTableModel tchrtbmodel = (DefaultTableModel) jTable4.getModel();
+        int row1 = jTable4.getSelectedRow();
+            int eve1 = (int) jTable4.getModel().getValueAt(row1, 0);
+        
+        String delRow = "DELETE FROM `tchr_info_table` WHERE `Tchr_ID` ="+eve1;
+            try {
+                pst=con.prepareStatement(delRow);
+                pst.execute();
+                JOptionPane.showMessageDialog(null, "Row Successfully Deleted");
+                pst.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null,  ex.getMessage());
+            }
+    }//GEN-LAST:event_deleteBtn2ActionPerformed
+
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        // TODO add your handling code here:
+        PreparedStatement psa;
+        
+        DefaultTableModel attntbmodel = (DefaultTableModel) jTable1.getModel();
+        int row2 = jTable1.getSelectedRow();
+            String date = jTable1.getValueAt(row2, 0).toString();
+            String subjName = jTable1.getValueAt(row2, 1).toString();
+            int stuID = Integer.valueOf(jTable1.getValueAt(row2, 2).toString());
+        
+        String delRow = "DELETE FROM `attndance_table` WHERE `Date`='"+date+"' AND `Subj_Name`='"+subjName+"' AND `Std_ID`="+stuID;
+            try {
+                psa=con.prepareStatement(delRow);
+                psa.execute();
+                JOptionPane.showMessageDialog(null, "Row Successfully Deleted");
+                psa.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null,  ex.getMessage());
+            }
+    }//GEN-LAST:event_deleteBtnActionPerformed
+
+    private void deleteBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtn3ActionPerformed
+        // TODO add your handling code here:
+        PreparedStatement psp;
+        
+        DefaultTableModel pymnttbmodel = (DefaultTableModel) jTable2.getModel();
+        int row2 = jTable2.getSelectedRow();
+            int stuID = Integer.valueOf(jTable2.getValueAt(row2, 0).toString());
+            String subjName = jTable2.getValueAt(row2, 2).toString();
+            String date = jTable2.getValueAt(row2, 6).toString();
+            
+        
+        String delRow = "DELETE FROM `payment_table` WHERE `Std_ID`="+stuID+" AND `Subj_Name`='"+subjName+"' AND `Date_paid`='"+date+"';";
+            try {
+                psp=con.prepareStatement(delRow);
+                psp.execute();
+                JOptionPane.showMessageDialog(null, "Row Successfully Deleted");
+                psp.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null,  ex.getMessage());
+            }
+    }//GEN-LAST:event_deleteBtn3ActionPerformed
 
     private void onClick(JPanel panel){
         panel.setBackground(new Color(48,203,220));
