@@ -7,6 +7,7 @@ package projectsuccess;
 
 import java.awt.Color;
 import java.awt.HeadlessException;
+import java.io.*;
 import java.sql.*;
 import java.util.Vector;
 import javax.swing.*;
@@ -117,7 +118,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         pymtSearchField = new javax.swing.JTextField();
         deleteBtn3 = new javax.swing.JButton();
         restBtn3 = new javax.swing.JButton();
-        updateBtn4 = new javax.swing.JButton();
+        printBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Success Educational Institute");
@@ -765,7 +766,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -829,11 +830,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             }
         });
 
-        updateBtn4.setBackground(new java.awt.Color(153, 204, 255));
-        updateBtn4.setText("Update");
-        updateBtn4.addActionListener(new java.awt.event.ActionListener() {
+        printBtn.setBackground(new java.awt.Color(255, 255, 102));
+        printBtn.setText("Print");
+        printBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateBtn4ActionPerformed(evt);
+                printBtnActionPerformed(evt);
             }
         });
 
@@ -849,8 +850,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(restBtn3)
                 .addGap(18, 18, 18)
-                .addComponent(updateBtn4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                .addComponent(printBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
                 .addComponent(deleteBtn3)
                 .addContainerGap())
         );
@@ -863,7 +864,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     .addComponent(pymtSearchField, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(deleteBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(restBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(updateBtn4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(printBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -1013,7 +1014,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnAttnInfoAllActionPerformed
-
+    
     private void btnPaymentInfoAll1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPaymentInfoAll1ActionPerformed
         mainPnl.setSelectedIndex(4);
         try {
@@ -1037,8 +1038,6 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
-        
     }//GEN-LAST:event_btnPaymentInfoAll1ActionPerformed
 
     private void btntcherInfoAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntcherInfoAllActionPerformed
@@ -1376,34 +1375,6 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             } 
     }//GEN-LAST:event_updateBtn3ActionPerformed
 
-    private void updateBtn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtn4ActionPerformed
-        // TODO add your handling code here:
-        Statement upSt3;
-        DefaultTableModel model3=(DefaultTableModel) jTable2.getModel();
-        
-        try {
-            upSt3 = con.createStatement();
-            
-            for (int i = 0; i<model3.getRowCount(); i++){
-                int stuID = Integer.valueOf(model3.getValueAt(i, 0).toString());
-                String subject = model3.getValueAt(i, 2).toString();
-                String fee = model3.getValueAt(i, 4).toString();
-                String month = model3.getValueAt(i, 5).toString();
-                String date = model3.getValueAt(i, 6).toString();
-                
-                
-                String updateQuery="UPDATE `payment_table` SET `Month`='"+month+"' WHERE `Std_ID`="+stuID+" AND `Subj_Name`='"+subject+"' AND `Date_paid`='"+date+"'";
-
-                upSt3.addBatch(updateQuery);
-            }
-
-            upSt3.executeBatch();
-            JOptionPane.showMessageDialog(null, "Table Successfully Updated");
-        } catch (HeadlessException | NumberFormatException | SQLException e) {
-            e.getMessage();
-        }
-    }//GEN-LAST:event_updateBtn4ActionPerformed
-
     private void deleteBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtn1ActionPerformed
         // TODO add your handling code here:
         PreparedStatement ps;
@@ -1470,13 +1441,17 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         PreparedStatement psp;
         
         DefaultTableModel pymnttbmodel = (DefaultTableModel) jTable2.getModel();
+        
+        
         int row2 = jTable2.getSelectedRow();
             int stuID = Integer.valueOf(jTable2.getValueAt(row2, 0).toString());
             String subjName = jTable2.getValueAt(row2, 2).toString();
+            String month = jTable2.getValueAt(row2, 5).toString();
             String date = jTable2.getValueAt(row2, 6).toString();
             
+            
         
-        String delRow = "DELETE FROM `payment_table` WHERE `Std_ID`="+stuID+" AND `Subj_Name`='"+subjName+"' AND `Date_paid`='"+date+"';";
+        String delRow = "DELETE FROM `payment_table` WHERE `Std_ID`="+stuID+" AND `Subj_Name`='"+subjName+"' AND `Date_paid`='"+date+"' AND `Month`='"+month+"';";
             try {
                 psp=con.prepareStatement(delRow);
                 psp.execute();
@@ -1486,6 +1461,78 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,  ex.getMessage());
             }
     }//GEN-LAST:event_deleteBtn3ActionPerformed
+
+    
+    public void export(JTable jTable2, File file){
+        TableRowSorter<TableModel> pymntSort = new TableRowSorter<>(jTable2.getModel());
+        jTable2.setRowSorter(pymntSort);
+        
+        pymtSearchField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                String pymntStr = pymtSearchField.getText();
+                if (pymntStr.trim().length()== 0 ){
+                    pymntSort.setRowFilter(null);
+                }
+                else{
+                    pymntSort.setRowFilter(RowFilter.regexFilter("(?i)" + pymntStr));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                String pymntStr = pymtSearchField.getText();
+                if (pymntStr.trim().length() == 0) {
+                    pymntSort.setRowFilter(null);
+                
+                }
+                else{
+                    pymntSort.setRowFilter(RowFilter.regexFilter("(?i)" + pymntStr));
+                    
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                
+            }
+        });
+    
+        
+        try
+    {
+      TableModel m = jTable2.getModel();
+      FileWriter fw = new FileWriter(file);
+      for(int i = 0; i < m.getColumnCount(); i++){
+        fw.write(m.getColumnName(i) + "\t");
+      }
+      fw.write("\n");
+      for(int i=0; i < m.getRowCount(); i++) {
+        for(int j=0; j < m.getColumnCount(); j++) {
+          fw.write(m.getValueAt(i,j).toString()+"\t");
+        }
+        fw.write("\n");
+      }
+      fw.close();
+    }
+    catch(IOException e){ System.out.println(e); }
+  }
+    
+    
+    private void printBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printBtnActionPerformed
+        // TODO add your handling code here:
+        
+  
+        JFileChooser fchoose = new JFileChooser();
+           int option = fchoose.showSaveDialog(printBtn);
+           if(option == JFileChooser.APPROVE_OPTION){
+             String name = fchoose.getSelectedFile().getName(); 
+             String path = fchoose.getSelectedFile().getParentFile().getPath();
+             String file = path + "\\" + name + ".xls"; 
+             export(jTable2, new File(file));
+           }
+           
+    }//GEN-LAST:event_printBtnActionPerformed
 
     private void onClick(JPanel panel){
         panel.setBackground(new Color(48,203,220));
@@ -1587,6 +1634,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JTable jTable4;
     private javax.swing.JPanel logo;
     private javax.swing.JTabbedPane mainPnl;
+    private javax.swing.JButton printBtn;
     private javax.swing.JPanel pymntFilterPnl;
     private javax.swing.JPanel pymntInfo;
     private javax.swing.JTextField pymtSearchField;
@@ -1607,6 +1655,5 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JButton updateBtn;
     private javax.swing.JButton updateBtn2;
     private javax.swing.JButton updateBtn3;
-    private javax.swing.JButton updateBtn4;
     // End of variables declaration//GEN-END:variables
 }

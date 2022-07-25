@@ -1365,7 +1365,7 @@
                                 <Column editable="false" title="Subject" type="java.lang.String"/>
                                 <Column editable="false" title="Teacher&apos;s Name" type="java.lang.String"/>
                                 <Column editable="false" title="Subject Fee" type="java.lang.String"/>
-                                <Column editable="true" title="Last Paid Month" type="java.lang.String"/>
+                                <Column editable="false" title="Last Paid Month" type="java.lang.String"/>
                                 <Column editable="false" title="Paid Date" type="java.lang.String"/>
                               </Table>
                             </Property>
@@ -1459,8 +1459,8 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="restBtn3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="updateBtn4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="139" max="32767" attributes="0"/>
+                              <Component id="printBtn" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="145" max="32767" attributes="0"/>
                               <Component id="deleteBtn3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -1475,7 +1475,7 @@
                                   <Component id="pymtSearchField" alignment="3" pref="28" max="32767" attributes="0"/>
                                   <Component id="deleteBtn3" alignment="3" max="32767" attributes="0"/>
                                   <Component id="restBtn3" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="updateBtn4" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="printBtn" alignment="3" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -1518,15 +1518,15 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="restBtn3ActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="updateBtn4">
+                    <Component class="javax.swing.JButton" name="printBtn">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="cc" red="99" type="rgb"/>
+                          <Color blue="66" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Update"/>
+                        <Property name="text" type="java.lang.String" value="Print"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateBtn4ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="printBtnActionPerformed"/>
                       </Events>
                     </Component>
                   </SubComponents>

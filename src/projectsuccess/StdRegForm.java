@@ -43,13 +43,7 @@ public class StdRegForm extends javax.swing.JFrame {
         txtStdID.setEnabled(false);
 
     }
-    //  add date format
-    
-//    private String getdate(){
-//      DateFormat format = new SimpleDateFormat("YYYY/MM/DD"); //display your format.
-//      Date date = new Date();//puts the date in variable.
-//      return txtDob.format(date); //returns the format to the date variable.
-//}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,9 +66,7 @@ public class StdRegForm extends javax.swing.JFrame {
         txtStdID.setEnabled(false);
         
     }
-//    private void stID(){
-//        txtStdID.setEnabled(false);
-//    }
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -323,14 +315,6 @@ public class StdRegForm extends javax.swing.JFrame {
             
             if(!Std_Name.isEmpty() && !Name_with_Initials.isEmpty() && !Address.isEmpty() && !DOB.isEmpty() && !Grade.isEmpty() && !sex.isEmpty() && !Grd_name.isEmpty() && !Grd_Phone_no.isEmpty()){
             
-//            if(!Std_Name.isEmpty()){
-//                if(!Name_with_Initials.isEmpty()){
-//                    if(!Address.isEmpty()){
-//                        if(!DOB.isEmpty()){
-//                            if(!Grade.isEmpty()){
-//                                if(!sex.isEmpty()){
-//                                    if(!Grd_name.isEmpty()){
-//                                        if(!Grd_Phone_no.isEmpty()){
                                             
                                             try {
                                                 
@@ -357,47 +341,9 @@ public class StdRegForm extends javax.swing.JFrame {
                                             } catch (SQLException e) {
 
                                                 System.out.println(e.getMessage());
+                                                JOptionPane.showMessageDialog(null, "Please check your filled data! ","Error Occurred!",JOptionPane.ERROR_MESSAGE);
                                             }
                                             
-//                                        }
-//                                        else{
-//                                            JOptionPane.showMessageDialog(null, "Please Enter guardian's Phone Number","Error Occurred!",JOptionPane.ERROR_MESSAGE);
-//                                        }
-//                                        
-//                                    }
-//                                    else{
-//                                        JOptionPane.showMessageDialog(null, "Please Enter guardian's Name","Error Occurred!",JOptionPane.ERROR_MESSAGE);
-//                                    }
-//                                    
-//                                }
-//                                else{
-//                                    JOptionPane.showMessageDialog(null, "Please Enter Student Sex","Error Occurred!",JOptionPane.ERROR_MESSAGE);
-//                                }
-//                                
-//                            }
-//                            else{
-//                                JOptionPane.showMessageDialog(null, "Please Enter Student Grade","Error Occurred!",JOptionPane.ERROR_MESSAGE);
-//                            }
-//                            
-//                        }
-//                        
-//                        else{
-//                            JOptionPane.showMessageDialog(null, "Please Enter Student Date Of Birth","Error Occurred!",JOptionPane.ERROR_MESSAGE);
-//                        }
-//                        
-//                    }
-//                    else{
-//                        JOptionPane.showMessageDialog(null, "Please Enter Student Date Of Birth","Error Occurred!",JOptionPane.ERROR_MESSAGE);
-//                    }
-//                    
-//                }
-//                else{
-//                    JOptionPane.showMessageDialog(null, "Please Enter Student Name With Initials","Error Occurred!",JOptionPane.ERROR_MESSAGE);
-//                }
-//            }
-//            else{
-//                JOptionPane.showMessageDialog(null, "Please Enter Student Name","Error Occurred!",JOptionPane.ERROR_MESSAGE);
-//            }
             }
             else{
                 JOptionPane.showMessageDialog(null, "Please Fill the Required Fields","Error Occurred!",JOptionPane.ERROR_MESSAGE);

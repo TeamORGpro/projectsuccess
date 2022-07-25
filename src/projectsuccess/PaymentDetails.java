@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.*;
 
 
-public class PaymentDetails extends javax.swing.JFrame {
+public final class PaymentDetails extends javax.swing.JFrame {
 
     
     Connection con= null;
@@ -304,8 +304,8 @@ public class PaymentDetails extends javax.swing.JFrame {
         String mnth=(String) monthCB.getSelectedItem();
         String date=dateLbl.getText();
     
-        
-        ResultSet rs3;
+        if (!Std_Name.isEmpty() && !techerName.isEmpty()){
+            ResultSet rs3;
         PreparedStatement pstmt3;
         
         try {
@@ -331,7 +331,13 @@ public class PaymentDetails extends javax.swing.JFrame {
         }
         catch(SQLException e){
             System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Please check your filled data! ","Error Occurred!",JOptionPane.ERROR_MESSAGE);
         }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Please Fill Required Fields!", "Error Occured!", JOptionPane.ERROR_MESSAGE);
+        }
+        
         
         
                 
