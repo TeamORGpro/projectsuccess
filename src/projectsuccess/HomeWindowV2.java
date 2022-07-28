@@ -40,7 +40,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
      */
     
 
-    
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -71,6 +71,15 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         tcherregFormBtn = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        bckupnRstorPnl = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        browsBtn = new javax.swing.JButton();
+        bkupBtn = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        browsBtn1 = new javax.swing.JButton();
+        rstorBtn = new javax.swing.JButton();
         attnInfo = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -309,7 +318,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jLabel6.setText("Student Registration");
         stdregformbtn.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 190, 70));
 
-        home.add(stdregformbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 280, 340, 110));
+        home.add(stdregformbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 260, 340, 110));
 
         btnLout.setBackground(new java.awt.Color(255, 102, 102));
         btnLout.setText("Log Out");
@@ -340,7 +349,102 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jLabel8.setText("Teacher Registration");
         tcherregFormBtn.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 190, 70));
 
-        home.add(tcherregFormBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 280, 340, 110));
+        home.add(tcherregFormBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 340, 110));
+
+        bckupnRstorPnl.setBackground(new java.awt.Color(0, 153, 102));
+
+        jLabel18.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel18.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Backup");
+
+        jTextField1.setEditable(false);
+        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        browsBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        browsBtn.setText("Browse");
+        browsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browsBtnActionPerformed(evt);
+            }
+        });
+
+        bkupBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        bkupBtn.setText("Backup");
+        bkupBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bkupBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel19.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel19.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Restore");
+
+        jTextField2.setEditable(false);
+        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        browsBtn1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        browsBtn1.setText("Browse");
+        browsBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browsBtn1ActionPerformed(evt);
+            }
+        });
+
+        rstorBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rstorBtn.setText("Restore");
+        rstorBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rstorBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout bckupnRstorPnlLayout = new javax.swing.GroupLayout(bckupnRstorPnl);
+        bckupnRstorPnl.setLayout(bckupnRstorPnlLayout);
+        bckupnRstorPnlLayout.setHorizontalGroup(
+            bckupnRstorPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bckupnRstorPnlLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(bckupnRstorPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel18)
+                    .addGroup(bckupnRstorPnlLayout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(browsBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(bkupBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(bckupnRstorPnlLayout.createSequentialGroup()
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(browsBtn1)
+                        .addGap(18, 18, 18)
+                        .addComponent(rstorBtn))
+                    .addComponent(jLabel19))
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+        bckupnRstorPnlLayout.setVerticalGroup(
+            bckupnRstorPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bckupnRstorPnlLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(bckupnRstorPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(browsBtn)
+                    .addComponent(bkupBtn))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(bckupnRstorPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(browsBtn1)
+                    .addComponent(rstorBtn))
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
+        home.add(bckupnRstorPnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 400, 520, 180));
 
         mainPnl.addTab("tab1", home);
 
@@ -1534,6 +1638,95 @@ public class HomeWindowV2 extends javax.swing.JFrame {
            
     }//GEN-LAST:event_printBtnActionPerformed
 
+    
+    
+    
+        String path1=null;
+        String filename=null;
+    private void browsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsBtnActionPerformed
+        // TODO add your handling code here:
+        
+        
+        JFileChooser fc=new JFileChooser();
+        fc.showOpenDialog(this);
+        
+        try {
+            File f=fc.getSelectedFile();
+            path1 = f.getAbsolutePath();
+            path1=path1.replace('\\', '/');
+            path1= path1+".sql";
+            jTextField1.setText(path1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_browsBtnActionPerformed
+
+    private void bkupBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bkupBtnActionPerformed
+        // TODO add your handling code here:
+        Process p=null;
+        try {
+            Runtime runtime=Runtime.getRuntime();
+            p=runtime.exec("D:/xampp/mysql/bin/mysqldump.exe -u root   -B successdb -r "+path1);
+            
+            int processComplete = p.waitFor();
+            if (processComplete==0) {
+                JOptionPane.showMessageDialog(null, "Successfully Backuped File");
+                jTextField1.setText("");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Backup Didn't Successfull, Try typing a single word for file name", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                jTextField1.setText("");
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_bkupBtnActionPerformed
+
+    private void browsBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsBtn1ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fc=new JFileChooser();
+        fc.showOpenDialog(this);
+        
+        try {
+            File f=fc.getSelectedFile();
+            path1 = f.getAbsolutePath();
+            path1=path1.replace('\\', '/');
+            jTextField2.setText(path1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_browsBtn1ActionPerformed
+
+    private void rstorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rstorBtnActionPerformed
+        // TODO add your handling code here:
+        
+        String user="root";
+//        String pass="";
+        String []restorecmd = new String []{"D:/xampp/mysql/bin/mysql.exe","--user="+user,"-e","source "+path1};
+        
+        Process process;
+        try {
+            process=Runtime.getRuntime().exec(restorecmd);
+            int pr=process.waitFor();
+            if (pr==0) {
+                JOptionPane.showMessageDialog(null, "Successfully Restored File. Please close and relaunch the application.");
+                jTextField2.setText("");
+                
+            } else {
+                
+                JOptionPane.showMessageDialog(null, "Restore Didn't Successfull", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                jTextField2.setText("");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_rstorBtnActionPerformed
+
     private void onClick(JPanel panel){
         panel.setBackground(new Color(48,203,220));
     }
@@ -1584,7 +1777,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JPanel attnFilterPnl;
     private javax.swing.JPanel attnInfo;
     private javax.swing.JTextField attnSearchField;
+    private javax.swing.JPanel bckupnRstorPnl;
     private javax.swing.JPanel bgPnl;
+    private javax.swing.JButton bkupBtn;
+    private javax.swing.JButton browsBtn;
+    private javax.swing.JButton browsBtn1;
     private javax.swing.JButton btnAttnInfoAll;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnLout;
@@ -1610,6 +1807,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
@@ -1632,6 +1831,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel logo;
     private javax.swing.JTabbedPane mainPnl;
     private javax.swing.JButton printBtn;
@@ -1642,6 +1843,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JButton restBtn1;
     private javax.swing.JButton restBtn2;
     private javax.swing.JButton restBtn3;
+    private javax.swing.JButton rstorBtn;
     private javax.swing.JPanel stdAttenBtn;
     private javax.swing.JPanel stdFilterPnl;
     private javax.swing.JPanel stdInfo;
