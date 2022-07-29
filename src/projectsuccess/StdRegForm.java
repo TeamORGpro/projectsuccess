@@ -23,9 +23,7 @@ public class StdRegForm extends javax.swing.JFrame {
      * Creates new form regForm
      */
     
-    Connection con= null;
-    ResultSet rset = null;
-    PreparedStatement pstmt=null;
+    
     
     
     public StdRegForm() {
@@ -39,7 +37,7 @@ public class StdRegForm extends javax.swing.JFrame {
         
         registerIcn1.setIcon(i);
 
-        con = DBConnect.connect();
+        
         txtStdID.setEnabled(false);
 
     }
@@ -312,7 +310,9 @@ public class StdRegForm extends javax.swing.JFrame {
 
                       
             // need validation part here
-            
+            Connection con;
+            PreparedStatement pstmt;
+            con = DBConnect.connect();
             if(!Std_Name.isEmpty() && !Name_with_Initials.isEmpty() && !Address.isEmpty() && !DOB.isEmpty() && !Grade.isEmpty() && !sex.isEmpty() && !Grd_name.isEmpty() && !Grd_Phone_no.isEmpty()){
             
                                             
@@ -338,6 +338,8 @@ public class StdRegForm extends javax.swing.JFrame {
                                                 System.out.println("query successfully executed");
                                                 JOptionPane.showMessageDialog(null, "query successfully executed");
 
+                                                pstmt.close();
+                                                con.close();
                                             } catch (SQLException e) {
 
                                                 System.out.println(e.getMessage());
