@@ -14,7 +14,6 @@ import javax.swing.*;
 public final class PaymentDetails extends javax.swing.JFrame {
 
     
-    Connection con= null;
 
 
     public PaymentDetails() {
@@ -28,8 +27,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
         
         paymentIcn1.setIcon(i);
         
- 
-        con = DBConnect.connect();
+
         
         getSubject();
         dt(); 
@@ -266,7 +264,8 @@ public final class PaymentDetails extends javax.swing.JFrame {
     
     private void searchBtn01ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtn01ActionPerformed
         // TODO add your handling code here:
-
+        Connection con;
+        con = DBConnect.connect();
         ResultSet rs;
         PreparedStatement pstmt;
         try {
@@ -286,6 +285,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
             }
             pstmt.close();
             rs.close();
+            con.close();
 
         } catch (HeadlessException | SQLException e) {
             System.out.println(e.getMessage());
@@ -305,8 +305,9 @@ public final class PaymentDetails extends javax.swing.JFrame {
         String date=dateLbl.getText();
     
         if (!Std_Name.isEmpty() && !techerName.isEmpty()){
-            ResultSet rs3;
-        PreparedStatement pstmt3;
+            Connection con;
+            con = DBConnect.connect();
+            PreparedStatement pstmt3;
         
         try {
                                                 
@@ -328,6 +329,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Data successfully Saved!");
             
             pstmt3.close();
+            con.close();
         }
         catch(SQLException e){
             System.out.println(e.getMessage());
@@ -345,6 +347,8 @@ public final class PaymentDetails extends javax.swing.JFrame {
 
     private void subCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subCBActionPerformed
         // TODO add your handling code here:
+        Connection con;
+        con = DBConnect.connect();
         ResultSet rs2;
         PreparedStatement pstmt2;
         try {
@@ -366,6 +370,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
             }
             pstmt2.close();
             rs2.close();
+            con.close();
 
         } catch (HeadlessException | SQLException e) {
             System.out.println(e.getMessage());
@@ -374,7 +379,8 @@ public final class PaymentDetails extends javax.swing.JFrame {
 
     
     public void getSubject(){
-    
+        Connection con;
+        con = DBConnect.connect();
         ResultSet rsSub;
         PreparedStatement psSub;
         
@@ -388,6 +394,9 @@ public final class PaymentDetails extends javax.swing.JFrame {
                 String subjname= rsSub.getString("Subj_Name");
                 subCB.addItem(subjname);
             }
+            rsSub.close();
+            psSub.close();
+            con.close();
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());

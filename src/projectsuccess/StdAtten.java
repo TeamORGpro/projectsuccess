@@ -25,9 +25,8 @@ public class StdAtten extends javax.swing.JFrame {
     /**
      * Creates new form stdAtten
      */
-    Connection con= null;
-    ResultSet rset = null;
-    PreparedStatement pstmt2=null;
+    
+    
     
     public StdAtten() {
         initComponents();
@@ -42,7 +41,6 @@ public class StdAtten extends javax.swing.JFrame {
         
         attenIcn1.setIcon(i);
         txtStatuslb.setEnabled(false);
-        con = DBConnect.connect();
         getSubject();
         
     }
@@ -460,6 +458,9 @@ public class StdAtten extends javax.swing.JFrame {
                 DefaultTableModel dtm= (DefaultTableModel)jTable1.getModel();
                 dtm.addRow(columns);
         
+                Connection con;
+                PreparedStatement pstmt2;
+                con = DBConnect.connect();
         try {
                                                 
             String query ="insert into attndance_table(Date,Subj_Name,Tchr_Name,Std_ID,Std_Name,Status,Spc_Note)values(?,?,?,?,?,?,?)";
@@ -486,6 +487,7 @@ public class StdAtten extends javax.swing.JFrame {
             pstmt2.execute();
             JOptionPane.showMessageDialog(null, "Data successfully Saved!");
             pstmt2.close();
+            con.close();
         } catch (SQLException e) {
 
             System.out.println(e.getMessage());
@@ -509,7 +511,8 @@ public class StdAtten extends javax.swing.JFrame {
 
     private void searchBtn01ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtn01ActionPerformed
         // TODO add your handling code here:
-
+        Connection con;
+        con = DBConnect.connect();
         ResultSet rs;
         PreparedStatement pstmt;
         try {
@@ -529,6 +532,7 @@ public class StdAtten extends javax.swing.JFrame {
             }
             pstmt.close();
             rs.close();
+            con.close();
 
         } catch (HeadlessException | SQLException e) {
             System.out.println(e.getMessage());
@@ -538,6 +542,8 @@ public class StdAtten extends javax.swing.JFrame {
 
     private void subCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subCBActionPerformed
         // TODO add your handling code here:
+        Connection con;
+        con = DBConnect.connect();
         ResultSet rs2;
         PreparedStatement pstmt3;
         try {
@@ -558,6 +564,7 @@ public class StdAtten extends javax.swing.JFrame {
             }
             pstmt3.close();
             rs2.close();
+            con.close();
 
         } catch (HeadlessException | SQLException e) {
             System.out.println(e.getMessage());
@@ -566,7 +573,8 @@ public class StdAtten extends javax.swing.JFrame {
 
     
     public void getSubject(){
-    
+        Connection con;
+        con = DBConnect.connect();
         ResultSet rsSub;
         PreparedStatement psSub;
         
@@ -581,6 +589,9 @@ public class StdAtten extends javax.swing.JFrame {
                 subCB.addItem(subjname);
             }
             
+            rsSub.close();
+            psSub.close();
+            con.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

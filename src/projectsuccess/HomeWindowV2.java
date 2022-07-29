@@ -23,15 +23,10 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     /**
      * Creates new form HomeWindow
      */
-        Connection con= null;
-        ResultSet rset = null;
-        PreparedStatement pstmt=null;
-    
+      
     public HomeWindowV2() {
         initComponents();
-        
-        con = DBConnect.connect();
-    }
+  }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1064,7 +1059,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
     private void btnstdInfoAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnstdInfoAllActionPerformed
         mainPnl.setSelectedIndex(2);
-        
+        Connection con;
+        con = DBConnect.connect();
         
         try {
             DefaultTableModel dt = (DefaultTableModel) jTable3.getModel();
@@ -1086,6 +1082,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     v.add(rs.getString("Grd_Phone_no"));
                     dt.addRow(v);
                 }
+                rs.close();
+                con.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -1095,7 +1093,9 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
     private void btnAttnInfoAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttnInfoAllActionPerformed
         mainPnl.setSelectedIndex(1);
-        
+        Connection con;
+
+        con = DBConnect.connect();
         try {
             DefaultTableModel dt1 = (DefaultTableModel) jTable1.getModel();
             dt1.setRowCount(0);
@@ -1112,6 +1112,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     v1.add(rs1.getString("Spc_Note"));
                     dt1.addRow(v1);
                 }
+                s1.close();
+                con.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -1121,6 +1123,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     
     private void btnPaymentInfoAll1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPaymentInfoAll1ActionPerformed
         mainPnl.setSelectedIndex(4);
+        
+        Connection con;
+        ResultSet rset = null;
+
+        con = DBConnect.connect();
         try {
             DefaultTableModel dt3 = (DefaultTableModel) jTable2.getModel();
             dt3.setRowCount(0);
@@ -1138,6 +1145,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     
                     dt3.addRow(v3);
                 }
+                s3.close();
+                con.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -1147,6 +1156,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private void btntcherInfoAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntcherInfoAllActionPerformed
         mainPnl.setSelectedIndex(3);
         
+        
+        Connection con;
+        ResultSet rset = null;
+
+        con = DBConnect.connect();
         try {
             DefaultTableModel dt2 = (DefaultTableModel) jTable4.getModel();
             dt2.setRowCount(0);
@@ -1166,6 +1180,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     v2.add(rs2.getString("NIC"));
                     dt2.addRow(v2);
                 }
+                s2.close();
+                con.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -1385,10 +1401,13 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         // TODO add your handling code here:
-        
+        Connection con;
+        con = DBConnect.connect();
         Statement upSt;
-        DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
         
+        
+        DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
+
         try {
             upSt = con.createStatement();
             
@@ -1406,6 +1425,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             
             upSt.executeBatch();
             JOptionPane.showMessageDialog(null, "Table Successfully Updated");
+            upSt.close();
+            con.close();
         } catch (HeadlessException | NumberFormatException | SQLException e) {
             System.out.println(e);
         } 
@@ -1413,10 +1434,13 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
     private void updateBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtn2ActionPerformed
         // TODO add your handling code here:
-        
+        Connection con;
+        con = DBConnect.connect();        
         Statement upSt1;
-        DefaultTableModel model1=(DefaultTableModel) jTable3.getModel();
         
+        
+        DefaultTableModel model1=(DefaultTableModel) jTable3.getModel();
+
         try {
             upSt1 = con.createStatement();
             
@@ -1439,6 +1463,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
             upSt1.executeBatch();
             JOptionPane.showMessageDialog(null, "Table Successfully Updated");
+            upSt1.close();
+            con.close();
         } catch (HeadlessException | NumberFormatException | SQLException e) {
             e.getMessage();
         }
@@ -1446,7 +1472,12 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
     private void updateBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtn3ActionPerformed
         // TODO add your handling code here:
+        
+        Connection con;
+        con = DBConnect.connect();
         Statement upSt2;
+        
+        
         DefaultTableModel model2=(DefaultTableModel) jTable4.getModel();
         
             try {
@@ -1474,6 +1505,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 upSt2.executeBatch();
                 JOptionPane.showMessageDialog(null, "Table Successfully Updated");
 
+                upSt2.close();
+                con.close();
             } catch (SQLException ex) {
                 ex.getMessage();
             } 
@@ -1481,7 +1514,9 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
     private void deleteBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtn1ActionPerformed
         // TODO add your handling code here:
+        Connection con;
         PreparedStatement ps;
+        con = DBConnect.connect();
         
         DefaultTableModel stdtbmodel = (DefaultTableModel) jTable3.getModel();
         int row = jTable3.getSelectedRow();
@@ -1493,27 +1528,29 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 ps.execute();
                 JOptionPane.showMessageDialog(null, "Row Successfully Deleted");
                 ps.close();
+                con.close();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null,  ex.getMessage());
             }
-        
-        
     }//GEN-LAST:event_deleteBtn1ActionPerformed
 
     private void deleteBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtn2ActionPerformed
         // TODO add your handling code here:
+        Connection con;
+        con = DBConnect.connect();
         PreparedStatement pst;
         
         DefaultTableModel tchrtbmodel = (DefaultTableModel) jTable4.getModel();
         int row1 = jTable4.getSelectedRow();
             int eve1 = (int) jTable4.getModel().getValueAt(row1, 0);
-        
+
         String delRow = "DELETE FROM `tchr_info_table` WHERE `Tchr_ID` ="+eve1;
             try {
                 pst=con.prepareStatement(delRow);
                 pst.execute();
                 JOptionPane.showMessageDialog(null, "Row Successfully Deleted");
                 pst.close();
+                con.close();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null,  ex.getMessage());
             }
@@ -1521,6 +1558,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
         // TODO add your handling code here:
+        Connection con;
+        con = DBConnect.connect();
         PreparedStatement psa;
         
         DefaultTableModel attntbmodel = (DefaultTableModel) jTable1.getModel();
@@ -1530,11 +1569,13 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             int stuID = Integer.valueOf(jTable1.getValueAt(row2, 2).toString());
         
         String delRow = "DELETE FROM `attndance_table` WHERE `Date`='"+date+"' AND `Subj_Name`='"+subjName+"' AND `Std_ID`="+stuID;
-            try {
+
+        try {
                 psa=con.prepareStatement(delRow);
                 psa.execute();
                 JOptionPane.showMessageDialog(null, "Row Successfully Deleted");
                 psa.close();
+                con.close();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null,  ex.getMessage());
             }
@@ -1542,6 +1583,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
     private void deleteBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtn3ActionPerformed
         // TODO add your handling code here:
+        Connection con;
+        con = DBConnect.connect();
         PreparedStatement psp;
         
         DefaultTableModel pymnttbmodel = (DefaultTableModel) jTable2.getModel();
@@ -1555,12 +1598,13 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             
             
         
-        String delRow = "DELETE FROM `payment_table` WHERE `Std_ID`="+stuID+" AND `Subj_Name`='"+subjName+"' AND `Date_paid`='"+date+"' AND `Month`='"+month+"';";
-            try {
+        String delRow = "DELETE FROM `payment_table` WHERE `Std_ID`="+stuID+" AND `Subj_Name`='"+subjName+"' AND `Date_paid`='"+date+"' AND `Month`='"+month+"';";       
+        try {
                 psp=con.prepareStatement(delRow);
                 psp.execute();
                 JOptionPane.showMessageDialog(null, "Row Successfully Deleted");
                 psp.close();
+                con.close();
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null,  ex.getMessage());
             }

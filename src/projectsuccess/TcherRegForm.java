@@ -21,13 +21,12 @@ import javax.swing.JOptionPane;
  */
 public class TcherRegForm extends javax.swing.JFrame {
 
-    Connection conn=null;
-    Statement stmt; 
+    
     /**
      * Creates new form regForm
      */
     public TcherRegForm()
-    {conn = DBConnect.connect();
+    {
         initComponents();
         
         ImageIcon myImage=new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/regicon.png")));
@@ -289,7 +288,8 @@ public class TcherRegForm extends javax.swing.JFrame {
         String SubjName = Subj_Name.getText().toLowerCase();
         String PaymentFees = Payment_Fees.getText();
         
-        
+        Connection con;
+        con = DBConnect.connect();
 
             char[] charArray = SubjName.toCharArray();
             boolean foundSpace = true;
@@ -324,7 +324,7 @@ public class TcherRegForm extends javax.swing.JFrame {
          
             String sql = "INSERT INTO tchr_info_table(Tchr_Name,Name_with_Initials,Address,Phone_no,sex,NIC,Subj_Name,Payment_Fees,DOB) VALUES(?,?,?,?,?,?,?,?,?)";
             
-        PreparedStatement pstmt=conn.prepareStatement(sql);
+        PreparedStatement pstmt=con.prepareStatement(sql);
         pstmt.setString(1,TchrName);
         pstmt.setString(2,Namewith_Initials);
         pstmt.setString(3,Address1);
@@ -338,6 +338,7 @@ public class TcherRegForm extends javax.swing.JFrame {
         pstmt.execute();
             JOptionPane.showMessageDialog(null,"Successfully saved");
         pstmt.close();
+        con.close();
         }
          
         catch(Exception e){ 
