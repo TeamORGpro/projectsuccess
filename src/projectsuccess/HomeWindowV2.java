@@ -7,6 +7,8 @@ package projectsuccess;
 
 import java.awt.Color;
 import java.awt.HeadlessException;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.*;
 import java.sql.*;
 import java.util.Vector;
@@ -26,6 +28,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
       
     public HomeWindowV2() {
         initComponents();
+        closedeny();
   }
 
     /**
@@ -37,6 +40,18 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
    
     @SuppressWarnings("unchecked")
+    
+    public void closedeny(){
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+            setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+                
+        }
+    });
+    }
+    
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -66,15 +81,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         tcherregFormBtn = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        bckupnRstorPnl = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        browsBtn = new javax.swing.JButton();
-        bkupBtn = new javax.swing.JButton();
-        jLabel19 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        browsBtn1 = new javax.swing.JButton();
-        rstorBtn = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         attnInfo = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -87,6 +94,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         deleteBtn = new javax.swing.JButton();
         restBtn = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
+        expoBtnAttnInfo = new javax.swing.JButton();
         stdInfo = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -99,6 +107,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         deleteBtn1 = new javax.swing.JButton();
         restBtn1 = new javax.swing.JButton();
         updateBtn2 = new javax.swing.JButton();
+        expoBtnStdInfo = new javax.swing.JButton();
         tcherInfo = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -111,6 +120,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         deleteBtn2 = new javax.swing.JButton();
         restBtn2 = new javax.swing.JButton();
         updateBtn3 = new javax.swing.JButton();
+        expoBtnTchrInfo = new javax.swing.JButton();
         pymntInfo = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -122,7 +132,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         pymtSearchField = new javax.swing.JTextField();
         deleteBtn3 = new javax.swing.JButton();
         restBtn3 = new javax.swing.JButton();
-        printBtn = new javax.swing.JButton();
+        expoBtnPymntInfo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Success Educational Institute");
@@ -244,7 +254,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jLabel7.setText("Success Higher Educational Institute");
         home.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 10, -1, 50));
 
-        stdAttenBtn.setBackground(new java.awt.Color(230, 244, 246));
+        stdAttenBtn.setBackground(new java.awt.Color(204, 255, 255));
         stdAttenBtn.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 2, 2, new java.awt.Color(153, 153, 153)));
         stdAttenBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         stdAttenBtn.setMaximumSize(new java.awt.Dimension(340, 110));
@@ -269,9 +279,9 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jLabel4.setText("Student Attendance");
         stdAttenBtn.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 190, 70));
 
-        home.add(stdAttenBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 100, 340, 110));
+        home.add(stdAttenBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 340, 110));
 
-        stdpymntformbtn.setBackground(new java.awt.Color(230, 244, 246));
+        stdpymntformbtn.setBackground(new java.awt.Color(204, 255, 255));
         stdpymntformbtn.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 2, 2, new java.awt.Color(153, 153, 153)));
         stdpymntformbtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         stdpymntformbtn.setMaximumSize(new java.awt.Dimension(340, 110));
@@ -291,9 +301,9 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jLabel5.setText("Student Payments");
         stdpymntformbtn.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 190, 70));
 
-        home.add(stdpymntformbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, 340, 110));
+        home.add(stdpymntformbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 340, 110));
 
-        stdregformbtn.setBackground(new java.awt.Color(230, 244, 246));
+        stdregformbtn.setBackground(new java.awt.Color(204, 255, 255));
         stdregformbtn.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 2, 2, new java.awt.Color(153, 153, 153)));
         stdregformbtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         stdregformbtn.setMaximumSize(new java.awt.Dimension(340, 110));
@@ -313,18 +323,19 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jLabel6.setText("Student Registration");
         stdregformbtn.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 190, 70));
 
-        home.add(stdregformbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 260, 340, 110));
+        home.add(stdregformbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 340, 110));
 
         btnLout.setBackground(new java.awt.Color(255, 102, 102));
+        btnLout.setForeground(new java.awt.Color(255, 255, 255));
         btnLout.setText("Log Out");
         btnLout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoutActionPerformed(evt);
             }
         });
-        home.add(btnLout, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 560, 97, 29));
+        home.add(btnLout, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 560, 120, 29));
 
-        tcherregFormBtn.setBackground(new java.awt.Color(230, 244, 246));
+        tcherregFormBtn.setBackground(new java.awt.Color(204, 255, 255));
         tcherregFormBtn.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 2, 2, new java.awt.Color(153, 153, 153)));
         tcherregFormBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tcherregFormBtn.setMaximumSize(new java.awt.Dimension(340, 110));
@@ -344,102 +355,17 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jLabel8.setText("Teacher Registration");
         tcherregFormBtn.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 190, 70));
 
-        home.add(tcherregFormBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 340, 110));
+        home.add(tcherregFormBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 290, 340, 110));
 
-        bckupnRstorPnl.setBackground(new java.awt.Color(0, 153, 102));
-
-        jLabel18.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel18.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("Backup");
-
-        jTextField1.setEditable(false);
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        browsBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        browsBtn.setText("Browse");
-        browsBtn.addActionListener(new java.awt.event.ActionListener() {
+        jButton5.setBackground(new java.awt.Color(0, 102, 204));
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
+        jButton5.setText("Backup And Restore");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                browsBtnActionPerformed(evt);
+                jButton5ActionPerformed(evt);
             }
         });
-
-        bkupBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        bkupBtn.setText("Backup");
-        bkupBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bkupBtnActionPerformed(evt);
-            }
-        });
-
-        jLabel19.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel19.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("Restore");
-
-        jTextField2.setEditable(false);
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        browsBtn1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        browsBtn1.setText("Browse");
-        browsBtn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                browsBtn1ActionPerformed(evt);
-            }
-        });
-
-        rstorBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        rstorBtn.setText("Restore");
-        rstorBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rstorBtnActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout bckupnRstorPnlLayout = new javax.swing.GroupLayout(bckupnRstorPnl);
-        bckupnRstorPnl.setLayout(bckupnRstorPnlLayout);
-        bckupnRstorPnlLayout.setHorizontalGroup(
-            bckupnRstorPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bckupnRstorPnlLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(bckupnRstorPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel18)
-                    .addGroup(bckupnRstorPnlLayout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(browsBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(bkupBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(bckupnRstorPnlLayout.createSequentialGroup()
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(browsBtn1)
-                        .addGap(18, 18, 18)
-                        .addComponent(rstorBtn))
-                    .addComponent(jLabel19))
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-        bckupnRstorPnlLayout.setVerticalGroup(
-            bckupnRstorPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bckupnRstorPnlLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel18)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(bckupnRstorPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(browsBtn)
-                    .addComponent(bkupBtn))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel19)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(bckupnRstorPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(browsBtn1)
-                    .addComponent(rstorBtn))
-                .addContainerGap(31, Short.MAX_VALUE))
-        );
-
-        home.add(bckupnRstorPnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 400, 520, 180));
+        home.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 560, -1, 30));
 
         mainPnl.addTab("tab1", home);
 
@@ -477,7 +403,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
@@ -539,6 +465,14 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             }
         });
 
+        expoBtnAttnInfo.setBackground(new java.awt.Color(204, 204, 255));
+        expoBtnAttnInfo.setText("Export");
+        expoBtnAttnInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                expoBtnAttnInfoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout attnFilterPnlLayout = new javax.swing.GroupLayout(attnFilterPnl);
         attnFilterPnl.setLayout(attnFilterPnlLayout);
         attnFilterPnlLayout.setHorizontalGroup(
@@ -552,7 +486,9 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addComponent(restBtn)
                 .addGap(18, 18, 18)
                 .addComponent(updateBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(expoBtnAttnInfo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(deleteBtn)
                 .addContainerGap())
         );
@@ -565,7 +501,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     .addComponent(attnSearchField, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(deleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(restBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(updateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(updateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(expoBtnAttnInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(40, 40, 40))
         );
 
@@ -583,20 +520,20 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Student ID", "Full Name", "Name with Initials", "Postal Address", "Date of Birth", "Grade", "Phone No", "Sex", "Guardian's Name", "Guardian's Phone No"
+                "Student ID", "Full Name", "Name with Initials", "Postal Address", "Date of Birth", "Subjects", "Grade", "Phone No", "Sex", "Guardian's Name", "Guardian's Phone No"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true, true, true, true, true
+                false, true, true, true, true, true, true, true, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -679,6 +616,14 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             }
         });
 
+        expoBtnStdInfo.setBackground(new java.awt.Color(204, 204, 255));
+        expoBtnStdInfo.setText("Export");
+        expoBtnStdInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                expoBtnStdInfoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout stdFilterPnlLayout = new javax.swing.GroupLayout(stdFilterPnl);
         stdFilterPnl.setLayout(stdFilterPnlLayout);
         stdFilterPnlLayout.setHorizontalGroup(
@@ -692,7 +637,9 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addComponent(restBtn1)
                 .addGap(18, 18, 18)
                 .addComponent(updateBtn2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(expoBtnStdInfo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(deleteBtn1)
                 .addContainerGap())
         );
@@ -705,7 +652,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     .addComponent(stdSearchField, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(deleteBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(restBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(updateBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(updateBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(expoBtnStdInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -808,6 +756,14 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             }
         });
 
+        expoBtnTchrInfo.setBackground(new java.awt.Color(204, 204, 255));
+        expoBtnTchrInfo.setText("Export");
+        expoBtnTchrInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                expoBtnTchrInfoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout tcherFilterPnlLayout = new javax.swing.GroupLayout(tcherFilterPnl);
         tcherFilterPnl.setLayout(tcherFilterPnlLayout);
         tcherFilterPnlLayout.setHorizontalGroup(
@@ -821,7 +777,9 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addComponent(restBtn2)
                 .addGap(18, 18, 18)
                 .addComponent(updateBtn3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(expoBtnTchrInfo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(deleteBtn2)
                 .addContainerGap())
         );
@@ -834,7 +792,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     .addComponent(tchrSearchField, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(deleteBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(restBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(updateBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(updateBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(expoBtnTchrInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -929,11 +888,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             }
         });
 
-        printBtn.setBackground(new java.awt.Color(255, 255, 102));
-        printBtn.setText("Print");
-        printBtn.addActionListener(new java.awt.event.ActionListener() {
+        expoBtnPymntInfo.setBackground(new java.awt.Color(204, 204, 255));
+        expoBtnPymntInfo.setText("Export");
+        expoBtnPymntInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                printBtnActionPerformed(evt);
+                expoBtnPymntInfoActionPerformed(evt);
             }
         });
 
@@ -949,8 +908,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(restBtn3)
                 .addGap(18, 18, 18)
-                .addComponent(printBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                .addComponent(expoBtnPymntInfo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
                 .addComponent(deleteBtn3)
                 .addContainerGap())
         );
@@ -963,7 +922,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     .addComponent(pymtSearchField, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(deleteBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(restBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(printBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(expoBtnPymntInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -1075,6 +1034,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     v.add(rs.getString("Name_with_Initials"));
                     v.add(rs.getString("Address"));
                     v.add(rs.getString("DOB"));
+                    v.add(rs.getString("Subjects"));
                     v.add(rs.getString("Grade"));
                     v.add(rs.getString("Phone_no"));
                     v.add(rs.getString("sex"));
@@ -1219,7 +1179,12 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
     private void btnLoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoutActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        int reply = JOptionPane.showConfirmDialog(null,
+                    "Do you really want to log out ?", "Logging Out", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION){
+                System.exit(0);
+            }
+        
     }//GEN-LAST:event_btnLoutActionPerformed
 
     private void stdSearchFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_stdSearchFieldFocusGained
@@ -1408,7 +1373,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         
         DefaultTableModel model=(DefaultTableModel) jTable1.getModel();
 
-        try {
+        
+        int reply = JOptionPane.showConfirmDialog(null,
+                    "Do you want to update data?", "Updating", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION){
+                try {
             upSt = con.createStatement();
             
             for (int i = 0;i<model.getRowCount();i++){
@@ -1428,8 +1397,12 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             upSt.close();
             con.close();
         } catch (HeadlessException | NumberFormatException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error :"+e.getLocalizedMessage());
             System.out.println(e);
         } 
+            }
+            
+        
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void updateBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtn2ActionPerformed
@@ -1441,7 +1414,10 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         
         DefaultTableModel model1=(DefaultTableModel) jTable3.getModel();
 
-        try {
+        int reply = JOptionPane.showConfirmDialog(null,
+                    "Do you want to update data?", "Updating", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION){
+                try {
             upSt1 = con.createStatement();
             
             for (int i = 0; i<model1.getRowCount(); i++){
@@ -1450,13 +1426,14 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 String nameWithIN = model1.getValueAt(i, 2).toString();
                 String addr = model1.getValueAt(i, 3).toString();
                 String dob = model1.getValueAt(i, 4).toString();
-                String grd = model1.getValueAt(i, 5).toString();
-                String pNo = model1.getValueAt(i, 6).toString();
-                String sex = model1.getValueAt(i, 7).toString();
-                String gName = model1.getValueAt(i, 8).toString();
-                String gPNo = model1.getValueAt(i, 9).toString();
+                String Subjects = model1.getValueAt(i, 5).toString();
+                String grd = model1.getValueAt(i, 6).toString();
+                String pNo = model1.getValueAt(i, 7).toString();
+                String sex = model1.getValueAt(i, 8).toString();
+                String gName = model1.getValueAt(i, 9).toString();
+                String gPNo = model1.getValueAt(i, 10).toString();
                 
-                String updateQuery="UPDATE `std_info_table` SET `Std_Name`='"+fname+"',`Name_with_Initials`='"+nameWithIN+"',`Address`='"+addr+"',`DOB`='"+dob+"',`Grade`='"+grd+"',`Phone_no`='"+pNo+"',`sex`='"+sex+"',`Grd_name`='"+gName+"',`Grd_Phone_no`='"+gPNo+"' WHERE `Std_ID`="+stuID;
+                String updateQuery="UPDATE `std_info_table` SET `Std_Name`='"+fname+"',`Name_with_Initials`='"+nameWithIN+"',`Address`='"+addr+"',`DOB`='"+dob+"',`Subjects`='"+Subjects+"',`Grade`='"+grd+"',`Phone_no`='"+pNo+"',`sex`='"+sex+"',`Grd_name`='"+gName+"',`Grd_Phone_no`='"+gPNo+"' WHERE `Std_ID`="+stuID;
 
                 upSt1.addBatch(updateQuery);
             }
@@ -1466,8 +1443,12 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             upSt1.close();
             con.close();
         } catch (HeadlessException | NumberFormatException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error :"+e.getLocalizedMessage());
             e.getMessage();
         }
+            }
+        
+        
     }//GEN-LAST:event_updateBtn2ActionPerformed
 
     private void updateBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtn3ActionPerformed
@@ -1480,7 +1461,10 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         
         DefaultTableModel model2=(DefaultTableModel) jTable4.getModel();
         
-            try {
+        int reply = JOptionPane.showConfirmDialog(null,
+                    "Do you want to update data?", "Updating", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION){
+                try {
                 upSt2 = con.createStatement();
                 
                 for (int i = 0; i<model2.getRowCount(); i++){
@@ -1508,8 +1492,12 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 upSt2.close();
                 con.close();
             } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error :"+ex.getLocalizedMessage());
                 ex.getMessage();
             } 
+            }
+        
+            
     }//GEN-LAST:event_updateBtn3ActionPerformed
 
     private void deleteBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtn1ActionPerformed
@@ -1522,7 +1510,12 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         int row = jTable3.getSelectedRow();
         String eve = (String) jTable3.getModel().getValueAt(row, 0);
         
-        String delRow = "DELETE FROM `std_info_table` WHERE `Std_ID`= "+eve;
+        int reply = JOptionPane.showConfirmDialog(null,
+                    "Do you want to delete?", "Deleting", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION){
+                
+                
+                String delRow = "DELETE FROM `std_info_table` WHERE `Std_ID`= "+eve;
             try {
                 ps=con.prepareStatement(delRow);
                 ps.execute();
@@ -1530,8 +1523,41 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 ps.close();
                 con.close();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null,  ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Error :"+ex.getLocalizedMessage());
             }
+            }
+        
+            
+            con = DBConnect.connect();
+        
+        try {
+            DefaultTableModel dt = (DefaultTableModel) jTable3.getModel();
+            dt.setRowCount(0);
+            
+            Statement s = con.createStatement();
+            try (ResultSet rs = s.executeQuery("select * from std_info_table ")) {
+                while (rs.next()) {
+                    Vector v = new Vector();
+                    v.add(rs.getString("Std_ID"));
+                    v.add(rs.getString("Std_Name"));
+                    v.add(rs.getString("Name_with_Initials"));
+                    v.add(rs.getString("Address"));
+                    v.add(rs.getString("DOB"));
+                    v.add(rs.getString("Subjects"));
+                    v.add(rs.getString("Grade"));
+                    v.add(rs.getString("Phone_no"));
+                    v.add(rs.getString("sex"));
+                    v.add(rs.getString("Grd_name"));
+                    v.add(rs.getString("Grd_Phone_no"));
+                    dt.addRow(v);
+                }
+                rs.close();
+                con.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
     }//GEN-LAST:event_deleteBtn1ActionPerformed
 
     private void deleteBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtn2ActionPerformed
@@ -1544,7 +1570,13 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         int row1 = jTable4.getSelectedRow();
             int eve1 = (int) jTable4.getModel().getValueAt(row1, 0);
 
-        String delRow = "DELETE FROM `tchr_info_table` WHERE `Tchr_ID` ="+eve1;
+            
+            int reply = JOptionPane.showConfirmDialog(null,
+                    "Do you want to delete?", "Deleting", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION){
+                
+                
+                String delRow = "DELETE FROM `tchr_info_table` WHERE `Tchr_ID` ="+eve1;
             try {
                 pst=con.prepareStatement(delRow);
                 pst.execute();
@@ -1552,8 +1584,39 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 pst.close();
                 con.close();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null,  ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Error :"+ex.getLocalizedMessage());
             }
+            }
+            
+            ResultSet rset = null;
+
+        con = DBConnect.connect();
+        try {
+            DefaultTableModel dt2 = (DefaultTableModel) jTable4.getModel();
+            dt2.setRowCount(0);
+            Statement s2 = con.createStatement();
+            try (ResultSet rs2 = s2.executeQuery("select * from tchr_info_table ")) {
+                while (rs2.next()) {
+                    Vector v2 = new Vector();
+                    v2.add(rs2.getInt("Tchr_ID"));
+                    v2.add(rs2.getString("Subj_Name"));
+                    v2.add(rs2.getString("Name_with_Initials"));
+                    v2.add(rs2.getString("Tchr_Name"));
+                    v2.add(rs2.getString("Payment_Fees"));
+                    v2.add(rs2.getString("Address"));
+                    v2.add(rs2.getString("DOB"));
+                    v2.add(rs2.getString("Phone_no"));
+                    v2.add(rs2.getString("sex"));
+                    v2.add(rs2.getString("NIC"));
+                    dt2.addRow(v2);
+                }
+                s2.close();
+                con.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
     }//GEN-LAST:event_deleteBtn2ActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
@@ -1568,7 +1631,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             String subjName = jTable1.getValueAt(row2, 1).toString();
             int stuID = Integer.valueOf(jTable1.getValueAt(row2, 2).toString());
         
-        String delRow = "DELETE FROM `attndance_table` WHERE `Date`='"+date+"' AND `Subj_Name`='"+subjName+"' AND `Std_ID`="+stuID;
+            
+            int reply = JOptionPane.showConfirmDialog(null,
+                    "Do you want to delete?", "Deleting", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION){
+                String delRow = "DELETE FROM `attndance_table` WHERE `Date`='"+date+"' AND `Subj_Name`='"+subjName+"' AND `Std_ID`="+stuID;
 
         try {
                 psa=con.prepareStatement(delRow);
@@ -1577,8 +1644,36 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 psa.close();
                 con.close();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null,  ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Error :"+ex.getLocalizedMessage());
             }
+            }
+            
+            con = DBConnect.connect();
+        try {
+            DefaultTableModel dt1 = (DefaultTableModel) jTable1.getModel();
+            dt1.setRowCount(0);
+            Statement s1 = con.createStatement();
+            try (ResultSet rs1 = s1.executeQuery("select * from attndance_table ")) {
+                while (rs1.next()) {
+                    Vector v1 = new Vector();
+                    v1.add(rs1.getString("Date"));
+                    v1.add(rs1.getString("Subj_Name"));
+                    v1.add(rs1.getInt("Std_ID"));
+                    v1.add(rs1.getString("Std_Name"));
+                    v1.add(rs1.getString("Tchr_Name"));
+                    v1.add(rs1.getString("Status"));
+                    v1.add(rs1.getString("Spc_Note"));
+                    dt1.addRow(v1);
+                }
+                s1.close();
+                con.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+            
+        
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void deleteBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtn3ActionPerformed
@@ -1597,8 +1692,10 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             String date = jTable2.getValueAt(row2, 6).toString();
             
             
-        
-        String delRow = "DELETE FROM `payment_table` WHERE `Std_ID`="+stuID+" AND `Subj_Name`='"+subjName+"' AND `Date_paid`='"+date+"' AND `Month`='"+month+"';";       
+            int reply = JOptionPane.showConfirmDialog(null,
+                    "Do you want to delete?", "Deleting", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION){
+                String delRow = "DELETE FROM `payment_table` WHERE `Std_ID`="+stuID+" AND `Subj_Name`='"+subjName+"' AND `Date_paid`='"+date+"' AND `Month`='"+month+"';";       
         try {
                 psp=con.prepareStatement(delRow);
                 psp.execute();
@@ -1606,8 +1703,38 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 psp.close();
                 con.close();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null,  ex.getMessage());
+                JOptionPane.showMessageDialog(null, "Error :"+ex.getLocalizedMessage());
             }
+            }
+            
+
+        ResultSet rset = null;
+
+        con = DBConnect.connect();
+        try {
+            DefaultTableModel dt3 = (DefaultTableModel) jTable2.getModel();
+            dt3.setRowCount(0);
+            Statement s3 = con.createStatement();
+            try (ResultSet rs3 = s3.executeQuery("select * from payment_table")) {
+                while (rs3.next()) {
+                    Vector v3 = new Vector();
+                    v3.add(rs3.getInt("Std_ID"));
+                    v3.add(rs3.getString("Std_Name"));
+                    v3.add(rs3.getString("Subj_Name"));
+                    v3.add(rs3.getString("Tchr_Name"));
+                    v3.add(rs3.getString("Payment_fee"));
+                    v3.add(rs3.getString("Month"));
+                    v3.add(rs3.getString("Date_paid"));
+                    
+                    dt3.addRow(v3);
+                }
+                s3.close();
+                con.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
     }//GEN-LAST:event_deleteBtn3ActionPerformed
 
     
@@ -1667,12 +1794,12 @@ public class HomeWindowV2 extends javax.swing.JFrame {
   }
     
     
-    private void printBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printBtnActionPerformed
+    private void expoBtnPymntInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expoBtnPymntInfoActionPerformed
         // TODO add your handling code here:
         
   
         JFileChooser fchoose = new JFileChooser();
-           int option = fchoose.showSaveDialog(printBtn);
+           int option = fchoose.showSaveDialog(expoBtnPymntInfo);
            if(option == JFileChooser.APPROVE_OPTION){
              String name = fchoose.getSelectedFile().getName(); 
              String path = fchoose.getSelectedFile().getParentFile().getPath();
@@ -1680,97 +1807,31 @@ public class HomeWindowV2 extends javax.swing.JFrame {
              export(jTable2, new File(file));
            }
            
-    }//GEN-LAST:event_printBtnActionPerformed
+    }//GEN-LAST:event_expoBtnPymntInfoActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        
+        BackupAndRestore bANDr = new BackupAndRestore();
+        bANDr.setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void expoBtnTchrInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expoBtnTchrInfoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_expoBtnTchrInfoActionPerformed
+
+    private void expoBtnStdInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expoBtnStdInfoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_expoBtnStdInfoActionPerformed
+
+    private void expoBtnAttnInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expoBtnAttnInfoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_expoBtnAttnInfoActionPerformed
 
     
     
     
-        String path1=null;
-        String filename=null;
-    private void browsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsBtnActionPerformed
-        // TODO add your handling code here:
         
-        
-        JFileChooser fc=new JFileChooser();
-        fc.showOpenDialog(this);
-        
-        try {
-            File f=fc.getSelectedFile();
-            path1 = f.getAbsolutePath();
-            path1=path1.replace('\\', '/');
-            path1= path1+".sql";
-            jTextField1.setText(path1);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-    }//GEN-LAST:event_browsBtnActionPerformed
-
-    private void bkupBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bkupBtnActionPerformed
-        // TODO add your handling code here:
-        Process p=null;
-        try {
-            Runtime runtime=Runtime.getRuntime();
-            p=runtime.exec("D:/xampp/mysql/bin/mysqldump.exe -u root   -B successdb -r "+path1);
-            
-            int processComplete = p.waitFor();
-            if (processComplete==0) {
-                JOptionPane.showMessageDialog(null, "Successfully Backuped File");
-                jTextField1.setText("");
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Backup Didn't Successfull, Try typing a single word for file name", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
-                jTextField1.setText("");
-            }
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-    }//GEN-LAST:event_bkupBtnActionPerformed
-
-    private void browsBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browsBtn1ActionPerformed
-        // TODO add your handling code here:
-        JFileChooser fc=new JFileChooser();
-        fc.showOpenDialog(this);
-        
-        try {
-            File f=fc.getSelectedFile();
-            path1 = f.getAbsolutePath();
-            path1=path1.replace('\\', '/');
-            jTextField2.setText(path1);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }//GEN-LAST:event_browsBtn1ActionPerformed
-
-    private void rstorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rstorBtnActionPerformed
-        // TODO add your handling code here:
-        
-        String user="root";
-//        String pass="";
-        String []restorecmd = new String []{"D:/xampp/mysql/bin/mysql.exe","--user="+user,"-e","source "+path1};
-        
-        Process process;
-        try {
-            process=Runtime.getRuntime().exec(restorecmd);
-            int pr=process.waitFor();
-            if (pr==0) {
-                JOptionPane.showMessageDialog(null, "Successfully Restored File. Please close and relaunch the application.");
-                jTextField2.setText("");
-                
-            } else {
-                
-                JOptionPane.showMessageDialog(null, "Restore Didn't Successfull", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
-                jTextField2.setText("");
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-        
-    }//GEN-LAST:event_rstorBtnActionPerformed
-
     private void onClick(JPanel panel){
         panel.setBackground(new Color(48,203,220));
     }
@@ -1821,11 +1882,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JPanel attnFilterPnl;
     private javax.swing.JPanel attnInfo;
     private javax.swing.JTextField attnSearchField;
-    private javax.swing.JPanel bckupnRstorPnl;
     private javax.swing.JPanel bgPnl;
-    private javax.swing.JButton bkupBtn;
-    private javax.swing.JButton browsBtn;
-    private javax.swing.JButton browsBtn1;
     private javax.swing.JButton btnAttnInfoAll;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnLout;
@@ -1837,11 +1894,16 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JButton deleteBtn1;
     private javax.swing.JButton deleteBtn2;
     private javax.swing.JButton deleteBtn3;
+    private javax.swing.JButton expoBtnAttnInfo;
+    private javax.swing.JButton expoBtnPymntInfo;
+    private javax.swing.JButton expoBtnStdInfo;
+    private javax.swing.JButton expoBtnTchrInfo;
     private javax.swing.JPanel home;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1851,8 +1913,6 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
@@ -1875,11 +1935,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel logo;
     private javax.swing.JTabbedPane mainPnl;
-    private javax.swing.JButton printBtn;
     private javax.swing.JPanel pymntFilterPnl;
     private javax.swing.JPanel pymntInfo;
     private javax.swing.JTextField pymtSearchField;
@@ -1887,7 +1944,6 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JButton restBtn1;
     private javax.swing.JButton restBtn2;
     private javax.swing.JButton restBtn3;
-    private javax.swing.JButton rstorBtn;
     private javax.swing.JPanel stdAttenBtn;
     private javax.swing.JPanel stdFilterPnl;
     private javax.swing.JPanel stdInfo;

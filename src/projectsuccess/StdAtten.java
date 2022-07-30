@@ -6,6 +6,8 @@
 package projectsuccess;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.*;
 import javax.swing.*;
 //import java.awt.Image;
@@ -30,7 +32,7 @@ public class StdAtten extends javax.swing.JFrame {
     
     public StdAtten() {
         initComponents();
-        
+        closeconfirm();
         dt();
         
         ImageIcon myImage=new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/attendance.png")));
@@ -70,6 +72,23 @@ public class StdAtten extends javax.swing.JFrame {
         txtStatuslb.setEnabled(false);
         txtNotes.setText("Special Note");
 
+    }
+    
+    public void closeconfirm(){
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+            int reply = JOptionPane.showConfirmDialog(null,
+                    "Really Quit ?", "Quit", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION){
+                setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+            }
+            else{
+                setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+            }
+                
+        }
+    });
     }
     
     @SuppressWarnings("unchecked")
@@ -435,18 +454,23 @@ public class StdAtten extends javax.swing.JFrame {
     }//GEN-LAST:event_presentRBActionPerformed
 
     private void cnslBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnslBtnActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:        
+        int reply = JOptionPane.showConfirmDialog(null,
+                    "Really Quit ?", "Quit", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION){
+                this.dispose();
+            }
         
-        this.dispose();
     }//GEN-LAST:event_cnslBtnActionPerformed
 
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
         // TODO add your handling code here:
                 
-        
-        String b="Absent";
-        String a="Present";
-        int Std_ID=Integer.parseInt(txtStdID.getText());
+        if (txtStdID.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please Fill the Required Fields","Error Occurred!",JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            int Std_ID=Integer.parseInt(txtStdID.getText());
         String Std_Name=lblstdName.getText();
         String date=txtAttnDate.getText();
         String subject=(String) subCB.getSelectedItem();
@@ -454,13 +478,13 @@ public class StdAtten extends javax.swing.JFrame {
         String specNote=txtNotes.getText();
         String status=txtStatuslb.getText();
         
-                String[] columns={txtStdID.getText(), Std_Name, subject, status};
-                DefaultTableModel dtm= (DefaultTableModel)jTable1.getModel();
-                dtm.addRow(columns);
+                
         
+                if (!Std_Name.isEmpty() && !subject.isEmpty() && !techerName.isEmpty() && !status.isEmpty()) {
                 Connection con;
                 PreparedStatement pstmt2;
                 con = DBConnect.connect();
+                
         try {
                                                 
             String query ="insert into attndance_table(Date,Subj_Name,Tchr_Name,Std_ID,Std_Name,Status,Spc_Note)values(?,?,?,?,?,?,?)";
@@ -486,13 +510,21 @@ public class StdAtten extends javax.swing.JFrame {
 
             pstmt2.execute();
             JOptionPane.showMessageDialog(null, "Data successfully Saved!");
+                String[] columns={txtStdID.getText(), Std_Name, subject, status};
+                DefaultTableModel dtm= (DefaultTableModel)jTable1.getModel();
+                dtm.addRow(columns);
             pstmt2.close();
             con.close();
         } catch (SQLException e) {
-
+            JOptionPane.showMessageDialog(null, "Error:"+e.getLocalizedMessage(),"Error Occurred!",JOptionPane.ERROR_MESSAGE);
             System.out.println(e.getMessage());
         }
         
+        } else {
+            JOptionPane.showMessageDialog(null, "Please Fill the Required Fields","Error Occurred!",JOptionPane.ERROR_MESSAGE);
+        }
+        }
+
     }//GEN-LAST:event_createBtnActionPerformed
 
     private void absentRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_absentRBActionPerformed
@@ -554,7 +586,6 @@ public class StdAtten extends javax.swing.JFrame {
             
             if(rs2.next()){
             String TeacherName =rs2.getString("Tchr_Name");
-            String paymentfee = rs2.getString("Payment_Fees");
             lblTchrName.setText(TeacherName);
         }
             else{
