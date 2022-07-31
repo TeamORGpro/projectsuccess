@@ -403,8 +403,12 @@ public class TcherRegForm extends javax.swing.JFrame {
         con.close();
         }
          
-        catch(HeadlessException | SQLException e){ 
-        JOptionPane.showMessageDialog(null, "Error :"+e.getLocalizedMessage(),"Error Occurred!",JOptionPane.ERROR_MESSAGE);
+        catch(HeadlessException | SQLException e){
+            if (e.getLocalizedMessage() == null ? "Data truncation: Incorrect date value: '"+DOB1+"' for column `successdb`.`tchr_info_table`.`DOB` at row 1" == null : e.getLocalizedMessage().equals("Data truncation: Incorrect date value: '"+DOB1+"' for column `successdb`.`tchr_info_table`.`DOB` at row 1")) {
+                JOptionPane.showMessageDialog(null, "Please enter right date format","Error Occurred!",JOptionPane.ERROR_MESSAGE);
+            } else{
+                JOptionPane.showMessageDialog(null, "Error :"+e.getMessage(),"Error Occurred!",JOptionPane.ERROR_MESSAGE);
+            }
         }
         }
         else{
