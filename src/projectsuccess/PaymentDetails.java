@@ -394,7 +394,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
             String TeacherName =rs2.getString("Tchr_Name");
             String paymentfee = rs2.getString("Payment_Fees");
             lblTchrName.setText(TeacherName);
-            feeLbl.setText(paymentfee+".00");
+            feeLbl.setText(paymentfee);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Please Enter Valid Subject Name");
