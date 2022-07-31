@@ -93,7 +93,8 @@ public class TcherRegForm extends javax.swing.JFrame {
         Name_with_Initials.setText("");
 //        Tchr_ID.setText("");
         Address.setText("");
-        DOB.setText("");
+        DOB.setText("yyyy-mm-dd");
+        DOB.setForeground(new Color(153, 153, 153));
         Phone_no.setText("");
         sex.setSelectedItem("Male");
         NIC.setText("");
@@ -159,6 +160,21 @@ public class TcherRegForm extends javax.swing.JFrame {
         jPanel1.add(Tchr_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, 388, -1));
 
         DOB.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        DOB.setForeground(new java.awt.Color(153, 153, 153));
+        DOB.setText("yyyy-mm-dd");
+        DOB.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                DOBFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                DOBFocusLost(evt);
+            }
+        });
+        DOB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DOBActionPerformed(evt);
+            }
+        });
         jPanel1.add(DOB, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 388, -1));
 
         Phone_no.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -363,32 +379,32 @@ public class TcherRegForm extends javax.swing.JFrame {
             SubjName = String.valueOf(charArray);
 
         
-        if(!TchrName.isEmpty() && !Namewith_Initials.isEmpty() && !Address1.isEmpty() && !DOB1.isEmpty() && !Phoneno.isEmpty() && !gender.isEmpty() && !NIC1.isEmpty() && !SubjName.isEmpty() && !PaymentFees.isEmpty()){
+        if(!TchrName.isEmpty() && !Namewith_Initials.isEmpty() && !Address1.isEmpty() && !("yyyy-mm-dd".equals(DOB1)) && !Phoneno.isEmpty() && !gender.isEmpty() && !NIC1.isEmpty() && !SubjName.isEmpty() && !PaymentFees.isEmpty()){
         
          try{
         
          
             String sql = "INSERT INTO tchr_info_table(Tchr_Name,Name_with_Initials,Address,Phone_no,sex,NIC,Subj_Name,Payment_Fees,DOB) VALUES(?,?,?,?,?,?,?,?,?)";
             
-        PreparedStatement pstmt=con.prepareStatement(sql);
-        pstmt.setString(1,TchrName);
-        pstmt.setString(2,Namewith_Initials);
-        pstmt.setString(3,Address1);
-        pstmt.setString(4,Phoneno);
-        pstmt.setString(5,gender);
-        pstmt.setString(6,NIC1);
-        pstmt.setString(7,SubjName);
-        pstmt.setString(8,PaymentFees+".00");
-        pstmt.setString(9,DOB1);
-        
-        pstmt.execute();
-            JOptionPane.showMessageDialog(null,"Successfully saved");
-        pstmt.close();
+             try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+                 pstmt.setString(1,TchrName);
+                 pstmt.setString(2,Namewith_Initials);
+                 pstmt.setString(3,Address1);
+                 pstmt.setString(4,Phoneno);
+                 pstmt.setString(5,gender);
+                 pstmt.setString(6,NIC1);
+                 pstmt.setString(7,SubjName);
+                 pstmt.setString(8,PaymentFees+".00");
+                 pstmt.setString(9,DOB1);
+                 
+                 pstmt.execute();
+                 JOptionPane.showMessageDialog(null,"Successfully saved");
+             }
         con.close();
         }
          
-        catch(Exception e){ 
-        System.out.println(e);
+        catch(HeadlessException | SQLException e){ 
+        JOptionPane.showMessageDialog(null, "Error :"+e.getLocalizedMessage(),"Error Occurred!",JOptionPane.ERROR_MESSAGE);
         }
         }
         else{
@@ -415,6 +431,28 @@ public class TcherRegForm extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_Phone_noKeyTyped
+
+    private void DOBFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DOBFocusGained
+        // TODO add your handling code here:
+        if(DOB.getText().equals("yyyy-mm-dd")){
+
+            DOB.setText("");
+            DOB.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_DOBFocusGained
+
+    private void DOBFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_DOBFocusLost
+        // TODO add your handling code here:
+        if(DOB.getText().equals("")){
+
+            DOB.setText("yyyy-mm-dd");
+            DOB.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_DOBFocusLost
+
+    private void DOBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DOBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DOBActionPerformed
          
     
 

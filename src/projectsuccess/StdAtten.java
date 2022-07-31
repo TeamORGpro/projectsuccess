@@ -71,6 +71,7 @@ public class StdAtten extends javax.swing.JFrame {
         txtStatuslb.setText("");
         txtStatuslb.setEnabled(false);
         txtNotes.setText("Special Note");
+        txtNotes.setForeground(new Color(153, 153, 153));
 
     }
     
@@ -150,13 +151,13 @@ public class StdAtten extends javax.swing.JFrame {
         attmarkPanl.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 5, 5, new java.awt.Color(102, 102, 102)));
 
         sbjName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        sbjName.setText("Subject Name");
+        sbjName.setText("Subject Name :");
 
         stdID.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        stdID.setText("Student ID");
+        stdID.setText("Student ID :");
 
         stdName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        stdName.setText("Student Name");
+        stdName.setText("Student Name :");
 
         txtStdID.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
@@ -197,7 +198,7 @@ public class StdAtten extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txtNotes);
 
         tchrName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        tchrName.setText("Teacher's Name");
+        tchrName.setText("Teacher's Name :");
 
         createBtn.setBackground(new java.awt.Color(102, 255, 102));
         createBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -239,7 +240,7 @@ public class StdAtten extends javax.swing.JFrame {
         txtStatuslb.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
         statuslb.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        statuslb.setText("Status");
+        statuslb.setText("Status :");
 
         subCB.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         subCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Subject" }));
@@ -314,7 +315,7 @@ public class StdAtten extends javax.swing.JFrame {
                             .addGroup(attmarkPanlLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(lblTchrName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addGap(0, 18, Short.MAX_VALUE))
+                .addGap(0, 10, Short.MAX_VALUE))
         );
         attmarkPanlLayout.setVerticalGroup(
             attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -429,7 +430,7 @@ public class StdAtten extends javax.swing.JFrame {
         if(txtNotes.getText().equals("")){
 
             txtNotes.setText("Special Note");
-            txtNotes.setForeground(new Color(153,153,153));
+            txtNotes.setForeground(new Color(153, 153, 153));
         }
     }//GEN-LAST:event_txtNotesFocusLost
 

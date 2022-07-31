@@ -100,7 +100,8 @@ public class StdRegForm extends javax.swing.JFrame {
         txtstdNameShort.setText("");
 //        txtStdID.setText("");
         txtAddress.setText("");
-        txtDob.setText("");
+        txtDob.setText("yyyy-mm-dd");
+        txtDob.setForeground(new Color(153, 153, 153));
         txtSubject.setText("");
         gradeCB.setSelectedItem("Grade 6");
         txtPhoneNo.setText("");
@@ -219,6 +220,16 @@ public class StdRegForm extends javax.swing.JFrame {
         jPanel1.add(txtstdName, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 57, 388, -1));
 
         txtDob.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtDob.setForeground(new java.awt.Color(153, 153, 153));
+        txtDob.setText("yyyy-mm-dd");
+        txtDob.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtDobFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDobFocusLost(evt);
+            }
+        });
         txtDob.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtDobKeyTyped(evt);
@@ -420,7 +431,7 @@ String word = txtSubject.getText().toLowerCase();
             Connection con;
             PreparedStatement pstmt;
             con = DBConnect.connect();
-            if(!Std_Name.isEmpty() && !Name_with_Initials.isEmpty() && !Address.isEmpty() && !DOB.isEmpty() && !subject.isEmpty() && !Grade.isEmpty() && !sex.isEmpty() && !Grd_name.isEmpty() && !Grd_Phone_no.isEmpty()){
+            if(!Std_Name.isEmpty() && !Name_with_Initials.isEmpty() && !Address.isEmpty() && !("yyyy-mm-dd".equals(DOB)) && !subject.isEmpty() && !Grade.isEmpty() && !sex.isEmpty() && !Grd_name.isEmpty() && !Grd_Phone_no.isEmpty()){
             
                                             
                                             try {
@@ -449,9 +460,7 @@ String word = txtSubject.getText().toLowerCase();
                                                 pstmt.close();
                                                 con.close();
                                             } catch (SQLException e) {
-
-                                                System.out.println(e.getMessage());
-                                                JOptionPane.showMessageDialog(null, "Please check your filled data! ","Error Occurred!",JOptionPane.ERROR_MESSAGE);
+                                                JOptionPane.showMessageDialog(null, "Error :"+e.getLocalizedMessage(),"Error Occurred!",JOptionPane.ERROR_MESSAGE);
                                             }
                                             
             }
@@ -465,8 +474,7 @@ String word = txtSubject.getText().toLowerCase();
     
     private void cnslBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnslBtnActionPerformed
             
-        int reply = JOptionPane.showConfirmDialog(null,
-                    "Really Quit ?", "Quit", JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(null,"Really Quit ?", "Quit", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION){
                 this.dispose();
             }
@@ -492,12 +500,11 @@ String word = txtSubject.getText().toLowerCase();
 
     private void txtDobKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDobKeyTyped
         // TODO add your handling code here:
-        DateFormat format = new SimpleDateFormat("YYYY/MM/DD"); //display your format.
-        Date date = new Date();//puts the date in variable.
     }//GEN-LAST:event_txtDobKeyTyped
 
     private void txtSubjectKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSubjectKeyTyped
         // TODO add your handling code here:
+        databaseName();
     }//GEN-LAST:event_txtSubjectKeyTyped
 
     private void txtSubjectKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSubjectKeyPressed
@@ -524,8 +531,26 @@ String word = txtSubject.getText().toLowerCase();
 
     private void txtSubjectFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSubjectFocusGained
         // TODO add your handling code here:
-        databaseName();
+        
     }//GEN-LAST:event_txtSubjectFocusGained
+
+    private void txtDobFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDobFocusGained
+        // TODO add your handling code here:
+        if(txtDob.getText().equals("yyyy-mm-dd")){
+
+            txtDob.setText("");
+            txtDob.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_txtDobFocusGained
+
+    private void txtDobFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDobFocusLost
+        // TODO add your handling code here:
+        if(txtDob.getText().equals("")){
+
+            txtDob.setText("yyyy-mm-dd");
+            txtDob.setForeground(new Color(153,153,153));
+        }
+    }//GEN-LAST:event_txtDobFocusLost
 
     /**
      * @param args the command line arguments
