@@ -460,7 +460,14 @@ String word = txtSubject.getText().toLowerCase();
                                                 pstmt.close();
                                                 con.close();
                                             } catch (SQLException e) {
-                                                JOptionPane.showMessageDialog(null, "Error :"+e.getLocalizedMessage(),"Error Occurred!",JOptionPane.ERROR_MESSAGE);
+                                                
+                                                
+                                                if (e.getLocalizedMessage() == null ? "Data truncation: Incorrect date value: '"+DOB+"' for column `successdb`.`std_info_table`.`DOB` at row 1" == null : e.getLocalizedMessage().equals("Data truncation: Incorrect date value: '"+DOB+"' for column `successdb`.`std_info_table`.`DOB` at row 1")) {
+                                                    JOptionPane.showMessageDialog(null, "Please enter right date format","Error Occurred!",JOptionPane.ERROR_MESSAGE);
+                                                } else{
+                                                    JOptionPane.showMessageDialog(null, "Error :"+e.getMessage(),"Error Occurred!",JOptionPane.ERROR_MESSAGE);
+                                                }
+                                                
                                             }
                                             
             }
