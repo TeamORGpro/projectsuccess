@@ -5,7 +5,7 @@
  */
 package projectsuccess;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.HeadlessException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -365,7 +365,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        home.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 560, -1, 30));
+        home.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 560, -1, 30));
 
         mainPnl.addTab("tab1", home);
 
@@ -377,6 +377,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jLabel9.setText("Attendance Informations");
         attnInfo.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 21, -1, 30));
 
+        jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -406,6 +407,24 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setMinWidth(100);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(0).setCellRenderer(null);
+            jTable1.getColumnModel().getColumn(1).setMinWidth(150);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(150);
+            jTable1.getColumnModel().getColumn(1).setCellRenderer(null);
+            jTable1.getColumnModel().getColumn(2).setMinWidth(100);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(3).setMinWidth(200);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(4).setMinWidth(200);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(5).setMinWidth(100);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(6).setMinWidth(200);
+            jTable1.getColumnModel().getColumn(6).setPreferredWidth(200);
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -518,6 +537,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jLabel12.setText("Students Informations");
         stdInfo.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 21, -1, 30));
 
+        jTable3.setAutoCreateRowSorter(true);
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null},
@@ -544,8 +564,31 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable3.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable3.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jTable3);
+        if (jTable3.getColumnModel().getColumnCount() > 0) {
+            jTable3.getColumnModel().getColumn(1).setMinWidth(200);
+            jTable3.getColumnModel().getColumn(1).setPreferredWidth(200);
+            jTable3.getColumnModel().getColumn(2).setMinWidth(150);
+            jTable3.getColumnModel().getColumn(2).setPreferredWidth(150);
+            jTable3.getColumnModel().getColumn(3).setMinWidth(200);
+            jTable3.getColumnModel().getColumn(3).setPreferredWidth(200);
+            jTable3.getColumnModel().getColumn(4).setMinWidth(100);
+            jTable3.getColumnModel().getColumn(4).setPreferredWidth(100);
+            jTable3.getColumnModel().getColumn(5).setMinWidth(200);
+            jTable3.getColumnModel().getColumn(5).setPreferredWidth(200);
+            jTable3.getColumnModel().getColumn(6).setMinWidth(100);
+            jTable3.getColumnModel().getColumn(6).setPreferredWidth(100);
+            jTable3.getColumnModel().getColumn(7).setMinWidth(100);
+            jTable3.getColumnModel().getColumn(7).setPreferredWidth(100);
+            jTable3.getColumnModel().getColumn(8).setMinWidth(50);
+            jTable3.getColumnModel().getColumn(8).setPreferredWidth(50);
+            jTable3.getColumnModel().getColumn(9).setMinWidth(200);
+            jTable3.getColumnModel().getColumn(9).setPreferredWidth(200);
+            jTable3.getColumnModel().getColumn(10).setMinWidth(100);
+            jTable3.getColumnModel().getColumn(10).setPreferredWidth(100);
+        }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -669,6 +712,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jLabel13.setText("Teachers Informations");
         tcherInfo.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 21, -1, 30));
 
+        jTable4.setAutoCreateRowSorter(true);
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null},
@@ -677,7 +721,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Teacher ID", "Subject Name", "Name With Initial", "Full Name", "Payment Fees", "Postal Address", "Date of Birth", "Phone No", "Sex", "NIC No"
+                "Teacher ID", "Subject Name", "Name With Initial", "Full Name", "Subject Fees", "Postal Address", "Date of Birth", "Phone No", "Sex", "NIC No"
             }
         ) {
             Class[] types = new Class [] {
@@ -695,8 +739,29 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable4.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable4.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(jTable4);
+        if (jTable4.getColumnModel().getColumnCount() > 0) {
+            jTable4.getColumnModel().getColumn(1).setMinWidth(200);
+            jTable4.getColumnModel().getColumn(1).setPreferredWidth(200);
+            jTable4.getColumnModel().getColumn(2).setMinWidth(150);
+            jTable4.getColumnModel().getColumn(2).setPreferredWidth(150);
+            jTable4.getColumnModel().getColumn(3).setMinWidth(200);
+            jTable4.getColumnModel().getColumn(3).setPreferredWidth(200);
+            jTable4.getColumnModel().getColumn(4).setMinWidth(75);
+            jTable4.getColumnModel().getColumn(4).setPreferredWidth(75);
+            jTable4.getColumnModel().getColumn(5).setMinWidth(200);
+            jTable4.getColumnModel().getColumn(5).setPreferredWidth(200);
+            jTable4.getColumnModel().getColumn(6).setMinWidth(100);
+            jTable4.getColumnModel().getColumn(6).setPreferredWidth(100);
+            jTable4.getColumnModel().getColumn(7).setMinWidth(100);
+            jTable4.getColumnModel().getColumn(7).setPreferredWidth(100);
+            jTable4.getColumnModel().getColumn(8).setMinWidth(50);
+            jTable4.getColumnModel().getColumn(8).setPreferredWidth(50);
+            jTable4.getColumnModel().getColumn(9).setMinWidth(100);
+            jTable4.getColumnModel().getColumn(9).setPreferredWidth(100);
+        }
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -809,6 +874,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jLabel11.setText("Payment Informations");
         pymntInfo.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 21, -1, 30));
 
+        jTable2.setAutoCreateRowSorter(true);
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -835,8 +901,23 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable2.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(1).setMinWidth(200);
+            jTable2.getColumnModel().getColumn(1).setPreferredWidth(200);
+            jTable2.getColumnModel().getColumn(2).setMinWidth(200);
+            jTable2.getColumnModel().getColumn(2).setPreferredWidth(200);
+            jTable2.getColumnModel().getColumn(3).setMinWidth(200);
+            jTable2.getColumnModel().getColumn(3).setPreferredWidth(200);
+            jTable2.getColumnModel().getColumn(4).setMinWidth(75);
+            jTable2.getColumnModel().getColumn(4).setPreferredWidth(75);
+            jTable2.getColumnModel().getColumn(5).setMinWidth(100);
+            jTable2.getColumnModel().getColumn(5).setPreferredWidth(100);
+            jTable2.getColumnModel().getColumn(6).setMinWidth(100);
+            jTable2.getColumnModel().getColumn(6).setPreferredWidth(100);
+        }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1021,6 +1102,9 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         Connection con;
         con = DBConnect.connect();
         
+        Dimension dim = new Dimension(10,1);
+        jTable3.setIntercellSpacing(new Dimension(dim));
+        
         try {
             DefaultTableModel dt = (DefaultTableModel) jTable3.getModel();
             dt.setRowCount(0);
@@ -1048,14 +1132,18 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        
     }//GEN-LAST:event_btnstdInfoAllActionPerformed
 
     private void btnAttnInfoAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttnInfoAllActionPerformed
         mainPnl.setSelectedIndex(1);
         Connection con;
-
+        
         con = DBConnect.connect();
+        
+        Dimension dim = new Dimension(10,1);
+        jTable1.setIntercellSpacing(new Dimension(dim));
+        
         try {
             DefaultTableModel dt1 = (DefaultTableModel) jTable1.getModel();
             dt1.setRowCount(0);
@@ -1079,14 +1167,22 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             e.printStackTrace();
         }
         
+        
+        
     }//GEN-LAST:event_btnAttnInfoAllActionPerformed
     
     private void btnPaymentInfoAll1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPaymentInfoAll1ActionPerformed
         mainPnl.setSelectedIndex(4);
         
         Connection con;
-        ResultSet rset = null;
-
+       
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+        rightRenderer.setHorizontalAlignment( JLabel.RIGHT );
+        jTable2.getColumnModel().getColumn(4).setCellRenderer( rightRenderer );
+        Dimension dim = new Dimension(10,1);
+        jTable2.setIntercellSpacing(new Dimension(dim));
+        
+        
         con = DBConnect.connect();
         try {
             DefaultTableModel dt3 = (DefaultTableModel) jTable2.getModel();
@@ -1118,9 +1214,15 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         
         
         Connection con;
-        ResultSet rset = null;
-
+        
         con = DBConnect.connect();
+        
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+        rightRenderer.setHorizontalAlignment( JLabel.RIGHT );
+        jTable4.getColumnModel().getColumn(4).setCellRenderer( rightRenderer );
+        Dimension dim = new Dimension(10,1);
+        jTable4.setIntercellSpacing(new Dimension(dim));
+        
         try {
             DefaultTableModel dt2 = (DefaultTableModel) jTable4.getModel();
             dt2.setRowCount(0);
@@ -1146,7 +1248,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        
         
     }//GEN-LAST:event_btntcherInfoAllActionPerformed
 

@@ -378,7 +378,7 @@ public class TcherRegForm extends javax.swing.JFrame {
         pstmt.setString(5,gender);
         pstmt.setString(6,NIC1);
         pstmt.setString(7,SubjName);
-        pstmt.setString(8,PaymentFees);
+        pstmt.setString(8,PaymentFees+".00");
         pstmt.setString(9,DOB1);
         
         pstmt.execute();
