@@ -186,7 +186,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="18" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -244,7 +244,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Subject Name"/>
+                <Property name="text" type="java.lang.String" value="Subject Name :"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="stdID">
@@ -252,7 +252,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Student ID"/>
+                <Property name="text" type="java.lang.String" value="Student ID :"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="stdName">
@@ -260,7 +260,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Student Name"/>
+                <Property name="text" type="java.lang.String" value="Student Name :"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtStdID">
@@ -336,7 +336,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Teacher&apos;s Name"/>
+                <Property name="text" type="java.lang.String" value="Teacher&apos;s Name :"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="createBtn">
@@ -415,7 +415,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Status"/>
+                <Property name="text" type="java.lang.String" value="Status :"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="subCB">
