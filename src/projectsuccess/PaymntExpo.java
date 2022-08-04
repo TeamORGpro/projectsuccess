@@ -12,7 +12,6 @@ package projectsuccess;
 import java.awt.*;
 import java.io.*;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -165,7 +164,9 @@ public class PaymntExpo extends javax.swing.JFrame {
                 wb.write(out);
                 wb.close();
                 out.close();
+                JOptionPane.showMessageDialog(null, "Successfully Exported!");
                 openFile(saveFile.toString());
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Error!");
             }

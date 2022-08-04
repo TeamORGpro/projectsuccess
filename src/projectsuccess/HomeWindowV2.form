@@ -684,6 +684,7 @@
                                 </Column>
                               </TableColumnModel>
                             </Property>
+                            <Property name="surrendersFocusOnKeystroke" type="boolean" value="true"/>
                             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                               <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                             </Property>
@@ -774,6 +775,7 @@
                       <Events>
                         <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="attnSearchFieldFocusGained"/>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="attnSearchFieldActionPerformed"/>
+                        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="attnSearchFieldKeyTyped"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="deleteBtn">
@@ -1052,6 +1054,7 @@
                     <Component class="javax.swing.JTextField" name="stdSearchField">
                       <Events>
                         <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="stdSearchFieldFocusGained"/>
+                        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="stdSearchFieldKeyTyped"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="deleteBtn1">
@@ -1327,6 +1330,7 @@
                     <Component class="javax.swing.JTextField" name="tchrSearchField">
                       <Events>
                         <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tchrSearchFieldFocusGained"/>
+                        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tchrSearchFieldKeyTyped"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="deleteBtn2">
@@ -1588,6 +1592,7 @@
                       <Events>
                         <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="pymtSearchFieldFocusGained"/>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pymtSearchFieldActionPerformed"/>
+                        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="pymtSearchFieldKeyTyped"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="deleteBtn3">
