@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.HeadlessException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.*;
 import java.sql.*;
 import java.util.Vector;
 import javax.swing.*;
@@ -28,6 +27,147 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     public HomeWindowV2() {
         initComponents();
         closedeny();
+        attnSField();
+        tchrSField();
+        stdSField();
+        pymntSField();
+        
+    }
+    
+        public void attnSField() {
+        TableRowSorter<TableModel> attnSort = new TableRowSorter<>(jTable1.getModel());
+        jTable1.setRowSorter(attnSort);
+
+        attnSearchField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                String attnStr = attnSearchField.getText();
+                if (attnStr.trim().length() == 0) {
+                    attnSort.setRowFilter(null);
+                } else {
+                    attnSort.setRowFilter(RowFilter.regexFilter("(?i)" + attnStr));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                String attnStr = attnSearchField.getText();
+                if (attnStr.trim().length() == 0) {
+                    attnSort.setRowFilter(null);
+
+                } else {
+                    attnSort.setRowFilter(RowFilter.regexFilter("(?i)" + attnStr));
+
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+
+            }
+        });
+    }
+
+    public void tchrSField() {
+        TableRowSorter<TableModel> tchrSort = new TableRowSorter<>(jTable4.getModel());
+        jTable4.setRowSorter(tchrSort);
+
+        tchrSearchField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                String tchrStr = tchrSearchField.getText();
+                if (tchrStr.trim().length() == 0) {
+                    tchrSort.setRowFilter(null);
+                } else {
+                    tchrSort.setRowFilter(RowFilter.regexFilter("(?i)" + tchrStr));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                String tchrStr = tchrSearchField.getText();
+                if (tchrStr.trim().length() == 0) {
+                    tchrSort.setRowFilter(null);
+
+                } else {
+                    tchrSort.setRowFilter(RowFilter.regexFilter("(?i)" + tchrStr));
+
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+
+            }
+        });
+    }
+
+    public void stdSField() {
+        TableRowSorter<TableModel> sort = new TableRowSorter<>(jTable3.getModel());
+        jTable3.setRowSorter(sort);
+
+        stdSearchField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                String str = stdSearchField.getText();
+                if (str.trim().length() == 0) {
+                    sort.setRowFilter(null);
+                } else {
+                    sort.setRowFilter(RowFilter.regexFilter("(?i)" + str));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                String str = stdSearchField.getText();
+                if (str.trim().length() == 0) {
+                    sort.setRowFilter(null);
+
+                } else {
+                    sort.setRowFilter(RowFilter.regexFilter("(?i)" + str));
+
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+
+            }
+        });
+    }
+
+    public void pymntSField() {
+        TableRowSorter<TableModel> pymntSort = new TableRowSorter<>(jTable2.getModel());
+        jTable2.setRowSorter(pymntSort);
+
+        pymtSearchField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                String pymntStr = pymtSearchField.getText();
+                if (pymntStr.trim().length() == 0) {
+                    pymntSort.setRowFilter(null);
+                } else {
+                    pymntSort.setRowFilter(RowFilter.regexFilter("(?i)" + pymntStr));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                String pymntStr = pymtSearchField.getText();
+                if (pymntStr.trim().length() == 0) {
+                    pymntSort.setRowFilter(null);
+
+                } else {
+                    pymntSort.setRowFilter(RowFilter.regexFilter("(?i)" + pymntStr));
+
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+
+            }
+        });
     }
 
     /**
@@ -403,6 +543,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             }
         });
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTable1.setSurrendersFocusOnKeystroke(true);
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
@@ -458,6 +599,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         attnSearchField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 attnSearchFieldActionPerformed(evt);
+            }
+        });
+        attnSearchField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                attnSearchFieldKeyTyped(evt);
             }
         });
 
@@ -622,6 +768,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         stdSearchField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 stdSearchFieldFocusGained(evt);
+            }
+        });
+        stdSearchField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                stdSearchFieldKeyTyped(evt);
             }
         });
 
@@ -797,6 +948,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 tchrSearchFieldFocusGained(evt);
             }
         });
+        tchrSearchField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tchrSearchFieldKeyTyped(evt);
+            }
+        });
 
         deleteBtn2.setBackground(new java.awt.Color(255, 153, 51));
         deleteBtn2.setText("Delete Record");
@@ -963,6 +1119,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         pymtSearchField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pymtSearchFieldActionPerformed(evt);
+            }
+        });
+        pymtSearchField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                pymtSearchFieldKeyTyped(evt);
             }
         });
 
@@ -1302,146 +1463,18 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private void stdSearchFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_stdSearchFieldFocusGained
         // TODO add your handling code here:
 
-        TableRowSorter<TableModel> sort = new TableRowSorter<>(jTable3.getModel());
-        jTable3.setRowSorter(sort);
-
-        stdSearchField.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent de) {
-                String str = stdSearchField.getText();
-                if (str.trim().length() == 0) {
-                    sort.setRowFilter(null);
-                } else {
-                    sort.setRowFilter(RowFilter.regexFilter("(?i)" + str));
-                }
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent de) {
-                String str = stdSearchField.getText();
-                if (str.trim().length() == 0) {
-                    sort.setRowFilter(null);
-
-                } else {
-                    sort.setRowFilter(RowFilter.regexFilter("(?i)" + str));
-
-                }
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent de) {
-
-            }
-        });
     }//GEN-LAST:event_stdSearchFieldFocusGained
 
     private void attnSearchFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_attnSearchFieldFocusGained
         // TODO add your handling code here:
-
-        TableRowSorter<TableModel> attnSort = new TableRowSorter<>(jTable1.getModel());
-        jTable1.setRowSorter(attnSort);
-
-        attnSearchField.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent de) {
-                String attnStr = attnSearchField.getText();
-                if (attnStr.trim().length() == 0) {
-                    attnSort.setRowFilter(null);
-                } else {
-                    attnSort.setRowFilter(RowFilter.regexFilter("(?i)" + attnStr));
-                }
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent de) {
-                String attnStr = attnSearchField.getText();
-                if (attnStr.trim().length() == 0) {
-                    attnSort.setRowFilter(null);
-
-                } else {
-                    attnSort.setRowFilter(RowFilter.regexFilter("(?i)" + attnStr));
-
-                }
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent de) {
-
-            }
-        });
     }//GEN-LAST:event_attnSearchFieldFocusGained
 
     private void tchrSearchFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tchrSearchFieldFocusGained
         // TODO add your handling code here:
-        TableRowSorter<TableModel> tchrSort = new TableRowSorter<>(jTable4.getModel());
-        jTable4.setRowSorter(tchrSort);
-
-        tchrSearchField.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent de) {
-                String tchrStr = tchrSearchField.getText();
-                if (tchrStr.trim().length() == 0) {
-                    tchrSort.setRowFilter(null);
-                } else {
-                    tchrSort.setRowFilter(RowFilter.regexFilter("(?i)" + tchrStr));
-                }
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent de) {
-                String tchrStr = tchrSearchField.getText();
-                if (tchrStr.trim().length() == 0) {
-                    tchrSort.setRowFilter(null);
-
-                } else {
-                    tchrSort.setRowFilter(RowFilter.regexFilter("(?i)" + tchrStr));
-
-                }
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent de) {
-
-            }
-        });
-
     }//GEN-LAST:event_tchrSearchFieldFocusGained
 
     private void pymtSearchFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pymtSearchFieldFocusGained
         // TODO add your handling code here:
-        TableRowSorter<TableModel> pymntSort = new TableRowSorter<>(jTable2.getModel());
-        jTable2.setRowSorter(pymntSort);
-
-        pymtSearchField.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent de) {
-                String pymntStr = pymtSearchField.getText();
-                if (pymntStr.trim().length() == 0) {
-                    pymntSort.setRowFilter(null);
-                } else {
-                    pymntSort.setRowFilter(RowFilter.regexFilter("(?i)" + pymntStr));
-                }
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent de) {
-                String pymntStr = pymtSearchField.getText();
-                if (pymntStr.trim().length() == 0) {
-                    pymntSort.setRowFilter(null);
-
-                } else {
-                    pymntSort.setRowFilter(RowFilter.regexFilter("(?i)" + pymntStr));
-
-                }
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent de) {
-
-            }
-        });
-
-
     }//GEN-LAST:event_pymtSearchFieldFocusGained
 
     private void restBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restBtnActionPerformed
@@ -2023,9 +2056,26 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     }//GEN-LAST:event_pymtSearchFieldActionPerformed
 
     private void jTable2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable2FocusLost
-        // TODO add your handling code here:
-        
+        // TODO add your handling code here:        
     }//GEN-LAST:event_jTable2FocusLost
+
+    private void attnSearchFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_attnSearchFieldKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_attnSearchFieldKeyTyped
+
+    private void tchrSearchFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tchrSearchFieldKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tchrSearchFieldKeyTyped
+
+
+    private void stdSearchFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stdSearchFieldKeyTyped
+        // TODO add your handling code here:        
+    }//GEN-LAST:event_stdSearchFieldKeyTyped
+
+
+    private void pymtSearchFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pymtSearchFieldKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pymtSearchFieldKeyTyped
 
     private void onClick(JPanel panel) {
         panel.setBackground(new Color(48, 203, 220));

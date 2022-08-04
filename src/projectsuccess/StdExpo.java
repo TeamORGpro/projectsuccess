@@ -164,6 +164,7 @@ public class StdExpo extends javax.swing.JFrame {
                 wb.write(out);
                 wb.close();
                 out.close();
+                JOptionPane.showMessageDialog(null, "Successfully Exported!");
                 openFile(saveFile.toString());
             } else {
                 JOptionPane.showMessageDialog(null, "Error!");
