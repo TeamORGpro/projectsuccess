@@ -50,8 +50,8 @@ public class StdAttnExpo extends javax.swing.JFrame {
         stdAttnExpoTbl = new javax.swing.JTable();
         exportAttnInfoBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Excel Exporter");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Attendance - Excel Exporter");
         setPreferredSize(new java.awt.Dimension(700, 500));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));

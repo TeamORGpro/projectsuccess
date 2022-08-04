@@ -51,8 +51,8 @@ public class PaymntExpo extends javax.swing.JFrame {
         paymntExpoTbl = new javax.swing.JTable();
         exportPaymntInfoBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Excel Exporter");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Payments - Excel Exporter");
         setPreferredSize(new java.awt.Dimension(700, 500));
 
         jPanel1.setToolTipText("Payment Info Exporter");

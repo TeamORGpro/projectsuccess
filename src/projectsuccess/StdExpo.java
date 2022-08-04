@@ -51,8 +51,8 @@ public class StdExpo extends javax.swing.JFrame {
         expoStdInfoTbl = new javax.swing.JTable();
         exportStdInfoBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Excel Exporter");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Students - Excel Exporter");
         setPreferredSize(new java.awt.Dimension(700, 500));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
