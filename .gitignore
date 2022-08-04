@@ -29,7 +29,6 @@ hs_err_pid*
 build/
 nbbuild/
 dist/
-!Excel_Libraries/*.jar
 nbdist/
 nbactions.xml
 nb-configuration.xml
