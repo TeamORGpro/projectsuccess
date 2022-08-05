@@ -334,6 +334,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
         String fee=feeLbl.getText();
         String mnth=(String) monthCB.getSelectedItem();
         String date=dateLbl.getText();
+        String yr=dateLbl.getText().substring(0, 4);
     
         if (!Std_Name.isEmpty() && !techerName.isEmpty()){
             Connection con;
@@ -342,7 +343,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
         
         try {
                                                 
-            String query ="insert into payment_table(Std_ID,Std_Name,Tchr_Name,Subj_Name,Payment_fee,Grade,Month,Date_paid)values(?,?,?,?,?,?,?,?)";
+            String query ="insert into payment_table(Std_ID,Std_Name,Tchr_Name,Subj_Name,Payment_fee,Grade,Month,Date_paid,Year)values(?,?,?,?,?,?,?,?,?)";
 
             pstmt3 = con.prepareStatement(query);
 
@@ -355,6 +356,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
             pstmt3.setString(6, grd);
             pstmt3.setString(7, mnth);
             pstmt3.setString(8, date);
+            pstmt3.setString(9, yr);
             
             pstmt3.execute();
             JOptionPane.showMessageDialog(null, "Data successfully Saved!");
