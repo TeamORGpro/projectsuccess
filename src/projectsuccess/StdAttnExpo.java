@@ -63,14 +63,14 @@ public class StdAttnExpo extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Date", "Subject Name", "Student ID", "Student Name", "Teacher's Name", "Status", "Special Notes"
+                "Date", "Subject Name", "Student ID", "Student Name", "Grade", "Teacher's Name", "Status", "Special Notes"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
+                false, false, false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -83,6 +83,10 @@ public class StdAttnExpo extends javax.swing.JFrame {
         });
         stdAttnExpoTbl.setRowSelectionAllowed(false);
         jScrollPane1.setViewportView(stdAttnExpoTbl);
+        if (stdAttnExpoTbl.getColumnModel().getColumnCount() > 0) {
+            stdAttnExpoTbl.getColumnModel().getColumn(4).setMinWidth(100);
+            stdAttnExpoTbl.getColumnModel().getColumn(4).setPreferredWidth(100);
+        }
 
         exportAttnInfoBtn.setText("Export to Excel File");
         exportAttnInfoBtn.setMaximumSize(new java.awt.Dimension(155, 30));

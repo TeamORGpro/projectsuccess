@@ -10,6 +10,7 @@ import java.awt.HeadlessException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.Vector;
 import javax.swing.*;
 import javax.swing.event.*;
@@ -31,10 +32,9 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         tchrSField();
         stdSField();
         pymntSField();
-        
     }
-    
-        public void attnSField() {
+
+    public void attnSField() {
         TableRowSorter<TableModel> attnSort = new TableRowSorter<>(jTable1.getModel());
         jTable1.setRowSorter(attnSort);
 
@@ -231,6 +231,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         restBtn = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
         sendBtnAttnInfo = new javax.swing.JButton();
+        attnFilterBtn = new javax.swing.JButton();
         stdInfo = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -269,6 +270,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         deleteBtn3 = new javax.swing.JButton();
         restBtn3 = new javax.swing.JButton();
         sendBtnPymntInfo = new javax.swing.JButton();
+        paymntFilterBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Success Educational Institute");
@@ -518,20 +520,20 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Date", "Subject Name", "Student ID", "Student Name", "Teacher's Name", "Status", "Special Notes"
+                "Date", "Subject Name", "Student ID", "Student Name", "Grade", "Teacher's Name", "Status", "Special Notes"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, true
+                false, false, false, false, false, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -555,12 +557,14 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
             jTable1.getColumnModel().getColumn(3).setMinWidth(200);
             jTable1.getColumnModel().getColumn(3).setPreferredWidth(200);
-            jTable1.getColumnModel().getColumn(4).setMinWidth(200);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(200);
-            jTable1.getColumnModel().getColumn(5).setMinWidth(100);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(6).setMinWidth(200);
-            jTable1.getColumnModel().getColumn(6).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(4).setMinWidth(100);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(5).setMinWidth(200);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(6).setMinWidth(100);
+            jTable1.getColumnModel().getColumn(6).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(7).setMinWidth(200);
+            jTable1.getColumnModel().getColumn(7).setPreferredWidth(200);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -632,7 +636,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         });
 
         sendBtnAttnInfo.setBackground(new java.awt.Color(204, 204, 255));
-        sendBtnAttnInfo.setText("Send to Export");
+        sendBtnAttnInfo.setText("Send the selected");
         sendBtnAttnInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sendBtnAttnInfoActionPerformed(evt);
@@ -656,7 +660,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addComponent(sendBtnAttnInfo)
                 .addGap(18, 18, 18)
                 .addComponent(deleteBtn)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         attnFilterPnlLayout.setVerticalGroup(
             attnFilterPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -673,6 +677,14 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         );
 
         attnInfo.add(attnFilterPnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, -1, 50));
+
+        attnFilterBtn.setText("Advanced Filter");
+        attnFilterBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                attnFilterBtnActionPerformed(evt);
+            }
+        });
+        attnInfo.add(attnFilterBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 130, 30));
 
         mainPnl.addTab("tab2", attnInfo);
 
@@ -812,7 +824,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         });
 
         sendBtnStdInfo.setBackground(new java.awt.Color(204, 204, 255));
-        sendBtnStdInfo.setText("Send to Export");
+        sendBtnStdInfo.setText("Send the selected");
         sendBtnStdInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sendBtnStdInfoActionPerformed(evt);
@@ -836,7 +848,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addComponent(sendBtnStdInfo)
                 .addGap(18, 18, 18)
                 .addComponent(deleteBtn1)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         stdFilterPnlLayout.setVerticalGroup(
             stdFilterPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -979,7 +991,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         });
 
         sendBtnTchrInfo.setBackground(new java.awt.Color(204, 204, 255));
-        sendBtnTchrInfo.setText("Send to Export");
+        sendBtnTchrInfo.setText("Send the selected");
         sendBtnTchrInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sendBtnTchrInfoActionPerformed(evt);
@@ -1003,7 +1015,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addComponent(sendBtnTchrInfo)
                 .addGap(18, 18, 18)
                 .addComponent(deleteBtn2)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         tcherFilterPnlLayout.setVerticalGroup(
             tcherFilterPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1034,20 +1046,20 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jTable2.setAutoCreateRowSorter(true);
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Student ID", "Student  Name", "Subject", "Teacher's Name", "Subject Fee", "Last Paid Month", "Paid Date"
+                "Student ID", "Student  Name", "Subject", "Teacher's Name", "Subject Fee", "Grade", "Last Paid Month", "Paid Date"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1081,6 +1093,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             jTable2.getColumnModel().getColumn(5).setPreferredWidth(100);
             jTable2.getColumnModel().getColumn(6).setMinWidth(100);
             jTable2.getColumnModel().getColumn(6).setPreferredWidth(100);
+            jTable2.getColumnModel().getColumn(7).setMinWidth(100);
+            jTable2.getColumnModel().getColumn(7).setPreferredWidth(100);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -1144,7 +1158,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         });
 
         sendBtnPymntInfo.setBackground(new java.awt.Color(204, 204, 255));
-        sendBtnPymntInfo.setText("Send to Export");
+        sendBtnPymntInfo.setText("Send the selected");
         sendBtnPymntInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sendBtnPymntInfoActionPerformed(evt);
@@ -1182,6 +1196,14 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         );
 
         pymntInfo.add(pymntFilterPnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, -1, 50));
+
+        paymntFilterBtn.setText("Advanced Filter");
+        paymntFilterBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                paymntFilterBtnActionPerformed(evt);
+            }
+        });
+        pymntInfo.add(paymntFilterBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 130, 30));
 
         mainPnl.addTab("tab5", pymntInfo);
 
@@ -1329,6 +1351,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     v1.add(rs1.getString("Subj_Name"));
                     v1.add(rs1.getInt("Std_ID"));
                     v1.add(rs1.getString("Std_Name"));
+                    v1.add(rs1.getString("Grade"));
                     v1.add(rs1.getString("Tchr_Name"));
                     v1.add(rs1.getString("Status"));
                     v1.add(rs1.getString("Spc_Note"));
@@ -1368,6 +1391,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     v3.add(rs3.getString("Subj_Name"));
                     v3.add(rs3.getString("Tchr_Name"));
                     v3.add(rs3.getString("Payment_fee"));
+                    v3.add(rs3.getString("Grade"));
                     v3.add(rs3.getString("Month"));
                     v3.add(rs3.getString("Date_paid"));
 
@@ -1481,24 +1505,159 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         attnSearchField.setText("");
+        
+        Connection con;
+
+        con = DBConnect.connect();
+
+        Dimension dim = new Dimension(10, 1);
+        jTable1.setIntercellSpacing(new Dimension(dim));
+
+        try {
+            DefaultTableModel dt1 = (DefaultTableModel) jTable1.getModel();
+            dt1.setRowCount(0);
+            Statement s1 = con.createStatement();
+            try (ResultSet rs1 = s1.executeQuery("select * from attndance_table ")) {
+                while (rs1.next()) {
+                    Vector v1 = new Vector();
+                    v1.add(rs1.getString("Date"));
+                    v1.add(rs1.getString("Subj_Name"));
+                    v1.add(rs1.getInt("Std_ID"));
+                    v1.add(rs1.getString("Std_Name"));
+                    v1.add(rs1.getString("Grade"));
+                    v1.add(rs1.getString("Tchr_Name"));
+                    v1.add(rs1.getString("Status"));
+                    v1.add(rs1.getString("Spc_Note"));
+                    dt1.addRow(v1);
+                }
+                s1.close();
+                con.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_restBtnActionPerformed
 
     private void restBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restBtn1ActionPerformed
         // TODO add your handling code here:
 
         stdSearchField.setText("");
+        
+        Connection con;
+        con = DBConnect.connect();
+
+        Dimension dim = new Dimension(10, 1);
+        jTable3.setIntercellSpacing(new Dimension(dim));
+
+        try {
+            DefaultTableModel dt = (DefaultTableModel) jTable3.getModel();
+            dt.setRowCount(0);
+
+            Statement s = con.createStatement();
+            try (ResultSet rs = s.executeQuery("select * from std_info_table ")) {
+                while (rs.next()) {
+                    Vector v = new Vector();
+                    v.add(rs.getString("Std_ID"));
+                    v.add(rs.getString("Std_Name"));
+                    v.add(rs.getString("Name_with_Initials"));
+                    v.add(rs.getString("Address"));
+                    v.add(rs.getString("DOB"));
+                    v.add(rs.getString("Subjects"));
+                    v.add(rs.getString("Grade"));
+                    v.add(rs.getString("Phone_no"));
+                    v.add(rs.getString("sex"));
+                    v.add(rs.getString("Grd_name"));
+                    v.add(rs.getString("Grd_Phone_no"));
+                    dt.addRow(v);
+                }
+                rs.close();
+                con.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_restBtn1ActionPerformed
 
     private void restBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restBtn2ActionPerformed
         // TODO add your handling code here:
 
         tchrSearchField.setText("");
+        
+        Connection con;
+
+        con = DBConnect.connect();
+
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+        rightRenderer.setHorizontalAlignment(JLabel.RIGHT);
+        jTable4.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
+        Dimension dim = new Dimension(10, 1);
+        jTable4.setIntercellSpacing(new Dimension(dim));
+
+        try {
+            DefaultTableModel dt2 = (DefaultTableModel) jTable4.getModel();
+            dt2.setRowCount(0);
+            Statement s2 = con.createStatement();
+            try (ResultSet rs2 = s2.executeQuery("select * from tchr_info_table ")) {
+                while (rs2.next()) {
+                    Vector v2 = new Vector();
+                    v2.add(rs2.getInt("Tchr_ID"));
+                    v2.add(rs2.getString("Subj_Name"));
+                    v2.add(rs2.getString("Name_with_Initials"));
+                    v2.add(rs2.getString("Tchr_Name"));
+                    v2.add(rs2.getString("Payment_Fees"));
+                    v2.add(rs2.getString("Address"));
+                    v2.add(rs2.getString("DOB"));
+                    v2.add(rs2.getString("Phone_no"));
+                    v2.add(rs2.getString("sex"));
+                    v2.add(rs2.getString("NIC"));
+                    dt2.addRow(v2);
+                }
+                s2.close();
+                con.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_restBtn2ActionPerformed
 
     private void restBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restBtn3ActionPerformed
         // TODO add your handling code here:
 
         pymtSearchField.setText("");
+
+        Connection con;
+
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+        rightRenderer.setHorizontalAlignment(JLabel.RIGHT);
+        jTable2.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
+        Dimension dim = new Dimension(10, 1);
+        jTable2.setIntercellSpacing(new Dimension(dim));
+
+        con = DBConnect.connect();
+        try {
+            DefaultTableModel dt3 = (DefaultTableModel) jTable2.getModel();
+            dt3.setRowCount(0);
+            Statement s3 = con.createStatement();
+            try (ResultSet rs3 = s3.executeQuery("select * from payment_table")) {
+                while (rs3.next()) {
+                    Vector v3 = new Vector();
+                    v3.add(rs3.getInt("Std_ID"));
+                    v3.add(rs3.getString("Std_Name"));
+                    v3.add(rs3.getString("Subj_Name"));
+                    v3.add(rs3.getString("Tchr_Name"));
+                    v3.add(rs3.getString("Payment_fee"));
+                    v3.add(rs3.getString("Grade"));
+                    v3.add(rs3.getString("Month"));
+                    v3.add(rs3.getString("Date_paid"));
+
+                    dt3.addRow(v3);
+                }
+                s3.close();
+                con.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_restBtn3ActionPerformed
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
@@ -1633,31 +1792,35 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
     private void deleteBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtn1ActionPerformed
         // TODO add your handling code here:
-        Connection con;
-        PreparedStatement ps;
-        con = DBConnect.connect();
+        int cSid = 0;
+        
 
-        DefaultTableModel stdtbmodel = (DefaultTableModel) jTable3.getModel();
-        int row = jTable3.getSelectedRow();
-        String eve = (String) jTable3.getModel().getValueAt(row, 0);
+        int[] rows = jTable3.getSelectedRows();
 
         int reply = JOptionPane.showConfirmDialog(null,
                 "Do you want to delete?", "Deleting", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
+            for (int i = 0; i < rows.length; i++) {
+                String s_id = jTable3.getModel().getValueAt(rows[i], cSid).toString();
+                
 
-            String delRow = "DELETE FROM `std_info_table` WHERE `Std_ID`= " + eve;
-            try {
-                ps = con.prepareStatement(delRow);
-                ps.execute();
-                JOptionPane.showMessageDialog(null, "Row Successfully Deleted");
-                ps.close();
-                con.close();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error :" + ex.getLocalizedMessage());
+                try {
+                    Connection con;
+                    con = DBConnect.connect();
+
+                    Statement dst = con.createStatement();
+                    String sql1 = "DELETE FROM std_info_table WHERE `Std_ID` = "+s_id+";";
+
+                    dst.executeUpdate(sql1);
+
+                } catch (SQLException e) {
+                }
             }
         }
 
-        con = DBConnect.connect();
+// reload table
+         
+        Connection con = DBConnect.connect();
 
         try {
             DefaultTableModel dt = (DefaultTableModel) jTable3.getModel();
@@ -1686,38 +1849,41 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
 
     }//GEN-LAST:event_deleteBtn1ActionPerformed
 
     private void deleteBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtn2ActionPerformed
         // TODO add your handling code here:
-        Connection con;
-        con = DBConnect.connect();
-        PreparedStatement pst;
+        int cTcherid = 0;
+        
 
-        DefaultTableModel tchrtbmodel = (DefaultTableModel) jTable4.getModel();
-        int row1 = jTable4.getSelectedRow();
-        int eve1 = (int) jTable4.getModel().getValueAt(row1, 0);
+        int[] rows = jTable4.getSelectedRows();
 
         int reply = JOptionPane.showConfirmDialog(null,
                 "Do you want to delete?", "Deleting", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
+            for (int i = 0; i < rows.length; i++) {
+                String tchr_id = jTable4.getModel().getValueAt(rows[i], cTcherid).toString();
+                
 
-            String delRow = "DELETE FROM `tchr_info_table` WHERE `Tchr_ID` =" + eve1;
-            try {
-                pst = con.prepareStatement(delRow);
-                pst.execute();
-                JOptionPane.showMessageDialog(null, "Row Successfully Deleted");
-                pst.close();
-                con.close();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error :" + ex.getLocalizedMessage());
+                try {
+                    Connection cont;
+                    cont = DBConnect.connect();
+
+                    Statement tst = cont.createStatement();
+                    String sql2 = "DELETE FROM `tchr_info_table` WHERE `Tchr_ID`="+tchr_id+";";
+
+                    tst.executeUpdate(sql2);
+
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
+        
 
-        ResultSet rset = null;
-
-        con = DBConnect.connect();
+        Connection con = DBConnect.connect();
         try {
             DefaultTableModel dt2 = (DefaultTableModel) jTable4.getModel();
             dt2.setRowCount(0);
@@ -1747,88 +1913,101 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteBtn2ActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        // TODO add your handling code here:
-        Connection con;
-        con = DBConnect.connect();
-        PreparedStatement psa;
 
-        DefaultTableModel attntbmodel = (DefaultTableModel) jTable1.getModel();
-        int row2 = jTable1.getSelectedRow();
-        String date = jTable1.getValueAt(row2, 0).toString();
-        String subjName = jTable1.getValueAt(row2, 1).toString();
-        int stuID = Integer.valueOf(jTable1.getValueAt(row2, 2).toString());
+        int gdate = 0;
+        int gsubjName = 1;
+        int gstuID = 2;
+
+        int[] rows = jTable1.getSelectedRows();
 
         int reply = JOptionPane.showConfirmDialog(null,
                 "Do you want to delete?", "Deleting", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
-            String delRow = "DELETE FROM `attndance_table` WHERE `Date`='" + date + "' AND `Subj_Name`='" + subjName + "' AND `Std_ID`=" + stuID;
+            for (int i = 0; i < rows.length; i++) {
+                String date = jTable1.getModel().getValueAt(rows[i], gdate).toString();
+                String subjName = jTable1.getModel().getValueAt(rows[i], gsubjName).toString();
+                String stuID = jTable1.getModel().getValueAt(rows[i], gstuID).toString();
 
-            try {
-                psa = con.prepareStatement(delRow);
-                psa.execute();
-                JOptionPane.showMessageDialog(null, "Row Successfully Deleted");
-                psa.close();
-                con.close();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error :" + ex.getLocalizedMessage());
-            }
-        }
+                try {
+                    Connection con;
+                    con = DBConnect.connect();
 
-        con = DBConnect.connect();
-        try {
-            DefaultTableModel dt1 = (DefaultTableModel) jTable1.getModel();
-            dt1.setRowCount(0);
-            Statement s1 = con.createStatement();
-            try (ResultSet rs1 = s1.executeQuery("select * from attndance_table ")) {
-                while (rs1.next()) {
-                    Vector v1 = new Vector();
-                    v1.add(rs1.getString("Date"));
-                    v1.add(rs1.getString("Subj_Name"));
-                    v1.add(rs1.getInt("Std_ID"));
-                    v1.add(rs1.getString("Std_Name"));
-                    v1.add(rs1.getString("Tchr_Name"));
-                    v1.add(rs1.getString("Status"));
-                    v1.add(rs1.getString("Spc_Note"));
-                    dt1.addRow(v1);
+                    Statement dst = con.createStatement();
+                    String sql1 = "DELETE FROM `attndance_table` WHERE `Date`='" + date + "' AND `Subj_Name`='" + subjName + "' AND `Std_ID`=" + stuID;
+
+                    dst.executeUpdate(sql1);
+
+                } catch (Exception e) {
                 }
-                s1.close();
-                con.close();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            Connection con2;
+            con2 = DBConnect.connect();
+            try {
+                DefaultTableModel dt1 = (DefaultTableModel) jTable1.getModel();
+                dt1.setRowCount(0);
+                Statement s1 = con2.createStatement();
+                try (ResultSet rs1 = s1.executeQuery("select * from attndance_table ")) {
+                    while (rs1.next()) {
+                        Vector v1 = new Vector();
+                        v1.add(rs1.getString("Date"));
+                        v1.add(rs1.getString("Subj_Name"));
+                        v1.add(rs1.getInt("Std_ID"));
+                        v1.add(rs1.getString("Std_Name"));
+                        v1.add(rs1.getString("Tchr_Name"));
+                        v1.add(rs1.getString("Status"));
+                        v1.add(rs1.getString("Spc_Note"));
+                        dt1.addRow(v1);
+                    }
+                    s1.close();
+                    con2.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+
+
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void deleteBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtn3ActionPerformed
         // TODO add your handling code here:
-        Connection con;
-        con = DBConnect.connect();
-        PreparedStatement psp;
+        int cSid = 0;
+        int csubjName = 2;
+        int cMonth = 6;
+        int cPDate=7;
 
-        DefaultTableModel pymnttbmodel = (DefaultTableModel) jTable2.getModel();
-
-        int row2 = jTable2.getSelectedRow();
-        int stuID = Integer.valueOf(jTable2.getValueAt(row2, 0).toString());
-        String subjName = jTable2.getValueAt(row2, 2).toString();
-        String month = jTable2.getValueAt(row2, 5).toString();
-        String date = jTable2.getValueAt(row2, 6).toString();
+        int[] rows = jTable2.getSelectedRows();
 
         int reply = JOptionPane.showConfirmDialog(null,
                 "Do you want to delete?", "Deleting", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
-            String delRow = "DELETE FROM `payment_table` WHERE `Std_ID`=" + stuID + " AND `Subj_Name`='" + subjName + "' AND `Date_paid`='" + date + "' AND `Month`='" + month + "';";
-            try {
-                psp = con.prepareStatement(delRow);
-                psp.execute();
-                JOptionPane.showMessageDialog(null, "Row Successfully Deleted");
-                psp.close();
-                con.close();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error :" + ex.getLocalizedMessage());
+            for (int i = 0; i < rows.length; i++) {
+                String Sid1 = jTable2.getModel().getValueAt(rows[i], cSid).toString();
+                String subjName1 = jTable2.getModel().getValueAt(rows[i], csubjName).toString();
+                String Month1 = jTable2.getModel().getValueAt(rows[i], cMonth).toString();
+                String date1 = jTable2.getModel().getValueAt(rows[i], cPDate).toString();
+
+                try {
+                    Connection con;
+                    con = DBConnect.connect();
+
+                    Statement dst = con.createStatement();
+                    String sql1 = "DELETE FROM payment_table WHERE `Std_ID` ="+Sid1+" AND `Subj_Name` = '"+subjName1+"' AND `Month` = '"+Month1+"' AND `Date_paid` = '"+date1+"';";
+
+                    dst.executeUpdate(sql1);
+
+                } catch (Exception e) {
+                }
             }
         }
+        
+        Connection con;
 
-        ResultSet rset = null;
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+        rightRenderer.setHorizontalAlignment(JLabel.RIGHT);
+        jTable2.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
+        Dimension dim = new Dimension(10, 1);
+        jTable2.setIntercellSpacing(new Dimension(dim));
 
         con = DBConnect.connect();
         try {
@@ -1843,6 +2022,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     v3.add(rs3.getString("Subj_Name"));
                     v3.add(rs3.getString("Tchr_Name"));
                     v3.add(rs3.getString("Payment_fee"));
+                    v3.add(rs3.getString("Grade"));
                     v3.add(rs3.getString("Month"));
                     v3.add(rs3.getString("Date_paid"));
 
@@ -1869,7 +2049,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
             int[] indexs = jTable2.getSelectedRows();
 
-            Object[] row = new Object[7];
+            Object[] row = new Object[8];
 
             PaymntExpo exportpayment = new PaymntExpo();
             DefaultTableModel model2 = (DefaultTableModel) exportpayment.paymntExpoTbl.getModel();
@@ -1888,6 +2068,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 row[5] = model1.getValueAt(indexs[i], 5);
 
                 row[6] = model1.getValueAt(indexs[i], 6);
+
+                row[7] = model1.getValueAt(indexs[i], 7);
 
                 model2.addRow(row);
             }
@@ -2017,7 +2199,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
             int[] indexs = jTable1.getSelectedRows();
 
-            Object[] row = new Object[7];
+            Object[] row = new Object[8];
 
             StdAttnExpo exportstdAtn = new StdAttnExpo();
             DefaultTableModel model2 = (DefaultTableModel) exportstdAtn.stdAttnExpoTbl.getModel();
@@ -2036,6 +2218,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 row[5] = model1.getValueAt(indexs[i], 5);
 
                 row[6] = model1.getValueAt(indexs[i], 6);
+                
+                row[7] = model1.getValueAt(indexs[i], 7);
 
                 model2.addRow(row);
             }
@@ -2076,6 +2260,271 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private void pymtSearchFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pymtSearchFieldKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_pymtSearchFieldKeyTyped
+
+
+    private void paymntFilterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymntFilterBtnActionPerformed
+        // TODO add your handling code here:
+
+        JComboBox cb1 = new JComboBox();
+        //load Subject to cb1
+        cb1.addItem("Select"); // add first value of combobox to "Select"
+        Connection cons;
+        cons = DBConnect.connect();
+        ResultSet rsSubs;
+        PreparedStatement psSubs;
+
+        String querys = "SELECT Subj_Name FROM tchr_info_table;";
+
+        try {
+
+            psSubs = cons.prepareStatement(querys);
+            rsSubs = psSubs.executeQuery();
+            while (rsSubs.next()) {
+                String subj1 = rsSubs.getString("Subj_Name");
+                cb1.addItem(subj1);
+            }
+            rsSubs.close();
+            psSubs.close();
+            cons.close();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        //finish load Subject to cb1
+
+        JComboBox cb2 = new JComboBox();
+        //load Month to cb2
+        cb2.addItem("Select"); // add first value of combobox to "Select"
+        cb2.addItem("January");
+        cb2.addItem("February");
+        cb2.addItem("March");
+        cb2.addItem("April");
+        cb2.addItem("May");
+        cb2.addItem("June");
+        cb2.addItem("July");
+        cb2.addItem("August");
+        cb2.addItem("September");
+        cb2.addItem("October");
+        cb2.addItem("November");
+        cb2.addItem("December");
+
+        //finish load Month to cb2
+        JComboBox cb3 = new JComboBox();
+        //load year to cb3
+        cb3.addItem("Select"); // add first value of combobox to "Select"
+        Connection con;
+        con = DBConnect.connect();
+        ResultSet rsSub;
+        PreparedStatement psSub;
+
+        String query1 = "SELECT `Year` FROM `payment_table` GROUP by Year;";
+
+        try {
+
+            psSub = con.prepareStatement(query1);
+            rsSub = psSub.executeQuery();
+            while (rsSub.next()) {
+                String yer = rsSub.getString("Year");
+                cb3.addItem(yer);
+            }
+            rsSub.close();
+            psSub.close();
+            con.close();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        //finish load year to cb3
+
+        JPanel myPanel = new JPanel();
+        myPanel.add(new JLabel("Subject:"));
+        myPanel.add(cb1);
+        myPanel.add(Box.createHorizontalStrut(15)); // a spacer
+        myPanel.add(new JLabel("Month:"));
+        myPanel.add(cb2);
+        myPanel.add(new JLabel("Year:"));
+        myPanel.add(cb3);
+
+        int result = JOptionPane.showConfirmDialog(null, myPanel,
+                "Advanced Filter Options", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            //start to apply filter to table - reloading the table from selected values 
+            Connection conrp;
+            conrp = DBConnect.connect();
+
+            DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+            rightRenderer.setHorizontalAlignment(JLabel.RIGHT);
+            jTable2.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
+            Dimension dim = new Dimension(10, 1);
+            jTable2.setIntercellSpacing(new Dimension(dim));
+
+            //variable to store selected items of comboboxes
+            String cbSubj = cb1.getSelectedItem().toString();
+            String cbmonth = cb2.getSelectedItem().toString();
+            String cbyr = cb3.getSelectedItem().toString();
+
+            DefaultTableModel dtmodP = (DefaultTableModel) jTable2.getModel();
+            dtmodP.setRowCount(0);
+
+            
+
+//  data validation
+            if ((!("Select".equals(cbmonth))) && (!("Select".equals(cbyr))) && (!("Select".equals(cbSubj))) ) {
+                
+                String q="SELECT * FROM `payment_table` WHERE `Year`='"+cbyr+"' AND `Month`='"+cbmonth+"' AND `Subj_Name`='"+cbSubj+"';";
+                
+                try {
+                Statement stP = conrp.createStatement();
+
+                try (ResultSet rsp = stP.executeQuery(q)) {
+                    while (rsp.next()) {
+                        Vector v3 = new Vector();
+                        v3.add(rsp.getInt("Std_ID"));
+                        v3.add(rsp.getString("Std_Name"));
+                        v3.add(rsp.getString("Subj_Name"));
+                        v3.add(rsp.getString("Tchr_Name"));
+                        v3.add(rsp.getString("Payment_fee"));
+                        v3.add(rsp.getString("Grade"));
+                        v3.add(rsp.getString("Month"));
+                        v3.add(rsp.getString("Date_paid"));
+
+                        dtmodP.addRow(v3);
+                    }
+                    stP.close();
+                    conrp.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            } else{
+                JOptionPane.showMessageDialog(null, "You must Select three filter options", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+            }
+
+//  end of data validation
+            
+            
+
+
+            
+
+        }
+
+
+    }//GEN-LAST:event_paymntFilterBtnActionPerformed
+
+    private void attnFilterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attnFilterBtnActionPerformed
+        // TODO add your handling code here:
+
+        JComboBox cb1 = new JComboBox();
+        //load Subject to cb1
+        cb1.addItem("Select"); // add first value of combobox to "Select"
+        Connection cons;
+        cons = DBConnect.connect();
+        ResultSet rsSubs;
+        PreparedStatement psSubs;
+
+        String querys = "SELECT Subj_Name FROM tchr_info_table;";
+
+        try {
+
+            psSubs = cons.prepareStatement(querys);
+            rsSubs = psSubs.executeQuery();
+            while (rsSubs.next()) {
+                String subj1 = rsSubs.getString("Subj_Name");
+                cb1.addItem(subj1);
+            }
+            rsSubs.close();
+            psSubs.close();
+            cons.close();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        //finish load Subject to cb1
+
+        JComboBox cb2 = new JComboBox();
+        //load grade to cb2
+        cb2.addItem("Select"); // add first value of combobox to "Select"
+        Connection con;
+        con = DBConnect.connect();
+        ResultSet rsSub;
+        PreparedStatement psSub;
+
+        String query1 = "SELECT Grade FROM `attndance_table` GROUP BY Grade;";
+
+        try {
+
+            psSub = con.prepareStatement(query1);
+            rsSub = psSub.executeQuery();
+            while (rsSub.next()) {
+                String grade = rsSub.getString("Grade");
+                cb2.addItem(grade);
+            }
+            rsSub.close();
+            psSub.close();
+            con.close();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        //finish load grade to cb2
+
+        JPanel myPanel = new JPanel();
+        myPanel.add(new JLabel("Subject:"));
+        myPanel.add(cb1);
+        myPanel.add(Box.createHorizontalStrut(15)); // a spacer
+        myPanel.add(new JLabel("Grade:"));
+        myPanel.add(cb2);
+
+        int result = JOptionPane.showConfirmDialog(null, myPanel,
+                "Advanced Filter Options", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            //start to apply filter to table - reloading the table from selected values 
+            Connection conrp;
+            conrp = DBConnect.connect();
+
+            DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+            rightRenderer.setHorizontalAlignment(JLabel.RIGHT);
+            jTable1.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
+            Dimension dim = new Dimension(10, 1);
+            jTable1.setIntercellSpacing(new Dimension(dim));
+
+            //variable to store selected items of comboboxes
+            String cbSubj = cb1.getSelectedItem().toString();
+            String cbgrade = cb2.getSelectedItem().toString();
+
+            DefaultTableModel dtmodP = (DefaultTableModel) jTable1.getModel();
+            dtmodP.setRowCount(0);
+
+            if ((!("Select".equals(cbSubj))) && (!("Select".equals(cbgrade))) ) {
+                try {
+                DefaultTableModel dtattnf = (DefaultTableModel) jTable1.getModel();
+                dtattnf.setRowCount(0);
+                Statement attnSt = conrp.createStatement();
+                try (ResultSet attnfrs = attnSt.executeQuery("SELECT * FROM attndance_table WHERE `Subj_Name`='"+cbSubj+"' AND `Grade`='"+cbgrade+"';")) {
+                    while (attnfrs.next()) {
+                        Vector Ve1 = new Vector();
+                        Ve1.add(attnfrs.getString("Date"));
+                        Ve1.add(attnfrs.getString("Subj_Name"));
+                        Ve1.add(attnfrs.getInt("Std_ID"));
+                        Ve1.add(attnfrs.getString("Std_Name"));
+                        Ve1.add(attnfrs.getString("Grade"));
+                        Ve1.add(attnfrs.getString("Tchr_Name"));
+                        Ve1.add(attnfrs.getString("Status"));
+                        Ve1.add(attnfrs.getString("Spc_Note"));
+                        dtattnf.addRow(Ve1);
+                    }
+                    attnSt.close();
+                    conrp.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            } else {
+                JOptionPane.showMessageDialog(null, "You must Select two filter options", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_attnFilterBtnActionPerformed
 
     private void onClick(JPanel panel) {
         panel.setBackground(new Color(48, 203, 220));
@@ -2124,6 +2573,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton attnFilterBtn;
     private javax.swing.JPanel attnFilterPnl;
     private javax.swing.JPanel attnInfo;
     private javax.swing.JTextField attnSearchField;
@@ -2178,6 +2628,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JTable jTable4;
     private javax.swing.JPanel logo;
     private javax.swing.JTabbedPane mainPnl;
+    private javax.swing.JButton paymntFilterBtn;
     private javax.swing.JPanel pymntFilterPnl;
     private javax.swing.JPanel pymntInfo;
     private javax.swing.JTextField pymtSearchField;

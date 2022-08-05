@@ -55,6 +55,7 @@ public class PaymntExpo extends javax.swing.JFrame {
         setTitle("Payments - Excel Exporter");
         setPreferredSize(new java.awt.Dimension(700, 500));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setToolTipText("Payment Info Exporter");
         jPanel1.setPreferredSize(new java.awt.Dimension(700, 500));
 
@@ -65,14 +66,14 @@ public class PaymntExpo extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Student ID", "Student Name", "Subject", "Teacher's Name", "Subject Fees", "Last paid month", "Paid Date"
+                "Student ID", "Student Name", "Subject", "Teacher's Name", "Subject Fees", "Grade", "Last paid month", "Paid Date"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {

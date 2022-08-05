@@ -44,6 +44,7 @@ public class StdAtten extends javax.swing.JFrame {
         attenIcn1.setIcon(i);
         txtStatuslb.setEnabled(false);
         getSubject();
+        templbl.setVisible(false);
         
     }
 
@@ -125,6 +126,7 @@ public class StdAtten extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         attnDate = new javax.swing.JLabel();
         txtAttnDate = new javax.swing.JTextField();
+        templbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Attendance");
@@ -400,6 +402,7 @@ public class StdAtten extends javax.swing.JFrame {
         attnDate.setText("Date :");
         bgPnl.add(attnDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 70, 50, 30));
         bgPnl.add(txtAttnDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 80, 30));
+        bgPnl.add(templbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, 50, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -478,6 +481,7 @@ public class StdAtten extends javax.swing.JFrame {
         String techerName=lblTchrName.getText();
         String specNote=txtNotes.getText();
         String status=txtStatuslb.getText();
+        String atnstdGrade=templbl.getText();
         
                 
         
@@ -488,7 +492,7 @@ public class StdAtten extends javax.swing.JFrame {
                 
         try {
                                                 
-            String query ="insert into attndance_table(Date,Subj_Name,Tchr_Name,Std_ID,Std_Name,Status,Spc_Note)values(?,?,?,?,?,?,?)";
+            String query ="insert into attndance_table(Date,Subj_Name,Tchr_Name,Std_ID,Std_Name,Status,Spc_Note,Grade)values(?,?,?,?,?,?,?,?)";
 
             pstmt2 = con.prepareStatement(query);
 
@@ -498,9 +502,7 @@ public class StdAtten extends javax.swing.JFrame {
             pstmt2.setString(3, techerName);
             pstmt2.setInt(4, Std_ID);
             pstmt2.setString(5, Std_Name);
-            pstmt2.setString(6, status);
-            
-            
+            pstmt2.setString(6, status); 
             if (!(specNote.equals("Special Note"))){
                 pstmt2.setString(7, specNote);
             }
@@ -508,7 +510,9 @@ public class StdAtten extends javax.swing.JFrame {
                 
                 pstmt2.setString(7, "");
             }
+            pstmt2.setString(8, atnstdGrade);
 
+            
             pstmt2.execute();
             JOptionPane.showMessageDialog(null, "Data successfully Saved!");
                 String[] columns={txtStdID.getText(), Std_Name, subject, status};
@@ -556,7 +560,9 @@ public class StdAtten extends javax.swing.JFrame {
 
             if(rs.next()){
                 String studentName =rs.getString("Std_Name");
+                String grd =rs.getString("Grade");
                 lblstdName.setText(studentName);
+                templbl.setText(grd);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Please Enter Valid Student ID");
@@ -700,6 +706,7 @@ public class StdAtten extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> subCB;
     private javax.swing.JPanel tblPanel;
     private javax.swing.JLabel tchrName;
+    private javax.swing.JLabel templbl;
     private javax.swing.JTextField txtAttnDate;
     private javax.swing.JTextArea txtNotes;
     private javax.swing.JTextField txtStatuslb;
