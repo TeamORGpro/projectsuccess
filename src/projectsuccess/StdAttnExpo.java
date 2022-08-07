@@ -26,6 +26,7 @@ public class StdAttnExpo extends javax.swing.JFrame {
      */
     public StdAttnExpo() {
         initComponents();
+        icon();
     }
     public void openFile(String file) {
         try {
@@ -220,4 +221,8 @@ public class StdAttnExpo extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable stdAttnExpoTbl;
     // End of variables declaration//GEN-END:variables
+
+    private void icon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/Project Icon.png")));
+    }
 }

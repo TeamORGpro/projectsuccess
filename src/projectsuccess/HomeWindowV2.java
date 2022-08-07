@@ -32,7 +32,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         tchrSField();
         stdSField();
         pymntSField();
+        icon();
+        
     }
+    
+    
 
     public void attnSField() {
         TableRowSorter<TableModel> attnSort = new TableRowSorter<>(jTable1.getModel());
@@ -2654,4 +2658,10 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JButton updateBtn2;
     private javax.swing.JButton updateBtn3;
     // End of variables declaration//GEN-END:variables
+
+    private void icon() {
+        
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/Project Icon.png")));
+    
+    }
 }

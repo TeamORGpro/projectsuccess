@@ -20,7 +20,7 @@ public class Login extends javax.swing.JFrame {
   
     public Login() {
         initComponents();
-//        closeconfirm();
+        icon();
         ImageIcon myImage=new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/login.png")));
         
         Image img1=myImage.getImage();
@@ -64,7 +64,7 @@ public class Login extends javax.swing.JFrame {
         uNameTxt = new javax.swing.JTextField();
         passWordArea = new javax.swing.JPasswordField();
         btnLin = new javax.swing.JButton();
-        clearBtn = new javax.swing.JButton();
+        cnslBtn = new javax.swing.JButton();
         loginTitle = new javax.swing.JLabel();
         loginIcon1 = new javax.swing.JLabel();
         logo = new javax.swing.JLabel();
@@ -96,15 +96,15 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        clearBtn.setBackground(new java.awt.Color(255, 102, 102));
-        clearBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        clearBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/x.png"))); // NOI18N
-        clearBtn.setText("Cancel");
-        clearBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        clearBtn.setIconTextGap(15);
-        clearBtn.addActionListener(new java.awt.event.ActionListener() {
+        cnslBtn.setBackground(new java.awt.Color(255, 102, 102));
+        cnslBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        cnslBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/x.png"))); // NOI18N
+        cnslBtn.setText("Cancel");
+        cnslBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cnslBtn.setIconTextGap(15);
+        cnslBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearBtnActionPerformed(evt);
+                cnslBtnActionPerformed(evt);
             }
         });
 
@@ -135,7 +135,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addComponent(btnLin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
-                .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cnslBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(BGLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(passWord, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -168,7 +168,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(46, 46, 46)
                 .addGroup(BGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnLin, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cnslBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         getContentPane().add(BG, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 349, 465));
@@ -189,20 +189,11 @@ public class Login extends javax.swing.JFrame {
      * @param args the command line arguments
      */
 
-    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
+    private void cnslBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnslBtnActionPerformed
 
+        System.exit(0);
         
-//        int reply = JOptionPane.showConfirmDialog(null,
-//                    "Really Quit ?", "Quit", JOptionPane.YES_NO_OPTION);
-//            if (reply == JOptionPane.YES_OPTION){
-//                System.exit(0);
-//            }
-//            else{
-//                setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-//            }
-        this.dispose();
-        
-    }//GEN-LAST:event_clearBtnActionPerformed
+    }//GEN-LAST:event_cnslBtnActionPerformed
 
     private void btnLinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLinActionPerformed
      String username=uNameTxt.getText();
@@ -266,7 +257,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BG;
     private javax.swing.JButton btnLin;
-    private javax.swing.JButton clearBtn;
+    private javax.swing.JButton cnslBtn;
     private javax.swing.JLabel loginIcon1;
     private javax.swing.JLabel loginTitle;
     private javax.swing.JLabel logo;
@@ -275,8 +266,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel uName;
     private javax.swing.JTextField uNameTxt;
     // End of variables declaration//GEN-END:variables
-
-    private void HomeWindow() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void icon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/Project Icon.png")));
     }
 }

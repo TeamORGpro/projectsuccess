@@ -63,7 +63,7 @@
                   <EmptySpace min="40" pref="40" max="-2" attributes="0"/>
                   <Component id="btnLin" min="-2" pref="100" max="-2" attributes="0"/>
                   <EmptySpace min="60" pref="60" max="-2" attributes="0"/>
-                  <Component id="clearBtn" min="-2" pref="110" max="-2" attributes="0"/>
+                  <Component id="cnslBtn" min="-2" pref="110" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
@@ -105,7 +105,7 @@
                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnLin" min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="clearBtn" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="cnslBtn" min="-2" pref="36" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -154,7 +154,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLinActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="clearBtn">
+        <Component class="javax.swing.JButton" name="cnslBtn">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="ff" type="rgb"/>
@@ -172,7 +172,7 @@
             <Property name="iconTextGap" type="int" value="15"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cnslBtnActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="loginTitle">

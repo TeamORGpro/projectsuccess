@@ -32,20 +32,15 @@ public class StdAtten extends javax.swing.JFrame {
     
     public StdAtten() {
         initComponents();
+        
         closeconfirm();
         dt();
+        iconlabelLoad();
         
-        ImageIcon myImage=new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/attendance.png")));
-        
-        Image img1=myImage.getImage();
-        Image img2=img1.getScaledInstance(attenIcn1.getWidth(), attenIcn1.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon i=new ImageIcon(img2);
-        
-        attenIcn1.setIcon(i);
         txtStatuslb.setEnabled(false);
         getSubject();
         templbl.setVisible(false);
-        
+        icon();
     }
 
     /**
@@ -712,4 +707,18 @@ public class StdAtten extends javax.swing.JFrame {
     private javax.swing.JTextField txtStatuslb;
     private javax.swing.JTextField txtStdID;
     // End of variables declaration//GEN-END:variables
+
+    private void icon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/Project Icon.png")));
+    }
+
+    private void iconlabelLoad() {
+        ImageIcon myImage=new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/attendance.png")));
+        
+        Image img1=myImage.getImage();
+        Image img2=img1.getScaledInstance(attenIcn1.getWidth(), attenIcn1.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon i=new ImageIcon(img2);
+        
+        attenIcn1.setIcon(i);
+    }
 }

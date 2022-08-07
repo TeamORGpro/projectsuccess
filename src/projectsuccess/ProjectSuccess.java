@@ -18,6 +18,8 @@ public class ProjectSuccess {
         //show home window
         Login lg= new Login(); 
         lg.setVisible(true);
+        
+        
+        
     }
-    
 }
