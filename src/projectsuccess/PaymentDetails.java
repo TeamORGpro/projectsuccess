@@ -20,14 +20,9 @@ public final class PaymentDetails extends javax.swing.JFrame {
 
     public PaymentDetails() {
         initComponents();
+        icon();
+        iconlabelLoad();
         
-        ImageIcon myImage=new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/paymentIcon.png")));
-        
-        Image img1=myImage.getImage();
-        Image img2=img1.getScaledInstance(paymentIcn1.getWidth(), paymentIcn1.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon i=new ImageIcon(img2);
-        
-        paymentIcn1.setIcon(i);
         closeconfirm();
 
         
@@ -509,4 +504,18 @@ public final class PaymentDetails extends javax.swing.JFrame {
     private javax.swing.JLabel tcherName;
     private javax.swing.JTextField txtstdID;
     // End of variables declaration//GEN-END:variables
+
+    private void icon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/Project Icon.png")));
+    }
+
+    private void iconlabelLoad() {
+        ImageIcon myImage=new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/paymentIcon.png")));
+        
+        Image img1=myImage.getImage();
+        Image img2=img1.getScaledInstance(paymentIcn1.getWidth(), paymentIcn1.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon i=new ImageIcon(img2);
+        
+        paymentIcn1.setIcon(i);
+    }
 }

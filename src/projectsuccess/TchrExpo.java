@@ -12,7 +12,6 @@ package projectsuccess;
 import java.awt.*;
 import java.io.*;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -28,6 +27,7 @@ public class TchrExpo extends javax.swing.JFrame {
     
     public TchrExpo() {
         initComponents();
+        icon();
         tblcellmargine();
     }
 
@@ -225,4 +225,8 @@ public class TchrExpo extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable tchrExportTbl;
     // End of variables declaration//GEN-END:variables
+
+    private void icon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/Project Icon.png")));
+    }
 }

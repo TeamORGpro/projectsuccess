@@ -25,6 +25,7 @@ public class PaymntExpo extends javax.swing.JFrame {
      */
     public PaymntExpo() {
         initComponents();
+        icon();
     }
 
     
@@ -219,4 +220,8 @@ public class PaymntExpo extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable paymntExpoTbl;
     // End of variables declaration//GEN-END:variables
+
+    private void icon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/Project Icon.png")));
+    }
 }

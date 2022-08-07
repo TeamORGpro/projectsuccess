@@ -29,15 +29,11 @@ public class StdRegForm extends javax.swing.JFrame {
     
     public StdRegForm() {
         initComponents();
+        icon();
         closeconfirm();
         nextid();
-        ImageIcon myImage=new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/regicon.png")));
+        iconlabelLoad();
         
-        Image img1=myImage.getImage();
-        Image img2=img1.getScaledInstance(registerIcn1.getWidth(), registerIcn1.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon i=new ImageIcon(img2);
-        
-        registerIcn1.setIcon(i);
         
         txtStdID.setEnabled(false);
 
@@ -665,6 +661,20 @@ private void autoComplete (String txt){
     }
     
 }
+
+    private void icon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/Project Icon.png")));
+    }
+
+    private void iconlabelLoad() {
+        ImageIcon myImage=new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/regicon.png")));
+        
+        Image img1=myImage.getImage();
+        Image img2=img1.getScaledInstance(registerIcn1.getWidth(), registerIcn1.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon i=new ImageIcon(img2);
+        
+        registerIcn1.setIcon(i);
+    }
 
 
 }

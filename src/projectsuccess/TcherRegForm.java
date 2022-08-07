@@ -30,15 +30,11 @@ public class TcherRegForm extends javax.swing.JFrame {
     public TcherRegForm()
     {
         initComponents();
+        icon();
         closeconfirm();
         nextid();
-        ImageIcon myImage=new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/regicon.png")));
+        iconlabelLoad();
         
-        Image img1=myImage.getImage();
-        Image img2=img1.getScaledInstance(registerIcn1.getWidth(), registerIcn1.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon i=new ImageIcon(img2);
-        
-        registerIcn1.setIcon(i);
         Tchr_ID.setEnabled(false);
     }
 
@@ -526,4 +522,18 @@ public class TcherRegForm extends javax.swing.JFrame {
     private javax.swing.JLabel tID;
     private javax.swing.JLabel tcherregisterTitle;
     // End of variables declaration//GEN-END:variables
+
+    private void icon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/Project Icon.png")));
+    }
+
+    private void iconlabelLoad() {
+        ImageIcon myImage=new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/regicon.png")));
+        
+        Image img1=myImage.getImage();
+        Image img2=img1.getScaledInstance(registerIcn1.getWidth(), registerIcn1.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon i=new ImageIcon(img2);
+        
+        registerIcn1.setIcon(i);
+    }
 }

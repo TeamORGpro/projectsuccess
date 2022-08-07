@@ -12,7 +12,6 @@ package projectsuccess;
 import java.awt.*;
 import java.io.*;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -26,6 +25,7 @@ public class StdExpo extends javax.swing.JFrame {
      */
     public StdExpo() {
         initComponents();
+        icon();
     }
     
     public void openFile(String file) {
@@ -218,4 +218,8 @@ public class StdExpo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    private void icon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/Project Icon.png")));
+    }
 }
