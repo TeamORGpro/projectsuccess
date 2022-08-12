@@ -28,6 +28,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     public HomeWindowV2() {
         initComponents();
         closedeny();
+        changeGrade();
         attnSField();
         tchrSField();
         stdSField();
@@ -37,8 +38,97 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     }
     
     
+    public void changeGrade() {
+        // load today
+        java.util.Date d = new java.util.Date();
 
-    public void attnSField() {
+        SimpleDateFormat sdat = new SimpleDateFormat("yyyy-MM-dd");
+
+        String dd= sdat.format(d);
+//        String dd = "2120-01-01"; //for test 
+
+        //end of load today
+        //grades change code
+        String iniDate = dd.substring(5, 10);
+//        System.out.println(iniDate);
+
+        if (("01-01").equals(iniDate)) {
+
+            // Show Dialog box to update
+            ImageIcon uicon = new ImageIcon(HomeWindowV2.class.getResource("/Icons/updateDicon.png"));
+            int reply = JOptionPane.showConfirmDialog(null, "<html><h3>Do you want to update student grades for new year ?</h3></html>", "Update Grades", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,uicon);
+            if (reply == JOptionPane.YES_OPTION) {
+                int confirm = JOptionPane.showConfirmDialog(null, "<html><h3>Please Confirm update student grades.</h3></html>", "Confirm Update Grades", JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    try {
+                        //Change Grade 11 to Higher Grade
+                        Connection conu6;
+                        conu6 = DBConnect.connect();
+                        String uquery6 = "UPDATE std_info_table SET Grade='Higher Grade' WHERE Grade='Grade 11';";
+                        try (PreparedStatement upstmt6 = conu6.prepareStatement(uquery6)) {
+                            upstmt6.executeUpdate();
+                        }
+                        conu6.close();
+
+                        //Change Grade 10 to 11
+                        Connection conu5;
+                        conu5 = DBConnect.connect();
+                        String uquery5 = "UPDATE std_info_table SET Grade='Grade 11' WHERE Grade='Grade 10';";
+                        try (PreparedStatement upstmt5 = conu5.prepareStatement(uquery5)) {
+                            upstmt5.executeUpdate();
+                        }
+                        conu5.close();
+
+                        //Change Grade 9 to 10
+                        Connection conu4;
+                        conu4 = DBConnect.connect();
+                        String uquery4 = "UPDATE std_info_table SET Grade='Grade 10' WHERE Grade='Grade 9';";
+                        try (PreparedStatement upstmt4 = conu4.prepareStatement(uquery4)) {
+                            upstmt4.executeUpdate();
+                        }
+                        conu4.close();
+
+                        //Change Grade 8 to 9
+                        Connection conu3;
+                        conu3 = DBConnect.connect();
+                        String uquery3 = "UPDATE std_info_table SET Grade='Grade 9' WHERE Grade='Grade 8';";
+                        try (PreparedStatement upstmt3 = conu3.prepareStatement(uquery3)) {
+                            upstmt3.executeUpdate();
+                        }
+                        conu3.close();
+
+                        //Change Grade 7 to 8
+                        Connection conu2;
+                        conu2 = DBConnect.connect();
+                        String uquery2 = "UPDATE std_info_table SET Grade='Grade 8' WHERE Grade='Grade 7';";
+                        try (PreparedStatement upstmt2 = conu2.prepareStatement(uquery2)) {
+                            upstmt2.executeUpdate();
+                        }
+                        conu2.close();
+
+                        //Change Grade 6 to 7
+                        Connection conu1;
+                        conu1 = DBConnect.connect();
+                        String uquery1 = "UPDATE std_info_table SET Grade='Grade 7' WHERE Grade='Grade 6';";
+                        try (PreparedStatement upstmt1 = conu1.prepareStatement(uquery1)) {
+                            upstmt1.executeUpdate();
+                        }
+                        conu1.close();
+
+                    } catch (SQLException e) {
+                        System.out.println(e.getSQLState());
+                        System.out.println(e.getMessage());
+                    }
+                }
+            }
+
+        }
+
+        //end of grade change code
+    }
+
+
+    public final void attnSField() {
         TableRowSorter<TableModel> attnSort = new TableRowSorter<>(jTable1.getModel());
         jTable1.setRowSorter(attnSort);
 
@@ -72,7 +162,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         });
     }
 
-    public void tchrSField() {
+    public final void tchrSField() {
         TableRowSorter<TableModel> tchrSort = new TableRowSorter<>(jTable4.getModel());
         jTable4.setRowSorter(tchrSort);
 
@@ -106,7 +196,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         });
     }
 
-    public void stdSField() {
+    public final void stdSField() {
         TableRowSorter<TableModel> sort = new TableRowSorter<>(jTable3.getModel());
         jTable3.setRowSorter(sort);
 
@@ -140,7 +230,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         });
     }
 
-    public void pymntSField() {
+    public final void pymntSField() {
         TableRowSorter<TableModel> pymntSort = new TableRowSorter<>(jTable2.getModel());
         jTable2.setRowSorter(pymntSort);
 
@@ -181,7 +271,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
 
-    public void closedeny() {
+    public final void closedeny() {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -233,7 +323,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         attnSearchField = new javax.swing.JTextField();
         deleteBtn = new javax.swing.JButton();
         restBtn = new javax.swing.JButton();
-        updateBtn = new javax.swing.JButton();
+        attnUpdate = new javax.swing.JButton();
         sendBtnAttnInfo = new javax.swing.JButton();
         attnFilterBtn = new javax.swing.JButton();
         stdInfo = new javax.swing.JPanel();
@@ -247,7 +337,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         stdSearchField = new javax.swing.JTextField();
         deleteBtn1 = new javax.swing.JButton();
         restBtn1 = new javax.swing.JButton();
-        updateBtn2 = new javax.swing.JButton();
+        stdUpdate = new javax.swing.JButton();
         sendBtnStdInfo = new javax.swing.JButton();
         tcherInfo = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
@@ -260,7 +350,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         tchrSearchField = new javax.swing.JTextField();
         deleteBtn2 = new javax.swing.JButton();
         restBtn2 = new javax.swing.JButton();
-        updateBtn3 = new javax.swing.JButton();
+        tchrUpdate = new javax.swing.JButton();
         sendBtnTchrInfo = new javax.swing.JButton();
         pymntInfo = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -631,11 +721,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             }
         });
 
-        updateBtn.setBackground(new java.awt.Color(153, 204, 255));
-        updateBtn.setText("Update");
-        updateBtn.addActionListener(new java.awt.event.ActionListener() {
+        attnUpdate.setBackground(new java.awt.Color(153, 204, 255));
+        attnUpdate.setText("Update");
+        attnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateBtnActionPerformed(evt);
+                attnUpdateActionPerformed(evt);
             }
         });
 
@@ -659,7 +749,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(restBtn)
                 .addGap(18, 18, 18)
-                .addComponent(updateBtn)
+                .addComponent(attnUpdate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(sendBtnAttnInfo)
                 .addGap(18, 18, 18)
@@ -675,7 +765,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     .addComponent(attnSearchField, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(deleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(restBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(updateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(attnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sendBtnAttnInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(40, 40, 40))
         );
@@ -745,8 +835,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             jTable3.getColumnModel().getColumn(6).setPreferredWidth(100);
             jTable3.getColumnModel().getColumn(7).setMinWidth(100);
             jTable3.getColumnModel().getColumn(7).setPreferredWidth(100);
-            jTable3.getColumnModel().getColumn(8).setMinWidth(50);
-            jTable3.getColumnModel().getColumn(8).setPreferredWidth(50);
+            jTable3.getColumnModel().getColumn(8).setMinWidth(60);
+            jTable3.getColumnModel().getColumn(8).setPreferredWidth(60);
             jTable3.getColumnModel().getColumn(9).setMinWidth(200);
             jTable3.getColumnModel().getColumn(9).setPreferredWidth(200);
             jTable3.getColumnModel().getColumn(10).setMinWidth(100);
@@ -819,11 +909,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             }
         });
 
-        updateBtn2.setBackground(new java.awt.Color(153, 204, 255));
-        updateBtn2.setText("Update");
-        updateBtn2.addActionListener(new java.awt.event.ActionListener() {
+        stdUpdate.setBackground(new java.awt.Color(153, 204, 255));
+        stdUpdate.setText("Update");
+        stdUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateBtn2ActionPerformed(evt);
+                stdUpdateActionPerformed(evt);
             }
         });
 
@@ -847,7 +937,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(restBtn1)
                 .addGap(18, 18, 18)
-                .addComponent(updateBtn2)
+                .addComponent(stdUpdate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(sendBtnStdInfo)
                 .addGap(18, 18, 18)
@@ -863,7 +953,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     .addComponent(stdSearchField, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(deleteBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(restBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(updateBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(stdUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sendBtnStdInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -925,8 +1015,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             jTable4.getColumnModel().getColumn(6).setPreferredWidth(100);
             jTable4.getColumnModel().getColumn(7).setMinWidth(100);
             jTable4.getColumnModel().getColumn(7).setPreferredWidth(100);
-            jTable4.getColumnModel().getColumn(8).setMinWidth(50);
-            jTable4.getColumnModel().getColumn(8).setPreferredWidth(50);
+            jTable4.getColumnModel().getColumn(8).setMinWidth(60);
+            jTable4.getColumnModel().getColumn(8).setPreferredWidth(60);
             jTable4.getColumnModel().getColumn(9).setMinWidth(100);
             jTable4.getColumnModel().getColumn(9).setPreferredWidth(100);
         }
@@ -986,11 +1076,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             }
         });
 
-        updateBtn3.setBackground(new java.awt.Color(153, 204, 255));
-        updateBtn3.setText("Update");
-        updateBtn3.addActionListener(new java.awt.event.ActionListener() {
+        tchrUpdate.setBackground(new java.awt.Color(153, 204, 255));
+        tchrUpdate.setText("Update");
+        tchrUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateBtn3ActionPerformed(evt);
+                tchrUpdateActionPerformed(evt);
             }
         });
 
@@ -1014,7 +1104,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(restBtn2)
                 .addGap(18, 18, 18)
-                .addComponent(updateBtn3)
+                .addComponent(tchrUpdate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(sendBtnTchrInfo)
                 .addGap(18, 18, 18)
@@ -1030,7 +1120,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     .addComponent(tchrSearchField, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(deleteBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(restBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(updateBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tchrUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sendBtnTchrInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1664,9 +1754,14 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_restBtn3ActionPerformed
 
-    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
-        // TODO add your handling code here:
-        Connection con;
+    private void attnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attnUpdateActionPerformed
+        // TODO add your handling code here: 
+        int rCount = jTable1.getSelectedRowCount();
+
+        if (rCount == 0) {
+            JOptionPane.showMessageDialog(null, "Please Select one or more rows to Update", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Connection con;
         con = DBConnect.connect();
         Statement upSt;
 
@@ -1682,8 +1777,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     String date = model.getValueAt(i, 0).toString();
                     String subjName = model.getValueAt(i, 1).toString();
                     int stuID = Integer.valueOf(model.getValueAt(i, 2).toString());
-                    String status = model.getValueAt(i, 5).toString();
-                    String spcNote = model.getValueAt(i, 6).toString();
+                    String status = model.getValueAt(i, 6).toString();
+                    String spcNote = model.getValueAt(i, 7).toString();
 
                     String updateQuery = "UPDATE attndance_table SET Status='" + status + "',Spc_Note='" + spcNote + "' WHERE `Date`='" + date + "'AND Subj_Name='" + subjName + "'AND Std_ID=" + stuID;
 
@@ -1699,13 +1794,20 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 System.out.println(e);
             }
         }
+        }
+        
 
 
-    }//GEN-LAST:event_updateBtnActionPerformed
+    }//GEN-LAST:event_attnUpdateActionPerformed
 
-    private void updateBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtn2ActionPerformed
+    private void stdUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stdUpdateActionPerformed
         // TODO add your handling code here:
-        Connection con;
+        int rCount = jTable3.getSelectedRowCount();
+
+        if (rCount == 0) {
+            JOptionPane.showMessageDialog(null, "Please Select one or more rows to Update", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Connection con;
         con = DBConnect.connect();
         Statement upSt1;
 
@@ -1744,13 +1846,19 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 e.getMessage();
             }
         }
+        }
+     
+    }//GEN-LAST:event_stdUpdateActionPerformed
 
-
-    }//GEN-LAST:event_updateBtn2ActionPerformed
-
-    private void updateBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtn3ActionPerformed
+    private void tchrUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tchrUpdateActionPerformed
         // TODO add your handling code here:
+        
+        int rCount = jTable4.getSelectedRowCount();
 
+        if (rCount == 0) {
+            JOptionPane.showMessageDialog(null, "Please Select one or more rows to Update", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            
         Connection con;
         con = DBConnect.connect();
         Statement upSt2;
@@ -1790,13 +1898,20 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 ex.getMessage();
             }
         }
+        }
 
 
-    }//GEN-LAST:event_updateBtn3ActionPerformed
+
+    }//GEN-LAST:event_tchrUpdateActionPerformed
 
     private void deleteBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtn1ActionPerformed
         // TODO add your handling code here:
-        int cSid = 0;
+        int rCount = jTable3.getSelectedRowCount();
+
+        if (rCount == 0) {
+            JOptionPane.showMessageDialog(null, "Please Select one or more rows to delete", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int cSid = 0;
         
 
         int[] rows = jTable3.getSelectedRows();
@@ -1816,6 +1931,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     String sql1 = "DELETE FROM std_info_table WHERE `Std_ID` = "+s_id+";";
 
                     dst.executeUpdate(sql1);
+                    con.close();
 
                 } catch (SQLException e) {
                 }
@@ -1853,13 +1969,22 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        }
+        
+        
         
 
     }//GEN-LAST:event_deleteBtn1ActionPerformed
 
     private void deleteBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtn2ActionPerformed
         // TODO add your handling code here:
-        int cTcherid = 0;
+        
+        int rCount = jTable4.getSelectedRowCount();
+
+        if (rCount == 0) {
+            JOptionPane.showMessageDialog(null, "Please Select one or more rows to delete", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int cTcherid = 0;
         
 
         int[] rows = jTable4.getSelectedRows();
@@ -1879,6 +2004,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     String sql2 = "DELETE FROM `tchr_info_table` WHERE `Tchr_ID`="+tchr_id+";";
 
                     tst.executeUpdate(sql2);
+                    cont.close();
 
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());
@@ -1913,12 +2039,20 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        }
+        
 
     }//GEN-LAST:event_deleteBtn2ActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
 
-        int gdate = 0;
+        int rCount = jTable1.getSelectedRowCount();
+
+        if (rCount == 0) {
+            JOptionPane.showMessageDialog(null, "Please Select one or more rows to delete", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            
+            int gdate = 0;
         int gsubjName = 1;
         int gstuID = 2;
 
@@ -1940,6 +2074,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     String sql1 = "DELETE FROM `attndance_table` WHERE `Date`='" + date + "' AND `Subj_Name`='" + subjName + "' AND `Std_ID`=" + stuID;
 
                     dst.executeUpdate(sql1);
+                    con.close();
 
                 } catch (Exception e) {
                 }
@@ -1969,13 +2104,21 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         }
+        }
+        
+        
 
 
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void deleteBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtn3ActionPerformed
         // TODO add your handling code here:
-        int cSid = 0;
+        int rCount = jTable2.getSelectedRowCount();
+
+        if (rCount == 0) {
+            JOptionPane.showMessageDialog(null, "Please Select one or more rows to delete", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int cSid = 0;
         int csubjName = 2;
         int cMonth = 6;
         int cPDate=7;
@@ -1999,6 +2142,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     String sql1 = "DELETE FROM payment_table WHERE `Std_ID` ="+Sid1+" AND `Subj_Name` = '"+subjName1+"' AND `Month` = '"+Month1+"' AND `Date_paid` = '"+date1+"';";
 
                     dst.executeUpdate(sql1);
+                    con.close();
 
                 } catch (Exception e) {
                 }
@@ -2038,6 +2182,9 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        }
+        
+        
 
     }//GEN-LAST:event_deleteBtn3ActionPerformed
 
@@ -2581,6 +2728,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JPanel attnFilterPnl;
     private javax.swing.JPanel attnInfo;
     private javax.swing.JTextField attnSearchField;
+    private javax.swing.JButton attnUpdate;
     private javax.swing.JPanel bgPnl;
     private javax.swing.JButton btnAttnInfoAll;
     private javax.swing.JButton btnHome;
@@ -2648,15 +2796,14 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JPanel stdFilterPnl;
     private javax.swing.JPanel stdInfo;
     private javax.swing.JTextField stdSearchField;
+    private javax.swing.JButton stdUpdate;
     private javax.swing.JPanel stdpymntformbtn;
     private javax.swing.JPanel stdregformbtn;
     private javax.swing.JPanel tcherFilterPnl;
     private javax.swing.JPanel tcherInfo;
     private javax.swing.JPanel tcherregFormBtn;
     private javax.swing.JTextField tchrSearchField;
-    private javax.swing.JButton updateBtn;
-    private javax.swing.JButton updateBtn2;
-    private javax.swing.JButton updateBtn3;
+    private javax.swing.JButton tchrUpdate;
     // End of variables declaration//GEN-END:variables
 
     private void icon() {
