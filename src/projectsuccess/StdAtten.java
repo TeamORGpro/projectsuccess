@@ -112,7 +112,7 @@ public class StdAtten extends javax.swing.JFrame {
         cnslBtn = new javax.swing.JButton();
         txtStatuslb = new javax.swing.JTextField();
         statuslb = new javax.swing.JLabel();
-        subCB = new javax.swing.JComboBox<>();
+        subCB = new javax.swing.JComboBox<String>();
         searchBtn01 = new javax.swing.JButton();
         lblstdName = new javax.swing.JLabel();
         lblTchrName = new javax.swing.JLabel();
@@ -126,7 +126,6 @@ public class StdAtten extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Attendance");
         setResizable(false);
-        setSize(new java.awt.Dimension(1024, 768));
 
         bgPnl.setBackground(new java.awt.Color(153, 204, 255));
         bgPnl.setMaximumSize(new java.awt.Dimension(1000, 580));
@@ -146,17 +145,22 @@ public class StdAtten extends javax.swing.JFrame {
 
         attmarkPanl.setBackground(new java.awt.Color(198, 228, 255));
         attmarkPanl.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 5, 5, new java.awt.Color(102, 102, 102)));
+        attmarkPanl.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         sbjName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         sbjName.setText("Subject Name :");
+        attmarkPanl.add(sbjName, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 12, -1, 30));
 
         stdID.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         stdID.setText("Student ID :");
+        attmarkPanl.add(stdID, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 103, -1, 30));
 
         stdName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         stdName.setText("Student Name :");
+        attmarkPanl.add(stdName, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 152, -1, 30));
 
         txtStdID.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        attmarkPanl.add(txtStdID, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 105, 149, 30));
 
         presentRB.setBackground(new java.awt.Color(198, 228, 255));
         buttonGroup1.add(presentRB);
@@ -167,6 +171,7 @@ public class StdAtten extends javax.swing.JFrame {
                 presentRBActionPerformed(evt);
             }
         });
+        attmarkPanl.add(presentRB, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 199, -1, 30));
 
         absentRB.setBackground(new java.awt.Color(198, 228, 255));
         buttonGroup1.add(absentRB);
@@ -177,6 +182,7 @@ public class StdAtten extends javax.swing.JFrame {
                 absentRBActionPerformed(evt);
             }
         });
+        attmarkPanl.add(absentRB, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 199, -1, 30));
 
         txtNotes.setColumns(20);
         txtNotes.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -194,8 +200,11 @@ public class StdAtten extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(txtNotes);
 
+        attmarkPanl.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 247, 376, -1));
+
         tchrName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         tchrName.setText("Teacher's Name :");
+        attmarkPanl.add(tchrName, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 63, -1, 30));
 
         createBtn.setBackground(new java.awt.Color(102, 255, 102));
         createBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -208,6 +217,7 @@ public class StdAtten extends javax.swing.JFrame {
                 createBtnActionPerformed(evt);
             }
         });
+        attmarkPanl.add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 367, 100, 36));
 
         newBtn.setBackground(new java.awt.Color(255, 255, 153));
         newBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -220,6 +230,7 @@ public class StdAtten extends javax.swing.JFrame {
                 newBtnActionPerformed(evt);
             }
         });
+        attmarkPanl.add(newBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(157, 367, 100, 36));
 
         cnslBtn.setBackground(new java.awt.Color(255, 102, 102));
         cnslBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -232,21 +243,25 @@ public class StdAtten extends javax.swing.JFrame {
                 cnslBtnActionPerformed(evt);
             }
         });
+        attmarkPanl.add(cnslBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 367, -1, 36));
 
         txtStatuslb.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtStatuslb.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        attmarkPanl.add(txtStatuslb, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 201, 107, 30));
 
         statuslb.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         statuslb.setText("Status :");
+        attmarkPanl.add(statuslb, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 199, -1, 30));
 
         subCB.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        subCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Subject" }));
+        subCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Choose Subject" }));
         subCB.setPreferredSize(new java.awt.Dimension(27, 20));
         subCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 subCBActionPerformed(evt);
             }
         });
+        attmarkPanl.add(subCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 13, 259, 30));
 
         searchBtn01.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         searchBtn01.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Search.png"))); // NOI18N
@@ -257,100 +272,13 @@ public class StdAtten extends javax.swing.JFrame {
                 searchBtn01ActionPerformed(evt);
             }
         });
+        attmarkPanl.add(searchBtn01, new org.netbeans.lib.awtextra.AbsoluteConstraints(305, 103, -1, 30));
 
         lblstdName.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        attmarkPanl.add(lblstdName, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 152, 259, 30));
 
         lblTchrName.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-
-        javax.swing.GroupLayout attmarkPanlLayout = new javax.swing.GroupLayout(attmarkPanl);
-        attmarkPanl.setLayout(attmarkPanlLayout);
-        attmarkPanlLayout.setHorizontalGroup(
-            attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(attmarkPanlLayout.createSequentialGroup()
-                .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(attmarkPanlLayout.createSequentialGroup()
-                        .addComponent(createBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(newBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cnslBtn))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(attmarkPanlLayout.createSequentialGroup()
-                        .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(attmarkPanlLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(sbjName))
-                            .addGroup(attmarkPanlLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(stdName))
-                            .addGroup(attmarkPanlLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(stdID))
-                            .addGroup(attmarkPanlLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(tchrName))
-                            .addGroup(attmarkPanlLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(statuslb)))
-                        .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, attmarkPanlLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(presentRB)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(absentRB)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtStatuslb, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(attmarkPanlLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(attmarkPanlLayout.createSequentialGroup()
-                                        .addComponent(txtStdID, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                                        .addComponent(searchBtn01))
-                                    .addComponent(subCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblstdName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(attmarkPanlLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(lblTchrName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addGap(0, 10, Short.MAX_VALUE))
-        );
-        attmarkPanlLayout.setVerticalGroup(
-            attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(attmarkPanlLayout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sbjName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(subCB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tchrName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTchrName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtStdID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(stdID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchBtn01, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(stdName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblstdName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtStatuslb, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(statuslb, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(presentRB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(absentRB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addGroup(attmarkPanlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(createBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(newBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cnslBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28))
-        );
+        attmarkPanl.add(lblTchrName, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 63, 277, 30));
 
         bgPnl.add(attmarkPanl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 410, 440));
 
@@ -381,10 +309,7 @@ public class StdAtten extends javax.swing.JFrame {
         tblPanel.setLayout(tblPanelLayout);
         tblPanelLayout.setHorizontalGroup(
             tblPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tblPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
         );
         tblPanelLayout.setVerticalGroup(
             tblPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

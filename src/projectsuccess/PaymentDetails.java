@@ -160,7 +160,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
         addpaymentDetails.add(paymentIcn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 16, 40, 35));
 
         gradeCB.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        gradeCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Grade 6", "Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12" }));
+        gradeCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Grade 6", "Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11" }));
         addpaymentDetails.add(gradeCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 128, 30));
 
         monthCB.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
