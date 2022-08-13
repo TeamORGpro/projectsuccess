@@ -207,7 +207,7 @@ public class BackupAndRestore extends javax.swing.JFrame {
         Process p = null;
         try {
             Runtime runtime = Runtime.getRuntime();
-             p=runtime.exec("D:/xampp/mysql/bin/mysqldump.exe -u root   -B successdb -r \""+path1+"\""); // My Pc XAMPP Path
+             p=runtime.exec("C:/xampp/mysql/bin/mysqldump.exe -u root   -B successdb -r \""+path1+"\""); // My Pc XAMPP Path
 //            p=runtime.exec("C:/Success Institute/mysql/bin/mysqldump.exe -u root   -B successdb -r \""+path1+"\"");
 
             int processComplete = p.waitFor();
@@ -251,7 +251,7 @@ public class BackupAndRestore extends javax.swing.JFrame {
 
         String user = "root";
         
-        String[] restorecmd = new String[]{"D:/xampp/mysql/bin/mysql.exe", "--user=" + user, "-e", "source "+path1};  // My Pc XAMPP Path
+        String[] restorecmd = new String[]{"C:/xampp/mysql/bin/mysql.exe", "--user=" + user, "-e", "source "+path1};  // My Pc XAMPP Path
 //        String[] restorecmd = new String[]{"C:/Success Institute/mysql/bin/mysql.exe", "--user=" + user, "-e", "source "+path1};
 
         Process process;
