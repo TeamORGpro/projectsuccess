@@ -8,9 +8,6 @@
       <Dimension value="[1024, 632]"/>
     </Property>
     <Property name="resizable" type="boolean" value="false"/>
-    <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1024, 660]"/>
-    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -757,7 +754,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel2" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="attnSearchField" alignment="3" pref="28" max="32767" attributes="0"/>
+                                  <Component id="attnSearchField" alignment="3" max="32767" attributes="0"/>
                                   <Component id="deleteBtn" max="32767" attributes="0"/>
                                   <Component id="restBtn" alignment="3" max="32767" attributes="0"/>
                                   <Component id="attnUpdate" alignment="3" max="32767" attributes="0"/>
@@ -1050,7 +1047,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel14" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="stdSearchField" alignment="3" pref="28" max="32767" attributes="0"/>
+                                  <Component id="stdSearchField" alignment="3" max="32767" attributes="0"/>
                                   <Component id="deleteBtn1" alignment="3" max="32767" attributes="0"/>
                                   <Component id="restBtn1" alignment="3" max="32767" attributes="0"/>
                                   <Component id="stdUpdate" alignment="3" max="32767" attributes="0"/>
@@ -1125,6 +1122,19 @@
                     </Component>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JButton" name="stdFilterBtn">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Advanced Filter"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stdFilterBtnActionPerformed"/>
+                  </Events>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="20" y="560" width="130" height="30"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="tcherInfo">
@@ -1326,7 +1336,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel15" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="tchrSearchField" alignment="3" pref="28" max="32767" attributes="0"/>
+                                  <Component id="tchrSearchField" alignment="3" max="32767" attributes="0"/>
                                   <Component id="deleteBtn2" alignment="3" max="32767" attributes="0"/>
                                   <Component id="restBtn2" alignment="3" max="32767" attributes="0"/>
                                   <Component id="tchrUpdate" alignment="3" max="32767" attributes="0"/>
@@ -1594,7 +1604,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel16" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="pymtSearchField" alignment="3" pref="28" max="32767" attributes="0"/>
+                                  <Component id="pymtSearchField" alignment="3" max="32767" attributes="0"/>
                                   <Component id="deleteBtn3" alignment="3" max="32767" attributes="0"/>
                                   <Component id="restBtn3" alignment="3" max="32767" attributes="0"/>
                                   <Component id="sendBtnPymntInfo" alignment="3" max="32767" attributes="0"/>
