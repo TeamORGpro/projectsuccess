@@ -2650,17 +2650,17 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
             //variable to store selected items of comboboxes
             String cbSubj = cb1.getSelectedItem().toString();
-            String cbgrade = cb2.getSelectedItem().toString();
+            String cbBatch = cb2.getSelectedItem().toString();
 
             DefaultTableModel dtmodP = (DefaultTableModel) jTable1.getModel();
             dtmodP.setRowCount(0);
 
-            if ((!("Select".equals(cbSubj))) && (!("Select".equals(cbgrade))) ) {
+            if ((!("Select".equals(cbSubj))) && (!("Select".equals(cbBatch))) ) {
                 try {
                 DefaultTableModel dtattnf = (DefaultTableModel) jTable1.getModel();
                 dtattnf.setRowCount(0);
                 Statement attnSt = conrp.createStatement();
-                try (ResultSet attnfrs = attnSt.executeQuery("SELECT * FROM attndance_table WHERE `Subj_Name`='"+cbSubj+"' AND `Grade`='"+cbgrade+"';")) {
+                try (ResultSet attnfrs = attnSt.executeQuery("SELECT * FROM attndance_table WHERE `Subj_Name`='"+cbSubj+"' AND `Grade`='"+cbBatch+"';")) {
                     while (attnfrs.next()) {
                         Vector Ve1 = new Vector();
                         Ve1.add(attnfrs.getString("Date"));
@@ -2724,15 +2724,15 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         ResultSet rsSub;
         PreparedStatement psSub;
 
-        String query1 = "SELECT Grade FROM `std_info_table` GROUP BY Grade;";
+        String query1 = "SELECT ol_yr FROM `std_info_table` GROUP BY ol_yr ;";
 
         try {
 
             psSub = con.prepareStatement(query1);
             rsSub = psSub.executeQuery();
             while (rsSub.next()) {
-                String grade = rsSub.getString("Grade");
-                cb2.addItem(grade);
+                String olyr = rsSub.getString("ol_yr");
+                cb2.addItem(olyr);
             }
             rsSub.close();
             psSub.close();
@@ -2748,7 +2748,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         myPanel.add(new JLabel("Subject:"));
         myPanel.add(cb1);
         myPanel.add(Box.createHorizontalStrut(15)); // a spacer
-        myPanel.add(new JLabel("Grade:"));
+        myPanel.add(new JLabel("O/L Batch:"));
         myPanel.add(cb2);
 
         int result = JOptionPane.showConfirmDialog(null, myPanel,
@@ -2767,17 +2767,17 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
             //variable to store selected items of comboboxes
             String cbSubj = cb1.getSelectedItem().toString();
-            String cbgrade = cb2.getSelectedItem().toString();
+            String cbBatch = cb2.getSelectedItem().toString();
 
             DefaultTableModel dtmodP = (DefaultTableModel) jTable3.getModel();
             dtmodP.setRowCount(0);
 
-            if ((!("Select".equals(cbSubj))) && (!("Select".equals(cbgrade))) ) {
+            if ((!("Select".equals(cbSubj))) && (!("Select".equals(cbBatch))) ) {
                 try {
                 DefaultTableModel dtattnf = (DefaultTableModel) jTable3.getModel();
                 dtattnf.setRowCount(0);
                 Statement stdSt = conrp.createStatement();
-                try (ResultSet stdrs = stdSt.executeQuery("SELECT * FROM std_info_table WHERE `Subjects` LIKE '%"+cbSubj+"%' AND `Grade`='"+cbgrade+"';")) {
+                try (ResultSet stdrs = stdSt.executeQuery("SELECT * FROM std_info_table WHERE `Subjects` LIKE '%"+cbSubj+"%' AND `ol_yr`='"+cbBatch+"';")) {
                     while (stdrs.next()) {
                     Vector v = new Vector();
                     v.add(stdrs.getString("Std_ID"));

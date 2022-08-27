@@ -336,6 +336,38 @@ public class TcherRegForm extends javax.swing.JFrame {
 
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
 
+        // validation part begins
+        String t_name=Tchr_Name.getText();
+        
+        String quryc="SELECT `Tchr_Name` FROM `std_info_table` WHERE `Tchr_Name`='"+t_name+"'";
+        
+        try {
+            Connection tchrVcon=DBConnect.connect();
+            Statement stVtchr=tchrVcon.createStatement();
+            ResultSet rsVtchr= stVtchr.executeQuery(quryc);
+        
+            rsVtchr.next();
+            String s = rsVtchr.getString("Std_Name");
+//            System.out.println(s);
+
+            if (t_name.equals(s)) {
+//                System.out.println("Name match");
+                JOptionPane.showMessageDialog(null, "Hmm. looks like a teacher already in the class","Error!" , JOptionPane.ERROR_MESSAGE);
+
+                
+            } else {
+            }
+            
+            
+            
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // validation part ends
+        
+        
         String TchrName = Tchr_Name.getText();
         String Namewith_Initials = Name_with_Initials.getText();
         String Address1 = Address.getText();
