@@ -339,6 +339,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         restBtn1 = new javax.swing.JButton();
         stdUpdate = new javax.swing.JButton();
         sendBtnStdInfo = new javax.swing.JButton();
+        stdFilterBtn = new javax.swing.JButton();
         tcherInfo = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -370,7 +371,6 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         setTitle("Success Educational Institute");
         setMinimumSize(new java.awt.Dimension(1024, 632));
         setResizable(false);
-        setSize(new java.awt.Dimension(1024, 660));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         bgPnl.setBackground(new java.awt.Color(153, 204, 255));
@@ -762,7 +762,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(attnFilterPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(attnSearchField, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(attnSearchField)
                     .addComponent(deleteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(restBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(attnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -950,7 +950,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(stdFilterPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(stdSearchField, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(stdSearchField)
                     .addComponent(deleteBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(restBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(stdUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -959,6 +959,14 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         );
 
         stdInfo.add(stdFilterPnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, -1, 50));
+
+        stdFilterBtn.setText("Advanced Filter");
+        stdFilterBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stdFilterBtnActionPerformed(evt);
+            }
+        });
+        stdInfo.add(stdFilterBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 130, 30));
 
         mainPnl.addTab("tab3", stdInfo);
 
@@ -1117,7 +1125,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(tcherFilterPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tchrSearchField, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(tchrSearchField)
                     .addComponent(deleteBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(restBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tchrUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1282,7 +1290,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pymntFilterPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pymtSearchField, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(pymtSearchField)
                     .addComponent(deleteBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(restBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sendBtnPymntInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -2677,6 +2685,129 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_attnFilterBtnActionPerformed
 
+    private void stdFilterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stdFilterBtnActionPerformed
+        // TODO add your handling code here:
+        
+         JComboBox cb1 = new JComboBox();
+        //load Subject to cb1
+        cb1.addItem("Select"); // add first value of combobox to "Select"
+        Connection cons;
+        cons = DBConnect.connect();
+        ResultSet rsSubs;
+        PreparedStatement psSubs;
+
+        String querys = "SELECT Subj_Name FROM tchr_info_table;";
+
+        try {
+
+            psSubs = cons.prepareStatement(querys);
+            rsSubs = psSubs.executeQuery();
+            while (rsSubs.next()) {
+                String subj1 = rsSubs.getString("Subj_Name");
+                cb1.addItem(subj1);
+            }
+            rsSubs.close();
+            psSubs.close();
+            cons.close();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        //finish load Subject to cb1
+        
+     
+        JComboBox cb2 = new JComboBox();
+        //load grade to cb2
+        cb2.addItem("Select"); // add first value of combobox to "Select"
+        Connection con;
+        con = DBConnect.connect();
+        ResultSet rsSub;
+        PreparedStatement psSub;
+
+        String query1 = "SELECT Grade FROM `std_info_table` GROUP BY Grade;";
+
+        try {
+
+            psSub = con.prepareStatement(query1);
+            rsSub = psSub.executeQuery();
+            while (rsSub.next()) {
+                String grade = rsSub.getString("Grade");
+                cb2.addItem(grade);
+            }
+            rsSub.close();
+            psSub.close();
+            con.close();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        //finish load grade to cb2
+        
+        
+        JPanel myPanel = new JPanel();
+        myPanel.add(new JLabel("Subject:"));
+        myPanel.add(cb1);
+        myPanel.add(Box.createHorizontalStrut(15)); // a spacer
+        myPanel.add(new JLabel("Grade:"));
+        myPanel.add(cb2);
+
+        int result = JOptionPane.showConfirmDialog(null, myPanel,
+                "Advanced Filter Options", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            
+            
+            Connection conrp;
+            conrp = DBConnect.connect();
+
+            DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+            rightRenderer.setHorizontalAlignment(JLabel.RIGHT);
+            jTable1.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
+            Dimension dim = new Dimension(10, 1);
+            jTable1.setIntercellSpacing(new Dimension(dim));
+
+            //variable to store selected items of comboboxes
+            String cbSubj = cb1.getSelectedItem().toString();
+            String cbgrade = cb2.getSelectedItem().toString();
+
+            DefaultTableModel dtmodP = (DefaultTableModel) jTable3.getModel();
+            dtmodP.setRowCount(0);
+
+            if ((!("Select".equals(cbSubj))) && (!("Select".equals(cbgrade))) ) {
+                try {
+                DefaultTableModel dtattnf = (DefaultTableModel) jTable3.getModel();
+                dtattnf.setRowCount(0);
+                Statement stdSt = conrp.createStatement();
+                try (ResultSet stdrs = stdSt.executeQuery("SELECT * FROM std_info_table WHERE `Subjects` LIKE '%"+cbSubj+"%' AND `Grade`='"+cbgrade+"';")) {
+                    while (stdrs.next()) {
+                    Vector v = new Vector();
+                    v.add(stdrs.getString("Std_ID"));
+                    v.add(stdrs.getString("Std_Name"));
+                    v.add(stdrs.getString("Name_with_Initials"));
+                    v.add(stdrs.getString("Address"));
+                    v.add(stdrs.getString("DOB"));
+                    v.add(stdrs.getString("Subjects"));
+                    v.add(stdrs.getString("Grade"));
+                    v.add(stdrs.getString("Phone_no"));
+                    v.add(stdrs.getString("sex"));
+                    v.add(stdrs.getString("Grd_name"));
+                    v.add(stdrs.getString("Grd_Phone_no"));
+                    dtattnf.addRow(v);
+                }
+                    conrp.close();
+                    conrp.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            } else {
+                JOptionPane.showMessageDialog(null, "You must Select two filter options", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            
+        }
+        
+    }//GEN-LAST:event_stdFilterBtnActionPerformed
+
     private void onClick(JPanel panel) {
         panel.setBackground(new Color(48, 203, 220));
     }
@@ -2793,6 +2924,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private javax.swing.JButton sendBtnStdInfo;
     private javax.swing.JButton sendBtnTchrInfo;
     private javax.swing.JPanel stdAttenBtn;
+    private javax.swing.JButton stdFilterBtn;
     private javax.swing.JPanel stdFilterPnl;
     private javax.swing.JPanel stdInfo;
     private javax.swing.JTextField stdSearchField;
