@@ -2793,7 +2793,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     v.add(stdrs.getString("Grd_Phone_no"));
                     dtattnf.addRow(v);
                 }
-                    conrp.close();
+                    stdSt.close();
                     conrp.close();
                 }
             } catch (SQLException e) {
