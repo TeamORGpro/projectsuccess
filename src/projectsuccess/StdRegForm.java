@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -33,6 +34,7 @@ public class StdRegForm extends javax.swing.JFrame {
         closeconfirm();
         nextid();
         iconlabelLoad();
+        batchAdd();
         
         
         txtStdID.setEnabled(false);
@@ -82,6 +84,23 @@ public class StdRegForm extends javax.swing.JFrame {
         }    
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+    
+    public void batchAdd(){
+        // add current year and 9 years to batch combo box
+        java.util.Date d = new java.util.Date();
+        
+        SimpleDateFormat sdat = new SimpleDateFormat("yyyy-MM-dd");
+        
+        String dd= sdat.format(d).substring(0, 4);
+        
+        int realyr=Integer.parseInt(dd);
+        
+        for (int i = 0; i < 10; i++) {
+            int olyr = realyr+i;
+            String item=String.valueOf(olyr);
+            batchYr.addItem(item);
         }
     }
     
@@ -135,6 +154,9 @@ public class StdRegForm extends javax.swing.JFrame {
         gradeCB = new javax.swing.JComboBox<>();
         subjectLbl = new javax.swing.JLabel();
         txtSubject = new javax.swing.JTextField();
+        batchName = new javax.swing.JLabel();
+        batchYr = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
         jDialog1.setTitle("Massage");
 
@@ -262,7 +284,7 @@ public class StdRegForm extends javax.swing.JFrame {
                 createBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 520, 100, 36));
+        jPanel1.add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 530, 100, 36));
 
         cnslBtn.setBackground(new java.awt.Color(255, 102, 102));
         cnslBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -275,7 +297,7 @@ public class StdRegForm extends javax.swing.JFrame {
                 cnslBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(cnslBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 520, 100, 36));
+        jPanel1.add(cnslBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 530, 100, 36));
 
         registerTitle.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 24)); // NOI18N
         registerTitle.setText("Student Register Form");
@@ -302,7 +324,7 @@ public class StdRegForm extends javax.swing.JFrame {
                 newBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(newBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 520, 100, 36));
+        jPanel1.add(newBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 530, 100, 36));
 
         txtAddress.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel1.add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 177, 388, -1));
@@ -347,6 +369,19 @@ public class StdRegForm extends javax.swing.JFrame {
         });
         jPanel1.add(txtSubject, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 257, 388, -1));
 
+        batchName.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        batchName.setText("Batch :");
+        batchName.setMaximumSize(new java.awt.Dimension(108, 14));
+        batchName.setMinimumSize(new java.awt.Dimension(108, 14));
+        jPanel1.add(batchName, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, -1, -1));
+
+        batchYr.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Exam Year" }));
+        jPanel1.add(batchYr, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 490, 120, 30));
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel1.setText("O/L Batch");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 497, 80, 20));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -372,115 +407,99 @@ public class StdRegForm extends javax.swing.JFrame {
 
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
 
-        //uppercase each word 
+                //uppercase each word 
+                String word = txtSubject.getText().toLowerCase();
 
-String word = txtSubject.getText().toLowerCase();
+                // stores each characters to a char array
+                char[] charArray = word.toCharArray();
+                boolean foundSpace = true;
 
-    // stores each characters to a char array
-    char[] charArray = word.toCharArray();
-    boolean foundSpace = true;
+                for (int i = 0; i < charArray.length; i++) {
 
-    for(int i = 0; i < charArray.length; i++) {
+                    // if the array element is a letter
+                    if (Character.isLetter(charArray[i])) {
 
-      // if the array element is a letter
-      if(Character.isLetter(charArray[i])) {
+                        // check space is present before the letter
+                        if (foundSpace) {
 
-        // check space is present before the letter
-        if(foundSpace) {
+                            // change the letter into uppercase
+                            charArray[i] = Character.toUpperCase(charArray[i]);
+                            foundSpace = false;
+                        }
+                    } else {
+                        // if the new character is not character
+                        foundSpace = true;
+                    }
+                }
 
-          // change the letter into uppercase
-          charArray[i] = Character.toUpperCase(charArray[i]);
-          foundSpace = false;
-        }
-      }
+                // convert the char array to the string
+                word = String.valueOf(charArray);
+                txtSubject.setText(word);
 
-      else {
-        // if the new character is not character
-        foundSpace = true;
-      }
-    }
+                String Std_Name = txtstdName.getText();
+                String Name_with_Initials = txtstdNameShort.getText();
+                String Address = txtAddress.getText();
+                String DOB = txtDob.getText();
+                String subject = txtSubject.getText();
+                String Grade = (String) gradeCB.getSelectedItem();
+                String Phone_no = txtPhoneNo.getText();
+                String sex = (String) cboxSex.getSelectedItem();
+                String Grd_name = txtguardiansName.getText();
+                String Grd_Phone_no = txtgphoneNo.getText();
+                String batchyear = (String) batchYr.getSelectedItem();
 
-    // convert the char array to the string
-    word = String.valueOf(charArray);
-    txtSubject.setText(word);
-        
-        
-        
-            String Std_Name=txtstdName.getText();
-            String Name_with_Initials=txtstdNameShort.getText();
-            String Address=txtAddress.getText();
-            String DOB=txtDob.getText();
-            String subject=txtSubject.getText();
-            String Grade=(String) gradeCB.getSelectedItem();
-            String Phone_no=txtPhoneNo.getText();
-            String sex=(String) cboxSex.getSelectedItem();
-            String Grd_name=txtguardiansName.getText();
-            String Grd_Phone_no = txtgphoneNo.getText();
-            
-            
+                // need validation part here
+                Connection con;
+                PreparedStatement pstmt;
+                con = DBConnect.connect();
+                if (!Std_Name.isEmpty() && !Name_with_Initials.isEmpty() && !Address.isEmpty() && !("yyyy-mm-dd".equals(DOB)) && !subject.isEmpty() && !Grade.isEmpty() && !sex.isEmpty() && !Grd_name.isEmpty() && !Grd_Phone_no.isEmpty() && !("Select Exam Year".equals(batchyear))) {
 
-        
-            
+                    try {
 
-                      
-            // need validation part here
-            Connection con;
-            PreparedStatement pstmt;
-            con = DBConnect.connect();
-            if(!Std_Name.isEmpty() && !Name_with_Initials.isEmpty() && !Address.isEmpty() && !("yyyy-mm-dd".equals(DOB)) && !subject.isEmpty() && !Grade.isEmpty() && !sex.isEmpty() && !Grd_name.isEmpty() && !Grd_Phone_no.isEmpty()){
-            
-                                            
-                                            try {
-                                                
-                                                String query ="insert into std_info_table(Std_Name,Name_with_Initials,Address,DOB,Subjects,Grade,Phone_no,sex,Grd_name,Grd_Phone_no)values(?,?,?,?,?,?,?,?,?,?)";
+                        String query = "insert into std_info_table(Std_Name,Name_with_Initials,Address,DOB,Subjects,Grade,Phone_no,sex,Grd_name,Grd_Phone_no,ol_yr)values(?,?,?,?,?,?,?,?,?,?,?)";
 
-                                                pstmt = con.prepareStatement(query);
+                        pstmt = con.prepareStatement(query);
 
+                        pstmt.setString(1, Std_Name);
+                        pstmt.setString(2, Name_with_Initials);
+                        pstmt.setString(3, Address);
+                        pstmt.setString(4, DOB);
+                        pstmt.setString(5, subject);
+                        pstmt.setString(6, Grade);
+                        pstmt.setString(7, Phone_no);
+                        pstmt.setString(8, sex);
+                        pstmt.setString(9, Grd_name);
+                        pstmt.setString(10, Grd_Phone_no);
+                        pstmt.setString(11, batchyear);
 
-                                                pstmt.setString(1, Std_Name);
-                                                pstmt.setString(2, Name_with_Initials);
-                                                pstmt.setString(3, Address);
-                                                pstmt.setString(4, DOB);
-                                                pstmt.setString(5, subject);
-                                                pstmt.setString(6, Grade);
-                                                pstmt.setString(7, Phone_no);
-                                                pstmt.setString(8, sex);
-                                                pstmt.setString(9, Grd_name);
-                                                pstmt.setString(10, Grd_Phone_no);
+                        pstmt.execute();
+                        System.out.println("query successfully executed");
+                        JOptionPane.showMessageDialog(null, "query successfully executed");
 
+                        pstmt.close();
+                        con.close();
+                    } catch (SQLException e) {
 
-                                                pstmt.execute();
-                                                System.out.println("query successfully executed");
-                                                JOptionPane.showMessageDialog(null, "query successfully executed");
+                        if (e.getLocalizedMessage() == null ? "Data truncation: Incorrect date value: '" + DOB + "' for column `successdb`.`std_info_table`.`DOB` at row 1" == null : e.getLocalizedMessage().equals("Data truncation: Incorrect date value: '" + DOB + "' for column `successdb`.`std_info_table`.`DOB` at row 1")) {
+                            JOptionPane.showMessageDialog(null, "Please enter right date format", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Error :" + e.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                        }
 
-                                                pstmt.close();
-                                                con.close();
-                                            } catch (SQLException e) {
-                                                
-                                                
-                                                if (e.getLocalizedMessage() == null ? "Data truncation: Incorrect date value: '"+DOB+"' for column `successdb`.`std_info_table`.`DOB` at row 1" == null : e.getLocalizedMessage().equals("Data truncation: Incorrect date value: '"+DOB+"' for column `successdb`.`std_info_table`.`DOB` at row 1")) {
-                                                    JOptionPane.showMessageDialog(null, "Please enter right date format","Error Occurred!",JOptionPane.ERROR_MESSAGE);
-                                                } else{
-                                                    JOptionPane.showMessageDialog(null, "Error :"+e.getMessage(),"Error Occurred!",JOptionPane.ERROR_MESSAGE);
-                                                }
-                                                
-                                            }
-                                            
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Please Fill the Required Fields","Error Occurred!",JOptionPane.ERROR_MESSAGE);
-            }
-    
-            
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please Fill the Required Fields", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                }
     }//GEN-LAST:event_createBtnActionPerformed
 
-    
+
     private void cnslBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnslBtnActionPerformed
-            
-        int reply = JOptionPane.showConfirmDialog(null,"Really Quit ?", "Quit", JOptionPane.YES_NO_OPTION);
-            if (reply == JOptionPane.YES_OPTION){
-                this.dispose();
-            }
+
+        int reply = JOptionPane.showConfirmDialog(null, "Really Quit ?", "Quit", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            this.dispose();
+        }
         
 
     }//GEN-LAST:event_cnslBtnActionPerformed
@@ -597,6 +616,8 @@ String word = txtSubject.getText().toLowerCase();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel address;
+    private javax.swing.JLabel batchName;
+    private javax.swing.JComboBox<String> batchYr;
     private javax.swing.JComboBox<String> cboxSex;
     private javax.swing.JButton cnslBtn;
     private javax.swing.JButton createBtn;
@@ -606,6 +627,7 @@ String word = txtSubject.getText().toLowerCase();
     private javax.swing.JComboBox<String> gradeCB;
     private javax.swing.JLabel guardiansName;
     private javax.swing.JDialog jDialog1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton newBtn;
     private javax.swing.JLabel phoneNo;
