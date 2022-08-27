@@ -8,6 +8,7 @@ package projectsuccess;
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.IOException;
 //import java.awt.event.WindowAdapter;
 //import java.awt.event.WindowEvent;
  
@@ -204,8 +205,21 @@ public class Login extends javax.swing.JFrame {
         // Component frame = null;
     // JOptionPane.showMessageDialog(frame, "you are sucessfully login") ;  
      
-     this.dispose();
-       HomeWindowV2 h1=new  HomeWindowV2();
+         this.dispose();
+
+         // run batch file to open xampp
+         
+//         try {
+//             Process p =  Runtime.getRuntime().exec("cmd /c start \"C:\\Program Files\\salesforce.com\\Data Loader\\cliq_process\\upsert\\upsert.bat\"") ;
+//         } catch (IOException e) {
+//             e.printStackTrace();
+//         }
+         
+         
+         
+         
+         // run batch file to close xampp
+         HomeWindowV2 h1=new  HomeWindowV2();
        h1.setVisible(true);
      }  
        else{
