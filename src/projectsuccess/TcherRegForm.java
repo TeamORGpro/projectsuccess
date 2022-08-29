@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  *
  * @author pc
  */
-public class TcherRegForm extends javax.swing.JFrame {
+public final class TcherRegForm extends javax.swing.JFrame {
 
     
     /**
@@ -340,7 +340,7 @@ public class TcherRegForm extends javax.swing.JFrame {
         String t_name = Tchr_Name.getText().toLowerCase();
         String t_subj = Subj_Name.getText().toLowerCase();
 
-        String quryc = "SELECT * FROM `tchr_info_table` WHERE `Tchr_Name`='" + t_name + "' AND `Subj_Name`='"+t_subj+"';";
+        String quryc = "SELECT * FROM `tchr_info_table` WHERE `Tchr_Name`='" + t_name + "' OR `Subj_Name`='"+t_subj+"';";
 
         try {
             Connection tchrVcon = DBConnect.connect();
@@ -348,18 +348,18 @@ public class TcherRegForm extends javax.swing.JFrame {
             ResultSet rsVtchr = stVtchr.executeQuery(quryc);
 
             if (rsVtchr.next() == true) {
-                String s = rsVtchr.getString("Tchr_Name").toLowerCase();
-                String sn = rsVtchr.getString("Subj_Name").toLowerCase();
+//                String s = rsVtchr.getString("Tchr_Name").toLowerCase();
+//                String sn = rsVtchr.getString("Subj_Name").toLowerCase();
 //            System.out.println(s);
-tchrVcon.close();
-stVtchr.close();
-rsVtchr.close();
-                if (t_name.equals(s) && t_subj.equals(sn)) {
-//                System.out.println("Name match");
-                    JOptionPane.showMessageDialog(null, "Hmm. looks like a teacher already in the class", "Error!", JOptionPane.ERROR_MESSAGE);
+                tchrVcon.close();
+                stVtchr.close();
+                rsVtchr.close();
 
-                }
+//                System.out.println("Name match");
+                    JOptionPane.showMessageDialog(null, "Hmm. looks like a teacher already in the institute", "Error!", JOptionPane.ERROR_MESSAGE);
+
             } else {
+                //start of create code
                 String TchrName = Tchr_Name.getText();
                 String Namewith_Initials = Name_with_Initials.getText();
                 String Address1 = Address.getText();
@@ -423,7 +423,7 @@ rsVtchr.close();
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Please Fill the Required Fields", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
-                }
+                }//end of create code
             }
 
         } catch (SQLException e) {

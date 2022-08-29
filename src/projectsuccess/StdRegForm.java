@@ -441,7 +441,7 @@ public class StdRegForm extends javax.swing.JFrame {
                 if(rsV.next()==true){
                     
                     String s = rsV.getString("Std_Name").toLowerCase();
-            String s1 = rsV.getString("DOB");
+                    String s1 = rsV.getString("DOB");
 
             System.out.println(s);
 
@@ -449,11 +449,11 @@ public class StdRegForm extends javax.swing.JFrame {
             stV.close();
             rsV.close();
 
-            if (v_name.equals(s) && v_date.equals(s1)) {
+//            if (v_name.equals(s) && v_date.equals(s1)) {
 //                System.out.println("Name match");
-                JOptionPane.showMessageDialog(null, "Hmm. looks like a student already in the class", "Error!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Hmm. looks like a student already in the institute", "Error!", JOptionPane.ERROR_MESSAGE);
 
-            }
+//            }
                     
                 }else {
 
