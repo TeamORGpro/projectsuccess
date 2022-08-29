@@ -356,7 +356,7 @@ public final class TcherRegForm extends javax.swing.JFrame {
                 rsVtchr.close();
 
 //                System.out.println("Name match");
-                    JOptionPane.showMessageDialog(null, "Hmm. looks like a teacher already in the institute", "Error!", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Hmm. It seems that there is already a teacher in the institution or doing this subject.", "Error!", JOptionPane.ERROR_MESSAGE);
 
             } else {
                 //start of create code
