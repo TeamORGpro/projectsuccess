@@ -337,10 +337,10 @@ public final class TcherRegForm extends javax.swing.JFrame {
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
 
         // validation part begins
-        String t_name = Tchr_Name.getText().toLowerCase();
+        
         String t_subj = Subj_Name.getText().toLowerCase();
 
-        String quryc = "SELECT * FROM `tchr_info_table` WHERE `Tchr_Name`='" + t_name + "' OR `Subj_Name`='"+t_subj+"';";
+        String quryc = "SELECT * FROM `tchr_info_table` WHERE `Subj_Name`='"+t_subj+"';";
 
         try {
             Connection tchrVcon = DBConnect.connect();
@@ -356,7 +356,7 @@ public final class TcherRegForm extends javax.swing.JFrame {
                 rsVtchr.close();
 
 //                System.out.println("Name match");
-                    JOptionPane.showMessageDialog(null, "Hmm. It seems that there is already a teacher in the institution or doing this subject.", "Error!", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Hmm. It seems that there is already a teacher doing this subject.", "Error!", JOptionPane.ERROR_MESSAGE);
 
             } else {
                 //start of create code
