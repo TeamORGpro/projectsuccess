@@ -367,11 +367,11 @@ public class StdRegForm extends javax.swing.JFrame {
         jPanel1.add(batchName, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, -1, -1));
 
         batchYr.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Exam Year" }));
-        jPanel1.add(batchYr, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 490, 120, 30));
+        jPanel1.add(batchYr, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 490, 140, 30));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel1.setText("O/L Batch");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 497, 80, 20));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 495, 80, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
