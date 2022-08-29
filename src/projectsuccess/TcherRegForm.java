@@ -351,7 +351,9 @@ public class TcherRegForm extends javax.swing.JFrame {
                 String s = rsVtchr.getString("Tchr_Name").toLowerCase();
                 String sn = rsVtchr.getString("Subj_Name").toLowerCase();
 //            System.out.println(s);
-
+tchrVcon.close();
+stVtchr.close();
+rsVtchr.close();
                 if (t_name.equals(s) && t_subj.equals(sn)) {
 //                System.out.println("Name match");
                     JOptionPane.showMessageDialog(null, "Hmm. looks like a teacher already in the class", "Error!", JOptionPane.ERROR_MESSAGE);
