@@ -337,111 +337,99 @@ public class TcherRegForm extends javax.swing.JFrame {
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
 
         // validation part begins
-        String t_name=Tchr_Name.getText();
-        
-        String quryc="SELECT `Tchr_Name` FROM `std_info_table` WHERE `Tchr_Name`='"+t_name+"'";
-        
+        String t_name = Tchr_Name.getText().toLowerCase();
+        String t_subj = Subj_Name.getText().toLowerCase();
+
+        String quryc = "SELECT * FROM `tchr_info_table` WHERE `Tchr_Name`='" + t_name + "' AND `Subj_Name`='"+t_subj+"';";
+
         try {
-            Connection tchrVcon=DBConnect.connect();
-            Statement stVtchr=tchrVcon.createStatement();
-            ResultSet rsVtchr= stVtchr.executeQuery(quryc);
-        
-            rsVtchr.next();
-            String s = rsVtchr.getString("Std_Name");
+            Connection tchrVcon = DBConnect.connect();
+            Statement stVtchr = tchrVcon.createStatement();
+            ResultSet rsVtchr = stVtchr.executeQuery(quryc);
+
+            if (rsVtchr.next() == true) {
+                String s = rsVtchr.getString("Tchr_Name").toLowerCase();
+                String sn = rsVtchr.getString("Subj_Name").toLowerCase();
 //            System.out.println(s);
 
-            if (t_name.equals(s)) {
+                if (t_name.equals(s) && t_subj.equals(sn)) {
 //                System.out.println("Name match");
-                JOptionPane.showMessageDialog(null, "Hmm. looks like a teacher already in the class","Error!" , JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Hmm. looks like a teacher already in the class", "Error!", JOptionPane.ERROR_MESSAGE);
 
-                
+                }
             } else {
+                String TchrName = Tchr_Name.getText();
+                String Namewith_Initials = Name_with_Initials.getText();
+                String Address1 = Address.getText();
+                String DOB1 = DOB.getText();
+                String Phoneno = Phone_no.getText();
+                String gender = (String) sex.getSelectedItem();
+                String NIC1 = NIC.getText();
+                String SubjName = Subj_Name.getText().toLowerCase();
+                String PaymentFees = Payment_Fees.getText();
+
+                Connection con;
+                con = DBConnect.connect();
+
+                char[] charArray = SubjName.toCharArray();
+                boolean foundSpace = true;
+
+                for (int i = 0; i < charArray.length; i++) {
+
+                    if (Character.isLetter(charArray[i])) {
+
+                        if (foundSpace) {
+
+                            charArray[i] = Character.toUpperCase(charArray[i]);
+                            foundSpace = false;
+                        }
+                    } else {
+
+                        foundSpace = true;
+                    }
+                }
+
+                SubjName = String.valueOf(charArray);
+
+                if (!TchrName.isEmpty() && !Namewith_Initials.isEmpty() && !Address1.isEmpty() && !("yyyy-mm-dd".equals(DOB1)) && !Phoneno.isEmpty() && !gender.isEmpty() && !NIC1.isEmpty() && !SubjName.isEmpty() && !PaymentFees.isEmpty()) {
+
+                    try {
+
+                        String sql = "INSERT INTO tchr_info_table(Tchr_Name,Name_with_Initials,Address,Phone_no,sex,NIC,Subj_Name,Payment_Fees,DOB) VALUES(?,?,?,?,?,?,?,?,?)";
+
+                        try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+                            pstmt.setString(1, TchrName);
+                            pstmt.setString(2, Namewith_Initials);
+                            pstmt.setString(3, Address1);
+                            pstmt.setString(4, Phoneno);
+                            pstmt.setString(5, gender);
+                            pstmt.setString(6, NIC1);
+                            pstmt.setString(7, SubjName);
+                            pstmt.setString(8, PaymentFees + ".00");
+                            pstmt.setString(9, DOB1);
+
+                            pstmt.execute();
+                            JOptionPane.showMessageDialog(null, "Successfully saved");
+                        }
+                        con.close();
+                    } catch (HeadlessException | SQLException e) {
+                        if (e.getLocalizedMessage() == null ? "Data truncation: Incorrect date value: '" + DOB1 + "' for column `successdb`.`tchr_info_table`.`DOB` at row 1" == null : e.getLocalizedMessage().equals("Data truncation: Incorrect date value: '" + DOB1 + "' for column `successdb`.`tchr_info_table`.`DOB` at row 1")) {
+                            JOptionPane.showMessageDialog(null, "Please enter right date format", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Error :" + e.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please Fill the Required Fields", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                }
             }
-            
-            
-            
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         // validation part ends
-        
-        
-        String TchrName = Tchr_Name.getText();
-        String Namewith_Initials = Name_with_Initials.getText();
-        String Address1 = Address.getText();
-        String DOB1 = DOB.getText();
-        String Phoneno = Phone_no.getText();
-        String gender = (String) sex.getSelectedItem();
-        String NIC1 = NIC.getText();
-        String SubjName = Subj_Name.getText().toLowerCase();
-        String PaymentFees = Payment_Fees.getText();
-        
-        Connection con;
-        con = DBConnect.connect();
 
-            char[] charArray = SubjName.toCharArray();
-            boolean foundSpace = true;
-
-            for(int i = 0; i < charArray.length; i++) {
-
-
-              if(Character.isLetter(charArray[i])) {
-
-
-                if(foundSpace) {
-
-
-                  charArray[i] = Character.toUpperCase(charArray[i]);
-                  foundSpace = false;
-                }
-              }
-
-              else {
-         
-                foundSpace = true;
-              }
-            }
-   
-            SubjName = String.valueOf(charArray);
-
-        
-        if(!TchrName.isEmpty() && !Namewith_Initials.isEmpty() && !Address1.isEmpty() && !("yyyy-mm-dd".equals(DOB1)) && !Phoneno.isEmpty() && !gender.isEmpty() && !NIC1.isEmpty() && !SubjName.isEmpty() && !PaymentFees.isEmpty()){
-        
-         try{
-        
-         
-            String sql = "INSERT INTO tchr_info_table(Tchr_Name,Name_with_Initials,Address,Phone_no,sex,NIC,Subj_Name,Payment_Fees,DOB) VALUES(?,?,?,?,?,?,?,?,?)";
-            
-             try (PreparedStatement pstmt = con.prepareStatement(sql)) {
-                 pstmt.setString(1,TchrName);
-                 pstmt.setString(2,Namewith_Initials);
-                 pstmt.setString(3,Address1);
-                 pstmt.setString(4,Phoneno);
-                 pstmt.setString(5,gender);
-                 pstmt.setString(6,NIC1);
-                 pstmt.setString(7,SubjName);
-                 pstmt.setString(8,PaymentFees+".00");
-                 pstmt.setString(9,DOB1);
-                 
-                 pstmt.execute();
-                 JOptionPane.showMessageDialog(null,"Successfully saved");
-             }
-        con.close();
-        }
-         
-        catch(HeadlessException | SQLException e){
-            if (e.getLocalizedMessage() == null ? "Data truncation: Incorrect date value: '"+DOB1+"' for column `successdb`.`tchr_info_table`.`DOB` at row 1" == null : e.getLocalizedMessage().equals("Data truncation: Incorrect date value: '"+DOB1+"' for column `successdb`.`tchr_info_table`.`DOB` at row 1")) {
-                JOptionPane.showMessageDialog(null, "Please enter right date format","Error Occurred!",JOptionPane.ERROR_MESSAGE);
-            } else{
-                JOptionPane.showMessageDialog(null, "Error :"+e.getMessage(),"Error Occurred!",JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        }
-        else{
-                JOptionPane.showMessageDialog(null, "Please Fill the Required Fields","Error Occurred!",JOptionPane.ERROR_MESSAGE);
-            }
         
     }//GEN-LAST:event_createBtnActionPerformed
 
