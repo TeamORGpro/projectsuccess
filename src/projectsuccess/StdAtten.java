@@ -6,6 +6,7 @@
 package projectsuccess;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.*;
@@ -112,7 +113,7 @@ public class StdAtten extends javax.swing.JFrame {
         cnslBtn = new javax.swing.JButton();
         txtStatuslb = new javax.swing.JTextField();
         statuslb = new javax.swing.JLabel();
-        subCB = new javax.swing.JComboBox<String>();
+        subCB = new javax.swing.JComboBox<>();
         searchBtn01 = new javax.swing.JButton();
         lblstdName = new javax.swing.JLabel();
         lblTchrName = new javax.swing.JLabel();
@@ -160,6 +161,11 @@ public class StdAtten extends javax.swing.JFrame {
         attmarkPanl.add(stdName, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 152, -1, 30));
 
         txtStdID.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        txtStdID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtStdIDKeyPressed(evt);
+            }
+        });
         attmarkPanl.add(txtStdID, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 105, 149, 30));
 
         presentRB.setBackground(new java.awt.Color(198, 228, 255));
@@ -254,7 +260,7 @@ public class StdAtten extends javax.swing.JFrame {
         attmarkPanl.add(statuslb, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 199, -1, 30));
 
         subCB.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        subCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Choose Subject" }));
+        subCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Subject" }));
         subCB.setPreferredSize(new java.awt.Dimension(27, 20));
         subCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -528,6 +534,43 @@ public class StdAtten extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_subCBActionPerformed
+
+    private void txtStdIDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStdIDKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode()==KeyEvent.VK_ENTER) {
+        
+            Connection con;
+        con = DBConnect.connect();
+        ResultSet rs;
+        PreparedStatement pstmt;
+        try {
+            String studentID=txtStdID.getText();
+            pstmt = con.prepareStatement("SELECT * FROM std_info_table WHERE Std_ID = ?");
+            pstmt.setString(1, studentID);
+            rs = pstmt.executeQuery();
+
+            if(rs.next()){
+                String studentName =rs.getString("Std_Name");
+                String grd =rs.getString("Grade");
+                lblstdName.setText(studentName);
+                templbl.setText(grd);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Please Enter Valid Student ID");
+                lblstdName.setText("");
+
+            }
+            pstmt.close();
+            rs.close();
+            con.close();
+
+        } catch (HeadlessException | SQLException e) {
+            System.out.println(e.getMessage());
+        }
+            
+            
+        }
+    }//GEN-LAST:event_txtStdIDKeyPressed
 
     
     public void getSubject(){
