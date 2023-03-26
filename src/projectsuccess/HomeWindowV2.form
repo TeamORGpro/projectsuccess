@@ -1478,7 +1478,7 @@
                               <Table columnCount="7" rowCount="4">
                                 <Column editable="false" title="Student ID" type="java.lang.Integer"/>
                                 <Column editable="false" title="Student  Name" type="java.lang.String"/>
-                                <Column editable="false" title="Subject" type="java.lang.String"/>
+                                <Column editable="false" title="Subjects" type="java.lang.String"/>
                                 <Column editable="false" title="Subject Fee" type="java.lang.String"/>
                                 <Column editable="false" title="Grade" type="java.lang.String"/>
                                 <Column editable="false" title="Last Paid Month" type="java.lang.String"/>

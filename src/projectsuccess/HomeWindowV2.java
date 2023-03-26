@@ -1154,7 +1154,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Student ID", "Student  Name", "Subject", "Subject Fee", "Grade", "Last Paid Month", "Paid Date"
+                "Student ID", "Student  Name", "Subjects", "Subject Fee", "Grade", "Last Paid Month", "Paid Date"
             }
         ) {
             Class[] types = new Class [] {
