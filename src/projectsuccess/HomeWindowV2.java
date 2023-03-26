@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.HeadlessException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
@@ -34,17 +35,16 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         stdSField();
         pymntSField();
         icon();
-        
+
     }
-    
-    
+
     public void changeGrade() {
         // load today
         java.util.Date d = new java.util.Date();
 
         SimpleDateFormat sdat = new SimpleDateFormat("yyyy-MM-dd");
 
-        String dd= sdat.format(d);
+        String dd = sdat.format(d);
 //        String dd = "2120-01-01"; //for test 
 
         //end of load today
@@ -56,7 +56,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
             // Show Dialog box to update
             ImageIcon uicon = new ImageIcon(HomeWindowV2.class.getResource("/Icons/updateDicon.png"));
-            int reply = JOptionPane.showConfirmDialog(null, "<html><h3>Do you want to update student grades for new year ?</h3></html>", "Update Grades", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,uicon);
+            int reply = JOptionPane.showConfirmDialog(null, "<html><h3>Do you want to update student grades for new year ?</h3></html>", "Update Grades", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, uicon);
             if (reply == JOptionPane.YES_OPTION) {
                 int confirm = JOptionPane.showConfirmDialog(null, "<html><h3>Please Confirm update student grades.</h3></html>", "Confirm Update Grades", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
@@ -126,7 +126,6 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
         //end of grade change code
     }
-
 
     public final void attnSField() {
         TableRowSorter<TableModel> attnSort = new TableRowSorter<>(jTable1.getModel());
@@ -1580,6 +1579,19 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 "Do you really want to log out ?", "Logging Out", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             System.exit(0);
+            try {
+                // Replace this with the path to your XAMPP installation folder
+                String xamppPath = "C:\\xampp";
+
+                // Stop MySQL
+                String[] command = {"cmd.exe", "/c", "start", "cmd.exe", "/c", "cd \"" + xamppPath + "\" && mysql\\bin\\mysqladmin.exe shutdown"};
+                Process process = Runtime.getRuntime().exec(command);
+
+                // Wait for the command to complete
+                process.waitFor();
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
     }//GEN-LAST:event_btnLoutActionPerformed
@@ -1605,7 +1617,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         attnSearchField.setText("");
-        
+
         Connection con;
 
         con = DBConnect.connect();
@@ -1642,7 +1654,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         stdSearchField.setText("");
-        
+
         Connection con;
         con = DBConnect.connect();
 
@@ -1682,7 +1694,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         tchrSearchField.setText("");
-        
+
         Connection con;
 
         con = DBConnect.connect();
@@ -1768,40 +1780,39 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please Select one or more rows to Update", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
         } else {
             Connection con;
-        con = DBConnect.connect();
-        Statement upSt;
+            con = DBConnect.connect();
+            Statement upSt;
 
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 
-        int reply = JOptionPane.showConfirmDialog(null,
-                "Do you want to update data?", "Updating", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
-            try {
-                upSt = con.createStatement();
+            int reply = JOptionPane.showConfirmDialog(null,
+                    "Do you want to update data?", "Updating", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                try {
+                    upSt = con.createStatement();
 
-                for (int i = 0; i < model.getRowCount(); i++) {
-                    String date = model.getValueAt(i, 0).toString();
-                    String subjName = model.getValueAt(i, 1).toString();
-                    int stuID = Integer.valueOf(model.getValueAt(i, 2).toString());
-                    String status = model.getValueAt(i, 6).toString();
-                    String spcNote = model.getValueAt(i, 7).toString();
+                    for (int i = 0; i < model.getRowCount(); i++) {
+                        String date = model.getValueAt(i, 0).toString();
+                        String subjName = model.getValueAt(i, 1).toString();
+                        int stuID = Integer.valueOf(model.getValueAt(i, 2).toString());
+                        String status = model.getValueAt(i, 6).toString();
+                        String spcNote = model.getValueAt(i, 7).toString();
 
-                    String updateQuery = "UPDATE attndance_table SET Status='" + status + "',Spc_Note='" + spcNote + "' WHERE `Date`='" + date + "'AND Subj_Name='" + subjName + "'AND Std_ID=" + stuID;
+                        String updateQuery = "UPDATE attndance_table SET Status='" + status + "',Spc_Note='" + spcNote + "' WHERE `Date`='" + date + "'AND Subj_Name='" + subjName + "'AND Std_ID=" + stuID;
 
-                    upSt.addBatch(updateQuery);
+                        upSt.addBatch(updateQuery);
+                    }
+
+                    upSt.executeBatch();
+                    JOptionPane.showMessageDialog(null, "Table Successfully Updated");
+                    upSt.close();
+                    con.close();
+                } catch (HeadlessException | NumberFormatException | SQLException e) {
+                    JOptionPane.showMessageDialog(null, "Error :" + e.getLocalizedMessage());
+                    System.out.println(e);
                 }
-
-                upSt.executeBatch();
-                JOptionPane.showMessageDialog(null, "Table Successfully Updated");
-                upSt.close();
-                con.close();
-            } catch (HeadlessException | NumberFormatException | SQLException e) {
-                JOptionPane.showMessageDialog(null, "Error :" + e.getLocalizedMessage());
-                System.out.println(e);
             }
         }
-        }
-        
 
 
     }//GEN-LAST:event_attnUpdateActionPerformed
@@ -1814,98 +1825,97 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please Select one or more rows to Update", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
         } else {
             Connection con;
-        con = DBConnect.connect();
-        Statement upSt1;
+            con = DBConnect.connect();
+            Statement upSt1;
 
-        DefaultTableModel model1 = (DefaultTableModel) jTable3.getModel();
+            DefaultTableModel model1 = (DefaultTableModel) jTable3.getModel();
 
-        int reply = JOptionPane.showConfirmDialog(null,
-                "Do you want to update data?", "Updating", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
-            try {
-                upSt1 = con.createStatement();
+            int reply = JOptionPane.showConfirmDialog(null,
+                    "Do you want to update data?", "Updating", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                try {
+                    upSt1 = con.createStatement();
 
-                for (int i = 0; i < model1.getRowCount(); i++) {
-                    int stuID = Integer.valueOf(model1.getValueAt(i, 0).toString());
-                    String fname = model1.getValueAt(i, 1).toString();
-                    String nameWithIN = model1.getValueAt(i, 2).toString();
-                    String addr = model1.getValueAt(i, 3).toString();
-                    String dob = model1.getValueAt(i, 4).toString();
-                    String Subjects = model1.getValueAt(i, 5).toString();
-                    String grd = model1.getValueAt(i, 6).toString();
-                    String pNo = model1.getValueAt(i, 7).toString();
-                    String sex = model1.getValueAt(i, 8).toString();
-                    String gName = model1.getValueAt(i, 9).toString();
-                    String gPNo = model1.getValueAt(i, 10).toString();
+                    for (int i = 0; i < model1.getRowCount(); i++) {
+                        int stuID = Integer.valueOf(model1.getValueAt(i, 0).toString());
+                        String fname = model1.getValueAt(i, 1).toString();
+                        String nameWithIN = model1.getValueAt(i, 2).toString();
+                        String addr = model1.getValueAt(i, 3).toString();
+                        String dob = model1.getValueAt(i, 4).toString();
+                        String Subjects = model1.getValueAt(i, 5).toString();
+                        String grd = model1.getValueAt(i, 6).toString();
+                        String pNo = model1.getValueAt(i, 7).toString();
+                        String sex = model1.getValueAt(i, 8).toString();
+                        String gName = model1.getValueAt(i, 9).toString();
+                        String gPNo = model1.getValueAt(i, 10).toString();
 
-                    String updateQuery = "UPDATE `std_info_table` SET `Std_Name`='" + fname + "',`Name_with_Initials`='" + nameWithIN + "',`Address`='" + addr + "',`DOB`='" + dob + "',`Subjects`='" + Subjects + "',`Grade`='" + grd + "',`Phone_no`='" + pNo + "',`sex`='" + sex + "',`Grd_name`='" + gName + "',`Grd_Phone_no`='" + gPNo + "' WHERE `Std_ID`=" + stuID;
+                        String updateQuery = "UPDATE `std_info_table` SET `Std_Name`='" + fname + "',`Name_with_Initials`='" + nameWithIN + "',`Address`='" + addr + "',`DOB`='" + dob + "',`Subjects`='" + Subjects + "',`Grade`='" + grd + "',`Phone_no`='" + pNo + "',`sex`='" + sex + "',`Grd_name`='" + gName + "',`Grd_Phone_no`='" + gPNo + "' WHERE `Std_ID`=" + stuID;
 
-                    upSt1.addBatch(updateQuery);
+                        upSt1.addBatch(updateQuery);
+                    }
+
+                    upSt1.executeBatch();
+                    JOptionPane.showMessageDialog(null, "Table Successfully Updated");
+                    upSt1.close();
+                    con.close();
+                } catch (HeadlessException | NumberFormatException | SQLException e) {
+                    JOptionPane.showMessageDialog(null, "Error :" + e.getLocalizedMessage());
+                    e.getMessage();
                 }
-
-                upSt1.executeBatch();
-                JOptionPane.showMessageDialog(null, "Table Successfully Updated");
-                upSt1.close();
-                con.close();
-            } catch (HeadlessException | NumberFormatException | SQLException e) {
-                JOptionPane.showMessageDialog(null, "Error :" + e.getLocalizedMessage());
-                e.getMessage();
             }
         }
-        }
-     
+
     }//GEN-LAST:event_stdUpdateActionPerformed
 
     private void tchrUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tchrUpdateActionPerformed
         // TODO add your handling code here:
-        
+
         int rCount = jTable4.getSelectedRowCount();
 
         if (rCount == 0) {
             JOptionPane.showMessageDialog(null, "Please Select one or more rows to Update", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
         } else {
-            
-        Connection con;
-        con = DBConnect.connect();
-        Statement upSt2;
 
-        DefaultTableModel model2 = (DefaultTableModel) jTable4.getModel();
+            Connection con;
+            con = DBConnect.connect();
+            Statement upSt2;
 
-        int reply = JOptionPane.showConfirmDialog(null,
-                "Do you want to update data?", "Updating", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
-            try {
-                upSt2 = con.createStatement();
+            DefaultTableModel model2 = (DefaultTableModel) jTable4.getModel();
 
-                for (int i = 0; i < model2.getRowCount(); i++) {
-                    int tchrID = Integer.valueOf(model2.getValueAt(i, 0).toString());
-                    String subjName = model2.getValueAt(i, 1).toString();
-                    String namewithIn = model2.getValueAt(i, 2).toString();
-                    String fname = model2.getValueAt(i, 3).toString();
-                    String fee = model2.getValueAt(i, 4).toString();
-                    String addr = model2.getValueAt(i, 5).toString();
-                    String dateofbirth = model2.getValueAt(i, 6).toString();
-                    String pNo = model2.getValueAt(i, 7).toString();
-                    String sex = model2.getValueAt(i, 8).toString();
-                    String nic = model2.getValueAt(i, 9).toString();
+            int reply = JOptionPane.showConfirmDialog(null,
+                    "Do you want to update data?", "Updating", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                try {
+                    upSt2 = con.createStatement();
 
-                    String updateQuery = "UPDATE `tchr_info_table` SET `Tchr_Name`='" + fname + "',`Name_with_Initials`='" + namewithIn + "',`Address`='" + addr + "',`Phone_no`='" + pNo + "',`sex`='" + sex + "',`NIC`='" + nic + "',`Subj_Name`='" + subjName + "',`Payment_Fees`='" + fee + "',`DOB`='" + dateofbirth + "' WHERE `Tchr_ID`=" + tchrID;
+                    for (int i = 0; i < model2.getRowCount(); i++) {
+                        int tchrID = Integer.valueOf(model2.getValueAt(i, 0).toString());
+                        String subjName = model2.getValueAt(i, 1).toString();
+                        String namewithIn = model2.getValueAt(i, 2).toString();
+                        String fname = model2.getValueAt(i, 3).toString();
+                        String fee = model2.getValueAt(i, 4).toString();
+                        String addr = model2.getValueAt(i, 5).toString();
+                        String dateofbirth = model2.getValueAt(i, 6).toString();
+                        String pNo = model2.getValueAt(i, 7).toString();
+                        String sex = model2.getValueAt(i, 8).toString();
+                        String nic = model2.getValueAt(i, 9).toString();
 
-                    upSt2.addBatch(updateQuery);
+                        String updateQuery = "UPDATE `tchr_info_table` SET `Tchr_Name`='" + fname + "',`Name_with_Initials`='" + namewithIn + "',`Address`='" + addr + "',`Phone_no`='" + pNo + "',`sex`='" + sex + "',`NIC`='" + nic + "',`Subj_Name`='" + subjName + "',`Payment_Fees`='" + fee + "',`DOB`='" + dateofbirth + "' WHERE `Tchr_ID`=" + tchrID;
 
+                        upSt2.addBatch(updateQuery);
+
+                    }
+                    upSt2.executeBatch();
+                    JOptionPane.showMessageDialog(null, "Table Successfully Updated");
+
+                    upSt2.close();
+                    con.close();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Error :" + ex.getLocalizedMessage());
+                    ex.getMessage();
                 }
-                upSt2.executeBatch();
-                JOptionPane.showMessageDialog(null, "Table Successfully Updated");
-
-                upSt2.close();
-                con.close();
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error :" + ex.getLocalizedMessage());
-                ex.getMessage();
             }
         }
-        }
-
 
 
     }//GEN-LAST:event_tchrUpdateActionPerformed
@@ -1918,135 +1928,127 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please Select one or more rows to delete", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
         } else {
             int cSid = 0;
-        
 
-        int[] rows = jTable3.getSelectedRows();
+            int[] rows = jTable3.getSelectedRows();
 
-        int reply = JOptionPane.showConfirmDialog(null,
-                "Do you want to delete?", "Deleting", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
-            for (int i = 0; i < rows.length; i++) {
-                String s_id = jTable3.getModel().getValueAt(rows[i], cSid).toString();
-                
+            int reply = JOptionPane.showConfirmDialog(null,
+                    "Do you want to delete?", "Deleting", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                for (int i = 0; i < rows.length; i++) {
+                    String s_id = jTable3.getModel().getValueAt(rows[i], cSid).toString();
 
-                try {
-                    Connection con;
-                    con = DBConnect.connect();
+                    try {
+                        Connection con;
+                        con = DBConnect.connect();
 
-                    Statement dst = con.createStatement();
-                    String sql1 = "DELETE FROM std_info_table WHERE `Std_ID` = "+s_id+";";
+                        Statement dst = con.createStatement();
+                        String sql1 = "DELETE FROM std_info_table WHERE `Std_ID` = " + s_id + ";";
 
-                    dst.executeUpdate(sql1);
-                    con.close();
+                        dst.executeUpdate(sql1);
+                        con.close();
 
-                } catch (SQLException e) {
+                    } catch (SQLException e) {
+                    }
                 }
             }
-        }
 
 // reload table
-         
-        Connection con = DBConnect.connect();
+            Connection con = DBConnect.connect();
 
-        try {
-            DefaultTableModel dt = (DefaultTableModel) jTable3.getModel();
-            dt.setRowCount(0);
+            try {
+                DefaultTableModel dt = (DefaultTableModel) jTable3.getModel();
+                dt.setRowCount(0);
 
-            Statement s = con.createStatement();
-            try (ResultSet rs = s.executeQuery("select * from std_info_table ")) {
-                while (rs.next()) {
-                    Vector v = new Vector();
-                    v.add(rs.getString("Std_ID"));
-                    v.add(rs.getString("Std_Name"));
-                    v.add(rs.getString("Name_with_Initials"));
-                    v.add(rs.getString("Address"));
-                    v.add(rs.getString("DOB"));
-                    v.add(rs.getString("Subjects"));
-                    v.add(rs.getString("Grade"));
-                    v.add(rs.getString("Phone_no"));
-                    v.add(rs.getString("sex"));
-                    v.add(rs.getString("Grd_name"));
-                    v.add(rs.getString("Grd_Phone_no"));
-                    dt.addRow(v);
+                Statement s = con.createStatement();
+                try (ResultSet rs = s.executeQuery("select * from std_info_table ")) {
+                    while (rs.next()) {
+                        Vector v = new Vector();
+                        v.add(rs.getString("Std_ID"));
+                        v.add(rs.getString("Std_Name"));
+                        v.add(rs.getString("Name_with_Initials"));
+                        v.add(rs.getString("Address"));
+                        v.add(rs.getString("DOB"));
+                        v.add(rs.getString("Subjects"));
+                        v.add(rs.getString("Grade"));
+                        v.add(rs.getString("Phone_no"));
+                        v.add(rs.getString("sex"));
+                        v.add(rs.getString("Grd_name"));
+                        v.add(rs.getString("Grd_Phone_no"));
+                        dt.addRow(v);
+                    }
+                    rs.close();
+                    con.close();
                 }
-                rs.close();
-                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        }
-        
-        
-        
+
 
     }//GEN-LAST:event_deleteBtn1ActionPerformed
 
     private void deleteBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtn2ActionPerformed
         // TODO add your handling code here:
-        
+
         int rCount = jTable4.getSelectedRowCount();
 
         if (rCount == 0) {
             JOptionPane.showMessageDialog(null, "Please Select one or more rows to delete", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
         } else {
             int cTcherid = 0;
-        
 
-        int[] rows = jTable4.getSelectedRows();
+            int[] rows = jTable4.getSelectedRows();
 
-        int reply = JOptionPane.showConfirmDialog(null,
-                "Do you want to delete?", "Deleting", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
-            for (int i = 0; i < rows.length; i++) {
-                String tchr_id = jTable4.getModel().getValueAt(rows[i], cTcherid).toString();
-                
+            int reply = JOptionPane.showConfirmDialog(null,
+                    "Do you want to delete?", "Deleting", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                for (int i = 0; i < rows.length; i++) {
+                    String tchr_id = jTable4.getModel().getValueAt(rows[i], cTcherid).toString();
 
-                try {
-                    Connection cont;
-                    cont = DBConnect.connect();
+                    try {
+                        Connection cont;
+                        cont = DBConnect.connect();
 
-                    Statement tst = cont.createStatement();
-                    String sql2 = "DELETE FROM `tchr_info_table` WHERE `Tchr_ID`="+tchr_id+";";
+                        Statement tst = cont.createStatement();
+                        String sql2 = "DELETE FROM `tchr_info_table` WHERE `Tchr_ID`=" + tchr_id + ";";
 
-                    tst.executeUpdate(sql2);
-                    cont.close();
+                        tst.executeUpdate(sql2);
+                        cont.close();
 
-                } catch (SQLException e) {
-                    System.out.println(e.getMessage());
+                    } catch (SQLException e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
             }
-        }
-        
 
-        Connection con = DBConnect.connect();
-        try {
-            DefaultTableModel dt2 = (DefaultTableModel) jTable4.getModel();
-            dt2.setRowCount(0);
-            Statement s2 = con.createStatement();
-            try (ResultSet rs2 = s2.executeQuery("select * from tchr_info_table ")) {
-                while (rs2.next()) {
-                    Vector v2 = new Vector();
-                    v2.add(rs2.getInt("Tchr_ID"));
-                    v2.add(rs2.getString("Subj_Name"));
-                    v2.add(rs2.getString("Name_with_Initials"));
-                    v2.add(rs2.getString("Tchr_Name"));
-                    v2.add(rs2.getString("Payment_Fees"));
-                    v2.add(rs2.getString("Address"));
-                    v2.add(rs2.getString("DOB"));
-                    v2.add(rs2.getString("Phone_no"));
-                    v2.add(rs2.getString("sex"));
-                    v2.add(rs2.getString("NIC"));
-                    dt2.addRow(v2);
+            Connection con = DBConnect.connect();
+            try {
+                DefaultTableModel dt2 = (DefaultTableModel) jTable4.getModel();
+                dt2.setRowCount(0);
+                Statement s2 = con.createStatement();
+                try (ResultSet rs2 = s2.executeQuery("select * from tchr_info_table ")) {
+                    while (rs2.next()) {
+                        Vector v2 = new Vector();
+                        v2.add(rs2.getInt("Tchr_ID"));
+                        v2.add(rs2.getString("Subj_Name"));
+                        v2.add(rs2.getString("Name_with_Initials"));
+                        v2.add(rs2.getString("Tchr_Name"));
+                        v2.add(rs2.getString("Payment_Fees"));
+                        v2.add(rs2.getString("Address"));
+                        v2.add(rs2.getString("DOB"));
+                        v2.add(rs2.getString("Phone_no"));
+                        v2.add(rs2.getString("sex"));
+                        v2.add(rs2.getString("NIC"));
+                        dt2.addRow(v2);
+                    }
+                    s2.close();
+                    con.close();
                 }
-                s2.close();
-                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        }
-        
+
 
     }//GEN-LAST:event_deleteBtn2ActionPerformed
 
@@ -2057,62 +2059,60 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         if (rCount == 0) {
             JOptionPane.showMessageDialog(null, "Please Select one or more rows to delete", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
         } else {
-            
+
             int gdate = 0;
-        int gsubjName = 1;
-        int gstuID = 2;
+            int gsubjName = 1;
+            int gstuID = 2;
 
-        int[] rows = jTable1.getSelectedRows();
+            int[] rows = jTable1.getSelectedRows();
 
-        int reply = JOptionPane.showConfirmDialog(null,
-                "Do you want to delete?", "Deleting", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
-            for (int i = 0; i < rows.length; i++) {
-                String date = jTable1.getModel().getValueAt(rows[i], gdate).toString();
-                String subjName = jTable1.getModel().getValueAt(rows[i], gsubjName).toString();
-                String stuID = jTable1.getModel().getValueAt(rows[i], gstuID).toString();
+            int reply = JOptionPane.showConfirmDialog(null,
+                    "Do you want to delete?", "Deleting", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                for (int i = 0; i < rows.length; i++) {
+                    String date = jTable1.getModel().getValueAt(rows[i], gdate).toString();
+                    String subjName = jTable1.getModel().getValueAt(rows[i], gsubjName).toString();
+                    String stuID = jTable1.getModel().getValueAt(rows[i], gstuID).toString();
 
-                try {
-                    Connection con;
-                    con = DBConnect.connect();
+                    try {
+                        Connection con;
+                        con = DBConnect.connect();
 
-                    Statement dst = con.createStatement();
-                    String sql1 = "DELETE FROM `attndance_table` WHERE `Date`='" + date + "' AND `Subj_Name`='" + subjName + "' AND `Std_ID`=" + stuID;
+                        Statement dst = con.createStatement();
+                        String sql1 = "DELETE FROM `attndance_table` WHERE `Date`='" + date + "' AND `Subj_Name`='" + subjName + "' AND `Std_ID`=" + stuID;
 
-                    dst.executeUpdate(sql1);
-                    con.close();
+                        dst.executeUpdate(sql1);
+                        con.close();
 
-                } catch (Exception e) {
-                }
-            }
-            Connection con2;
-            con2 = DBConnect.connect();
-            try {
-                DefaultTableModel dt1 = (DefaultTableModel) jTable1.getModel();
-                dt1.setRowCount(0);
-                Statement s1 = con2.createStatement();
-                try (ResultSet rs1 = s1.executeQuery("select * from attndance_table ")) {
-                    while (rs1.next()) {
-                        Vector v1 = new Vector();
-                        v1.add(rs1.getString("Date"));
-                        v1.add(rs1.getString("Subj_Name"));
-                        v1.add(rs1.getInt("Std_ID"));
-                        v1.add(rs1.getString("Std_Name"));
-                        v1.add(rs1.getString("Tchr_Name"));
-                        v1.add(rs1.getString("Status"));
-                        v1.add(rs1.getString("Spc_Note"));
-                        dt1.addRow(v1);
+                    } catch (Exception e) {
                     }
-                    s1.close();
-                    con2.close();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
+                Connection con2;
+                con2 = DBConnect.connect();
+                try {
+                    DefaultTableModel dt1 = (DefaultTableModel) jTable1.getModel();
+                    dt1.setRowCount(0);
+                    Statement s1 = con2.createStatement();
+                    try (ResultSet rs1 = s1.executeQuery("select * from attndance_table ")) {
+                        while (rs1.next()) {
+                            Vector v1 = new Vector();
+                            v1.add(rs1.getString("Date"));
+                            v1.add(rs1.getString("Subj_Name"));
+                            v1.add(rs1.getInt("Std_ID"));
+                            v1.add(rs1.getString("Std_Name"));
+                            v1.add(rs1.getString("Tchr_Name"));
+                            v1.add(rs1.getString("Status"));
+                            v1.add(rs1.getString("Spc_Note"));
+                            dt1.addRow(v1);
+                        }
+                        s1.close();
+                        con2.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         }
-        }
-        
-        
 
 
     }//GEN-LAST:event_deleteBtnActionPerformed
@@ -2125,72 +2125,71 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please Select one or more rows to delete", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
         } else {
             int cSid = 0;
-        int csubjName = 2;
-        int cMonth = 6;
-        int cPDate=7;
+            int csubjName = 2;
+            int cMonth = 6;
+            int cPDate = 7;
 
-        int[] rows = jTable2.getSelectedRows();
+            int[] rows = jTable2.getSelectedRows();
 
-        int reply = JOptionPane.showConfirmDialog(null,
-                "Do you want to delete?", "Deleting", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
-            for (int i = 0; i < rows.length; i++) {
-                String Sid1 = jTable2.getModel().getValueAt(rows[i], cSid).toString();
-                String subjName1 = jTable2.getModel().getValueAt(rows[i], csubjName).toString();
-                String Month1 = jTable2.getModel().getValueAt(rows[i], cMonth).toString();
-                String date1 = jTable2.getModel().getValueAt(rows[i], cPDate).toString();
+            int reply = JOptionPane.showConfirmDialog(null,
+                    "Do you want to delete?", "Deleting", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                for (int i = 0; i < rows.length; i++) {
+                    String Sid1 = jTable2.getModel().getValueAt(rows[i], cSid).toString();
+                    String subjName1 = jTable2.getModel().getValueAt(rows[i], csubjName).toString();
+                    String Month1 = jTable2.getModel().getValueAt(rows[i], cMonth).toString();
+                    String date1 = jTable2.getModel().getValueAt(rows[i], cPDate).toString();
 
-                try {
-                    Connection con;
-                    con = DBConnect.connect();
+                    try {
+                        Connection con;
+                        con = DBConnect.connect();
 
-                    Statement dst = con.createStatement();
-                    String sql1 = "DELETE FROM payment_table WHERE `Std_ID` ="+Sid1+" AND `Subj_Name` = '"+subjName1+"' AND `Month` = '"+Month1+"' AND `Date_paid` = '"+date1+"';";
+                        Statement dst = con.createStatement();
+                        String sql1 = "DELETE FROM payment_table WHERE `Std_ID` =" + Sid1 + " AND `Subj_Name` = '" + subjName1 + "' AND `Month` = '" + Month1 + "' AND `Date_paid` = '" + date1 + "';";
 
-                    dst.executeUpdate(sql1);
+                        dst.executeUpdate(sql1);
+                        con.close();
+
+                    } catch (Exception e) {
+                    }
+                }
+            }
+
+            Connection con;
+
+            DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+            rightRenderer.setHorizontalAlignment(JLabel.RIGHT);
+            jTable2.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
+            Dimension dim = new Dimension(10, 1);
+            jTable2.setIntercellSpacing(new Dimension(dim));
+
+            con = DBConnect.connect();
+            try {
+                DefaultTableModel dt3 = (DefaultTableModel) jTable2.getModel();
+                dt3.setRowCount(0);
+                Statement s3 = con.createStatement();
+                try (ResultSet rs3 = s3.executeQuery("select * from payment_table")) {
+                    while (rs3.next()) {
+                        Vector v3 = new Vector();
+                        v3.add(rs3.getInt("Std_ID"));
+                        v3.add(rs3.getString("Std_Name"));
+                        v3.add(rs3.getString("Subj_Name"));
+                        v3.add(rs3.getString("Tchr_Name"));
+                        v3.add(rs3.getString("Payment_fee"));
+                        v3.add(rs3.getString("Grade"));
+                        v3.add(rs3.getString("Month"));
+                        v3.add(rs3.getString("Date_paid"));
+
+                        dt3.addRow(v3);
+                    }
+                    s3.close();
                     con.close();
-
-                } catch (Exception e) {
                 }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
-        
-        Connection con;
 
-        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
-        rightRenderer.setHorizontalAlignment(JLabel.RIGHT);
-        jTable2.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
-        Dimension dim = new Dimension(10, 1);
-        jTable2.setIntercellSpacing(new Dimension(dim));
-
-        con = DBConnect.connect();
-        try {
-            DefaultTableModel dt3 = (DefaultTableModel) jTable2.getModel();
-            dt3.setRowCount(0);
-            Statement s3 = con.createStatement();
-            try (ResultSet rs3 = s3.executeQuery("select * from payment_table")) {
-                while (rs3.next()) {
-                    Vector v3 = new Vector();
-                    v3.add(rs3.getInt("Std_ID"));
-                    v3.add(rs3.getString("Std_Name"));
-                    v3.add(rs3.getString("Subj_Name"));
-                    v3.add(rs3.getString("Tchr_Name"));
-                    v3.add(rs3.getString("Payment_fee"));
-                    v3.add(rs3.getString("Grade"));
-                    v3.add(rs3.getString("Month"));
-                    v3.add(rs3.getString("Date_paid"));
-
-                    dt3.addRow(v3);
-                }
-                s3.close();
-                con.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        }
-        
-        
 
     }//GEN-LAST:event_deleteBtn3ActionPerformed
 
@@ -2199,46 +2198,44 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         int rCount = jTable2.getSelectedRowCount();
         try {
             if (rCount == 0) {
-            JOptionPane.showMessageDialog(null, "Please Select one or more rows to export", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
-        } else {
-            pymtSearchField.setText("");
-            TableModel model1 = jTable2.getModel();
+                JOptionPane.showMessageDialog(null, "Please Select one or more rows to export", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+            } else {
+                pymtSearchField.setText("");
+                TableModel model1 = jTable2.getModel();
 
-            int[] indexs = jTable2.getSelectedRows();
+                int[] indexs = jTable2.getSelectedRows();
 
-            Object[] row = new Object[8];
+                Object[] row = new Object[8];
 
-            PaymntExpo exportpayment = new PaymntExpo();
-            DefaultTableModel model2 = (DefaultTableModel) exportpayment.paymntExpoTbl.getModel();
+                PaymntExpo exportpayment = new PaymntExpo();
+                DefaultTableModel model2 = (DefaultTableModel) exportpayment.paymntExpoTbl.getModel();
 
-            for (int i = 0; i < indexs.length; i++) {
-                row[0] = model1.getValueAt(indexs[i], 0);
+                for (int i = 0; i < indexs.length; i++) {
+                    row[0] = model1.getValueAt(indexs[i], 0);
 
-                row[1] = model1.getValueAt(indexs[i], 1);
+                    row[1] = model1.getValueAt(indexs[i], 1);
 
-                row[2] = model1.getValueAt(indexs[i], 2);
+                    row[2] = model1.getValueAt(indexs[i], 2);
 
-                row[3] = model1.getValueAt(indexs[i], 3);
+                    row[3] = model1.getValueAt(indexs[i], 3);
 
-                row[4] = model1.getValueAt(indexs[i], 4);
+                    row[4] = model1.getValueAt(indexs[i], 4);
 
-                row[5] = model1.getValueAt(indexs[i], 5);
+                    row[5] = model1.getValueAt(indexs[i], 5);
 
-                row[6] = model1.getValueAt(indexs[i], 6);
+                    row[6] = model1.getValueAt(indexs[i], 6);
 
 //                row[7] = model1.getValueAt(indexs[i], 7);
+                    model2.addRow(row);
+                }
 
-                model2.addRow(row);
+                exportpayment.setVisible(true);
+                exportpayment.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
             }
-
-            exportpayment.setVisible(true);
-            exportpayment.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        }
         } catch (HeadlessException e) {
-            
+
             System.out.println(e.getMessage());
         }
-        
 
 
     }//GEN-LAST:event_sendBtnPymntInfoActionPerformed
@@ -2380,7 +2377,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 row[5] = model1.getValueAt(indexs[i], 5);
 
                 row[6] = model1.getValueAt(indexs[i], 6);
-                
+
                 row[7] = model1.getValueAt(indexs[i], 7);
 
                 model2.addRow(row);
@@ -2528,47 +2525,39 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             DefaultTableModel dtmodP = (DefaultTableModel) jTable2.getModel();
             dtmodP.setRowCount(0);
 
-            
-
 //  data validation
-            if ((!("Select".equals(cbmonth))) && (!("Select".equals(cbyr))) && (!("Select".equals(cbSubj))) ) {
-                
-                String q="SELECT * FROM `payment_table` WHERE `Year`='"+cbyr+"' AND `Month`='"+cbmonth+"' AND `Subj_Name`='"+cbSubj+"';";
-                
+            if ((!("Select".equals(cbmonth))) && (!("Select".equals(cbyr))) && (!("Select".equals(cbSubj)))) {
+
+                String q = "SELECT * FROM `payment_table` WHERE `Year`='" + cbyr + "' AND `Month`='" + cbmonth + "' AND `Subj_Name`='" + cbSubj + "';";
+
                 try {
-                Statement stP = conrp.createStatement();
+                    Statement stP = conrp.createStatement();
 
-                try (ResultSet rsp = stP.executeQuery(q)) {
-                    while (rsp.next()) {
-                        Vector v3 = new Vector();
-                        v3.add(rsp.getInt("Std_ID"));
-                        v3.add(rsp.getString("Std_Name"));
-                        v3.add(rsp.getString("Subj_Name"));
-                        v3.add(rsp.getString("Tchr_Name"));
-                        v3.add(rsp.getString("Payment_fee"));
-                        v3.add(rsp.getString("Grade"));
-                        v3.add(rsp.getString("Month"));
-                        v3.add(rsp.getString("Date_paid"));
+                    try (ResultSet rsp = stP.executeQuery(q)) {
+                        while (rsp.next()) {
+                            Vector v3 = new Vector();
+                            v3.add(rsp.getInt("Std_ID"));
+                            v3.add(rsp.getString("Std_Name"));
+                            v3.add(rsp.getString("Subj_Name"));
+                            v3.add(rsp.getString("Tchr_Name"));
+                            v3.add(rsp.getString("Payment_fee"));
+                            v3.add(rsp.getString("Grade"));
+                            v3.add(rsp.getString("Month"));
+                            v3.add(rsp.getString("Date_paid"));
 
-                        dtmodP.addRow(v3);
+                            dtmodP.addRow(v3);
+                        }
+                        stP.close();
+                        conrp.close();
                     }
-                    stP.close();
-                    conrp.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            } else{
+            } else {
                 JOptionPane.showMessageDialog(null, "You must Select three filter options", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
             }
 
 //  end of data validation
-            
-            
-
-
-            
-
         }
 
 
@@ -2658,30 +2647,30 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             DefaultTableModel dtmodP = (DefaultTableModel) jTable1.getModel();
             dtmodP.setRowCount(0);
 
-            if ((!("Select".equals(cbSubj))) && (!("Select".equals(cbBatch))) ) {
+            if ((!("Select".equals(cbSubj))) && (!("Select".equals(cbBatch)))) {
                 try {
-                DefaultTableModel dtattnf = (DefaultTableModel) jTable1.getModel();
-                dtattnf.setRowCount(0);
-                Statement attnSt = conrp.createStatement();
-                try (ResultSet attnfrs = attnSt.executeQuery("SELECT * FROM attndance_table WHERE `Subj_Name`='"+cbSubj+"' AND `Grade`='"+cbBatch+"';")) {
-                    while (attnfrs.next()) {
-                        Vector Ve1 = new Vector();
-                        Ve1.add(attnfrs.getString("Date"));
-                        Ve1.add(attnfrs.getString("Subj_Name"));
-                        Ve1.add(attnfrs.getInt("Std_ID"));
-                        Ve1.add(attnfrs.getString("Std_Name"));
-                        Ve1.add(attnfrs.getString("Grade"));
-                        Ve1.add(attnfrs.getString("Tchr_Name"));
-                        Ve1.add(attnfrs.getString("Status"));
-                        Ve1.add(attnfrs.getString("Spc_Note"));
-                        dtattnf.addRow(Ve1);
+                    DefaultTableModel dtattnf = (DefaultTableModel) jTable1.getModel();
+                    dtattnf.setRowCount(0);
+                    Statement attnSt = conrp.createStatement();
+                    try (ResultSet attnfrs = attnSt.executeQuery("SELECT * FROM attndance_table WHERE `Subj_Name`='" + cbSubj + "' AND `Grade`='" + cbBatch + "';")) {
+                        while (attnfrs.next()) {
+                            Vector Ve1 = new Vector();
+                            Ve1.add(attnfrs.getString("Date"));
+                            Ve1.add(attnfrs.getString("Subj_Name"));
+                            Ve1.add(attnfrs.getInt("Std_ID"));
+                            Ve1.add(attnfrs.getString("Std_Name"));
+                            Ve1.add(attnfrs.getString("Grade"));
+                            Ve1.add(attnfrs.getString("Tchr_Name"));
+                            Ve1.add(attnfrs.getString("Status"));
+                            Ve1.add(attnfrs.getString("Spc_Note"));
+                            dtattnf.addRow(Ve1);
+                        }
+                        attnSt.close();
+                        conrp.close();
                     }
-                    attnSt.close();
-                    conrp.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
             } else {
                 JOptionPane.showMessageDialog(null, "You must Select two filter options", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
             }
@@ -2690,8 +2679,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
     private void stdFilterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stdFilterBtnActionPerformed
         // TODO add your handling code here:
-        
-         JComboBox cb1 = new JComboBox();
+
+        JComboBox cb1 = new JComboBox();
         //load Subject to cb1
         cb1.addItem("Select"); // add first value of combobox to "Select"
         Connection cons;
@@ -2717,8 +2706,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
         //finish load Subject to cb1
-        
-     
+
         JComboBox cb2 = new JComboBox();
         //load grade to cb2
         cb2.addItem("Select"); // add first value of combobox to "Select"
@@ -2745,8 +2733,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
         //finish load grade to cb2
-        
-        
+
         JPanel myPanel = new JPanel();
         myPanel.add(new JLabel("Subject:"));
         myPanel.add(cb1);
@@ -2757,8 +2744,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         int result = JOptionPane.showConfirmDialog(null, myPanel,
                 "Advanced Filter Options", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
-            
-            
+
             Connection conrp;
             conrp = DBConnect.connect();
 
@@ -2775,40 +2761,39 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             DefaultTableModel dtmodP = (DefaultTableModel) jTable3.getModel();
             dtmodP.setRowCount(0);
 
-            if ((!("Select".equals(cbSubj))) && (!("Select".equals(cbBatch))) ) {
+            if ((!("Select".equals(cbSubj))) && (!("Select".equals(cbBatch)))) {
                 try {
-                DefaultTableModel dtattnf = (DefaultTableModel) jTable3.getModel();
-                dtattnf.setRowCount(0);
-                Statement stdSt = conrp.createStatement();
-                try (ResultSet stdrs = stdSt.executeQuery("SELECT * FROM std_info_table WHERE `Subjects` LIKE '%"+cbSubj+"%' AND `ol_yr`='"+cbBatch+"';")) {
-                    while (stdrs.next()) {
-                    Vector v = new Vector();
-                    v.add(stdrs.getString("Std_ID"));
-                    v.add(stdrs.getString("Std_Name"));
-                    v.add(stdrs.getString("Name_with_Initials"));
-                    v.add(stdrs.getString("Address"));
-                    v.add(stdrs.getString("DOB"));
-                    v.add(stdrs.getString("Subjects"));
-                    v.add(stdrs.getString("Grade"));
-                    v.add(stdrs.getString("Phone_no"));
-                    v.add(stdrs.getString("sex"));
-                    v.add(stdrs.getString("Grd_name"));
-                    v.add(stdrs.getString("Grd_Phone_no"));
-                    dtattnf.addRow(v);
+                    DefaultTableModel dtattnf = (DefaultTableModel) jTable3.getModel();
+                    dtattnf.setRowCount(0);
+                    Statement stdSt = conrp.createStatement();
+                    try (ResultSet stdrs = stdSt.executeQuery("SELECT * FROM std_info_table WHERE `Subjects` LIKE '%" + cbSubj + "%' AND `ol_yr`='" + cbBatch + "';")) {
+                        while (stdrs.next()) {
+                            Vector v = new Vector();
+                            v.add(stdrs.getString("Std_ID"));
+                            v.add(stdrs.getString("Std_Name"));
+                            v.add(stdrs.getString("Name_with_Initials"));
+                            v.add(stdrs.getString("Address"));
+                            v.add(stdrs.getString("DOB"));
+                            v.add(stdrs.getString("Subjects"));
+                            v.add(stdrs.getString("Grade"));
+                            v.add(stdrs.getString("Phone_no"));
+                            v.add(stdrs.getString("sex"));
+                            v.add(stdrs.getString("Grd_name"));
+                            v.add(stdrs.getString("Grd_Phone_no"));
+                            dtattnf.addRow(v);
+                        }
+                        stdSt.close();
+                        conrp.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-                    stdSt.close();
-                    conrp.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
             } else {
                 JOptionPane.showMessageDialog(null, "You must Select two filter options", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
             }
-            
-            
+
         }
-        
+
     }//GEN-LAST:event_stdFilterBtnActionPerformed
 
     private void onClick(JPanel panel) {
@@ -2942,8 +2927,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void icon() {
-        
+
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/Project Icon.png")));
-    
+
     }
 }

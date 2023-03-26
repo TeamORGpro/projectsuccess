@@ -174,6 +174,7 @@ public class Login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cnslBtnActionPerformed
 
+    private static Process process;
     private void btnLinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLinActionPerformed
         String username = uNameTxt.getText();
         String password = String.valueOf(passWordArea.getPassword());
@@ -188,6 +189,16 @@ public class Login extends javax.swing.JFrame {
 
         }
 
+        try {
+            // Replace this with the path to your XAMPP installation folder
+            String xamppPath = "C:\\xampp";
+
+            // Start MySQL in the background
+            String[] command = {"cmd.exe", "/c", "start", "cmd.exe", "/c", "cd \"" + xamppPath + "\" && mysql\\bin\\mysqld.exe"};
+            process = Runtime.getRuntime().exec(command);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }//GEN-LAST:event_btnLinActionPerformed
 
