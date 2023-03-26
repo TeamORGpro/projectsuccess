@@ -1148,20 +1148,20 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jTable2.setAutoCreateRowSorter(true);
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Student ID", "Student  Name", "Subject", "Teacher's Name", "Subject Fee", "Grade", "Last Paid Month", "Paid Date"
+                "Student ID", "Student  Name", "Subject", "Subject Fee", "Grade", "Last Paid Month", "Paid Date"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1187,16 +1187,14 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             jTable2.getColumnModel().getColumn(1).setPreferredWidth(200);
             jTable2.getColumnModel().getColumn(2).setMinWidth(200);
             jTable2.getColumnModel().getColumn(2).setPreferredWidth(200);
-            jTable2.getColumnModel().getColumn(3).setMinWidth(200);
-            jTable2.getColumnModel().getColumn(3).setPreferredWidth(200);
-            jTable2.getColumnModel().getColumn(4).setMinWidth(75);
-            jTable2.getColumnModel().getColumn(4).setPreferredWidth(75);
+            jTable2.getColumnModel().getColumn(3).setMinWidth(75);
+            jTable2.getColumnModel().getColumn(3).setPreferredWidth(75);
+            jTable2.getColumnModel().getColumn(4).setMinWidth(100);
+            jTable2.getColumnModel().getColumn(4).setPreferredWidth(100);
             jTable2.getColumnModel().getColumn(5).setMinWidth(100);
             jTable2.getColumnModel().getColumn(5).setPreferredWidth(100);
             jTable2.getColumnModel().getColumn(6).setMinWidth(100);
             jTable2.getColumnModel().getColumn(6).setPreferredWidth(100);
-            jTable2.getColumnModel().getColumn(7).setMinWidth(100);
-            jTable2.getColumnModel().getColumn(7).setPreferredWidth(100);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -1490,8 +1488,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     Vector v3 = new Vector();
                     v3.add(rs3.getInt("Std_ID"));
                     v3.add(rs3.getString("Std_Name"));
-                    v3.add(rs3.getString("Subj_Name"));
-                    v3.add(rs3.getString("Tchr_Name"));
+                    v3.add(rs3.getString("Subj_Names"));
+//                    v3.add(rs3.getString("Tchr_Name"));
                     v3.add(rs3.getString("Payment_fee"));
                     v3.add(rs3.getString("Grade"));
                     v3.add(rs3.getString("Month"));
@@ -2199,8 +2197,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private void sendBtnPymntInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendBtnPymntInfoActionPerformed
         // TODO add your handling code here:
         int rCount = jTable2.getSelectedRowCount();
-
-        if (rCount == 0) {
+        try {
+            if (rCount == 0) {
             JOptionPane.showMessageDialog(null, "Please Select one or more rows to export", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
         } else {
             pymtSearchField.setText("");
@@ -2228,7 +2226,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
                 row[6] = model1.getValueAt(indexs[i], 6);
 
-                row[7] = model1.getValueAt(indexs[i], 7);
+//                row[7] = model1.getValueAt(indexs[i], 7);
 
                 model2.addRow(row);
             }
@@ -2236,6 +2234,11 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             exportpayment.setVisible(true);
             exportpayment.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         }
+        } catch (HeadlessException e) {
+            
+            System.out.println(e.getMessage());
+        }
+        
 
 
     }//GEN-LAST:event_sendBtnPymntInfoActionPerformed

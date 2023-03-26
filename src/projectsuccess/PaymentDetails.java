@@ -51,13 +51,6 @@ public final class PaymentDetails extends javax.swing.JFrame {
 
     @SuppressWarnings("unchecked")
 
-    private void reset() {
-        txtstdID.setText("");
-        lblstdName.setText("");
-        grdLabel.setText("");
-
-    }
-
     public void dt() {
         java.util.Date d = new java.util.Date();
 
@@ -265,7 +258,12 @@ public final class PaymentDetails extends javax.swing.JFrame {
 
     private void newBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newBtnActionPerformed
         // TODO add your handling code here:
-        reset();
+        Window window = SwingUtilities.getWindowAncestor(newBtn);
+        window.dispose();
+
+        PaymentDetails newWindow = new PaymentDetails();
+        newWindow.setVisible(true);
+
     }//GEN-LAST:event_newBtnActionPerformed
 
     private void cnslBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cnslBtnActionPerformed
@@ -315,13 +313,14 @@ public final class PaymentDetails extends javax.swing.JFrame {
 
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
         // TODO add your handling code here:
+        /*
         if (txtstdID.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please Fill the Required Fields", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
         } else {
             int Std_ID = Integer.parseInt(txtstdID.getText());
             String Std_Name = lblstdName.getText();
             String subject = (String) subCB.getSelectedItem();
-            
+
             String grd = grdLabel.getText();
             String fee = feeLbl.getText();
             String mnth = (String) monthCB.getSelectedItem();
@@ -361,6 +360,70 @@ public final class PaymentDetails extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Please Fill Required Fields!", "Error Occured!", JOptionPane.ERROR_MESSAGE);
             }
         }
+         */
+
+        if (txtstdID.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please Fill the Required Fields", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int Std_ID = Integer.parseInt(txtstdID.getText());
+            String Std_Name = lblstdName.getText();
+
+            //subject list edit
+//            String subject = (String) subCB.getSelectedItem();
+            DefaultTableModel model = (DefaultTableModel) subj_tbl.getModel();
+            String values = "";
+            for (int i = 0; i < model.getRowCount(); i++) {
+                // Get the value of the column containing the multiple values
+                Object valueObject = model.getValueAt(i, 0);
+
+                // Cast the object to a string and add it to the concatenated string with a comma separator
+                String value = (valueObject != null) ? valueObject.toString() : "";
+                if (i == 0) {
+                    values = value;
+                } else {
+                    values += ", " + value;
+                }
+            }
+//            String subject=values;
+            String grd = grdLabel.getText();
+            String fee = feeLbl.getText();
+            String mnth = (String) monthCB.getSelectedItem();
+            String date = dateLbl.getText();
+            String yr = dateLbl.getText().substring(0, 4);
+
+            if (!Std_Name.isEmpty()) {
+                Connection con;
+                con = DBConnect.connect();
+                PreparedStatement pstmt3;
+
+                try {
+
+                    String query = "insert into payment_table(Std_ID,Std_Name,Subj_Names,Payment_fee,Grade,Month,Date_paid,Year)values(?,?,?,?,?,?,?,?)";
+
+                    pstmt3 = con.prepareStatement(query);
+
+                    pstmt3.setInt(1, Std_ID);
+                    pstmt3.setString(2, Std_Name);
+                    pstmt3.setString(3, values);
+                    pstmt3.setString(4, fee);
+                    pstmt3.setString(5, grd);
+                    pstmt3.setString(6, mnth);
+                    pstmt3.setString(7, date);
+                    pstmt3.setString(8, yr);
+
+                    pstmt3.execute();
+                    JOptionPane.showMessageDialog(null, "Data successfully Saved!");
+
+                    pstmt3.close();
+                    con.close();
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                    JOptionPane.showMessageDialog(null, "Please check your filled data! ", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Please Fill Required Fields!", "Error Occured!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
 
 
     }//GEN-LAST:event_createBtnActionPerformed
@@ -381,12 +444,33 @@ public final class PaymentDetails extends javax.swing.JFrame {
                 String subjectName = rs2.getString("Subj_Name");
                 String TeacherName = rs2.getString("Tchr_Name");
                 String paymentfee = rs2.getString("Payment_Fees");
-                feeLbl.setText(paymentfee);
-                String[] columns1={subjectName, TeacherName, paymentfee};
-                DefaultTableModel pmntTablemodel= (DefaultTableModel)subj_tbl.getModel();
+
+                String[] columns1 = {subjectName, TeacherName, paymentfee};
+                DefaultTableModel pmntTablemodel = (DefaultTableModel) subj_tbl.getModel();
                 pmntTablemodel.addRow(columns1);
-                
-                
+
+                int numRows = pmntTablemodel.getRowCount();
+                double totalFees = 0.0;
+                for (int i = 0; i < numRows; i++) {
+
+                    Object value = pmntTablemodel.getValueAt(i, 2);
+                    if (value instanceof String) {
+                        try {
+                            double doubleValue = Double.parseDouble((String) value);
+                            totalFees += doubleValue;
+                            String totFee = Double.toString(totalFees);
+                            feeLbl.setText(totFee);
+                        } catch (NumberFormatException e) {
+                            System.out.println(e.getMessage());
+                        }
+                    }
+//                    double fee = (double) pmntTablemodel.getValueAt(i, 2);
+//
+//                    totalFees += fee;
+                }
+//                String totFee = Double.toString(totalFees);
+//                feeLbl.setText(totFee);
+
             } else {
                 JOptionPane.showMessageDialog(null, "Please Enter Valid Subject Name");
                 feeLbl.setText("");
@@ -460,6 +544,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
         }
 
     }
+
     /**
      * @param args the command line arguments
      */
