@@ -179,7 +179,7 @@ public class Login extends javax.swing.JFrame {
         String username = uNameTxt.getText();
         String password = String.valueOf(passWordArea.getPassword());
 
-        if (username.equals("") && password.equals("")) {
+        if (username.equals("Success higher educational institute") && password.equals("ADMINpwd141414")) {
             this.dispose();
             HomeWindowV2 h1 = new HomeWindowV2();
             h1.setVisible(true);
