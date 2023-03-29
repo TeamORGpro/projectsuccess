@@ -557,10 +557,13 @@ public class StdRegForm extends javax.swing.JFrame {
                                     JOptionPane.showMessageDialog(this, "QR code downloaded successfully");
                                 } catch (IOException e) {
                                     e.printStackTrace();
+//                                    JOptionPane.showMessageDialog(null, "There is a Probleme to download QR Code", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                                    JOptionPane.showMessageDialog(this, "Error downloading QR code: " + e.getMessage()+" error or internet error", "Error", JOptionPane.ERROR_MESSAGE);
                                 }
                             }
-                        } catch (Exception e) {
+                        } catch (HeadlessException e) {
                             JOptionPane.showMessageDialog(null, "There is a Probleme to download QR Code", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                            e.getMessage();
                         }
 
                     } else {
