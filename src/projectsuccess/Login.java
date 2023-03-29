@@ -183,22 +183,22 @@ public class Login extends javax.swing.JFrame {
             this.dispose();
             HomeWindowV2 h1 = new HomeWindowV2();
             h1.setVisible(true);
+            try {
+                // Replace this with the path to your XAMPP installation folder
+                String xamppPath = "C:\\xampp";
+
+                // Start MySQL in the background
+                String[] command = {"cmd.exe", "/c", "start", "cmd.exe", "/c", "cd \"" + xamppPath + "\" && mysql\\bin\\mysqld.exe"};
+                process = Runtime.getRuntime().exec(command);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
             Component frame = null;
             JOptionPane.showMessageDialog(frame, "invaild username or password");
 
         }
 
-        try {
-            // Replace this with the path to your XAMPP installation folder
-            String xamppPath = "C:\\xampp";
-
-            // Start MySQL in the background
-            String[] command = {"cmd.exe", "/c", "start", "cmd.exe", "/c", "cd \"" + xamppPath + "\" && mysql\\bin\\mysqld.exe"};
-            process = Runtime.getRuntime().exec(command);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
     }//GEN-LAST:event_btnLinActionPerformed
 

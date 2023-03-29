@@ -1578,7 +1578,6 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         int reply = JOptionPane.showConfirmDialog(null,
                 "Do you really want to log out ?", "Logging Out", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
-            System.exit(0);
             try {
                 // Replace this with the path to your XAMPP installation folder
                 String xamppPath = "C:\\xampp";
@@ -1589,9 +1588,12 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
                 // Wait for the command to complete
                 process.waitFor();
+                Runtime.getRuntime().exec("taskkill /F /IM mysqld.exe");// this command force kill the mysqld.exe
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
+            System.exit(0);
+
         }
 
     }//GEN-LAST:event_btnLoutActionPerformed

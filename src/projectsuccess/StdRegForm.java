@@ -14,6 +14,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.*;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author pc
@@ -438,88 +445,133 @@ public class StdRegForm extends javax.swing.JFrame {
             Statement stV = stdVcon.createStatement();
             ResultSet rsV = stV.executeQuery(qury);
             try {
-                if(rsV.next()==true){
-                    
+                if (rsV.next() == true) {
+
                     String s = rsV.getString("Std_Name").toLowerCase();
                     String s1 = rsV.getString("DOB");
 
-            System.out.println(s);
+                    System.out.println(s);
 
-            stdVcon.close();
-            stV.close();
-            rsV.close();
+                    stdVcon.close();
+                    stV.close();
+                    rsV.close();
 
 //            if (v_name.equals(s) && v_date.equals(s1)) {
 //                System.out.println("Name match");
-                JOptionPane.showMessageDialog(null, "Hmm. looks like a student already in the institute", "Error!", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Hmm. looks like a student already in the institute", "Error!", JOptionPane.ERROR_MESSAGE);
 
 //            }
-                    
-                }else {
+                } else {
 
-                String Std_Name = txtstdName.getText();
-                String Name_with_Initials = txtstdNameShort.getText();
-                String Address = txtAddress.getText();
-                String DOB = txtDob.getText();
-                String subject = txtSubject.getText();
-                String Grade = (String) gradeCB.getSelectedItem();
-                String Phone_no = txtPhoneNo.getText();
-                String sex = (String) cboxSex.getSelectedItem();
-                String Grd_name = txtguardiansName.getText();
-                String Grd_Phone_no = txtgphoneNo.getText();
-                String batchyear = (String) batchYr.getSelectedItem();
+                    String Std_Name = txtstdName.getText();
+                    String Name_with_Initials = txtstdNameShort.getText();
+                    String Address = txtAddress.getText();
+                    String DOB = txtDob.getText();
+                    String subject = txtSubject.getText();
+                    String Grade = (String) gradeCB.getSelectedItem();
+                    String Phone_no = txtPhoneNo.getText();
+                    String sex = (String) cboxSex.getSelectedItem();
+                    String Grd_name = txtguardiansName.getText();
+                    String Grd_Phone_no = txtgphoneNo.getText();
+                    String batchyear = (String) batchYr.getSelectedItem();
 
-                // need validation part here
-                Connection con;
-                PreparedStatement pstmt;
-                con = DBConnect.connect();
-                if (!Std_Name.isEmpty() && !Name_with_Initials.isEmpty() && !Address.isEmpty() && !("yyyy-mm-dd".equals(DOB)) && !subject.isEmpty() && !Grade.isEmpty() && !sex.isEmpty() && !Grd_name.isEmpty() && !Grd_Phone_no.isEmpty() && !("Select Exam Year".equals(batchyear))) {
+                    // need validation part here
+                    Connection con;
+                    PreparedStatement pstmt;
+                    con = DBConnect.connect();
+                    if (!Std_Name.isEmpty() && !Name_with_Initials.isEmpty() && !Address.isEmpty() && !("yyyy-mm-dd".equals(DOB)) && !subject.isEmpty() && !Grade.isEmpty() && !sex.isEmpty() && !Grd_name.isEmpty() && !Grd_Phone_no.isEmpty() && !("Select Exam Year".equals(batchyear))) {
 
-                    try {
+                        try {
 
-                        String query = "insert into std_info_table(Std_Name,Name_with_Initials,Address,DOB,Subjects,Grade,Phone_no,sex,Grd_name,Grd_Phone_no,ol_yr)values(?,?,?,?,?,?,?,?,?,?,?)";
+                            String query = "insert into std_info_table(Std_Name,Name_with_Initials,Address,DOB,Subjects,Grade,Phone_no,sex,Grd_name,Grd_Phone_no,ol_yr)values(?,?,?,?,?,?,?,?,?,?,?)";
 
-                        pstmt = con.prepareStatement(query);
+                            pstmt = con.prepareStatement(query);
 
-                        pstmt.setString(1, Std_Name);
-                        pstmt.setString(2, Name_with_Initials);
-                        pstmt.setString(3, Address);
-                        pstmt.setString(4, DOB);
-                        pstmt.setString(5, subject);
-                        pstmt.setString(6, Grade);
-                        pstmt.setString(7, Phone_no);
-                        pstmt.setString(8, sex);
-                        pstmt.setString(9, Grd_name);
-                        pstmt.setString(10, Grd_Phone_no);
-                        pstmt.setString(11, batchyear);
+                            pstmt.setString(1, Std_Name);
+                            pstmt.setString(2, Name_with_Initials);
+                            pstmt.setString(3, Address);
+                            pstmt.setString(4, DOB);
+                            pstmt.setString(5, subject);
+                            pstmt.setString(6, Grade);
+                            pstmt.setString(7, Phone_no);
+                            pstmt.setString(8, sex);
+                            pstmt.setString(9, Grd_name);
+                            pstmt.setString(10, Grd_Phone_no);
+                            pstmt.setString(11, batchyear);
 
-                        pstmt.execute();
-                        System.out.println("query successfully executed");
-                        JOptionPane.showMessageDialog(null, "query successfully executed");
+                            pstmt.execute();
+                            JOptionPane.showMessageDialog(null, "query successfully executed");
 
-                        pstmt.close();
-                        con.close();
-                    } catch (SQLException e) {
+                            pstmt.close();
+                            con.close();
+                        } catch (SQLException e) {
 
-                        if (e.getLocalizedMessage() == null ? "Data truncation: Incorrect date value: '" + DOB + "' for column `successdb`.`std_info_table`.`DOB` at row 1" == null : e.getLocalizedMessage().equals("Data truncation: Incorrect date value: '" + DOB + "' for column `successdb`.`std_info_table`.`DOB` at row 1")) {
-                            JOptionPane.showMessageDialog(null, "Please enter right date format", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Error :" + e.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                            if (e.getLocalizedMessage() == null ? "Data truncation: Incorrect date value: '" + DOB + "' for column `successdb`.`std_info_table`.`DOB` at row 1" == null : e.getLocalizedMessage().equals("Data truncation: Incorrect date value: '" + DOB + "' for column `successdb`.`std_info_table`.`DOB` at row 1")) {
+                                JOptionPane.showMessageDialog(null, "Please enter right date format", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Error :" + e.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                            }
+
                         }
 
+//                      QR code Generate and Download code
+                        try {
+                            // Get the text from the text field
+                            String qrText = txtStdID.getText();
+
+                            // Generate the URL for the QR code image using the Google Charts API
+                            String url = "https://chart.googleapis.com/chart?cht=qr&chl=" + qrText + "&chs=200x200";
+
+                            // Show a file chooser dialog to let the user choose where to save the QR code image
+                            JFileChooser fileChooser = new JFileChooser();
+
+                            // Set a default file name and extension
+                            String defaultFileName = "" + qrText + ".png";
+                            fileChooser.setSelectedFile(new File(defaultFileName));
+
+                            fileChooser.setDialogTitle("Save QR Code");
+                            int userSelection = fileChooser.showSaveDialog(this);
+
+                            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                                try {
+                                    // Get the selected file and create a file output stream
+                                    File fileToSave = fileChooser.getSelectedFile();
+                                    FileOutputStream out = new FileOutputStream(fileToSave);
+
+                                    // Open a connection to the URL and get the input stream
+                                    URL qrCodeUrl = new URL(url);
+                                    InputStream in = qrCodeUrl.openStream();
+
+                                    // Write the image data to the selected file
+                                    byte[] buffer = new byte[1024];
+                                    int bytesRead;
+                                    while ((bytesRead = in.read(buffer)) != -1) {
+                                        out.write(buffer, 0, bytesRead);
+                                    }
+
+                                    // Close the input and output streams
+                                    in.close();
+                                    out.close();
+
+//                                    System.out.println("QR code downloaded successfully");
+                                    JOptionPane.showMessageDialog(this, "QR code downloaded successfully");
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, "There is a Probleme to download QR Code", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Please Fill the Required Fields", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
                     }
 
-                } else {
-                    JOptionPane.showMessageDialog(null, "Please Fill the Required Fields", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
                 }
-
-            }
             } catch (SQLException e) {
                 e.printStackTrace();
 
             }
-
-             
 
         } catch (SQLException e) {
             e.printStackTrace();
