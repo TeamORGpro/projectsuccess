@@ -192,6 +192,7 @@ public class Login extends javax.swing.JFrame {
                 process = Runtime.getRuntime().exec(command);
             } catch (IOException e) {
                 e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "DB Connection error : " + e.getMessage()+" error or internet error", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             Component frame = null;

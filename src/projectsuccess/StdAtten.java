@@ -443,7 +443,7 @@ public class StdAtten extends javax.swing.JFrame {
                     con.close();
                 } catch (SQLException e) {
                     JOptionPane.showMessageDialog(null, "Error:" + e.getLocalizedMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
-                    System.out.println(e.getMessage());
+//                    System.out.println(e.getMessage());
                 }
 
             } else {
