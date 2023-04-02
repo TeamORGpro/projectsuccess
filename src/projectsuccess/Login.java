@@ -8,6 +8,7 @@ package projectsuccess;
 import java.awt.Component;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.File;
 import java.io.IOException;
 //import java.awt.event.WindowAdapter;
 //import java.awt.event.WindowEvent;
@@ -184,15 +185,23 @@ public class Login extends javax.swing.JFrame {
             HomeWindowV2 h1 = new HomeWindowV2();
             h1.setVisible(true);
             try {
+                /*
                 // Replace this with the path to your XAMPP installation folder
                 String xamppPath = "C:\\xampp";
 
                 // Start MySQL in the background
                 String[] command = {"cmd.exe", "/c", "start", "cmd.exe", "/c", "cd \"" + xamppPath + "\" && mysql\\bin\\mysqld.exe"};
                 process = Runtime.getRuntime().exec(command);
+                 */
+
+                String xamppPath = "C:\\xampp";
+                ProcessBuilder pb = new ProcessBuilder(xamppPath + "\\mysql\\bin\\mysqld.exe");
+                pb.directory(new File(xamppPath));
+                Process process = pb.start();
+
             } catch (IOException e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(this, "DB Connection error : " + e.getMessage()+" error or internet error", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "DB Connection error : " + e.getMessage() + " error or internet error", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             Component frame = null;
