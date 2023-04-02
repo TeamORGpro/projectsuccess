@@ -59,10 +59,10 @@ public final class PaymentDetails extends javax.swing.JFrame {
         String dd = sdat.format(d);
         dateLbl.setText(dd);
     }
-    
-    public void lpaidMonth() throws SQLException{
+
+    public void lpaidMonth() throws SQLException {
         Connection con = DBConnect.connect();
-        
+
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT mycolumn FROM mytable WHERE id = 1");
     }
@@ -364,10 +364,34 @@ public final class PaymentDetails extends javax.swing.JFrame {
                 lblstdName.setText("");
 
             }
+
             pstmt.close();
             rs.close();
             con.close();
 
+//            ---------------------------------------------------------------------------------------------------------- Code Again this OR rewrite the query
+            String query = "SELECT Subj_Names FROM payment_table WHERE Std_ID = '" + studentID + "' AND Date_paid = (SELECT MAX(Date_paid) FROM payment_table WHERE Std_ID = '" + studentID + "' ORDER BY Date_paid DESC LIMIT 1)";
+
+            try {
+                Connection con1 = DBConnect.connect();
+                Statement stmt1 = con1.createStatement();
+                ResultSet rs1 = stmt1.executeQuery(query);
+                DefaultListModel<String> model = new DefaultListModel<>();
+                while (rs1.next()) {
+                    String[] subjects = rs1.getString("Subj_Names").split(", ");
+                    for (String subject : subjects) {
+                        model.addElement(subject);
+                    }
+                }
+                pdSbjlist.setModel(model);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+//            ----------------------------------------------------------------------------------------------------------
+//            pstmt.close();
+//            rs.close();
+//            con.close();
         } catch (HeadlessException | SQLException e) {
             System.out.println(e.getMessage());
         }
