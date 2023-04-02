@@ -71,7 +71,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
     private void initComponents() {
 
         addpaymentDetails = new javax.swing.JPanel();
-        month = new javax.swing.JLabel();
+        lblMonth = new javax.swing.JLabel();
         txtstdID = new javax.swing.JTextField();
         stdName = new javax.swing.JLabel();
         pmntDetails = new javax.swing.JLabel();
@@ -94,7 +94,14 @@ public final class PaymentDetails extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         subj_tbl = new javax.swing.JTable();
         lpaidMonth = new javax.swing.JLabel();
-        month2 = new javax.swing.JLabel();
+        lblPdsubjects = new javax.swing.JLabel();
+        lblLpdmonth = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        pdSbjlist = new javax.swing.JList<>();
+        lblAllsubjects = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        allEnrolledsbjlist = new javax.swing.JList<>();
+        lblPayingsubjects = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Payment Details");
@@ -106,11 +113,11 @@ public final class PaymentDetails extends javax.swing.JFrame {
         addpaymentDetails.setPreferredSize(new java.awt.Dimension(605, 700));
         addpaymentDetails.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        month.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        month.setText("Paying Month :");
-        month.setMaximumSize(new java.awt.Dimension(108, 14));
-        month.setMinimumSize(new java.awt.Dimension(108, 14));
-        addpaymentDetails.add(month, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 470, -1, 30));
+        lblMonth.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblMonth.setText("Paying Month :");
+        lblMonth.setMaximumSize(new java.awt.Dimension(108, 14));
+        lblMonth.setMinimumSize(new java.awt.Dimension(108, 14));
+        addpaymentDetails.add(lblMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, -1, 30));
 
         txtstdID.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtstdID.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -118,7 +125,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
                 txtstdIDKeyPressed(evt);
             }
         });
-        addpaymentDetails.add(txtstdID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 250, 30));
+        addpaymentDetails.add(txtstdID, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 220, 30));
 
         stdName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         stdName.setText("Student Name :");
@@ -144,18 +151,18 @@ public final class PaymentDetails extends javax.swing.JFrame {
         grade.setText("Grade In School :");
         grade.setMaximumSize(new java.awt.Dimension(83, 14));
         grade.setMinimumSize(new java.awt.Dimension(83, 14));
-        addpaymentDetails.add(grade, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, -1, 30));
+        addpaymentDetails.add(grade, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, 30));
 
         pmntFee.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         pmntFee.setText("Payment Fees (Rs) :");
         pmntFee.setMaximumSize(new java.awt.Dimension(57, 14));
         pmntFee.setMinimumSize(new java.awt.Dimension(57, 14));
-        addpaymentDetails.add(pmntFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, -1, 30));
+        addpaymentDetails.add(pmntFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, 30));
         addpaymentDetails.add(paymentIcn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 16, 40, 35));
 
         monthCB.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         monthCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
-        addpaymentDetails.add(monthCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 470, 128, 30));
+        addpaymentDetails.add(monthCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 550, 128, 30));
 
         createBtn.setBackground(new java.awt.Color(102, 255, 102));
         createBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -168,7 +175,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
                 createBtnActionPerformed(evt);
             }
         });
-        addpaymentDetails.add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 540, 100, 36));
+        addpaymentDetails.add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 620, 100, 36));
 
         newBtn.setBackground(new java.awt.Color(255, 255, 153));
         newBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -181,7 +188,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
                 newBtnActionPerformed(evt);
             }
         });
-        addpaymentDetails.add(newBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 540, 100, 36));
+        addpaymentDetails.add(newBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 620, 100, 36));
 
         cnslBtn.setBackground(new java.awt.Color(255, 102, 102));
         cnslBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -194,7 +201,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
                 cnslBtnActionPerformed(evt);
             }
         });
-        addpaymentDetails.add(cnslBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, 105, 36));
+        addpaymentDetails.add(cnslBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 620, 105, 36));
 
         searchBtn01.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         searchBtn01.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Search.png"))); // NOI18N
@@ -205,34 +212,34 @@ public final class PaymentDetails extends javax.swing.JFrame {
                 searchBtn01ActionPerformed(evt);
             }
         });
-        addpaymentDetails.add(searchBtn01, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, 100, 30));
+        addpaymentDetails.add(searchBtn01, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 100, 30));
 
         feeLbl.setBackground(new java.awt.Color(255, 255, 255));
         feeLbl.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         feeLbl.setText("0.00");
-        addpaymentDetails.add(feeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, 120, 30));
+        addpaymentDetails.add(feeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 120, 30));
 
         subCB.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        subCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Subject" }));
+        subCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Subjects" }));
         subCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 subCBActionPerformed(evt);
             }
         });
-        addpaymentDetails.add(subCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 360, 30));
+        addpaymentDetails.add(subCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 340, 30));
 
         lblstdName.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         addpaymentDetails.add(lblstdName, new org.netbeans.lib.awtextra.AbsoluteConstraints(203, 110, 357, 30));
 
         attnDate.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         attnDate.setText("Date :");
-        addpaymentDetails.add(attnDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, 40, 30));
+        addpaymentDetails.add(attnDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 20, 40, 30));
 
         dateLbl.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        addpaymentDetails.add(dateLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, 90, 30));
+        addpaymentDetails.add(dateLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 20, 90, 30));
 
         grdLabel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        addpaymentDetails.add(grdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, 110, 30));
+        addpaymentDetails.add(grdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 220, 110, 30));
 
         subj_tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -244,28 +251,64 @@ public final class PaymentDetails extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(subj_tbl);
 
-        addpaymentDetails.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 400, 160));
+        addpaymentDetails.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 100, 400, 300));
 
         lpaidMonth.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lpaidMonth.setMaximumSize(new java.awt.Dimension(108, 14));
         lpaidMonth.setMinimumSize(new java.awt.Dimension(108, 14));
-        addpaymentDetails.add(lpaidMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, 110, 30));
+        addpaymentDetails.add(lpaidMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, 110, 30));
 
-        month2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        month2.setText("Last Paid Month :");
-        month2.setMaximumSize(new java.awt.Dimension(108, 14));
-        month2.setMinimumSize(new java.awt.Dimension(108, 14));
-        addpaymentDetails.add(month2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, -1, 30));
+        lblPdsubjects.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblPdsubjects.setText("Paid Subjects :");
+        lblPdsubjects.setMaximumSize(new java.awt.Dimension(108, 14));
+        lblPdsubjects.setMinimumSize(new java.awt.Dimension(108, 14));
+        addpaymentDetails.add(lblPdsubjects, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, -1, 30));
+
+        lblLpdmonth.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblLpdmonth.setText("Last Paid Month :");
+        lblLpdmonth.setMaximumSize(new java.awt.Dimension(108, 14));
+        lblLpdmonth.setMinimumSize(new java.awt.Dimension(108, 14));
+        addpaymentDetails.add(lblLpdmonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, 30));
+
+        pdSbjlist.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(pdSbjlist);
+
+        addpaymentDetails.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 340, 100));
+
+        lblAllsubjects.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblAllsubjects.setText("All enrolled subjects :");
+        lblAllsubjects.setMaximumSize(new java.awt.Dimension(108, 14));
+        lblAllsubjects.setMinimumSize(new java.awt.Dimension(108, 14));
+        addpaymentDetails.add(lblAllsubjects, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 430, -1, 30));
+
+        allEnrolledsbjlist.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(allEnrolledsbjlist);
+
+        addpaymentDetails.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 470, 400, 190));
+
+        lblPayingsubjects.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblPayingsubjects.setText("Paying subjects :");
+        lblPayingsubjects.setMaximumSize(new java.awt.Dimension(108, 14));
+        lblPayingsubjects.setMinimumSize(new java.awt.Dimension(108, 14));
+        addpaymentDetails.add(lblPayingsubjects, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, -1, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(addpaymentDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
+            .addComponent(addpaymentDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(addpaymentDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
+            .addComponent(addpaymentDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
         );
 
         pack();
@@ -382,7 +425,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
         }
          */
 
-        if (txtstdID.getText().isEmpty()) {
+        if (txtstdID.getText().isEmpty() || "Choose Subjects".equals(subCB)) {
             JOptionPane.showMessageDialog(null, "Please Fill the Required Fields", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
         } else {
             int Std_ID = Integer.parseInt(txtstdID.getText());
@@ -611,6 +654,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addpaymentDetails;
+    private javax.swing.JList<String> allEnrolledsbjlist;
     private javax.swing.JLabel attnDate;
     private javax.swing.JButton cnslBtn;
     private javax.swing.JButton createBtn;
@@ -619,13 +663,19 @@ public final class PaymentDetails extends javax.swing.JFrame {
     private javax.swing.JLabel grade;
     private javax.swing.JLabel grdLabel;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblAllsubjects;
+    private javax.swing.JLabel lblLpdmonth;
+    private javax.swing.JLabel lblMonth;
+    private javax.swing.JLabel lblPayingsubjects;
+    private javax.swing.JLabel lblPdsubjects;
     private javax.swing.JLabel lblstdName;
     private javax.swing.JLabel lpaidMonth;
-    private javax.swing.JLabel month;
-    private javax.swing.JLabel month2;
     private javax.swing.JComboBox<String> monthCB;
     private javax.swing.JButton newBtn;
     private javax.swing.JLabel paymentIcn1;
+    private javax.swing.JList<String> pdSbjlist;
     private javax.swing.JLabel pmntDetails;
     private javax.swing.JLabel pmntFee;
     private javax.swing.JLabel sbjName;
