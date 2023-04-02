@@ -59,6 +59,13 @@ public final class PaymentDetails extends javax.swing.JFrame {
         String dd = sdat.format(d);
         dateLbl.setText(dd);
     }
+    
+    public void lpaidMonth() throws SQLException{
+        Connection con = DBConnect.connect();
+        
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT mycolumn FROM mytable WHERE id = 1");
+    }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -86,6 +93,8 @@ public final class PaymentDetails extends javax.swing.JFrame {
         grdLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         subj_tbl = new javax.swing.JTable();
+        lpaidMonth = new javax.swing.JLabel();
+        month2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Payment Details");
@@ -98,10 +107,10 @@ public final class PaymentDetails extends javax.swing.JFrame {
         addpaymentDetails.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         month.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        month.setText("Month :");
+        month.setText("Paying Month :");
         month.setMaximumSize(new java.awt.Dimension(108, 14));
         month.setMinimumSize(new java.awt.Dimension(108, 14));
-        addpaymentDetails.add(month, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, -1, 30));
+        addpaymentDetails.add(month, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 470, -1, 30));
 
         txtstdID.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtstdID.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -146,7 +155,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
 
         monthCB.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         monthCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
-        addpaymentDetails.add(monthCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, 128, 30));
+        addpaymentDetails.add(monthCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 470, 128, 30));
 
         createBtn.setBackground(new java.awt.Color(102, 255, 102));
         createBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -236,6 +245,17 @@ public final class PaymentDetails extends javax.swing.JFrame {
         jScrollPane1.setViewportView(subj_tbl);
 
         addpaymentDetails.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 400, 160));
+
+        lpaidMonth.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lpaidMonth.setMaximumSize(new java.awt.Dimension(108, 14));
+        lpaidMonth.setMinimumSize(new java.awt.Dimension(108, 14));
+        addpaymentDetails.add(lpaidMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, 110, 30));
+
+        month2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        month2.setText("Last Paid Month :");
+        month2.setMaximumSize(new java.awt.Dimension(108, 14));
+        month2.setMinimumSize(new java.awt.Dimension(108, 14));
+        addpaymentDetails.add(month2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, -1, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -600,7 +620,9 @@ public final class PaymentDetails extends javax.swing.JFrame {
     private javax.swing.JLabel grdLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblstdName;
+    private javax.swing.JLabel lpaidMonth;
     private javax.swing.JLabel month;
+    private javax.swing.JLabel month2;
     private javax.swing.JComboBox<String> monthCB;
     private javax.swing.JButton newBtn;
     private javax.swing.JLabel paymentIcn1;

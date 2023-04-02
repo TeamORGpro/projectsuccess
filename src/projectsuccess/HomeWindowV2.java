@@ -1757,8 +1757,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     Vector v3 = new Vector();
                     v3.add(rs3.getInt("Std_ID"));
                     v3.add(rs3.getString("Std_Name"));
-                    v3.add(rs3.getString("Subj_Name"));
-                    v3.add(rs3.getString("Tchr_Name"));
+                    v3.add(rs3.getString("Subj_Names"));
+//                    v3.add(rs3.getString("Tchr_Name"));
                     v3.add(rs3.getString("Payment_fee"));
                     v3.add(rs3.getString("Grade"));
                     v3.add(rs3.getString("Month"));
@@ -2530,8 +2530,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 //  data validation
             if ((!("Select".equals(cbmonth))) && (!("Select".equals(cbyr))) && (!("Select".equals(cbSubj)))) {
 
-                String q = "SELECT * FROM `payment_table` WHERE `Year`='" + cbyr + "' AND `Month`='" + cbmonth + "' AND `Subj_Name`='" + cbSubj + "';";
-
+//                String q = "SELECT * FROM `payment_table` WHERE `Year`='" + cbyr + "' AND `Month`='" + cbmonth + "' AND `Subj_Name`='" + cbSubj + "';";
+                String q = "SELECT * FROM `payment_table` WHERE `Year`= '" + cbyr + "' AND `Month`= '" + cbmonth + "' AND `Subj_Names` LIKE '%" + cbSubj + "%';";
                 try {
                     Statement stP = conrp.createStatement();
 
@@ -2540,13 +2540,12 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                             Vector v3 = new Vector();
                             v3.add(rsp.getInt("Std_ID"));
                             v3.add(rsp.getString("Std_Name"));
-                            v3.add(rsp.getString("Subj_Name"));
-                            v3.add(rsp.getString("Tchr_Name"));
+                            v3.add(rsp.getString("Subj_Names"));
+//                            v3.add(rsp.getString("Tchr_Name"));
                             v3.add(rsp.getString("Payment_fee"));
                             v3.add(rsp.getString("Grade"));
                             v3.add(rsp.getString("Month"));
                             v3.add(rsp.getString("Date_paid"));
-
                             dtmodP.addRow(v3);
                         }
                         stP.close();
