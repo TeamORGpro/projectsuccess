@@ -39,7 +39,6 @@ public class StdRegForm extends javax.swing.JFrame {
         nextid();
         iconlabelLoad();
         batchAdd();
-
         txtStdID.setEnabled(false);
 
     }
@@ -68,24 +67,26 @@ public class StdRegForm extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
 
     public final void nextid() {
-        Connection con;
-        con = DBConnect.connect();
+        Connection con1;
+        con1 = DBConnect.connect();
         Statement s;
         try {
-            s = con.createStatement();
+            s = con1.createStatement();
 
-            try (ResultSet rs = s.executeQuery("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'successdb' AND TABLE_NAME= 'std_info_table';")) {
+            try (ResultSet rs1 = s.executeQuery("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'successdb' AND TABLE_NAME= 'std_info_table';")) {
 
-                rs.next();
-                txtStdID.setText(rs.getString("AUTO_INCREMENT"));
-
+                rs1.next();
+                txtStdID.setText(rs1.getString("AUTO_INCREMENT"));
+                con1.close();
+                s.close();
+                rs1.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void batchAdd() {
+    private void batchAdd() {
         // add current year and 9 years to batch combo box
         java.util.Date d = new java.util.Date();
 
@@ -357,6 +358,11 @@ public class StdRegForm extends javax.swing.JFrame {
                 txtSubjectFocusGained(evt);
             }
         });
+        txtSubject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSubjectActionPerformed(evt);
+            }
+        });
         txtSubject.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtSubjectKeyPressed(evt);
@@ -447,11 +453,10 @@ public class StdRegForm extends javax.swing.JFrame {
             try {
                 if (rsV.next() == true) {
 
-                    String s = rsV.getString("Std_Name").toLowerCase();
-                    String s1 = rsV.getString("DOB");
-
-                    System.out.println(s);
-
+//                    String s = rsV.getString("Std_Name").toLowerCase();
+//                    String s1 = rsV.getString("DOB");
+//
+//                    System.out.println(s);
                     stdVcon.close();
                     stV.close();
                     rsV.close();
@@ -558,7 +563,7 @@ public class StdRegForm extends javax.swing.JFrame {
                                 } catch (IOException e) {
                                     e.printStackTrace();
 //                                    JOptionPane.showMessageDialog(null, "There is a Probleme to download QR Code", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
-                                    JOptionPane.showMessageDialog(this, "Error downloading QR code: " + e.getMessage()+" error or internet error", "Error", JOptionPane.ERROR_MESSAGE);
+                                    JOptionPane.showMessageDialog(this, "Error downloading QR code: " + e.getMessage() + " error or internet error", "Error", JOptionPane.ERROR_MESSAGE);
                                 }
                             }
                         } catch (HeadlessException e) {
@@ -667,6 +672,10 @@ public class StdRegForm extends javax.swing.JFrame {
     private void txtStdIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStdIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStdIDActionPerformed
+
+    private void txtSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSubjectActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSubjectActionPerformed
 
     /**
      * @param args the command line arguments

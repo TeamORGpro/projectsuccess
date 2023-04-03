@@ -170,7 +170,7 @@ public class PaymntExpo extends javax.swing.JFrame {
                 openFile(saveFile.toString());
                 
             } else {
-                JOptionPane.showMessageDialog(null, "Error!");
+                JOptionPane.showMessageDialog(null, "Error occurred while exporting", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
             }
         } catch (FileNotFoundException e) {
             System.out.println(e);
