@@ -531,33 +531,34 @@ public class StdAtten extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
-            Connection con;
-            con = DBConnect.connect();
-            ResultSet rs;
-            PreparedStatement pstmt;
-            try {
-                String studentID = txtStdID.getText();
-                pstmt = con.prepareStatement("SELECT * FROM std_info_table WHERE Std_ID = ?");
-                pstmt.setString(1, studentID);
-                rs = pstmt.executeQuery();
-
-                if (rs.next()) {
-                    String studentName = rs.getString("Std_Name");
-                    String grd = rs.getString("Grade");
-                    lblstdName.setText(studentName);
-                    templbl.setText(grd);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Please Enter Valid Student ID");
-                    lblstdName.setText("");
-
-                }
-                pstmt.close();
-                rs.close();
-                con.close();
-
-            } catch (HeadlessException | SQLException e) {
-                System.out.println(e.getMessage());
-            }
+            searchBtn01.doClick();
+//            Connection con;
+//            con = DBConnect.connect();
+//            ResultSet rs;
+//            PreparedStatement pstmt;
+//            try {
+//                String studentID = txtStdID.getText();
+//                pstmt = con.prepareStatement("SELECT * FROM std_info_table WHERE Std_ID = ?");
+//                pstmt.setString(1, studentID);
+//                rs = pstmt.executeQuery();
+//
+//                if (rs.next()) {
+//                    String studentName = rs.getString("Std_Name");
+//                    String grd = rs.getString("Grade");
+//                    lblstdName.setText(studentName);
+//                    templbl.setText(grd);
+//                } else {
+//                    JOptionPane.showMessageDialog(null, "Please Enter Valid Student ID");
+//                    lblstdName.setText("");
+//
+//                }
+//                pstmt.close();
+//                rs.close();
+//                con.close();
+//
+//            } catch (HeadlessException | SQLException e) {
+//                System.out.println(e.getMessage());
+//            }
 
         }
     }//GEN-LAST:event_txtStdIDKeyPressed

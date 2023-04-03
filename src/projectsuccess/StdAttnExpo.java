@@ -28,6 +28,7 @@ public class StdAttnExpo extends javax.swing.JFrame {
         initComponents();
         icon();
     }
+
     public void openFile(String file) {
         try {
             File path = new File(file);
@@ -170,7 +171,8 @@ public class StdAttnExpo extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Successfully Exported!");
                 openFile(saveFile.toString());
             } else {
-                JOptionPane.showMessageDialog(null, "Error!");
+                JOptionPane.showMessageDialog(null, "Error occurred while exporting", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+
             }
         } catch (FileNotFoundException e) {
             System.out.println(e);

@@ -27,7 +27,7 @@ public class StdExpo extends javax.swing.JFrame {
         initComponents();
         icon();
     }
-    
+
     public void openFile(String file) {
         try {
             File path = new File(file);
@@ -134,7 +134,7 @@ public class StdExpo extends javax.swing.JFrame {
 
     private void exportStdInfoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportStdInfoBtnActionPerformed
         // TODO add your handling code here:
-        
+
         try {
             JFileChooser jFileChooser = new JFileChooser();
             jFileChooser.showSaveDialog(this);
@@ -167,14 +167,15 @@ public class StdExpo extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Successfully Exported!");
                 openFile(saveFile.toString());
             } else {
-                JOptionPane.showMessageDialog(null, "Error!");
+                JOptionPane.showMessageDialog(null, "Error occurred while exporting", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+
             }
         } catch (FileNotFoundException e) {
             System.out.println(e);
         } catch (IOException io) {
             System.out.println(io);
         }
-        
+
     }//GEN-LAST:event_exportStdInfoBtnActionPerformed
 
     /**
