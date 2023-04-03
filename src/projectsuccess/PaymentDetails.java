@@ -400,7 +400,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
                     DefaultListModel<String> model = new DefaultListModel<>();
 
                     while (rs1.next()) {
-                        String[] subjects = rs1.getString("Subj_Names").split(", ");
+                        String[] subjects = rs1.getString("Subj_Names").split("\\s*,\\s*");
                         for (String subject : subjects) {
                             model.addElement(subject);
                         }
@@ -430,7 +430,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
                     DefaultListModel<String> model2 = new DefaultListModel<>();
 
                     while (rs2.next()) {
-                        String[] subjects = rs2.getString("Subjects").split(", ");
+                        String[] subjects = rs2.getString("Subjects").split("\\s*,\\s*");
                         for (String subject : subjects) {
                             model2.addElement(subject);
                         }

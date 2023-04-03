@@ -40,7 +40,7 @@ public class StdRegForm extends javax.swing.JFrame {
         iconlabelLoad();
         batchAdd();
         txtStdID.setEnabled(false);
-
+        getSubject();
     }
 
     /**
@@ -103,6 +103,7 @@ public class StdRegForm extends javax.swing.JFrame {
         }
     }
 
+    /*
     private void reset() {
         nextid();
         txtstdName.setText("");
@@ -111,13 +112,39 @@ public class StdRegForm extends javax.swing.JFrame {
         txtAddress.setText("");
         txtDob.setText("yyyy-mm-dd");
         txtDob.setForeground(new Color(153, 153, 153));
-        txtSubject.setText("");
+//        txtSubject.setText("");
         gradeCB.setSelectedItem("Grade 6");
         txtPhoneNo.setText("");
         cboxSex.setSelectedItem("Male");
         txtguardiansName.setText("");
         txtgphoneNo.setText("");
         txtStdID.setEnabled(false);
+
+    }
+     */
+    public void getSubject() {
+        Connection conS;
+        conS = DBConnect.connect();
+        ResultSet rsSubj;
+        PreparedStatement psSubj;
+
+        String query2 = "SELECT Subj_Name FROM tchr_info_table;";
+
+        try {
+
+            psSubj = conS.prepareStatement(query2);
+            rsSubj = psSubj.executeQuery();
+            while (rsSubj.next()) {
+                String subjname = rsSubj.getString("Subj_Name");
+                cbSubjects.addItem(subjname);
+            }
+            rsSubj.close();
+            psSubj.close();
+            conS.close();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 
@@ -152,10 +179,12 @@ public class StdRegForm extends javax.swing.JFrame {
         txtStdID = new javax.swing.JTextField();
         gradeCB = new javax.swing.JComboBox<>();
         subjectLbl = new javax.swing.JLabel();
-        txtSubject = new javax.swing.JTextField();
         batchName = new javax.swing.JLabel();
         batchYr = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstSubjects = new javax.swing.JList<>();
+        cbSubjects = new javax.swing.JComboBox<>();
 
         jDialog1.setTitle("Massage");
 
@@ -202,31 +231,31 @@ public class StdRegForm extends javax.swing.JFrame {
         grade.setText("Grade In School :");
         grade.setMaximumSize(new java.awt.Dimension(83, 14));
         grade.setMinimumSize(new java.awt.Dimension(83, 14));
-        jPanel1.add(grade, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
+        jPanel1.add(grade, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, -1, -1));
 
         phoneNo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         phoneNo.setText("Phone No. :");
         phoneNo.setMaximumSize(new java.awt.Dimension(57, 14));
         phoneNo.setMinimumSize(new java.awt.Dimension(57, 14));
-        jPanel1.add(phoneNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
+        jPanel1.add(phoneNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, -1, -1));
 
         sex.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         sex.setText("Sex :");
         sex.setMaximumSize(new java.awt.Dimension(25, 14));
         sex.setMinimumSize(new java.awt.Dimension(25, 14));
-        jPanel1.add(sex, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, -1, -1));
+        jPanel1.add(sex, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, -1, -1));
 
         guardiansName.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         guardiansName.setText("Guardian's Name :");
         guardiansName.setMaximumSize(new java.awt.Dimension(87, 14));
         guardiansName.setMinimumSize(new java.awt.Dimension(87, 14));
-        jPanel1.add(guardiansName, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, -1, -1));
+        jPanel1.add(guardiansName, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, -1, -1));
 
         gPhoneNo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         gPhoneNo.setText("His Or Her Phone  No. :");
         gPhoneNo.setMaximumSize(new java.awt.Dimension(108, 14));
         gPhoneNo.setMinimumSize(new java.awt.Dimension(108, 14));
-        jPanel1.add(gPhoneNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, -1, -1));
+        jPanel1.add(gPhoneNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 580, -1, -1));
 
         txtstdName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel1.add(txtstdName, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 57, 388, -1));
@@ -255,10 +284,10 @@ public class StdRegForm extends javax.swing.JFrame {
                 txtPhoneNoKeyTyped(evt);
             }
         });
-        jPanel1.add(txtPhoneNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 337, 388, -1));
+        jPanel1.add(txtPhoneNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 460, 388, -1));
 
         txtguardiansName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jPanel1.add(txtguardiansName, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 417, 388, -1));
+        jPanel1.add(txtguardiansName, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 540, 388, -1));
 
         txtgphoneNo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtgphoneNo.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -266,11 +295,11 @@ public class StdRegForm extends javax.swing.JFrame {
                 txtgphoneNoKeyTyped(evt);
             }
         });
-        jPanel1.add(txtgphoneNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 457, 388, -1));
+        jPanel1.add(txtgphoneNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 580, 388, -1));
 
         cboxSex.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         cboxSex.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
-        jPanel1.add(cboxSex, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 377, 88, -1));
+        jPanel1.add(cboxSex, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 500, 88, -1));
 
         createBtn.setBackground(new java.awt.Color(102, 255, 102));
         createBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -283,7 +312,7 @@ public class StdRegForm extends javax.swing.JFrame {
                 createBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 530, 100, 36));
+        jPanel1.add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 650, 100, 36));
 
         cnslBtn.setBackground(new java.awt.Color(255, 102, 102));
         cnslBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -296,7 +325,7 @@ public class StdRegForm extends javax.swing.JFrame {
                 cnslBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(cnslBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 530, 100, 36));
+        jPanel1.add(cnslBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 650, 100, 36));
 
         registerTitle.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 24)); // NOI18N
         registerTitle.setText("Student Register Form");
@@ -323,7 +352,7 @@ public class StdRegForm extends javax.swing.JFrame {
                 newBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(newBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 530, 100, 36));
+        jPanel1.add(newBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 650, 100, 36));
 
         txtAddress.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jPanel1.add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 177, 388, -1));
@@ -344,7 +373,7 @@ public class StdRegForm extends javax.swing.JFrame {
 
         gradeCB.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         gradeCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Grade 6", "Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11" }));
-        jPanel1.add(gradeCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 297, 128, 25));
+        jPanel1.add(gradeCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 420, 128, 25));
 
         subjectLbl.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         subjectLbl.setText("Subjects :");
@@ -352,39 +381,36 @@ public class StdRegForm extends javax.swing.JFrame {
         subjectLbl.setMinimumSize(new java.awt.Dimension(57, 14));
         jPanel1.add(subjectLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 90, -1));
 
-        txtSubject.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txtSubject.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtSubjectFocusGained(evt);
-            }
-        });
-        txtSubject.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSubjectActionPerformed(evt);
-            }
-        });
-        txtSubject.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtSubjectKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtSubjectKeyTyped(evt);
-            }
-        });
-        jPanel1.add(txtSubject, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 257, 388, -1));
-
         batchName.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         batchName.setText("Batch :");
         batchName.setMaximumSize(new java.awt.Dimension(108, 14));
         batchName.setMinimumSize(new java.awt.Dimension(108, 14));
-        jPanel1.add(batchName, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, -1, -1));
+        jPanel1.add(batchName, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 620, -1, -1));
 
         batchYr.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Exam Year" }));
-        jPanel1.add(batchYr, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 490, 140, 30));
+        jPanel1.add(batchYr, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 610, 140, 30));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         jLabel1.setText("O/L Batch");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 495, 80, 20));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 620, 80, 20));
+
+        lstSubjects.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lstSubjects.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { " ", "Selected subjects will display here." };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(lstSubjects);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 390, 90));
+
+        cbSubjects.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Subject(s)" }));
+        cbSubjects.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSubjectsActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cbSubjects, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 260, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -394,9 +420,7 @@ public class StdRegForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
 
         pack();
@@ -405,12 +429,16 @@ public class StdRegForm extends javax.swing.JFrame {
 
     private void newBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newBtnActionPerformed
         // TODO add your handling code here:
+//        reset();
+        Window window = SwingUtilities.getWindowAncestor(newBtn);
+        window.dispose();
 
-        reset();
+        StdRegForm newWindow = new StdRegForm();
+        newWindow.setVisible(true);
     }//GEN-LAST:event_newBtnActionPerformed
 
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
-
+        /*
         //uppercase each word 
         String word = txtSubject.getText().toLowerCase();
 
@@ -439,13 +467,27 @@ public class StdRegForm extends javax.swing.JFrame {
         // convert the char array to the string
         word = String.valueOf(charArray);
         txtSubject.setText(word);
-
+         */
         // validation part begins
         String v_name = txtstdName.getText().toLowerCase();
         String v_date = txtDob.getText();
 
         String qury = "SELECT * FROM `std_info_table` WHERE `Std_Name`='" + v_name + "' AND `DOB`='" + v_date + "';";
 
+        //Make String from Listed Items 
+        DefaultListModel<String> model = (DefaultListModel<String>) lstSubjects.getModel();
+        int size = model.getSize();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            String item = model.getElementAt(i);
+            sb.append(item);
+            if (i < size - 1) {
+                sb.append(", ");
+            }
+        }
+        String result = sb.toString();
+
+        //End Of making string from list items
         try {
             Connection stdVcon = DBConnect.connect();
             Statement stV = stdVcon.createStatement();
@@ -472,7 +514,10 @@ public class StdRegForm extends javax.swing.JFrame {
                     String Name_with_Initials = txtstdNameShort.getText();
                     String Address = txtAddress.getText();
                     String DOB = txtDob.getText();
-                    String subject = txtSubject.getText();
+//                    String subject = txtSubject.getText();
+
+                    String subject = result;
+
                     String Grade = (String) gradeCB.getSelectedItem();
                     String Phone_no = txtPhoneNo.getText();
                     String sex = (String) cboxSex.getSelectedItem();
@@ -620,37 +665,6 @@ public class StdRegForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDobKeyTyped
 
-    private void txtSubjectKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSubjectKeyTyped
-        // TODO add your handling code here:
-        databaseName();
-    }//GEN-LAST:event_txtSubjectKeyTyped
-
-    private void txtSubjectKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSubjectKeyPressed
-        // TODO add your handling code here:
-
-        switch (evt.getKeyCode()) {
-            case KeyEvent.VK_BACK_SPACE:
-                break;
-            case KeyEvent.VK_ENTER:
-                txtSubject.setText(txtSubject.getText());
-                break;
-            default:
-                EventQueue.invokeLater(new Runnable() {
-                    @Override
-
-                    public void run() {
-                        String txt = txtSubject.getText();
-                        autoComplete(txt);
-                    }
-                });
-        }
-    }//GEN-LAST:event_txtSubjectKeyPressed
-
-    private void txtSubjectFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSubjectFocusGained
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_txtSubjectFocusGained
-
     private void txtDobFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDobFocusGained
         // TODO add your handling code here:
         if (txtDob.getText().equals("yyyy-mm-dd")) {
@@ -673,9 +687,20 @@ public class StdRegForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStdIDActionPerformed
 
-    private void txtSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSubjectActionPerformed
+    private void cbSubjectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSubjectsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtSubjectActionPerformed
+
+        // Get the selected item from the JComboBox
+        String selectedSubject = cbSubjects.getSelectedItem().toString();
+
+        // Add the selected item to the JList
+        if (!(lstSubjects.getModel() instanceof DefaultListModel)) {
+            lstSubjects.setModel(new DefaultListModel());
+        }
+        DefaultListModel<String> model = (DefaultListModel<String>) lstSubjects.getModel();
+        model.addElement(selectedSubject);
+        lstSubjects.setModel(model);
+    }//GEN-LAST:event_cbSubjectsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -717,6 +742,7 @@ public class StdRegForm extends javax.swing.JFrame {
     private javax.swing.JLabel address;
     private javax.swing.JLabel batchName;
     private javax.swing.JComboBox<String> batchYr;
+    private javax.swing.JComboBox<String> cbSubjects;
     private javax.swing.JComboBox<String> cboxSex;
     private javax.swing.JButton cnslBtn;
     private javax.swing.JButton createBtn;
@@ -728,6 +754,8 @@ public class StdRegForm extends javax.swing.JFrame {
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> lstSubjects;
     private javax.swing.JButton newBtn;
     private javax.swing.JLabel phoneNo;
     private javax.swing.JLabel registerIcn1;
@@ -741,7 +769,6 @@ public class StdRegForm extends javax.swing.JFrame {
     private javax.swing.JTextField txtDob;
     private javax.swing.JTextField txtPhoneNo;
     private javax.swing.JTextField txtStdID;
-    private javax.swing.JTextField txtSubject;
     private javax.swing.JTextField txtgphoneNo;
     private javax.swing.JTextField txtguardiansName;
     private javax.swing.JTextField txtstdName;
@@ -771,6 +798,7 @@ public class StdRegForm extends javax.swing.JFrame {
         }
     }
 
+    /*
     private void autoComplete(String txt) {
         String complete = "";
         int start = txt.length();
@@ -790,7 +818,7 @@ public class StdRegForm extends javax.swing.JFrame {
         }
 
     }
-
+     */
     private void icon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/Project Icon.png")));
     }
