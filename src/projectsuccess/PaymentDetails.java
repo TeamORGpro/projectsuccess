@@ -582,33 +582,6 @@ public final class PaymentDetails extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             searchBtn01.doClick();
-//            Connection con;
-//            con = DBConnect.connect();
-//            ResultSet rs;
-//            PreparedStatement pstmt;
-//            try {
-//                String studentID = txtstdID.getText();
-//                pstmt = con.prepareStatement("SELECT * FROM std_info_table WHERE Std_ID = ?");
-//                pstmt.setString(1, studentID);
-//                rs = pstmt.executeQuery();
-//
-//                if (rs.next()) {
-//                    String studentName = rs.getString("Std_Name");
-//                    lblstdName.setText(studentName);
-//                    String studentgrd = rs.getString("Grade");
-//                    grdLabel.setText(studentgrd);
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Please Enter Valid Student ID");
-//                    lblstdName.setText("");
-//
-//                }
-//                pstmt.close();
-//                rs.close();
-//                con.close();
-//
-//            } catch (HeadlessException | SQLException e) {
-//                System.out.println(e.getMessage());
-//            }
 
         }
     }//GEN-LAST:event_txtstdIDKeyPressed
