@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.*;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -102,6 +103,11 @@ public final class PaymentDetails extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         allEnrolledsbjlist = new javax.swing.JList<>();
         lblPayingsubjects = new javax.swing.JLabel();
+        btnPrintSend = new javax.swing.JButton();
+        cashAmount = new javax.swing.JLabel();
+        txtCash = new javax.swing.JTextField();
+        balanceAmount = new javax.swing.JLabel();
+        balanceLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Payment Details");
@@ -117,7 +123,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
         lblMonth.setText("Paying Month :");
         lblMonth.setMaximumSize(new java.awt.Dimension(108, 14));
         lblMonth.setMinimumSize(new java.awt.Dimension(108, 14));
-        addpaymentDetails.add(lblMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, -1, 30));
+        addpaymentDetails.add(lblMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, -1, 30));
 
         txtstdID.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtstdID.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -131,7 +137,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
         stdName.setText("Student Name :");
         stdName.setMaximumSize(new java.awt.Dimension(53, 14));
         stdName.setMinimumSize(new java.awt.Dimension(53, 14));
-        addpaymentDetails.add(stdName, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, 30));
+        addpaymentDetails.add(stdName, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, 30));
 
         pmntDetails.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 24)); // NOI18N
         pmntDetails.setText("Paymant Details");
@@ -145,7 +151,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
         sbjName.setText("Subject :");
         sbjName.setMaximumSize(new java.awt.Dimension(70, 14));
         sbjName.setMinimumSize(new java.awt.Dimension(70, 14));
-        addpaymentDetails.add(sbjName, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, 30));
+        addpaymentDetails.add(sbjName, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, 30));
 
         grade.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         grade.setText("Grade In School :");
@@ -157,12 +163,12 @@ public final class PaymentDetails extends javax.swing.JFrame {
         pmntFee.setText("Payment Fees (Rs) :");
         pmntFee.setMaximumSize(new java.awt.Dimension(57, 14));
         pmntFee.setMinimumSize(new java.awt.Dimension(57, 14));
-        addpaymentDetails.add(pmntFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, 30));
+        addpaymentDetails.add(pmntFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, -1, 30));
         addpaymentDetails.add(paymentIcn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 16, 40, 35));
 
         monthCB.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         monthCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
-        addpaymentDetails.add(monthCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 550, 128, 30));
+        addpaymentDetails.add(monthCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 460, 128, 30));
 
         createBtn.setBackground(new java.awt.Color(102, 255, 102));
         createBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -175,7 +181,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
                 createBtnActionPerformed(evt);
             }
         });
-        addpaymentDetails.add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 620, 100, 36));
+        addpaymentDetails.add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 690, 100, 36));
 
         newBtn.setBackground(new java.awt.Color(255, 255, 153));
         newBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -188,7 +194,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
                 newBtnActionPerformed(evt);
             }
         });
-        addpaymentDetails.add(newBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 620, 100, 36));
+        addpaymentDetails.add(newBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 690, 100, 36));
 
         cnslBtn.setBackground(new java.awt.Color(255, 102, 102));
         cnslBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -201,7 +207,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
                 cnslBtnActionPerformed(evt);
             }
         });
-        addpaymentDetails.add(cnslBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 620, 105, 36));
+        addpaymentDetails.add(cnslBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 690, 105, 36));
 
         searchBtn01.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         searchBtn01.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/Search.png"))); // NOI18N
@@ -217,7 +223,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
         feeLbl.setBackground(new java.awt.Color(255, 255, 255));
         feeLbl.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         feeLbl.setText("0.00");
-        addpaymentDetails.add(feeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 120, 30));
+        addpaymentDetails.add(feeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 520, 120, 30));
 
         subCB.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         subCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose Subjects" }));
@@ -226,10 +232,10 @@ public final class PaymentDetails extends javax.swing.JFrame {
                 subCBActionPerformed(evt);
             }
         });
-        addpaymentDetails.add(subCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 340, 30));
+        addpaymentDetails.add(subCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 340, 30));
 
         lblstdName.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        addpaymentDetails.add(lblstdName, new org.netbeans.lib.awtextra.AbsoluteConstraints(203, 110, 357, 30));
+        addpaymentDetails.add(lblstdName, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 357, 30));
 
         attnDate.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         attnDate.setText("Date :");
@@ -257,19 +263,19 @@ public final class PaymentDetails extends javax.swing.JFrame {
         lblLpaidMonth.setForeground(new java.awt.Color(0, 153, 153));
         lblLpaidMonth.setMaximumSize(new java.awt.Dimension(108, 14));
         lblLpaidMonth.setMinimumSize(new java.awt.Dimension(108, 14));
-        addpaymentDetails.add(lblLpaidMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, 110, 30));
+        addpaymentDetails.add(lblLpaidMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 270, 110, 30));
 
         lblPdsubjects.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblPdsubjects.setText("Paid Subjects :");
         lblPdsubjects.setMaximumSize(new java.awt.Dimension(108, 14));
         lblPdsubjects.setMinimumSize(new java.awt.Dimension(108, 14));
-        addpaymentDetails.add(lblPdsubjects, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, -1, 30));
+        addpaymentDetails.add(lblPdsubjects, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, 30));
 
         lblLpdmonth.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblLpdmonth.setText("Last Paid Month :");
         lblLpdmonth.setMaximumSize(new java.awt.Dimension(108, 14));
         lblLpdmonth.setMinimumSize(new java.awt.Dimension(108, 14));
-        addpaymentDetails.add(lblLpdmonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, 30));
+        addpaymentDetails.add(lblLpdmonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, 30));
 
         pdSbjlist.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         pdSbjlist.setModel(new javax.swing.AbstractListModel<String>() {
@@ -279,7 +285,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(pdSbjlist);
 
-        addpaymentDetails.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 340, 100));
+        addpaymentDetails.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 340, 100));
 
         lblAllsubjects.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblAllsubjects.setText("All enrolled subjects :");
@@ -303,6 +309,42 @@ public final class PaymentDetails extends javax.swing.JFrame {
         lblPayingsubjects.setMinimumSize(new java.awt.Dimension(108, 14));
         addpaymentDetails.add(lblPayingsubjects, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, -1, 30));
 
+        btnPrintSend.setText("Print");
+        btnPrintSend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrintSendActionPerformed(evt);
+            }
+        });
+        addpaymentDetails.add(btnPrintSend, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 690, 100, 36));
+
+        cashAmount.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cashAmount.setText("Cash (Rs) :");
+        cashAmount.setMaximumSize(new java.awt.Dimension(57, 14));
+        cashAmount.setMinimumSize(new java.awt.Dimension(57, 14));
+        addpaymentDetails.add(cashAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 570, -1, 30));
+
+        txtCash.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        txtCash.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCashKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCashKeyReleased(evt);
+            }
+        });
+        addpaymentDetails.add(txtCash, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 570, 130, 30));
+
+        balanceAmount.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        balanceAmount.setText("Cash (Rs) :");
+        balanceAmount.setMaximumSize(new java.awt.Dimension(57, 14));
+        balanceAmount.setMinimumSize(new java.awt.Dimension(57, 14));
+        addpaymentDetails.add(balanceAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 630, -1, 30));
+
+        balanceLbl.setBackground(new java.awt.Color(255, 255, 255));
+        balanceLbl.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        balanceLbl.setText("0.00");
+        addpaymentDetails.add(balanceLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 630, 120, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -311,7 +353,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(addpaymentDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+            .addComponent(addpaymentDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
         );
 
         pack();
@@ -604,7 +646,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
                 pmntTablemodel.addRow(columns1);
 
                 int numRows = pmntTablemodel.getRowCount();
-                double totalFees = 0.0;
+                double totalFees = 0.00;
                 for (int i = 0; i < numRows; i++) {
 
                     Object value = pmntTablemodel.getValueAt(i, 2);
@@ -612,18 +654,14 @@ public final class PaymentDetails extends javax.swing.JFrame {
                         try {
                             double doubleValue = Double.parseDouble((String) value);
                             totalFees += doubleValue;
-                            String totFee = Double.toString(totalFees);
+                            DecimalFormat df = new DecimalFormat("0.00");
+                            String totFee = df.format(totalFees);
                             feeLbl.setText(totFee);
                         } catch (NumberFormatException e) {
                             System.out.println(e.getMessage());
                         }
                     }
-//                    double fee = (double) pmntTablemodel.getValueAt(i, 2);
-//
-//                    totalFees += fee;
                 }
-//                String totFee = Double.toString(totalFees);
-//                feeLbl.setText(totFee);
 
             } else {
                 JOptionPane.showMessageDialog(null, "Please Enter Valid Subject Name");
@@ -646,6 +684,31 @@ public final class PaymentDetails extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_txtstdIDKeyPressed
+
+    private void btnPrintSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintSendActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPrintSendActionPerformed
+
+    private void txtCashKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCashKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCashKeyPressed
+
+    private void txtCashKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCashKeyReleased
+        // TODO add your handling code here:
+        if (!txtCash.getText().isEmpty()) {
+            double tot = Double.parseDouble(feeLbl.getText());
+            double csh = Double.parseDouble(txtCash.getText());
+
+            double bal = csh - tot;
+
+            DecimalFormat df = new DecimalFormat("0.00");
+            String fbal = df.format(bal);
+
+            balanceLbl.setText(fbal);
+        }
+
+
+    }//GEN-LAST:event_txtCashKeyReleased
 
     public void getSubject() {
         Connection con;
@@ -721,6 +784,10 @@ public final class PaymentDetails extends javax.swing.JFrame {
     private javax.swing.JPanel addpaymentDetails;
     private javax.swing.JList<String> allEnrolledsbjlist;
     private javax.swing.JLabel attnDate;
+    private javax.swing.JLabel balanceAmount;
+    private javax.swing.JLabel balanceLbl;
+    private javax.swing.JButton btnPrintSend;
+    private javax.swing.JLabel cashAmount;
     private javax.swing.JButton cnslBtn;
     private javax.swing.JButton createBtn;
     private javax.swing.JLabel dateLbl;
@@ -749,6 +816,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
     private javax.swing.JLabel stdName;
     private javax.swing.JComboBox<String> subCB;
     private javax.swing.JTable subj_tbl;
+    private javax.swing.JTextField txtCash;
     private javax.swing.JTextField txtstdID;
     // End of variables declaration//GEN-END:variables
 
