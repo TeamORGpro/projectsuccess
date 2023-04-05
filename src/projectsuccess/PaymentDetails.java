@@ -524,6 +524,55 @@ public final class PaymentDetails extends javax.swing.JFrame {
 
     private void subCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subCBActionPerformed
         // TODO add your handling code here:
+//        Connection con;
+//        con = DBConnect.connect();
+//        ResultSet rs2;
+//        PreparedStatement pstmt2;
+//        try {
+//            String subject = (String) subCB.getSelectedItem();
+//            pstmt2 = con.prepareStatement("SELECT * FROM tchr_info_table WHERE Subj_Name = ?");
+//            pstmt2.setString(1, subject);
+//            rs2 = pstmt2.executeQuery();
+//
+//            if (rs2.next()) {
+//                String subjectName = rs2.getString("Subj_Name");
+//                String TeacherName = rs2.getString("Tchr_Name");
+//                String paymentfee = rs2.getString("Payment_Fees");
+//
+//                String[] columns1 = {subjectName, TeacherName, paymentfee};
+//                DefaultTableModel pmntTablemodel = (DefaultTableModel) subj_tbl.getModel();
+//                pmntTablemodel.addRow(columns1);
+//
+//                int numRows = pmntTablemodel.getRowCount();
+//                double totalFees = 0.00;
+//                for (int i = 0; i < numRows; i++) {
+//
+//                    Object value = pmntTablemodel.getValueAt(i, 2);
+//                    if (value instanceof String) {
+//                        try {
+//                            double doubleValue = Double.parseDouble((String) value);
+//                            totalFees += doubleValue;
+//                            DecimalFormat df = new DecimalFormat("0.00");
+//                            String totFee = df.format(totalFees);
+//                            feeLbl.setText(totFee);
+//                        } catch (NumberFormatException e) {
+//                            System.out.println(e.getMessage());
+//                        }
+//                    }
+//                }
+//
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Please Enter Valid Subject Name");
+//                feeLbl.setText("");
+//            }
+//            pstmt2.close();
+//            rs2.close();
+//            con.close();
+//
+//        } catch (HeadlessException | SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
+
         Connection con;
         con = DBConnect.connect();
         ResultSet rs2;
@@ -539,8 +588,19 @@ public final class PaymentDetails extends javax.swing.JFrame {
                 String TeacherName = rs2.getString("Tchr_Name");
                 String paymentfee = rs2.getString("Payment_Fees");
 
-                String[] columns1 = {subjectName, TeacherName, paymentfee};
                 DefaultTableModel pmntTablemodel = (DefaultTableModel) subj_tbl.getModel();
+
+                // Check if a row with the same subject and teacher name already exists
+                for (int i = 0; i < pmntTablemodel.getRowCount(); i++) {
+                    String rowSubjName = pmntTablemodel.getValueAt(i, 0).toString();
+                    String rowTeacherName = pmntTablemodel.getValueAt(i, 1).toString();
+                    if (rowSubjName.equals(subjectName) && rowTeacherName.equals(TeacherName)) {
+                        JOptionPane.showMessageDialog(null, "This subject and teacher combination already exists.");
+                        return;
+                    }
+                }
+
+                String[] columns1 = {subjectName, TeacherName, paymentfee};
                 pmntTablemodel.addRow(columns1);
 
                 int numRows = pmntTablemodel.getRowCount();
@@ -576,6 +636,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
         } catch (HeadlessException | SQLException e) {
             System.out.println(e.getMessage());
         }
+
     }//GEN-LAST:event_subCBActionPerformed
 
     private void txtstdIDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtstdIDKeyPressed
