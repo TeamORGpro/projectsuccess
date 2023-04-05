@@ -278,7 +278,7 @@ public class StdAtten extends javax.swing.JFrame {
         attmarkPanl.add(lblstdName, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 152, 259, 30));
 
         lblTchrName.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        attmarkPanl.add(lblTchrName, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 63, 277, 30));
+        attmarkPanl.add(lblTchrName, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 63, 250, 30));
 
         absntBtn.setText("Set Absents");
         absntBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -514,7 +514,7 @@ public class StdAtten extends javax.swing.JFrame {
                 String TeacherName = rs2.getString("Tchr_Name");
                 lblTchrName.setText(TeacherName);
             } else {
-                JOptionPane.showMessageDialog(null, "Please Enter Valid Subject Name");
+                JOptionPane.showMessageDialog(null, "Please Select Valid Subject Name");
                 lblTchrName.setText("");
 
             }
