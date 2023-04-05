@@ -111,6 +111,7 @@ public class StdAtten extends javax.swing.JFrame {
         lblstdName = new javax.swing.JLabel();
         lblTchrName = new javax.swing.JLabel();
         absntBtn = new javax.swing.JButton();
+        cbGrades = new javax.swing.JComboBox<>();
         tblPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -280,13 +281,19 @@ public class StdAtten extends javax.swing.JFrame {
         lblTchrName.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         attmarkPanl.add(lblTchrName, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 63, 250, 30));
 
+        absntBtn.setBackground(new java.awt.Color(102, 51, 255));
+        absntBtn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        absntBtn.setForeground(new java.awt.Color(255, 255, 102));
         absntBtn.setText("Set Absents");
         absntBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 absntBtnActionPerformed(evt);
             }
         });
-        attmarkPanl.add(absntBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 410, 100, -1));
+        attmarkPanl.add(absntBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, 160, 30));
+
+        cbGrades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Set grade for absent", "Grade 6", "Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11" }));
+        attmarkPanl.add(cbGrades, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 150, 30));
 
         bgPnl.add(attmarkPanl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 410, 460));
 
@@ -483,9 +490,14 @@ public class StdAtten extends javax.swing.JFrame {
                 String grd = rs.getString("Grade");
                 lblstdName.setText(studentName);
                 templbl.setText(grd);
+
+                //mark radio button as present
+                presentRB.setSelected(true);
+                String c = "Present";
+                txtStatuslb.setText(c);
             } else {
                 JOptionPane.showMessageDialog(null, "Please Enter Valid Student ID");
-                lblstdName.setText("");
+                newBtn.doClick();
 
             }
             pstmt.close();
@@ -514,7 +526,7 @@ public class StdAtten extends javax.swing.JFrame {
                 String TeacherName = rs2.getString("Tchr_Name");
                 lblTchrName.setText(TeacherName);
             } else {
-                JOptionPane.showMessageDialog(null, "Please Select Valid Subject Name");
+                JOptionPane.showMessageDialog(null, "Please Select Valid Subject Name", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
                 lblTchrName.setText("");
 
             }
@@ -559,12 +571,81 @@ public class StdAtten extends javax.swing.JFrame {
 //            } catch (HeadlessException | SQLException e) {
 //                System.out.println(e.getMessage());
 //            }
-
         }
     }//GEN-LAST:event_txtStdIDKeyPressed
 
     private void absntBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_absntBtnActionPerformed
         // TODO add your handling code here:
+
+        String date = txtAttnDate.getText();
+        String subject = (String) subCB.getSelectedItem();
+
+        if ("Choose Subject".equals(subject)) {
+            JOptionPane.showMessageDialog(null, "Select valid subject for mark students as absent", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+
+        } else if ("Set grade for absent".equals(cbGrades.getSelectedItem().toString())) {
+            JOptionPane.showMessageDialog(null, "Select valid grade for mark students as absent", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+        } else {
+            String sGrade = (String) cbGrades.getSelectedItem();
+            Connection con;
+            PreparedStatement pstmt1, pstmt2 = null;
+            ResultSet rs1, rs2;
+
+            try {
+                con = DBConnect.connect();
+
+                // Select only those students who are absent for the given date and subject
+                String query1 = "SELECT Std_ID, Std_Name FROM std_info_table WHERE Grade = ? AND Subjects LIKE ? ;";
+                pstmt1 = con.prepareStatement(query1);
+                pstmt1.setString(1, "" + sGrade + "");
+                pstmt1.setString(2, "%" + subject + "%");
+                rs1 = pstmt1.executeQuery();
+
+                while (rs1.next()) {
+                    int stdID = rs1.getInt("Std_ID");
+                    String stdName = rs1.getString("Std_Name");
+
+                    // Check if the student is already marked as absent for the given date and subject
+                    String query2 = "SELECT * FROM attndance_table WHERE Std_ID = ? AND Date = ? AND Subj_Name = ?";
+                    pstmt2 = con.prepareStatement(query2);
+                    pstmt2.setInt(1, stdID);
+                    pstmt2.setString(2, date);
+                    pstmt2.setString(3, subject);
+                    rs2 = pstmt2.executeQuery();
+
+                    if (!rs2.next()) {
+                        // If the student is not marked as absent, insert the absent attendance
+                        String teacherName = lblTchrName.getText();
+                        String specNote = txtNotes.getText();
+
+                        String insertQuery = "INSERT INTO attndance_table (Date, Subj_Name, Tchr_Name, Std_ID, Std_Name, Status, Spc_Note, Grade) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                        pstmt2 = con.prepareStatement(insertQuery);
+                        pstmt2.setString(1, date);
+                        pstmt2.setString(2, subject);
+                        pstmt2.setString(3, teacherName);
+                        pstmt2.setInt(4, stdID);
+                        pstmt2.setString(5, stdName);
+                        pstmt2.setString(6, "Absent");
+
+                        if (!specNote.equals("Special Note")) {
+                            pstmt2.setString(7, specNote);
+                        } else {
+                            pstmt2.setString(7, "");
+                        }
+
+                        pstmt2.setString(8, sGrade);
+                        pstmt2.execute();
+                    }
+                }
+
+                JOptionPane.showMessageDialog(null, "Data successfully Saved!");
+                pstmt1.close();
+                pstmt2.close();
+                con.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error:" + e.getLocalizedMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
 
 
     }//GEN-LAST:event_absntBtnActionPerformed
@@ -648,6 +729,7 @@ public class StdAtten extends javax.swing.JFrame {
     private javax.swing.JLabel attnDate;
     private javax.swing.JPanel bgPnl;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cbGrades;
     private javax.swing.JButton cnslBtn;
     private javax.swing.JButton createBtn;
     private javax.swing.JPanel jPanel1;
