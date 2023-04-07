@@ -1147,20 +1147,20 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         jTable2.setAutoCreateRowSorter(true);
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Student ID", "Student  Name", "Subjects", "Subjects Fee", "Grade", "Last Paid Month", "Paid Date"
+                "Payment ID", "Student ID", "Student  Name", "Subjects", "Subjects Fee", "Grade", "Last Paid Month", "Paid Date"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1182,18 +1182,18 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(1).setMinWidth(200);
-            jTable2.getColumnModel().getColumn(1).setPreferredWidth(200);
             jTable2.getColumnModel().getColumn(2).setMinWidth(200);
             jTable2.getColumnModel().getColumn(2).setPreferredWidth(200);
-            jTable2.getColumnModel().getColumn(3).setMinWidth(75);
-            jTable2.getColumnModel().getColumn(3).setPreferredWidth(75);
-            jTable2.getColumnModel().getColumn(4).setMinWidth(100);
-            jTable2.getColumnModel().getColumn(4).setPreferredWidth(100);
+            jTable2.getColumnModel().getColumn(3).setMinWidth(200);
+            jTable2.getColumnModel().getColumn(3).setPreferredWidth(200);
+            jTable2.getColumnModel().getColumn(4).setMinWidth(75);
+            jTable2.getColumnModel().getColumn(4).setPreferredWidth(75);
             jTable2.getColumnModel().getColumn(5).setMinWidth(100);
             jTable2.getColumnModel().getColumn(5).setPreferredWidth(100);
             jTable2.getColumnModel().getColumn(6).setMinWidth(100);
             jTable2.getColumnModel().getColumn(6).setPreferredWidth(100);
+            jTable2.getColumnModel().getColumn(7).setMinWidth(100);
+            jTable2.getColumnModel().getColumn(7).setPreferredWidth(100);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -1485,6 +1485,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             try (ResultSet rs3 = s3.executeQuery("select * from payment_table")) {
                 while (rs3.next()) {
                     Vector v3 = new Vector();
+                    v3.add(rs3.getInt("payment_ID"));
                     v3.add(rs3.getInt("Std_ID"));
                     v3.add(rs3.getString("Std_Name"));
                     v3.add(rs3.getString("Subj_Names"));
@@ -1755,6 +1756,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             try (ResultSet rs3 = s3.executeQuery("select * from payment_table")) {
                 while (rs3.next()) {
                     Vector v3 = new Vector();
+                    v3.add(rs3.getInt("payment_ID"));
                     v3.add(rs3.getInt("Std_ID"));
                     v3.add(rs3.getString("Std_Name"));
                     v3.add(rs3.getString("Subj_Names"));
@@ -2173,6 +2175,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 try (ResultSet rs3 = s3.executeQuery("select * from payment_table")) {
                     while (rs3.next()) {
                         Vector v3 = new Vector();
+                        v3.add(rs3.getInt("payment_ID"));
                         v3.add(rs3.getInt("Std_ID"));
                         v3.add(rs3.getString("Std_Name"));
                         v3.add(rs3.getString("Subj_Name"));
@@ -2227,7 +2230,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
                     row[6] = model1.getValueAt(indexs[i], 6);
 
-//                row[7] = model1.getValueAt(indexs[i], 7);
+                    row[7] = model1.getValueAt(indexs[i], 7);
                     model2.addRow(row);
                 }
 
@@ -2538,6 +2541,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     try (ResultSet rsp = stP.executeQuery(q)) {
                         while (rsp.next()) {
                             Vector v3 = new Vector();
+                            v3.add(rsp.getInt("payment_ID"));
                             v3.add(rsp.getInt("Std_ID"));
                             v3.add(rsp.getString("Std_Name"));
                             v3.add(rsp.getString("Subj_Names"));
