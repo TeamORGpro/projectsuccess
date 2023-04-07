@@ -17,6 +17,8 @@ import javax.swing.table.DefaultTableModel;
 
 public final class PaymentDetails extends javax.swing.JFrame {
 
+    private static final long serialVersionUID = 1L;
+
     public PaymentDetails() {
         initComponents();
         icon();
@@ -366,11 +368,51 @@ public final class PaymentDetails extends javax.swing.JFrame {
 
     private void newBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newBtnActionPerformed
         // TODO add your handling code here:
-        Window window = SwingUtilities.getWindowAncestor(newBtn);
-        window.dispose();
 
-        PaymentDetails newWindow = new PaymentDetails();
-        newWindow.setVisible(true);
+        //following code will reopen the current window
+//        Window window = SwingUtilities.getWindowAncestor(newBtn);
+//        window.dispose();
+//
+//        PaymentDetails newWindow = new PaymentDetails();
+//        newWindow.setVisible(true);
+        try {
+            txtstdID.setText("");
+            lblstdName.setText("");
+            grdLabel.setText("");
+            lblLpaidMonth.setText("");
+
+            // reset paid subject list
+            DefaultListModel<String> listModel = (DefaultListModel<String>) pdSbjlist.getModel();
+            listModel.clear();
+            String[] newData = {"", "", "", "The subjects last paid by the student are listed here."};
+            for (String item : newData) {
+                listModel.addElement(item);
+            }
+            pdSbjlist.setModel(listModel);
+            //End of reset paid subject list
+
+            // reset all subject list
+            DefaultListModel<String> listModel2 = (DefaultListModel<String>) allEnrolledsbjlist.getModel();
+            listModel2.clear();
+            String[] newData2 = {"", "", "", "All the subjects in which the student is registered are listed here."};
+            for (String item2 : newData2) {
+                listModel2.addElement(item2);
+            }
+            allEnrolledsbjlist.setModel(listModel2);
+            //End of reset all subject list
+
+            //set table empty
+            DefaultTableModel model = (DefaultTableModel) subj_tbl.getModel();
+            model.setRowCount(0);
+            //End of set table empty
+
+        } catch (Exception e) {
+            if ("projectsuccess.PaymentDetails$8 cannot be cast to javax.swing.DefaultListModel".equals(e.getLocalizedMessage())) {
+                JOptionPane.showMessageDialog(null, "You already refresh the window.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error : " + e.getLocalizedMessage() + " ", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
 
     }//GEN-LAST:event_newBtnActionPerformed
 
@@ -614,7 +656,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
 //        } catch (HeadlessException | SQLException e) {
 //            System.out.println(e.getMessage());
 //        }
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Connection con;
         con = DBConnect.connect();
         ResultSet rs2;
@@ -665,7 +707,6 @@ public final class PaymentDetails extends javax.swing.JFrame {
 
             } else {
                 JOptionPane.showMessageDialog(null, "Please Enter Valid Subject Name");
-                feeLbl.setText("");
             }
             pstmt2.close();
             rs2.close();
