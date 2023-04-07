@@ -67,14 +67,14 @@ public class PaymntExpo extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Student ID", "Student Name", "Subject", "Subject Fees", "Grade", "Last paid month", "Paid Date"
+                "Payment ID", "Student ID", "Student Name", "Subject", "Subject Fees", "Grade", "Last paid month", "Paid Date"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
