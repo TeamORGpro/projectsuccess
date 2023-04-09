@@ -382,7 +382,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
             lblstdName.setText("");
             grdLabel.setText("");
             lblLpaidMonth.setText("");
-            monthCB.setSelectedIndex(0);
+//            monthCB.setSelectedIndex(0);
             feeLbl.setText("0.00");
             txtCash.setText("");
             balanceLbl.setText("0.00");
@@ -477,7 +477,11 @@ public final class PaymentDetails extends javax.swing.JFrame {
 //            String query = "SELECT Subj_Names FROM payment_table WHERE Std_ID = '" + studentID + "' AND Date_paid = (SELECT MAX(Date_paid) FROM payment_table WHERE Std_ID = '" + studentID + "')";
 
 //working query 1
-            String query = "SELECT * FROM payment_table WHERE Std_ID = '" + studentID + "' AND Month = (SELECT MAX(Month) FROM payment_table WHERE Std_ID = '" + studentID + "') AND Year = (SELECT MAX(Year) FROM payment_table WHERE Std_ID = '" + studentID + "');";
+//            String query = "SELECT * FROM payment_table WHERE Std_ID = '" + studentID + "' AND Month = (SELECT MAX(Month) FROM payment_table WHERE Std_ID = '" + studentID + "') AND Year = (SELECT MAX(Year) FROM payment_table WHERE Std_ID = '" + studentID + "');";
+            String query = "SELECT * FROM payment_table WHERE Std_ID = '" + studentID + "' AND \n"
+                    + "MONTH(STR_TO_DATE(CONCAT('01 ', Month, ' 2000'), '%d %M %Y')) = \n"
+                    + "(SELECT MAX(MONTH(STR_TO_DATE(CONCAT('01 ', Month, ' 2000'), '%d %M %Y'))) FROM payment_table WHERE Std_ID = '" + studentID + "') AND \n"
+                    + "Year = (SELECT MAX(Year) FROM payment_table WHERE Std_ID = '" + studentID + "');";
 
 //working query 2
 //            String query =  "SELECT * FROM payment_table WHERE Std_ID = "+studentID+" AND (Month, Year) = ( SELECT Month, MAX(CAST(Year AS UNSIGNED)) FROM ( SELECT `Month`, `Year`, CAST(CONCAT(`Year`, LPAD(m.month_number, 2, '0'), '01') AS DATE) AS month_date FROM payment_table JOIN ( SELECT 'January' AS month_name, 1 AS month_number UNION SELECT 'February', 2 UNION SELECT 'March', 3 UNION SELECT 'April', 4 UNION SELECT 'May', 5 UNION SELECT 'June', 6 UNION SELECT 'July', 7 UNION SELECT 'August', 8 UNION SELECT 'September', 9 UNION SELECT 'October', 10 UNION SELECT 'November', 11 UNION SELECT 'December', 12 ) m ON m.month_name = payment_table.`Month` ) t WHERE Std_ID = "+studentID+" GROUP BY Month ORDER BY MAX(month_date) DESC LIMIT 1 );";
@@ -645,18 +649,38 @@ public final class PaymentDetails extends javax.swing.JFrame {
             con = DBConnect.connect();
 
             try {
-                // Check if there is already a row with the same Std_ID, Subj_Names, Month, and Year values
-                String query1 = "SELECT * FROM payment_table WHERE Std_ID=? AND Subj_Names=? AND Month=? AND Year=?";
+
+                // Check if there is already a row with the same Std_ID, Month, and Year values
+                String query1 = "SELECT * FROM payment_table WHERE Std_ID=? AND Month=? AND Year=?";
                 pstmt1 = con.prepareStatement(query1);
                 pstmt1.setInt(1, Std_ID);
-                pstmt1.setString(2, values);
-                pstmt1.setString(3, mnth);
-                pstmt1.setString(4, yr);
+                pstmt1.setString(2, mnth);
+                pstmt1.setString(3, yr);
                 ResultSet rs = pstmt1.executeQuery();
-                if (rs.next()) {
+                boolean dataExists = false;
+                while (rs.next()) {
+                    // Get the value of the Subj_Names column for the current row
+                    String subjNames = rs.getString("Subj_Names");
+                    // Split the value of Subj_Names into an array of subjects
+                    String[] subjects = subjNames.split(", ");
+                    // Check if the new subjects to be added already exist in the Subj_Names column
+                    for (String subject : subjects) {
+                        if (values.contains(subject)) {
+                            dataExists = true;
+                            break;
+                        }
+                    }
+                    if (dataExists) {
+                        break;
+                    }
+                }
+                if (dataExists) {
                     JOptionPane.showMessageDialog(null, "Data already exists!", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                    newBtn.doClick(); //clicking new btn after receving error msg
+
                 } else {
-                    // If there is no row with the same values, insert the data
+                    // If there is no row with the same Std_ID, Month, and Year values that already includes the new subjects,
+                    // insert the data
                     String query2 = "INSERT INTO payment_table (Std_ID, Std_Name, Subj_Names, Payment_fee, Grade, Month, Date_paid, Year) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                     pstmt2 = con.prepareStatement(query2);
                     pstmt2.setInt(1, Std_ID);
@@ -675,17 +699,17 @@ public final class PaymentDetails extends javax.swing.JFrame {
                     int id = 0;
                     try {
 
-                        Connection idcon = DBConnect.connect();
                         Statement stmtid;
                         ResultSet rsid;
-                        String queryId = "SELECT `payment_ID` FROM `payment_table` WHERE `payment_ID` order by `payment_ID` DESC LIMIT 1;";
-                        stmtid = idcon.createStatement();
-                        rsid = stmtid.executeQuery(queryId);
+                        try (Connection idcon = DBConnect.connect()) {
+                            String queryId = "SELECT `payment_ID` FROM `payment_table` WHERE `payment_ID` order by `payment_ID` DESC LIMIT 1;";
+                            stmtid = idcon.createStatement();
+                            rsid = stmtid.executeQuery(queryId);
 
-                        while (rsid.next()) {
-                            id = Integer.parseInt(rsid.getString("payment_ID"));
+                            while (rsid.next()) {
+                                id = Integer.parseInt(rsid.getString("payment_ID"));
+                            }
                         }
-                        idcon.close();
                         stmtid.close();
                         rsid.close();
 
@@ -723,15 +747,16 @@ public final class PaymentDetails extends javax.swing.JFrame {
                         JasperReport jasperReport = JasperCompileManager.compileReport(reportSource);
                         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, param, new JRTableModelDataSource(subj_tbl.getModel()));
 
-//            JasperViewer.viewReport(jasperPrint, false);         //View   
-                        JasperPrintManager.printReport(jasperPrint, false);    //Direct Print
+//                      JasperViewer.viewReport(jasperPrint, false);            //View   
+                        JasperPrintManager.printReport(jasperPrint, false);     //Direct Print
 
                     } catch (JRException e) {
-                        System.out.println(e.getMessage());
                         e.printStackTrace();
                     }
-
+                    newBtn.doClick(); //clicking new btn after save
+                    pstmt2.close();
                 }
+
                 pstmt1.close();
                 con.close();
             } catch (SQLException e) {
@@ -865,6 +890,10 @@ public final class PaymentDetails extends javax.swing.JFrame {
 
     private void txtCashKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCashKeyPressed
         // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            createBtn.doClick();
+
+        }
     }//GEN-LAST:event_txtCashKeyPressed
 
     private void txtCashKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCashKeyReleased
