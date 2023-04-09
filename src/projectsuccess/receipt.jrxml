@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="226" pageHeight="623" columnWidth="186" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f31e2345-753d-4313-b6d1-8fbf1014c9f7">
+	<property name="ireport.zoom" value="2.5937424601000023"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="134"/>
+	<parameter name="tot" class="java.lang.String"/>
+	<parameter name="month" class="java.lang.String"/>
+	<parameter name="cash" class="java.lang.String"/>
+	<parameter name="balance" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\NetBeans Projects\\projectsuccess\\src\\projectsuccess\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="stdID" class="java.lang.String"/>
+	<parameter name="stdname" class="java.lang.String"/>
+	<parameter name="grd" class="java.lang.String"/>
+	<parameter name="rcptID" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="COLUMN_0" class="java.lang.String"/>
+	<field name="COLUMN_2" class="java.lang.String"/>
+	<group name="payment">
+		<groupFooter>
+			<band height="78">
+				<textField>
+					<reportElement x="136" y="11" width="49" height="13" uuid="e56bc529-92fb-422e-83fb-2f8e5782df34"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{tot}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="90" y="11" width="35" height="13" uuid="e3238d57-3b50-4b5c-9d42-5180ea4c7e7b"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Total :]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="136" y="26" width="49" height="13" uuid="6f768700-237c-4f29-9606-c797e5a63448"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{cash}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="90" y="26" width="35" height="13" uuid="5079132d-61b2-405f-98f0-b52d71422c97"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Cash :]]></text>
+				</staticText>
+				<line>
+					<reportElement x="84" y="40" width="100" height="1" uuid="cf522da2-7387-4a14-8169-0f0ec9590f3e"/>
+				</line>
+				<textField>
+					<reportElement x="136" y="42" width="48" height="13" uuid="5322470d-502c-4412-b5f3-aa173b445503"/>
+					<textElement textAlignment="Right">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{balance}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="74" y="42" width="51" height="13" uuid="de1cc4e3-8a6a-48e0-9515-24386f14a253"/>
+					<textElement textAlignment="Right">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[Balance :]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="0" width="186" height="1" uuid="7dc980cb-2054-4ced-b141-325d9c56633d"/>
+					<graphicElement>
+						<pen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="90" splitType="Stretch">
+			<image>
+				<reportElement x="23" y="0" width="136" height="58" uuid="fca7912c-5643-45eb-8379-cbe406834809"/>
+				<imageExpression><![CDATA["C:\\NetBeans Projects\\projectsuccess\\src\\Icons\\logo_jpg.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="47" width="186" height="12" uuid="909da00b-afc2-4a0b-9aba-b2c66fc479a4"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Success Higher Education Institute - Ganemulla]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="66" width="116" height="17" uuid="82e68c19-7187-4284-95fc-e593d70ee0e8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Candara" size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Payment Receipt]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="72" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="34" width="47" height="12" uuid="76bf1d4e-bd69-41f7-bae0-19e561ae39b6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Student ID :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="47" y="34" width="77" height="12" uuid="87552e41-d6ed-402d-bebf-88a0dc4ff551"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{stdID}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="46" width="47" height="12" uuid="dc55f648-d449-466b-a886-25cd08257fd0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Student Name :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="56" width="47" height="12" uuid="79c13c8f-3c6f-4eaf-a41a-055502e8a507"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Grade :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="47" y="46" width="77" height="12" uuid="c2eb556c-73bd-4127-97b9-c8500800ab26"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{stdname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="47" y="56" width="77" height="12" uuid="d2d52b89-2803-48ff-adc0-3b87d55c243b"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{grd}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="147" y="20" width="39" height="14" uuid="86747222-11d3-4222-be58-c7cf8faa9958"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Receipt ID]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="90" y="20" width="49" height="14" uuid="ef1d8ae4-2426-4917-9e0b-0cf15111b3f6"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{rcptID}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="14" width="186" height="1" uuid="b5136983-c6fe-4d7b-a6ce-1ff772cb9e37"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="90" y="0" width="50" height="12" uuid="732eeece-b301-4478-97b8-cff46f0c912f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm a">
+				<reportElement x="147" y="0" width="39" height="12" uuid="c14c0a08-5285-44b9-b4b0-7a55167b0e37"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="6" width="31" height="12" uuid="14c9dec6-3a66-4d4b-99e0-9b6d854323e4"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Subjects]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="137" y="6" width="48" height="12" uuid="e8b56588-e819-4d22-b63b-63afe948b523"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="186" height="1" uuid="803fb810-b3db-46b0-a57d-998236091a6c"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="22" width="186" height="1" uuid="0f80fd45-c5f9-4da6-b82a-e1b84e472eff"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dotted" lineColor="#000000"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="2" width="125" height="12" uuid="d60b902d-7c27-4fb3-ad00-d7c28504c043"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COLUMN_0}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="2" width="48" height="12" uuid="1238dae2-0c33-432b-b494-c6391f7e3564"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COLUMN_2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="54"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

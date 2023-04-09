@@ -9,11 +9,22 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.sql.*;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 
 public final class PaymentDetails extends javax.swing.JFrame {
 
@@ -105,7 +116,6 @@ public final class PaymentDetails extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         allEnrolledsbjlist = new javax.swing.JList<>();
         lblPayingsubjects = new javax.swing.JLabel();
-        btnPrintSend = new javax.swing.JButton();
         cashAmount = new javax.swing.JLabel();
         txtCash = new javax.swing.JTextField();
         balanceAmount = new javax.swing.JLabel();
@@ -162,7 +172,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
         addpaymentDetails.add(grade, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, 30));
 
         pmntFee.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        pmntFee.setText("Payment Fees (Rs) :");
+        pmntFee.setText("Total Fees (Rs) :");
         pmntFee.setMaximumSize(new java.awt.Dimension(57, 14));
         pmntFee.setMinimumSize(new java.awt.Dimension(57, 14));
         addpaymentDetails.add(pmntFee, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, -1, 30));
@@ -311,14 +321,6 @@ public final class PaymentDetails extends javax.swing.JFrame {
         lblPayingsubjects.setMinimumSize(new java.awt.Dimension(108, 14));
         addpaymentDetails.add(lblPayingsubjects, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 60, -1, 30));
 
-        btnPrintSend.setText("Print");
-        btnPrintSend.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrintSendActionPerformed(evt);
-            }
-        });
-        addpaymentDetails.add(btnPrintSend, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 690, 100, 36));
-
         cashAmount.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cashAmount.setText("Cash (Rs) :");
         cashAmount.setMaximumSize(new java.awt.Dimension(57, 14));
@@ -337,15 +339,15 @@ public final class PaymentDetails extends javax.swing.JFrame {
         addpaymentDetails.add(txtCash, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 570, 130, 30));
 
         balanceAmount.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        balanceAmount.setText("Cash (Rs) :");
+        balanceAmount.setText("Balance :");
         balanceAmount.setMaximumSize(new java.awt.Dimension(57, 14));
         balanceAmount.setMinimumSize(new java.awt.Dimension(57, 14));
-        addpaymentDetails.add(balanceAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 630, -1, 30));
+        addpaymentDetails.add(balanceAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 620, -1, 30));
 
         balanceLbl.setBackground(new java.awt.Color(255, 255, 255));
         balanceLbl.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         balanceLbl.setText("0.00");
-        addpaymentDetails.add(balanceLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 630, 120, 30));
+        addpaymentDetails.add(balanceLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 620, 120, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -380,6 +382,10 @@ public final class PaymentDetails extends javax.swing.JFrame {
             lblstdName.setText("");
             grdLabel.setText("");
             lblLpaidMonth.setText("");
+            monthCB.setSelectedIndex(0);
+            feeLbl.setText("0.00");
+            txtCash.setText("");
+            balanceLbl.setText("0.00");
 
             // reset paid subject list
             DefaultListModel<String> listModel = (DefaultListModel<String>) pdSbjlist.getModel();
@@ -535,7 +541,74 @@ public final class PaymentDetails extends javax.swing.JFrame {
 
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
         // TODO add your handling code here:
-
+        //Saving Section
+        /*
+        if (txtstdID.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Please Fill the Required Fields", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+        } else if ("Choose Subjects".equals(subCB)) {
+        JOptionPane.showMessageDialog(null, "Please Fill the Required Fields", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+        } else if ("0.00".equals(feeLbl.getText())) {
+        JOptionPane.showMessageDialog(null, "Please Fill the Required Fields", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+        } else {
+        int Std_ID = Integer.parseInt(txtstdID.getText());
+        String Std_Name = lblstdName.getText();
+        
+        //subject list edit
+        //            String subject = (String) subCB.getSelectedItem();
+        DefaultTableModel model = (DefaultTableModel) subj_tbl.getModel();
+        String values = "";
+        for (int i = 0; i < model.getRowCount(); i++) {
+        // Get the value of the column containing the multiple values
+        Object valueObject = model.getValueAt(i, 0);
+        
+        // Cast the object to a string and add it to the concatenated string with a comma separator
+        String value = (valueObject != null) ? valueObject.toString() : "";
+        if (i == 0) {
+        values = value;
+        } else {
+        values += ", " + value;
+        }
+        }
+        //            String subject=values;
+        String grd = grdLabel.getText();
+        String fee = feeLbl.getText();
+        String mnth = (String) monthCB.getSelectedItem();
+        String date = dateLbl.getText();
+        String yr = dateLbl.getText().substring(0, 4);
+        
+        //            if (!Std_Name.isEmpty() || "Choose Subjects".equals(subCB) ) {
+        Connection con;
+        con = DBConnect.connect();
+        PreparedStatement pstmt3;
+        
+        try {
+        
+        String query = "insert into payment_table(Std_ID,Std_Name,Subj_Names,Payment_fee,Grade,Month,Date_paid,Year)values(?,?,?,?,?,?,?,?)";
+        
+        pstmt3 = con.prepareStatement(query);
+        
+        pstmt3.setInt(1, Std_ID);
+        pstmt3.setString(2, Std_Name);
+        pstmt3.setString(3, values);
+        pstmt3.setString(4, fee);
+        pstmt3.setString(5, grd);
+        pstmt3.setString(6, mnth);
+        pstmt3.setString(7, date);
+        pstmt3.setString(8, yr);
+        
+        pstmt3.execute();
+        JOptionPane.showMessageDialog(null, "Data successfully Saved!");
+        
+        pstmt3.close();
+        con.close();
+        } catch (SQLException e) {
+        System.out.println(e.getMessage());
+        JOptionPane.showMessageDialog(null, "Please check your filled data! ", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+        }
+        //            } else {
+        //                JOptionPane.showMessageDialog(null, "Please Fill Required Fields!", "Error Occured!", JOptionPane.ERROR_MESSAGE);
+        //            }
+        }*/
         if (txtstdID.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please Fill the Required Fields", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
         } else if ("Choose Subjects".equals(subCB)) {
@@ -547,7 +620,6 @@ public final class PaymentDetails extends javax.swing.JFrame {
             String Std_Name = lblstdName.getText();
 
             //subject list edit
-//            String subject = (String) subCB.getSelectedItem();
             DefaultTableModel model = (DefaultTableModel) subj_tbl.getModel();
             String values = "";
             for (int i = 0; i < model.getRowCount(); i++) {
@@ -562,45 +634,110 @@ public final class PaymentDetails extends javax.swing.JFrame {
                     values += ", " + value;
                 }
             }
-//            String subject=values;
             String grd = grdLabel.getText();
             String fee = feeLbl.getText();
             String mnth = (String) monthCB.getSelectedItem();
             String date = dateLbl.getText();
             String yr = dateLbl.getText().substring(0, 4);
 
-//            if (!Std_Name.isEmpty() || "Choose Subjects".equals(subCB) ) {
             Connection con;
+            PreparedStatement pstmt1, pstmt2;
             con = DBConnect.connect();
-            PreparedStatement pstmt3;
 
             try {
+                // Check if there is already a row with the same Std_ID, Subj_Names, Month, and Year values
+                String query1 = "SELECT * FROM payment_table WHERE Std_ID=? AND Subj_Names=? AND Month=? AND Year=?";
+                pstmt1 = con.prepareStatement(query1);
+                pstmt1.setInt(1, Std_ID);
+                pstmt1.setString(2, values);
+                pstmt1.setString(3, mnth);
+                pstmt1.setString(4, yr);
+                ResultSet rs = pstmt1.executeQuery();
+                if (rs.next()) {
+                    JOptionPane.showMessageDialog(null, "Data already exists!", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    // If there is no row with the same values, insert the data
+                    String query2 = "INSERT INTO payment_table (Std_ID, Std_Name, Subj_Names, Payment_fee, Grade, Month, Date_paid, Year) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                    pstmt2 = con.prepareStatement(query2);
+                    pstmt2.setInt(1, Std_ID);
+                    pstmt2.setString(2, Std_Name);
+                    pstmt2.setString(3, values);
+                    pstmt2.setString(4, fee);
+                    pstmt2.setString(5, grd);
+                    pstmt2.setString(6, mnth);
+                    pstmt2.setString(7, date);
+                    pstmt2.setString(8, yr);
+                    pstmt2.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Data successfully saved!");
 
-                String query = "insert into payment_table(Std_ID,Std_Name,Subj_Names,Payment_fee,Grade,Month,Date_paid,Year)values(?,?,?,?,?,?,?,?)";
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    // Id getting Section
+                    int id = 0;
+                    try {
 
-                pstmt3 = con.prepareStatement(query);
+                        Connection idcon = DBConnect.connect();
+                        Statement stmtid;
+                        ResultSet rsid;
+                        String queryId = "SELECT `payment_ID` FROM `payment_table` WHERE `payment_ID` order by `payment_ID` DESC LIMIT 1;";
+                        stmtid = idcon.createStatement();
+                        rsid = stmtid.executeQuery(queryId);
 
-                pstmt3.setInt(1, Std_ID);
-                pstmt3.setString(2, Std_Name);
-                pstmt3.setString(3, values);
-                pstmt3.setString(4, fee);
-                pstmt3.setString(5, grd);
-                pstmt3.setString(6, mnth);
-                pstmt3.setString(7, date);
-                pstmt3.setString(8, yr);
+                        while (rsid.next()) {
+                            id = Integer.parseInt(rsid.getString("payment_ID"));
+                        }
+                        idcon.close();
+                        stmtid.close();
+                        rsid.close();
 
-                pstmt3.execute();
-                JOptionPane.showMessageDialog(null, "Data successfully Saved!");
+                    } catch (NumberFormatException | SQLException e) {
+                        JOptionPane.showMessageDialog(null, "Error : " + e.getLocalizedMessage() + "", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
 
-                pstmt3.close();
+                    }
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    //Printing Section
+                    try {
+
+                        String total = feeLbl.getText();
+                        String month = monthCB.getSelectedItem().toString();
+                        String cash = txtCash.getText() + ".00";
+                        String bal = balanceLbl.getText();
+                        String stuID = txtstdID.getText();
+                        String stdname = lblstdName.getText();
+                        String grd1 = grdLabel.getText();
+                        String id1 = Integer.toString(id);
+
+                        File f = new File("src/projectsuccess/receipt.jrxml"); // get file relative path
+                        String reportSource = f.getAbsolutePath(); //get absolute path according to that relative path
+
+                        Map<String, Object> param = new HashMap<String, Object>();
+                        param.put("tot", total);
+                        param.put("month", month);
+                        param.put("cash", cash);
+                        param.put("balance", bal);
+                        param.put("stdID", stuID);
+                        param.put("stdname", stdname);
+                        param.put("grd", grd1);
+                        param.put("rcptID", id1);
+
+                        JasperReport jasperReport = JasperCompileManager.compileReport(reportSource);
+                        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, param, new JRTableModelDataSource(subj_tbl.getModel()));
+
+//            JasperViewer.viewReport(jasperPrint, false);         //View   
+                        JasperPrintManager.printReport(jasperPrint, false);    //Direct Print
+
+                    } catch (JRException e) {
+                        System.out.println(e.getMessage());
+                        e.printStackTrace();
+                    }
+
+                }
+                pstmt1.close();
                 con.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
                 JOptionPane.showMessageDialog(null, "Please check your filled data! ", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
             }
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Please Fill Required Fields!", "Error Occured!", JOptionPane.ERROR_MESSAGE);
-//            }
         }
 
 
@@ -726,10 +863,6 @@ public final class PaymentDetails extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtstdIDKeyPressed
 
-    private void btnPrintSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintSendActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPrintSendActionPerformed
-
     private void txtCashKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCashKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCashKeyPressed
@@ -827,7 +960,6 @@ public final class PaymentDetails extends javax.swing.JFrame {
     private javax.swing.JLabel attnDate;
     private javax.swing.JLabel balanceAmount;
     private javax.swing.JLabel balanceLbl;
-    private javax.swing.JButton btnPrintSend;
     private javax.swing.JLabel cashAmount;
     private javax.swing.JButton cnslBtn;
     private javax.swing.JButton createBtn;
