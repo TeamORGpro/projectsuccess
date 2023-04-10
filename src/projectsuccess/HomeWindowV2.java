@@ -23,6 +23,8 @@ import javax.swing.table.*;
  */
 public class HomeWindowV2 extends javax.swing.JFrame {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Creates new form HomeWindow
      */
@@ -1407,7 +1409,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             Statement s = con.createStatement();
             try (ResultSet rs = s.executeQuery("select * from std_info_table ")) {
                 while (rs.next()) {
-                    Vector v = new Vector();
+                    Vector<Object> v = new Vector<>();
                     v.add(rs.getString("Std_ID"));
                     v.add(rs.getString("Std_Name"));
                     v.add(rs.getString("Name_with_Initials"));
@@ -1445,7 +1447,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             Statement s1 = con.createStatement();
             try (ResultSet rs1 = s1.executeQuery("select * from attndance_table ")) {
                 while (rs1.next()) {
-                    Vector v1 = new Vector();
+                    Vector<Object> v1 = new Vector<>();
                     v1.add(rs1.getString("Date"));
                     v1.add(rs1.getString("Subj_Name"));
                     v1.add(rs1.getInt("Std_ID"));
@@ -1484,7 +1486,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             Statement s3 = con.createStatement();
             try (ResultSet rs3 = s3.executeQuery("select * from payment_table")) {
                 while (rs3.next()) {
-                    Vector v3 = new Vector();
+                   Vector<Object> v3 = new Vector<>();
                     v3.add(rs3.getInt("payment_ID"));
                     v3.add(rs3.getInt("Std_ID"));
                     v3.add(rs3.getString("Std_Name"));
@@ -1524,7 +1526,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             Statement s2 = con.createStatement();
             try (ResultSet rs2 = s2.executeQuery("select * from tchr_info_table ")) {
                 while (rs2.next()) {
-                    Vector v2 = new Vector();
+                    Vector<Object> v2 = new Vector<>();
                     v2.add(rs2.getInt("Tchr_ID"));
                     v2.add(rs2.getString("Subj_Name"));
                     v2.add(rs2.getString("Name_with_Initials"));
@@ -1634,7 +1636,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             Statement s1 = con.createStatement();
             try (ResultSet rs1 = s1.executeQuery("select * from attndance_table ")) {
                 while (rs1.next()) {
-                    Vector v1 = new Vector();
+                    Vector<Object> v1 = new Vector<>();
                     v1.add(rs1.getString("Date"));
                     v1.add(rs1.getString("Subj_Name"));
                     v1.add(rs1.getInt("Std_ID"));
@@ -1671,7 +1673,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             Statement s = con.createStatement();
             try (ResultSet rs = s.executeQuery("select * from std_info_table ")) {
                 while (rs.next()) {
-                    Vector v = new Vector();
+                    Vector<Object> v = new Vector<>();
                     v.add(rs.getString("Std_ID"));
                     v.add(rs.getString("Std_Name"));
                     v.add(rs.getString("Name_with_Initials"));
@@ -1714,7 +1716,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             Statement s2 = con.createStatement();
             try (ResultSet rs2 = s2.executeQuery("select * from tchr_info_table ")) {
                 while (rs2.next()) {
-                    Vector v2 = new Vector();
+                    Vector<Object> v2 = new Vector<>();
                     v2.add(rs2.getInt("Tchr_ID"));
                     v2.add(rs2.getString("Subj_Name"));
                     v2.add(rs2.getString("Name_with_Initials"));
@@ -1755,7 +1757,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             Statement s3 = con.createStatement();
             try (ResultSet rs3 = s3.executeQuery("select * from payment_table")) {
                 while (rs3.next()) {
-                    Vector v3 = new Vector();
+                    Vector<Object> v3 = new Vector<>();
                     v3.add(rs3.getInt("payment_ID"));
                     v3.add(rs3.getInt("Std_ID"));
                     v3.add(rs3.getString("Std_Name"));
@@ -1966,7 +1968,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 Statement s = con.createStatement();
                 try (ResultSet rs = s.executeQuery("select * from std_info_table ")) {
                     while (rs.next()) {
-                        Vector v = new Vector();
+                        Vector<Object> v = new Vector<>();
                         v.add(rs.getString("Std_ID"));
                         v.add(rs.getString("Std_Name"));
                         v.add(rs.getString("Name_with_Initials"));
@@ -2032,7 +2034,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 Statement s2 = con.createStatement();
                 try (ResultSet rs2 = s2.executeQuery("select * from tchr_info_table ")) {
                     while (rs2.next()) {
-                        Vector v2 = new Vector();
+                        Vector<Object> v2 = new Vector<>();
                         v2.add(rs2.getInt("Tchr_ID"));
                         v2.add(rs2.getString("Subj_Name"));
                         v2.add(rs2.getString("Name_with_Initials"));
@@ -2099,7 +2101,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     Statement s1 = con2.createStatement();
                     try (ResultSet rs1 = s1.executeQuery("select * from attndance_table ")) {
                         while (rs1.next()) {
-                            Vector v1 = new Vector();
+                            Vector<Object> v1 = new Vector<>();
                             v1.add(rs1.getString("Date"));
                             v1.add(rs1.getString("Subj_Name"));
                             v1.add(rs1.getInt("Std_ID"));
@@ -2174,7 +2176,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 Statement s3 = con.createStatement();
                 try (ResultSet rs3 = s3.executeQuery("select * from payment_table")) {
                     while (rs3.next()) {
-                        Vector v3 = new Vector();
+                        Vector<Object> v3 = new Vector<>();
                         v3.add(rs3.getInt("payment_ID"));
                         v3.add(rs3.getInt("Std_ID"));
                         v3.add(rs3.getString("Std_Name"));
@@ -2429,7 +2431,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private void paymntFilterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymntFilterBtnActionPerformed
         // TODO add your handling code here:
 
-        JComboBox cb1 = new JComboBox();
+        JComboBox<String> cb1 = new JComboBox<>();
         //load Subject to cb1
         cb1.addItem("Select"); // add first value of combobox to "Select"
         Connection cons;
@@ -2456,7 +2458,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         }
         //finish load Subject to cb1
 
-        JComboBox cb2 = new JComboBox();
+        JComboBox<String> cb2 = new JComboBox<>();
         //load Month to cb2
         cb2.addItem("Select"); // add first value of combobox to "Select"
         cb2.addItem("January");
@@ -2473,7 +2475,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         cb2.addItem("December");
 
         //finish load Month to cb2
-        JComboBox cb3 = new JComboBox();
+        JComboBox<String> cb3 = new JComboBox<>();
         //load year to cb3
         cb3.addItem("Select"); // add first value of combobox to "Select"
         Connection con;
@@ -2540,7 +2542,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
 
                     try (ResultSet rsp = stP.executeQuery(q)) {
                         while (rsp.next()) {
-                            Vector v3 = new Vector();
+                            Vector<Object> v3 = new Vector<>();
                             v3.add(rsp.getInt("payment_ID"));
                             v3.add(rsp.getInt("Std_ID"));
                             v3.add(rsp.getString("Std_Name"));
@@ -2598,7 +2600,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         }
         //finish load Subject to cb1
 
-        JComboBox cb2 = new JComboBox();
+        JComboBox<String> cb2 = new JComboBox<>();
         //load grade to cb2
         cb2.addItem("Select"); // add first value of combobox to "Select"
         Connection con;
@@ -2659,16 +2661,16 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     Statement attnSt = conrp.createStatement();
                     try (ResultSet attnfrs = attnSt.executeQuery("SELECT * FROM attndance_table WHERE `Subj_Name`='" + cbSubj + "' AND `Grade`='" + cbBatch + "';")) {
                         while (attnfrs.next()) {
-                            Vector Ve1 = new Vector();
-                            Ve1.add(attnfrs.getString("Date"));
-                            Ve1.add(attnfrs.getString("Subj_Name"));
-                            Ve1.add(attnfrs.getInt("Std_ID"));
-                            Ve1.add(attnfrs.getString("Std_Name"));
-                            Ve1.add(attnfrs.getString("Grade"));
-                            Ve1.add(attnfrs.getString("Tchr_Name"));
-                            Ve1.add(attnfrs.getString("Status"));
-                            Ve1.add(attnfrs.getString("Spc_Note"));
-                            dtattnf.addRow(Ve1);
+                            Vector<Object> ve1 = new Vector<>();
+                            ve1.add(attnfrs.getString("Date"));
+                            ve1.add(attnfrs.getString("Subj_Name"));
+                            ve1.add(attnfrs.getInt("Std_ID"));
+                            ve1.add(attnfrs.getString("Std_Name"));
+                            ve1.add(attnfrs.getString("Grade"));
+                            ve1.add(attnfrs.getString("Tchr_Name"));
+                            ve1.add(attnfrs.getString("Status"));
+                            ve1.add(attnfrs.getString("Spc_Note"));
+                            dtattnf.addRow(ve1);
                         }
                         attnSt.close();
                         conrp.close();
@@ -2685,7 +2687,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     private void stdFilterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stdFilterBtnActionPerformed
         // TODO add your handling code here:
 
-        JComboBox cb1 = new JComboBox();
+        JComboBox<String> cb1 = new JComboBox<>();
         //load Subject to cb1
         cb1.addItem("Select"); // add first value of combobox to "Select"
         Connection cons;
@@ -2712,7 +2714,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         }
         //finish load Subject to cb1
 
-        JComboBox cb2 = new JComboBox();
+        JComboBox<String> cb2 = new JComboBox<>();
         //load grade to cb2
         cb2.addItem("Select"); // add first value of combobox to "Select"
         Connection con;
@@ -2773,7 +2775,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     Statement stdSt = conrp.createStatement();
                     try (ResultSet stdrs = stdSt.executeQuery("SELECT * FROM std_info_table WHERE `Subjects` LIKE '%" + cbSubj + "%' AND `ol_yr`='" + cbBatch + "';")) {
                         while (stdrs.next()) {
-                            Vector v = new Vector();
+                            Vector<Object> v = new Vector<>();
                             v.add(stdrs.getString("Std_ID"));
                             v.add(stdrs.getString("Std_Name"));
                             v.add(stdrs.getString("Name_with_Initials"));
@@ -2840,10 +2842,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new HomeWindowV2().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new HomeWindowV2().setVisible(true);
         });
     }
 
