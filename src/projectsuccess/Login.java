@@ -18,6 +18,8 @@ import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
+    private static final long serialVersionUID = 1L;
+
     public Login() {
         initComponents();
         icon();
@@ -180,34 +182,23 @@ public class Login extends javax.swing.JFrame {
         String username = uNameTxt.getText();
         String password = String.valueOf(passWordArea.getPassword());
 
-        if (username.equals("") && password.equals("")) {
-//        if (username.equals("Success higher educational institute") && password.equals("ADMINpwd141414")) {
+        if (username.equals("Success higher educational institute") && password.equals("ADMINpwd141414")) {
             this.dispose();
             HomeWindowV2 h1 = new HomeWindowV2();
             h1.setVisible(true);
             try {
-                /*
-                // Replace this with the path to your XAMPP installation folder
-                String xamppPath = "C:\\xampp";
-
-                // Start MySQL in the background
-                String[] command = {"cmd.exe", "/c", "start", "cmd.exe", "/c", "cd \"" + xamppPath + "\" && mysql\\bin\\mysqld.exe"};
-                process = Runtime.getRuntime().exec(command);
-                 */
-
                 String xamppPath = "C:\\xampp";
                 ProcessBuilder pb = new ProcessBuilder(xamppPath + "\\mysql\\bin\\mysqld.exe");
                 pb.directory(new File(xamppPath));
-                Process process = pb.start();
+                Process processes = pb.start();
+                System.out.println(pb);
 
             } catch (IOException e) {
-                e.printStackTrace();
                 JOptionPane.showMessageDialog(this, "DB Connection error : " + e.getMessage() + " error or internet error", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             Component frame = null;
             JOptionPane.showMessageDialog(frame, "invaild username or password");
-
         }
 
 
@@ -238,10 +229,8 @@ public class Login extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Login().setVisible(true);
         });
     }
 

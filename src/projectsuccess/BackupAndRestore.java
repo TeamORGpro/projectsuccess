@@ -207,16 +207,19 @@ public class BackupAndRestore extends javax.swing.JFrame {
         Process p = null;
         try {
             Runtime runtime = Runtime.getRuntime();
-             p=runtime.exec("C:/xampp/mysql/bin/mysqldump.exe -u root   -B successdb -r \""+path1+"\""); // My Pc XAMPP Path
+
+            String mainPath="C:/xampp";
+//            String mainPath = System.getProperty("user.dir") + "./xampp";
+
+            p = runtime.exec("" + mainPath + "/mysql/bin/mysqldump.exe -u root   -B successdb -r \"" + path1 + "\" --events"); // My Pc XAMPP Path
 //            p=runtime.exec("C:/Success Institute/mysql/bin/mysqldump.exe -u root   -B successdb -r \""+path1+"\"");
 
             int processComplete = p.waitFor();
             if (processComplete == 0) {
                 JOptionPane.showMessageDialog(null, "Successfully Backuped File");
                 jTextField1.setText("");
-            } 
-            else {
-                JOptionPane.showMessageDialog(null, "Backup Didn't Successfull, Try typing a single word for file name", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Backup Didn't Successfull", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
                 jTextField1.setText("");
             }
 
@@ -250,10 +253,14 @@ public class BackupAndRestore extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         String user = "root";
-        
-        String[] restorecmd = new String[]{"C:/xampp/mysql/bin/mysql.exe", "--user=" + user, "-e", "source "+path1};  // My Pc XAMPP Path
-//        String[] restorecmd = new String[]{"C:/Success Institute/mysql/bin/mysql.exe", "--user=" + user, "-e", "source "+path1};
 
+//        Previous code
+                String mainPath = "C:/xampp";
+//        String mainPath = System.getProperty("user.dir") + "./xampp";
+        String[] restorecmd = new String[]{"" + mainPath + "/mysql/bin/mysql.exe", "--user=" + user, "-e", "source " + path1};  // My Pc XAMPP Path
+        
+        
+  
         Process process;
         try {
             process = Runtime.getRuntime().exec(restorecmd);

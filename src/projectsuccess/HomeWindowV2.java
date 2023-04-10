@@ -1462,7 +1462,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 con.close();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace();    
         }
 
 
@@ -1584,6 +1584,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             try {
                 // Replace this with the path to your XAMPP installation folder
                 String xamppPath = "C:\\xampp";
+//                String xamppPath = System.getProperty("user.dir") + "./xampp";
 
                 // Stop MySQL
                 String[] command = {"cmd.exe", "/c", "start", "cmd.exe", "/c", "cd \"" + xamppPath + "\" && mysql\\bin\\mysqladmin.exe shutdown"};
