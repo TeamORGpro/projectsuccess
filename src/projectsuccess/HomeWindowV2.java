@@ -1462,7 +1462,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 con.close();
             }
         } catch (SQLException e) {
-            e.printStackTrace();    
+            e.printStackTrace();
         }
 
 
@@ -1486,7 +1486,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             Statement s3 = con.createStatement();
             try (ResultSet rs3 = s3.executeQuery("select * from payment_table")) {
                 while (rs3.next()) {
-                   Vector<Object> v3 = new Vector<>();
+                    Vector<Object> v3 = new Vector<>();
                     v3.add(rs3.getInt("payment_ID"));
                     v3.add(rs3.getInt("Std_ID"));
                     v3.add(rs3.getString("Std_Name"));
@@ -2131,8 +2131,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         if (rCount == 0) {
             JOptionPane.showMessageDialog(null, "Please Select one or more rows to delete", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
         } else {
-            int cSid = 0;
-            int csubjName = 2;
+            int cSid = 1;
+            int csubjName = 3;
             int cMonth = 6;
             int cPDate = 7;
 
@@ -2152,12 +2152,14 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                         con = DBConnect.connect();
 
                         Statement dst = con.createStatement();
-                        String sql1 = "DELETE FROM payment_table WHERE `Std_ID` =" + Sid1 + " AND `Subj_Name` = '" + subjName1 + "' AND `Month` = '" + Month1 + "' AND `Date_paid` = '" + date1 + "';";
+                        String sql1 = "DELETE FROM payment_table WHERE `Std_ID` =" + Sid1 + " AND `Month` = '" + Month1 + "' AND `Date_paid` = '" + date1 + "' AND `Subj_Names` LIKE  '%" + subjName1 + "%';";
 
                         dst.executeUpdate(sql1);
                         con.close();
 
-                    } catch (Exception e) {
+                    } catch (SQLException exc) {
+                        JOptionPane.showMessageDialog(null, "Error : " + exc.getLocalizedMessage() + "", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+
                     }
                 }
             }
@@ -2181,8 +2183,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                         v3.add(rs3.getInt("payment_ID"));
                         v3.add(rs3.getInt("Std_ID"));
                         v3.add(rs3.getString("Std_Name"));
-                        v3.add(rs3.getString("Subj_Name"));
-                        v3.add(rs3.getString("Tchr_Name"));
+                        v3.add(rs3.getString("Subj_Names"));
+//                    v3.add(rs3.getString("Tchr_Name"));
                         v3.add(rs3.getString("Payment_fee"));
                         v3.add(rs3.getString("Grade"));
                         v3.add(rs3.getString("Month"));

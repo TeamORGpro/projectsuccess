@@ -103,7 +103,7 @@
 		<band height="103" splitType="Stretch">
 			<image>
 				<reportElement x="23" y="0" width="136" height="58" uuid="fca7912c-5643-45eb-8379-cbe406834809"/>
-				<imageExpression><![CDATA["C:\\NetBeans Projects\\projectsuccess\\src\\Icons\\logo_jpg.jpg"]]></imageExpression>
+				<imageExpression><![CDATA["PrintBuilder\\logo_jpg.jpg"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="0" y="46" width="186" height="12" uuid="909da00b-afc2-4a0b-9aba-b2c66fc479a4"/>
