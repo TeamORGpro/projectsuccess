@@ -555,33 +555,6 @@ public class StdAtten extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
             searchBtn01.doClick();
-//            Connection con;
-//            con = DBConnect.connect();
-//            ResultSet rs;
-//            PreparedStatement pstmt;
-//            try {
-//                String studentID = txtStdID.getText();
-//                pstmt = con.prepareStatement("SELECT * FROM std_info_table WHERE Std_ID = ?");
-//                pstmt.setString(1, studentID);
-//                rs = pstmt.executeQuery();
-//
-//                if (rs.next()) {
-//                    String studentName = rs.getString("Std_Name");
-//                    String grd = rs.getString("Grade");
-//                    lblstdName.setText(studentName);
-//                    templbl.setText(grd);
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Please Enter Valid Student ID");
-//                    lblstdName.setText("");
-//
-//                }
-//                pstmt.close();
-//                rs.close();
-//                con.close();
-//
-//            } catch (HeadlessException | SQLException e) {
-//                System.out.println(e.getMessage());
-//            }
         }
     }//GEN-LAST:event_txtStdIDKeyPressed
 
@@ -613,13 +586,13 @@ public class StdAtten extends javax.swing.JFrame {
                 rs1 = pstmt1.executeQuery();
 
                 while (rs1.next()) {
-                    int stdID = rs1.getInt("Std_ID");
-                    String stdName = rs1.getString("Std_Name");
+                    int stdtID = rs1.getInt("Std_ID");
+                    String stdtName = rs1.getString("Std_Name");
 
                     // Check if the student is already marked as absent for the given date and subject
                     String query2 = "SELECT * FROM attndance_table WHERE Std_ID = ? AND Date = ? AND Subj_Name = ?";
                     pstmt2 = con.prepareStatement(query2);
-                    pstmt2.setInt(1, stdID);
+                    pstmt2.setInt(1, stdtID);
                     pstmt2.setString(2, date);
                     pstmt2.setString(3, subject);
                     rs2 = pstmt2.executeQuery();
@@ -634,8 +607,8 @@ public class StdAtten extends javax.swing.JFrame {
                         pstmt2.setString(1, date);
                         pstmt2.setString(2, subject);
                         pstmt2.setString(3, teacherName);
-                        pstmt2.setInt(4, stdID);
-                        pstmt2.setString(5, stdName);
+                        pstmt2.setInt(4, stdtID);
+                        pstmt2.setString(5, stdtName);
                         pstmt2.setString(6, "Absent");
 
                         if (!specNote.equals("Special Note")) {
@@ -654,7 +627,7 @@ public class StdAtten extends javax.swing.JFrame {
                 pstmt2.close();
                 con.close();
             } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Error:" + e.getLocalizedMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
             }
         }
 

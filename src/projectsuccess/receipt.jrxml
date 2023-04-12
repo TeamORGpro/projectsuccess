@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="226" pageHeight="623" columnWidth="186" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f31e2345-753d-4313-b6d1-8fbf1014c9f7">
 	<property name="ireport.zoom" value="2.5937424601000023"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="2"/>
+	<property name="ireport.y" value="588"/>
 	<parameter name="tot" class="java.lang.String"/>
 	<parameter name="month" class="java.lang.String"/>
 	<parameter name="cash" class="java.lang.String"/>

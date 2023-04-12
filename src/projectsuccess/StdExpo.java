@@ -20,6 +20,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class StdExpo extends javax.swing.JFrame {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Creates new form StdExpo
      */
@@ -142,27 +144,24 @@ public class StdExpo extends javax.swing.JFrame {
 
             if (saveFile != null) {
                 saveFile = new File(saveFile.toString() + ".xlsx");
-                Workbook wb = new XSSFWorkbook();
-                Sheet sheet = wb.createSheet("Students");
-
-                Row rowCol = sheet.createRow(0);
-                for (int i = 0; i < expoStdInfoTbl.getColumnCount(); i++) {
-                    Cell cell = rowCol.createCell(i);
-                    cell.setCellValue(expoStdInfoTbl.getColumnName(i));
-                }
-
-                for (int j = 0; j < expoStdInfoTbl.getRowCount(); j++) {
-                    Row row = sheet.createRow(j + 1);
-                    for (int k = 0; k < expoStdInfoTbl.getColumnCount(); k++) {
-                        Cell cell = row.createCell(k);
-                        if (expoStdInfoTbl.getValueAt(j, k) != null) {
-                            cell.setCellValue(expoStdInfoTbl.getValueAt(j, k).toString());
+                FileOutputStream out;
+                try (Workbook wb = new XSSFWorkbook()) {
+                    Sheet sheet = wb.createSheet("Students");
+                    Row rowCol = sheet.createRow(0);
+                    for (int i = 0; i < expoStdInfoTbl.getColumnCount(); i++) {
+                        Cell cell = rowCol.createCell(i);
+                        cell.setCellValue(expoStdInfoTbl.getColumnName(i));
+                    }   for (int j = 0; j < expoStdInfoTbl.getRowCount(); j++) {
+                        Row row = sheet.createRow(j + 1);
+                        for (int k = 0; k < expoStdInfoTbl.getColumnCount(); k++) {
+                            Cell cell = row.createCell(k);
+                            if (expoStdInfoTbl.getValueAt(j, k) != null) {
+                                cell.setCellValue(expoStdInfoTbl.getValueAt(j, k).toString());
+                            }
                         }
-                    }
+                    }   out = new FileOutputStream(new File(saveFile.toString()));
+                    wb.write(out);
                 }
-                FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
-                wb.write(out);
-                wb.close();
                 out.close();
                 JOptionPane.showMessageDialog(null, "Successfully Exported!");
                 openFile(saveFile.toString());
@@ -206,10 +205,8 @@ public class StdExpo extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new StdExpo().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new StdExpo().setVisible(true);
         });
     }
 
