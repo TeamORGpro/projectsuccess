@@ -112,6 +112,9 @@ public class StdAtten extends javax.swing.JFrame {
         lblTchrName = new javax.swing.JLabel();
         absntBtn = new javax.swing.JButton();
         cbGrades = new javax.swing.JComboBox<>();
+        stdName1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
         tblPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -218,7 +221,7 @@ public class StdAtten extends javax.swing.JFrame {
                 createBtnActionPerformed(evt);
             }
         });
-        attmarkPanl.add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 100, 36));
+        attmarkPanl.add(createBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 100, 36));
 
         newBtn.setBackground(new java.awt.Color(255, 255, 153));
         newBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -231,7 +234,7 @@ public class StdAtten extends javax.swing.JFrame {
                 newBtnActionPerformed(evt);
             }
         });
-        attmarkPanl.add(newBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 100, 36));
+        attmarkPanl.add(newBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 440, 100, 36));
 
         cnslBtn.setBackground(new java.awt.Color(255, 102, 102));
         cnslBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -244,7 +247,7 @@ public class StdAtten extends javax.swing.JFrame {
                 cnslBtnActionPerformed(evt);
             }
         });
-        attmarkPanl.add(cnslBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 360, -1, 36));
+        attmarkPanl.add(cnslBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 440, -1, 36));
 
         txtStatuslb.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         txtStatuslb.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -290,12 +293,20 @@ public class StdAtten extends javax.swing.JFrame {
                 absntBtnActionPerformed(evt);
             }
         });
-        attmarkPanl.add(absntBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 410, 160, 30));
+        attmarkPanl.add(absntBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, 150, 30));
 
         cbGrades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Set grade for absent", "Grade 6", "Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11" }));
-        attmarkPanl.add(cbGrades, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 150, 30));
+        attmarkPanl.add(cbGrades, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 150, 30));
 
-        bgPnl.add(attmarkPanl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 410, 460));
+        stdName1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        stdName1.setText("Mark absent for other students :");
+        attmarkPanl.add(stdName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, 30));
+
+        jSeparator1.setForeground(new java.awt.Color(102, 153, 255));
+        attmarkPanl.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 370, 70));
+        attmarkPanl.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 370, 50));
+
+        bgPnl.add(attmarkPanl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 410, 490));
 
         tblPanel.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -328,7 +339,7 @@ public class StdAtten extends javax.swing.JFrame {
         );
         tblPanelLayout.setVerticalGroup(
             tblPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
         );
 
         bgPnl.add(tblPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(426, 11, -1, -1));
@@ -349,7 +360,7 @@ public class StdAtten extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bgPnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(bgPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
         );
 
         pack();
@@ -544,33 +555,6 @@ public class StdAtten extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
             searchBtn01.doClick();
-//            Connection con;
-//            con = DBConnect.connect();
-//            ResultSet rs;
-//            PreparedStatement pstmt;
-//            try {
-//                String studentID = txtStdID.getText();
-//                pstmt = con.prepareStatement("SELECT * FROM std_info_table WHERE Std_ID = ?");
-//                pstmt.setString(1, studentID);
-//                rs = pstmt.executeQuery();
-//
-//                if (rs.next()) {
-//                    String studentName = rs.getString("Std_Name");
-//                    String grd = rs.getString("Grade");
-//                    lblstdName.setText(studentName);
-//                    templbl.setText(grd);
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Please Enter Valid Student ID");
-//                    lblstdName.setText("");
-//
-//                }
-//                pstmt.close();
-//                rs.close();
-//                con.close();
-//
-//            } catch (HeadlessException | SQLException e) {
-//                System.out.println(e.getMessage());
-//            }
         }
     }//GEN-LAST:event_txtStdIDKeyPressed
 
@@ -602,13 +586,13 @@ public class StdAtten extends javax.swing.JFrame {
                 rs1 = pstmt1.executeQuery();
 
                 while (rs1.next()) {
-                    int stdID = rs1.getInt("Std_ID");
-                    String stdName = rs1.getString("Std_Name");
+                    int stdtID = rs1.getInt("Std_ID");
+                    String stdtName = rs1.getString("Std_Name");
 
                     // Check if the student is already marked as absent for the given date and subject
                     String query2 = "SELECT * FROM attndance_table WHERE Std_ID = ? AND Date = ? AND Subj_Name = ?";
                     pstmt2 = con.prepareStatement(query2);
-                    pstmt2.setInt(1, stdID);
+                    pstmt2.setInt(1, stdtID);
                     pstmt2.setString(2, date);
                     pstmt2.setString(3, subject);
                     rs2 = pstmt2.executeQuery();
@@ -623,8 +607,8 @@ public class StdAtten extends javax.swing.JFrame {
                         pstmt2.setString(1, date);
                         pstmt2.setString(2, subject);
                         pstmt2.setString(3, teacherName);
-                        pstmt2.setInt(4, stdID);
-                        pstmt2.setString(5, stdName);
+                        pstmt2.setInt(4, stdtID);
+                        pstmt2.setString(5, stdtName);
                         pstmt2.setString(6, "Absent");
 
                         if (!specNote.equals("Special Note")) {
@@ -643,7 +627,7 @@ public class StdAtten extends javax.swing.JFrame {
                 pstmt2.close();
                 con.close();
             } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Error:" + e.getLocalizedMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Error:" + e.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
             }
         }
 
@@ -735,6 +719,8 @@ public class StdAtten extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblTchrName;
     private javax.swing.JLabel lblstdName;
@@ -745,6 +731,7 @@ public class StdAtten extends javax.swing.JFrame {
     private javax.swing.JLabel statuslb;
     private javax.swing.JLabel stdID;
     private javax.swing.JLabel stdName;
+    private javax.swing.JLabel stdName1;
     private javax.swing.JComboBox<String> subCB;
     private javax.swing.JPanel tblPanel;
     private javax.swing.JLabel tchrName;

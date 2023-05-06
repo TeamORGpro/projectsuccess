@@ -118,8 +118,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                         conu1.close();
 
                     } catch (SQLException e) {
-                        System.out.println(e.getSQLState());
-                        System.out.println(e.getMessage());
+                        JOptionPane.showMessageDialog(null, "Error :" + e.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+
                     }
                 }
             }
@@ -1359,14 +1359,23 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     }//GEN-LAST:event_stdpymntformbtnMouseClicked
 
     private void stdregformbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stdregformbtnMouseClicked
-        onLeaveClick(stdAttenBtn);
-        onLeaveClick(stdpymntformbtn);
-        onClick(stdregformbtn);
-        onLeaveClick(tcherregFormBtn);
 
-        //link StdRegForm windows
-        StdRegForm a = new StdRegForm();
-        a.setVisible(true);
+        int n = JOptionPane.showConfirmDialog(
+                null, "Do you have an internet connection as you need internet to save the QR code?",
+                "Do you have internet connection?",
+                JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION) {
+            onLeaveClick(stdAttenBtn);
+            onLeaveClick(stdpymntformbtn);
+            onClick(stdregformbtn);
+            onLeaveClick(tcherregFormBtn);
+
+            //link StdRegForm windows
+            StdRegForm a = new StdRegForm();
+            a.setVisible(true);
+        }
+
+
     }//GEN-LAST:event_stdregformbtnMouseClicked
 
     private void tcherregFormBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tcherregFormBtnMouseClicked
@@ -1486,7 +1495,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             Statement s3 = con.createStatement();
             try (ResultSet rs3 = s3.executeQuery("select * from payment_table")) {
                 while (rs3.next()) {
-                   Vector<Object> v3 = new Vector<>();
+                    Vector<Object> v3 = new Vector<>();
                     v3.add(rs3.getInt("payment_ID"));
                     v3.add(rs3.getInt("Std_ID"));
                     v3.add(rs3.getString("Std_Name"));
@@ -1584,6 +1593,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             try {
                 // Replace this with the path to your XAMPP installation folder
                 String xamppPath = "C:\\xampp";
+//                String xamppPath = System.getProperty("user.dir") + "./xampp";
 
                 // Stop MySQL
                 String[] command = {"cmd.exe", "/c", "start", "cmd.exe", "/c", "cd \"" + xamppPath + "\" && mysql\\bin\\mysqladmin.exe shutdown"};
@@ -1814,8 +1824,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     upSt.close();
                     con.close();
                 } catch (HeadlessException | NumberFormatException | SQLException e) {
-                    JOptionPane.showMessageDialog(null, "Error :" + e.getLocalizedMessage());
-                    System.out.println(e);
+                    JOptionPane.showMessageDialog(null, "Error :" + e.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
@@ -1865,8 +1874,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     upSt1.close();
                     con.close();
                 } catch (HeadlessException | NumberFormatException | SQLException e) {
-                    JOptionPane.showMessageDialog(null, "Error :" + e.getLocalizedMessage());
-                    e.getMessage();
+                    JOptionPane.showMessageDialog(null, "Error :" + e.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
@@ -1917,8 +1925,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     upSt2.close();
                     con.close();
                 } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "Error :" + ex.getLocalizedMessage());
-                    ex.getMessage();
+                    JOptionPane.showMessageDialog(null, "Error :" + ex.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
@@ -2130,8 +2137,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         if (rCount == 0) {
             JOptionPane.showMessageDialog(null, "Please Select one or more rows to delete", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
         } else {
-            int cSid = 0;
-            int csubjName = 2;
+            int cSid = 1;
+            int csubjName = 3;
             int cMonth = 6;
             int cPDate = 7;
 
@@ -2151,12 +2158,14 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                         con = DBConnect.connect();
 
                         Statement dst = con.createStatement();
-                        String sql1 = "DELETE FROM payment_table WHERE `Std_ID` =" + Sid1 + " AND `Subj_Name` = '" + subjName1 + "' AND `Month` = '" + Month1 + "' AND `Date_paid` = '" + date1 + "';";
+                        String sql1 = "DELETE FROM payment_table WHERE `Std_ID` =" + Sid1 + " AND `Month` = '" + Month1 + "' AND `Date_paid` = '" + date1 + "' AND `Subj_Names` LIKE  '%" + subjName1 + "%';";
 
                         dst.executeUpdate(sql1);
                         con.close();
 
-                    } catch (Exception e) {
+                    } catch (SQLException exc) {
+                        JOptionPane.showMessageDialog(null, "Error :" + exc.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+
                     }
                 }
             }
@@ -2180,8 +2189,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                         v3.add(rs3.getInt("payment_ID"));
                         v3.add(rs3.getInt("Std_ID"));
                         v3.add(rs3.getString("Std_Name"));
-                        v3.add(rs3.getString("Subj_Name"));
-                        v3.add(rs3.getString("Tchr_Name"));
+                        v3.add(rs3.getString("Subj_Names"));
+//                    v3.add(rs3.getString("Tchr_Name"));
                         v3.add(rs3.getString("Payment_fee"));
                         v3.add(rs3.getString("Grade"));
                         v3.add(rs3.getString("Month"));
@@ -2561,7 +2570,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     e.printStackTrace();
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "You must Select three filter options", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "You must Select all the three filter options", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
             }
 
 //  end of data validation
@@ -2679,7 +2688,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     e.printStackTrace();
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "You must Select two filter options", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "You must Select all the two filter options", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_attnFilterBtnActionPerformed
@@ -2796,7 +2805,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     e.printStackTrace();
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "You must Select two filter options", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "You must Select all the two filter options", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
             }
 
         }

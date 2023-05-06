@@ -6,7 +6,6 @@
 package projectsuccess;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.*;
@@ -27,10 +26,12 @@ import javax.swing.JFileChooser;
  */
 public class StdRegForm extends javax.swing.JFrame {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Creates new form regForm
      */
-    ArrayList name = new ArrayList();
+    ArrayList<String> name = new ArrayList<>();
 
     public StdRegForm() {
         initComponents();
@@ -185,6 +186,7 @@ public class StdRegForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         lstSubjects = new javax.swing.JList<>();
         cbSubjects = new javax.swing.JComboBox<>();
+        listDelbtn = new javax.swing.JButton();
 
         jDialog1.setTitle("Massage");
 
@@ -412,6 +414,18 @@ public class StdRegForm extends javax.swing.JFrame {
         });
         jPanel1.add(cbSubjects, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 260, -1));
 
+        listDelbtn.setBackground(new java.awt.Color(255, 255, 255));
+        listDelbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/trash-bin.png"))); // NOI18N
+        listDelbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listDelbtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(listDelbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 343, 40, 40));
+        listDelbtn.setOpaque(false);
+        listDelbtn.setContentAreaFilled(false);
+        listDelbtn.setBorderPainted(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -438,36 +452,7 @@ public class StdRegForm extends javax.swing.JFrame {
     }//GEN-LAST:event_newBtnActionPerformed
 
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
-        /*
-        //uppercase each word 
-        String word = txtSubject.getText().toLowerCase();
 
-        // stores each characters to a char array
-        char[] charArray = word.toCharArray();
-        boolean foundSpace = true;
-
-        for (int i = 0; i < charArray.length; i++) {
-
-            // if the array element is a letter
-            if (Character.isLetter(charArray[i])) {
-
-                // check space is present before the letter
-                if (foundSpace) {
-
-                    // change the letter into uppercase
-                    charArray[i] = Character.toUpperCase(charArray[i]);
-                    foundSpace = false;
-                }
-            } else {
-                // if the new character is not character
-                foundSpace = true;
-            }
-        }
-
-        // convert the char array to the string
-        word = String.valueOf(charArray);
-        txtSubject.setText(word);
-         */
         // validation part begins
         String v_name = txtstdName.getText().toLowerCase();
         String v_date = txtDob.getText();
@@ -621,13 +606,14 @@ public class StdRegForm extends javax.swing.JFrame {
                     }
 
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error :" + ex.getMessage() + "", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
 
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException exc) {
+            JOptionPane.showMessageDialog(null, "Error :" + exc.getMessage() + "", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+
         }
 
         // validation part ends
@@ -687,6 +673,7 @@ public class StdRegForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStdIDActionPerformed
 
+
     private void cbSubjectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSubjectsActionPerformed
         // TODO add your handling code here:
 
@@ -701,6 +688,16 @@ public class StdRegForm extends javax.swing.JFrame {
         model.addElement(selectedSubject);
         lstSubjects.setModel(model);
     }//GEN-LAST:event_cbSubjectsActionPerformed
+
+    private void listDelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listDelbtnActionPerformed
+        int selectedIndex = lstSubjects.getSelectedIndex();
+        if (selectedIndex != -1) {
+            DefaultListModel<String> model = (DefaultListModel<String>) lstSubjects.getModel();
+            String selectedItem = lstSubjects.getSelectedValue();
+            model.removeElement(selectedItem);
+            lstSubjects.repaint();
+        }
+    }//GEN-LAST:event_listDelbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -755,6 +752,7 @@ public class StdRegForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton listDelbtn;
     private javax.swing.JList<String> lstSubjects;
     private javax.swing.JButton newBtn;
     private javax.swing.JLabel phoneNo;
@@ -780,45 +778,23 @@ public class StdRegForm extends javax.swing.JFrame {
         Connection con;
         con = DBConnect.connect();
         try {
-            Statement st = con.createStatement();
-            String sql = "SELECT * FROM tchr_info_table;";
-            ResultSet rst = st.executeQuery(sql);
-
-            while (rst.next()) {
-                String Name = rst.getString("Subj_Name");
-
-                name.add(Name);
-
+            try (Statement st = con.createStatement()) {
+                String sql = "SELECT * FROM tchr_info_table;";
+                try (ResultSet rst = st.executeQuery(sql)) {
+                    while (rst.next()) {
+                        String Name = rst.getString("Subj_Name");
+                        
+                        name.add(Name);
+                        
+                    }
+                }
             }
-            rst.close();
-            st.close();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error :" + e.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
         }
     }
-
-    /*
-    private void autoComplete(String txt) {
-        String complete = "";
-        int start = txt.length();
-        int last = txt.length();
-        int a;
-        for (a = 0; a < name.size(); a++) {
-            if (name.get(a).toString().startsWith(txt)) {
-                complete = name.get(a).toString();
-                last = complete.length();
-                break;
-            }
-        }
-        if (last > start) {
-            txtSubject.setText(complete);
-            txtSubject.setCaretPosition(last);
-            txtSubject.moveCaretPosition(start);
-        }
-
-    }
-     */
+    
     private void icon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/Project Icon.png")));
     }

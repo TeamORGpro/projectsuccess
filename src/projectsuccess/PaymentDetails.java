@@ -537,82 +537,15 @@ public final class PaymentDetails extends javax.swing.JFrame {
                 }
 
             } catch (SQLException e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error :" + e.getMessage() + "", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+
             }
         }
 
     }//GEN-LAST:event_searchBtn01ActionPerformed
 
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
-        // TODO add your handling code here:
-        //Saving Section
-        /*
-        if (txtstdID.getText().isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Please Fill the Required Fields", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
-        } else if ("Choose Subjects".equals(subCB)) {
-        JOptionPane.showMessageDialog(null, "Please Fill the Required Fields", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
-        } else if ("0.00".equals(feeLbl.getText())) {
-        JOptionPane.showMessageDialog(null, "Please Fill the Required Fields", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
-        } else {
-        int Std_ID = Integer.parseInt(txtstdID.getText());
-        String Std_Name = lblstdName.getText();
-        
-        //subject list edit
-        //            String subject = (String) subCB.getSelectedItem();
-        DefaultTableModel model = (DefaultTableModel) subj_tbl.getModel();
-        String values = "";
-        for (int i = 0; i < model.getRowCount(); i++) {
-        // Get the value of the column containing the multiple values
-        Object valueObject = model.getValueAt(i, 0);
-        
-        // Cast the object to a string and add it to the concatenated string with a comma separator
-        String value = (valueObject != null) ? valueObject.toString() : "";
-        if (i == 0) {
-        values = value;
-        } else {
-        values += ", " + value;
-        }
-        }
-        //            String subject=values;
-        String grd = grdLabel.getText();
-        String fee = feeLbl.getText();
-        String mnth = (String) monthCB.getSelectedItem();
-        String date = dateLbl.getText();
-        String yr = dateLbl.getText().substring(0, 4);
-        
-        //            if (!Std_Name.isEmpty() || "Choose Subjects".equals(subCB) ) {
-        Connection con;
-        con = DBConnect.connect();
-        PreparedStatement pstmt3;
-        
-        try {
-        
-        String query = "insert into payment_table(Std_ID,Std_Name,Subj_Names,Payment_fee,Grade,Month,Date_paid,Year)values(?,?,?,?,?,?,?,?)";
-        
-        pstmt3 = con.prepareStatement(query);
-        
-        pstmt3.setInt(1, Std_ID);
-        pstmt3.setString(2, Std_Name);
-        pstmt3.setString(3, values);
-        pstmt3.setString(4, fee);
-        pstmt3.setString(5, grd);
-        pstmt3.setString(6, mnth);
-        pstmt3.setString(7, date);
-        pstmt3.setString(8, yr);
-        
-        pstmt3.execute();
-        JOptionPane.showMessageDialog(null, "Data successfully Saved!");
-        
-        pstmt3.close();
-        con.close();
-        } catch (SQLException e) {
-        System.out.println(e.getMessage());
-        JOptionPane.showMessageDialog(null, "Please check your filled data! ", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
-        }
-        //            } else {
-        //                JOptionPane.showMessageDialog(null, "Please Fill Required Fields!", "Error Occured!", JOptionPane.ERROR_MESSAGE);
-        //            }
-        }*/
+
         if (txtstdID.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please Fill the Required Fields", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
         } else if ("Choose Subjects".equals(subCB)) {
@@ -731,7 +664,8 @@ public final class PaymentDetails extends javax.swing.JFrame {
                         String grd1 = grdLabel.getText();
                         String id1 = Integer.toString(id);
 
-                        File f = new File("src/projectsuccess/receipt.jrxml"); // get file relative path
+//                        File f = new File("src/projectsuccess/receipt.jrxml"); // get file relative path of my pc
+                        File f = new File("PrintBuilder/receipt.jrxml"); // get file relative path
                         String reportSource = f.getAbsolutePath(); //get absolute path according to that relative path
 
                         Map<String, Object> param = new HashMap<String, Object>();
@@ -750,8 +684,9 @@ public final class PaymentDetails extends javax.swing.JFrame {
 //                      JasperViewer.viewReport(jasperPrint, false);            //View   
                         JasperPrintManager.printReport(jasperPrint, false);     //Direct Print
 
-                    } catch (JRException e) {
-                        e.printStackTrace();
+                    } catch (JRException ex) {
+                        JOptionPane.showMessageDialog(null, "Error : " + ex.getLocalizedMessage() + "", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+
                     }
                     newBtn.doClick(); //clicking new btn after save
                     pstmt2.close();
@@ -769,56 +704,6 @@ public final class PaymentDetails extends javax.swing.JFrame {
     }//GEN-LAST:event_createBtnActionPerformed
 
     private void subCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subCBActionPerformed
-        // TODO add your handling code here:
-//        Connection con;
-//        con = DBConnect.connect();
-//        ResultSet rs2;
-//        PreparedStatement pstmt2;
-//        try {
-//            String subject = (String) subCB.getSelectedItem();
-//            pstmt2 = con.prepareStatement("SELECT * FROM tchr_info_table WHERE Subj_Name = ?");
-//            pstmt2.setString(1, subject);
-//            rs2 = pstmt2.executeQuery();
-//
-//            if (rs2.next()) {
-//                String subjectName = rs2.getString("Subj_Name");
-//                String TeacherName = rs2.getString("Tchr_Name");
-//                String paymentfee = rs2.getString("Payment_Fees");
-//
-//                String[] columns1 = {subjectName, TeacherName, paymentfee};
-//                DefaultTableModel pmntTablemodel = (DefaultTableModel) subj_tbl.getModel();
-//                pmntTablemodel.addRow(columns1);
-//
-//                int numRows = pmntTablemodel.getRowCount();
-//                double totalFees = 0.00;
-//                for (int i = 0; i < numRows; i++) {
-//
-//                    Object value = pmntTablemodel.getValueAt(i, 2);
-//                    if (value instanceof String) {
-//                        try {
-//                            double doubleValue = Double.parseDouble((String) value);
-//                            totalFees += doubleValue;
-//                            DecimalFormat df = new DecimalFormat("0.00");
-//                            String totFee = df.format(totalFees);
-//                            feeLbl.setText(totFee);
-//                        } catch (NumberFormatException e) {
-//                            System.out.println(e.getMessage());
-//                        }
-//                    }
-//                }
-//
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Please Enter Valid Subject Name");
-//                feeLbl.setText("");
-//            }
-//            pstmt2.close();
-//            rs2.close();
-//            con.close();
-//
-//        } catch (HeadlessException | SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Connection con;
         con = DBConnect.connect();
         ResultSet rs2;
@@ -862,7 +747,8 @@ public final class PaymentDetails extends javax.swing.JFrame {
                             String totFee = df.format(totalFees);
                             feeLbl.setText(totFee);
                         } catch (NumberFormatException e) {
-                            System.out.println(e.getMessage());
+                            JOptionPane.showMessageDialog(null, "Error :" + e.getMessage() + "", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+
                         }
                     }
                 }
@@ -874,8 +760,9 @@ public final class PaymentDetails extends javax.swing.JFrame {
             rs2.close();
             con.close();
 
-        } catch (HeadlessException | SQLException e) {
-            System.out.println(e.getMessage());
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error :" + ex.getMessage() + "", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+
         }
 
     }//GEN-LAST:event_subCBActionPerformed
@@ -933,8 +820,9 @@ public final class PaymentDetails extends javax.swing.JFrame {
             psSub.close();
             con.close();
 
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        } catch (SQLException exc) {
+            JOptionPane.showMessageDialog(null, "Error :" + exc.getMessage() + "", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+
         }
 
     }
@@ -955,15 +843,11 @@ public final class PaymentDetails extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PaymentDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PaymentDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PaymentDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(PaymentDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
         //</editor-fold>
 
         /* Create and display the form */
