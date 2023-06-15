@@ -136,7 +136,7 @@ public class StdAtten extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         attenTitle.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 24)); // NOI18N
-        attenTitle.setText("Student Attendace");
+        attenTitle.setText("Student Attendance");
         jPanel1.add(attenTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, 35));
         jPanel1.add(attenIcn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 16, 32, 35));
 
@@ -296,6 +296,11 @@ public class StdAtten extends javax.swing.JFrame {
         attmarkPanl.add(absntBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, 150, 30));
 
         cbGrades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Set grade for absent", "Grade 6", "Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11" }));
+        cbGrades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbGradesActionPerformed(evt);
+            }
+        });
         attmarkPanl.add(cbGrades, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 390, 150, 30));
 
         stdName1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -397,7 +402,17 @@ public class StdAtten extends javax.swing.JFrame {
 
             txtStatuslb.setText(c);
             txtStatuslb.setEnabled(false);
+            
+            //Disable Marking Absent methods if present button selected
+            cbGrades.setEnabled(false);
+            absntBtn.setEnabled(false);
+            txtStdID.setEnabled(true);
+            searchBtn01.setEnabled(true);
+            txtNotes.setEnabled(true);
+            createBtn.setEnabled(true);
+            
 
+            
         }
 
     }//GEN-LAST:event_presentRBActionPerformed
@@ -470,19 +485,6 @@ public class StdAtten extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_createBtnActionPerformed
-
-    private void absentRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_absentRBActionPerformed
-        // TODO add your handling code here:
-
-        if (absentRB.isSelected() == (true)) {
-            String b = "Absent";
-
-            txtStatuslb.setText(b);
-            txtStatuslb.setEnabled(false);
-
-        }
-
-    }//GEN-LAST:event_absentRBActionPerformed
 
     private void searchBtn01ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtn01ActionPerformed
         // TODO add your handling code here:
@@ -565,10 +567,10 @@ public class StdAtten extends javax.swing.JFrame {
         String subject = (String) subCB.getSelectedItem();
 
         if ("Choose Subject".equals(subject)) {
-            JOptionPane.showMessageDialog(null, "Select valid subject for mark students as absent", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Select the valid subject to mark students as absent", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
 
         } else if ("Set grade for absent".equals(cbGrades.getSelectedItem().toString())) {
-            JOptionPane.showMessageDialog(null, "Select valid grade for mark students as absent", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Select the valid grade to mark students as absent", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
         } else {
             String sGrade = (String) cbGrades.getSelectedItem();
             Connection con;
@@ -633,6 +635,29 @@ public class StdAtten extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_absntBtnActionPerformed
+
+    private void cbGradesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGradesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbGradesActionPerformed
+
+    private void absentRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_absentRBActionPerformed
+        // TODO add your handling code here:
+
+        if (absentRB.isSelected() == (true)) {
+            String b = "Absent";
+
+            txtStatuslb.setText(b);
+            txtStatuslb.setEnabled(false);
+            
+            txtStdID.setEnabled(false);
+            searchBtn01.setEnabled(false);
+            txtNotes.setEnabled(false);
+            createBtn.setEnabled(false);
+            cbGrades.setEnabled(true);
+            absntBtn.setEnabled(true);
+
+        }
+    }//GEN-LAST:event_absentRBActionPerformed
 
     public void getSubject() {
         Connection con;

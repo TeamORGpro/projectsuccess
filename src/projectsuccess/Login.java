@@ -177,28 +177,35 @@ public class Login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cnslBtnActionPerformed
 
-    private static Process process;
+
     private void btnLinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLinActionPerformed
-        String username = uNameTxt.getText();
-        String password = String.valueOf(passWordArea.getPassword());
 
-        if (username.equals("") && password.equals("")) {
-            this.dispose();
-            HomeWindowV2 h1 = new HomeWindowV2();
-            h1.setVisible(true);
-            try {
-                String xamppPath = "C:\\xampp";
-                ProcessBuilder pb = new ProcessBuilder(xamppPath + "\\mysql\\bin\\mysqld.exe");
-                pb.directory(new File(xamppPath));
-                Process processes = pb.start();
-                System.out.println(pb);
+        int msg = JOptionPane.showConfirmDialog(null, "<html><h3><font color=\"red\">Is the date and time on your system correct?</font></h3></html>", "Check Data and Time", JOptionPane.YES_NO_OPTION);
+        if (msg == JOptionPane.YES_OPTION) {
+            String username = uNameTxt.getText();
+            String password = String.valueOf(passWordArea.getPassword());
 
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(this, "DB Connection error : " + e.getMessage() + " error or internet error", "Error", JOptionPane.ERROR_MESSAGE);
+
+            if (username.equals("Success higher educational institute") && password.equals("ADMINpwd141414")) {
+                this.dispose();
+                HomeWindowV2 h1 = new HomeWindowV2();
+                h1.setVisible(true);
+                try {
+                    String xamppPath = "C:\\xampp";
+                    ProcessBuilder pb = new ProcessBuilder(xamppPath + "\\mysql\\bin\\mysqld.exe");
+                    pb.directory(new File(xamppPath));
+                    Process processes = pb.start();
+
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(this, "DB Connection error : " + e.getMessage() + " error or internet error", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                Component frame = null;
+                JOptionPane.showMessageDialog(frame, "invaild username or password");
             }
         } else {
-            Component frame = null;
-            JOptionPane.showMessageDialog(frame, "invaild username or password");
+            JOptionPane.showMessageDialog(null, "Update your system date and time");
+            this.dispose();
         }
 
 
