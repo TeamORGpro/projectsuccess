@@ -144,27 +144,24 @@ public class PaymntExpo extends javax.swing.JFrame {
 
             if (saveFile != null) {
                 saveFile = new File(saveFile.toString() + ".xlsx");
-                Workbook wb = new XSSFWorkbook();
-                Sheet sheet = wb.createSheet("Payments");
-
-                Row rowCol = sheet.createRow(0);
-                for (int i = 0; i < paymntExpoTbl.getColumnCount(); i++) {
-                    Cell cell = rowCol.createCell(i);
-                    cell.setCellValue(paymntExpoTbl.getColumnName(i));
-                }
-
-                for (int j = 0; j < paymntExpoTbl.getRowCount(); j++) {
-                    Row row = sheet.createRow(j + 1);
-                    for (int k = 0; k < paymntExpoTbl.getColumnCount(); k++) {
-                        Cell cell = row.createCell(k);
-                        if (paymntExpoTbl.getValueAt(j, k) != null) {
-                            cell.setCellValue(paymntExpoTbl.getValueAt(j, k).toString());
+                FileOutputStream out;
+                try (Workbook wb = new XSSFWorkbook()) {
+                    Sheet sheet = wb.createSheet("Payments");
+                    Row rowCol = sheet.createRow(0);
+                    for (int i = 0; i < paymntExpoTbl.getColumnCount(); i++) {
+                        Cell cell = rowCol.createCell(i);
+                        cell.setCellValue(paymntExpoTbl.getColumnName(i));
+                    }   for (int j = 0; j < paymntExpoTbl.getRowCount(); j++) {
+                        Row row = sheet.createRow(j + 1);
+                        for (int k = 0; k < paymntExpoTbl.getColumnCount(); k++) {
+                            Cell cell = row.createCell(k);
+                            if (paymntExpoTbl.getValueAt(j, k) != null) {
+                                cell.setCellValue(paymntExpoTbl.getValueAt(j, k).toString());
+                            }
                         }
-                    }
+                    }   out = new FileOutputStream(new File(saveFile.toString()));
+                    wb.write(out);
                 }
-                FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
-                wb.write(out);
-                wb.close();
                 out.close();
                 JOptionPane.showMessageDialog(null, "Successfully Exported!");
                 openFile(saveFile.toString());
@@ -207,10 +204,8 @@ public class PaymntExpo extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PaymntExpo().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new PaymntExpo().setVisible(true);
         });
     }
 

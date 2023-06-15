@@ -224,9 +224,7 @@ public class BackupAndRestore extends javax.swing.JFrame {
             }
 
         } catch (HeadlessException | IOException | InterruptedException e) {
-            System.out.println(e);
-            System.out.println(path1);
-            JOptionPane.showMessageDialog(null, "Error :" + e.getLocalizedMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error :" + e.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
 
             e.printStackTrace();
         }
@@ -244,7 +242,6 @@ public class BackupAndRestore extends javax.swing.JFrame {
             path1 = path1.replace('\\', '/');
             jTextField2.setText(path1);
         } catch (Exception e) {
-
             e.printStackTrace();
         }
     }//GEN-LAST:event_browsBtn1ActionPerformed
@@ -275,7 +272,7 @@ public class BackupAndRestore extends javax.swing.JFrame {
                 jTextField2.setText("");
             }
         } catch (HeadlessException | IOException | InterruptedException e) {
-            JOptionPane.showMessageDialog(null, "Error :" + e.getLocalizedMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error :" + e.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
 

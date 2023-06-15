@@ -26,10 +26,12 @@ import javax.swing.JFileChooser;
  */
 public class StdRegForm extends javax.swing.JFrame {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * Creates new form regForm
      */
-    ArrayList name = new ArrayList();
+    ArrayList<String> name = new ArrayList<>();
 
     public StdRegForm() {
         initComponents();
@@ -776,45 +778,23 @@ public class StdRegForm extends javax.swing.JFrame {
         Connection con;
         con = DBConnect.connect();
         try {
-            Statement st = con.createStatement();
-            String sql = "SELECT * FROM tchr_info_table;";
-            ResultSet rst = st.executeQuery(sql);
-
-            while (rst.next()) {
-                String Name = rst.getString("Subj_Name");
-
-                name.add(Name);
-
+            try (Statement st = con.createStatement()) {
+                String sql = "SELECT * FROM tchr_info_table;";
+                try (ResultSet rst = st.executeQuery(sql)) {
+                    while (rst.next()) {
+                        String Name = rst.getString("Subj_Name");
+                        
+                        name.add(Name);
+                        
+                    }
+                }
             }
-            rst.close();
-            st.close();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error :" + e.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
         }
     }
-
-    /*
-    private void autoComplete(String txt) {
-        String complete = "";
-        int start = txt.length();
-        int last = txt.length();
-        int a;
-        for (a = 0; a < name.size(); a++) {
-            if (name.get(a).toString().startsWith(txt)) {
-                complete = name.get(a).toString();
-                last = complete.length();
-                break;
-            }
-        }
-        if (last > start) {
-            txtSubject.setText(complete);
-            txtSubject.setCaretPosition(last);
-            txtSubject.moveCaretPosition(start);
-        }
-
-    }
-     */
+    
     private void icon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/Project Icon.png")));
     }

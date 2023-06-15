@@ -118,8 +118,8 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                         conu1.close();
 
                     } catch (SQLException e) {
-                        System.out.println(e.getSQLState());
-                        System.out.println(e.getMessage());
+                        JOptionPane.showMessageDialog(null, "Error :" + e.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+
                     }
                 }
             }
@@ -1359,14 +1359,23 @@ public class HomeWindowV2 extends javax.swing.JFrame {
     }//GEN-LAST:event_stdpymntformbtnMouseClicked
 
     private void stdregformbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stdregformbtnMouseClicked
-        onLeaveClick(stdAttenBtn);
-        onLeaveClick(stdpymntformbtn);
-        onClick(stdregformbtn);
-        onLeaveClick(tcherregFormBtn);
 
-        //link StdRegForm windows
-        StdRegForm a = new StdRegForm();
-        a.setVisible(true);
+        int n = JOptionPane.showConfirmDialog(
+                null, "Do you have an internet connection as you need internet to save the QR code?",
+                "Do you have internet connection?",
+                JOptionPane.YES_NO_OPTION);
+        if (n == JOptionPane.YES_OPTION) {
+            onLeaveClick(stdAttenBtn);
+            onLeaveClick(stdpymntformbtn);
+            onClick(stdregformbtn);
+            onLeaveClick(tcherregFormBtn);
+
+            //link StdRegForm windows
+            StdRegForm a = new StdRegForm();
+            a.setVisible(true);
+        }
+
+
     }//GEN-LAST:event_stdregformbtnMouseClicked
 
     private void tcherregFormBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tcherregFormBtnMouseClicked
@@ -1815,8 +1824,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     upSt.close();
                     con.close();
                 } catch (HeadlessException | NumberFormatException | SQLException e) {
-                    JOptionPane.showMessageDialog(null, "Error :" + e.getLocalizedMessage());
-                    System.out.println(e);
+                    JOptionPane.showMessageDialog(null, "Error :" + e.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
@@ -1866,8 +1874,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     upSt1.close();
                     con.close();
                 } catch (HeadlessException | NumberFormatException | SQLException e) {
-                    JOptionPane.showMessageDialog(null, "Error :" + e.getLocalizedMessage());
-                    e.getMessage();
+                    JOptionPane.showMessageDialog(null, "Error :" + e.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
@@ -1918,8 +1925,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     upSt2.close();
                     con.close();
                 } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "Error :" + ex.getLocalizedMessage());
-                    ex.getMessage();
+                    JOptionPane.showMessageDialog(null, "Error :" + ex.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
@@ -2158,7 +2164,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                         con.close();
 
                     } catch (SQLException exc) {
-                        JOptionPane.showMessageDialog(null, "Error : " + exc.getLocalizedMessage() + "", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Error :" + exc.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
 
                     }
                 }
@@ -2564,7 +2570,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     e.printStackTrace();
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "You must Select three filter options", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "You must Select all the three filter options", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
             }
 
 //  end of data validation
@@ -2682,7 +2688,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     e.printStackTrace();
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "You must Select two filter options", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "You must Select all the two filter options", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_attnFilterBtnActionPerformed
@@ -2799,7 +2805,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                     e.printStackTrace();
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "You must Select two filter options", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "You must Select all the two filter options", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
             }
 
         }
