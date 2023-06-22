@@ -88,7 +88,7 @@ public class StdExpo extends javax.swing.JFrame {
         expoStdInfoTbl.setRowSelectionAllowed(false);
         jScrollPane1.setViewportView(expoStdInfoTbl);
 
-        exportStdInfoBtn.setText("Export to Excel File");
+        exportStdInfoBtn.setText("Export as Excel File");
         exportStdInfoBtn.setMaximumSize(new java.awt.Dimension(155, 30));
         exportStdInfoBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

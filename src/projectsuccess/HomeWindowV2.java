@@ -17,6 +17,9 @@ import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
 
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
 /**
  *
  * @author pc
@@ -1947,21 +1950,23 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             int reply = JOptionPane.showConfirmDialog(null,
                     "Do you want to delete?", "Deleting", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
-                for (int i = 0; i < rows.length; i++) {
-                    String s_id = jTable3.getModel().getValueAt(rows[i], cSid).toString();
+                
+                try {
+                    Connection con = DBConnect.connect();
+                    Statement dst = con.createStatement();
 
-                    try {
-                        Connection con;
-                        con = DBConnect.connect();
+                    for (int i = 0; i < rows.length; i++) {
+                        int viewRow = jTable3.convertRowIndexToModel(rows[i]);
+                        String s_id = jTable3.getModel().getValueAt(viewRow, cSid).toString();
 
-                        Statement dst = con.createStatement();
                         String sql1 = "DELETE FROM std_info_table WHERE `Std_ID` = " + s_id + ";";
 
                         dst.executeUpdate(sql1);
-                        con.close();
-
-                    } catch (SQLException e) {
                     }
+
+                    con.close();
+                } catch (SQLException exc) {
+                    JOptionPane.showMessageDialog(null, "Error: " + exc.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
@@ -2015,23 +2020,23 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             int reply = JOptionPane.showConfirmDialog(null,
                     "Do you want to delete?", "Deleting", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
+                
                 for (int i = 0; i < rows.length; i++) {
-                    String tchr_id = jTable4.getModel().getValueAt(rows[i], cTcherid).toString();
+                    int viewRow = jTable4.convertRowIndexToModel(rows[i]);
+                    String tchr_id = jTable4.getModel().getValueAt(viewRow, cTcherid).toString();
 
                     try {
-                        Connection cont;
-                        cont = DBConnect.connect();
-
+                        Connection cont = DBConnect.connect();
                         Statement tst = cont.createStatement();
                         String sql2 = "DELETE FROM `tchr_info_table` WHERE `Tchr_ID`=" + tchr_id + ";";
 
                         tst.executeUpdate(sql2);
                         cont.close();
-
-                    } catch (SQLException e) {
-                        System.out.println(e.getMessage());
+                    } catch (SQLException exc) {
+                        System.out.println(exc.getMessage());
                     }
                 }
+
             }
 
             Connection con = DBConnect.connect();
@@ -2082,24 +2087,26 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             int reply = JOptionPane.showConfirmDialog(null,
                     "Do you want to delete?", "Deleting", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
-                for (int i = 0; i < rows.length; i++) {
-                    String date = jTable1.getModel().getValueAt(rows[i], gdate).toString();
-                    String subjName = jTable1.getModel().getValueAt(rows[i], gsubjName).toString();
-                    String stuID = jTable1.getModel().getValueAt(rows[i], gstuID).toString();
-
-                    try {
-                        Connection con;
-                        con = DBConnect.connect();
-
+                
+                try {
+                    try (Connection con = DBConnect.connect()) {
                         Statement dst = con.createStatement();
-                        String sql1 = "DELETE FROM `attndance_table` WHERE `Date`='" + date + "' AND `Subj_Name`='" + subjName + "' AND `Std_ID`=" + stuID;
 
-                        dst.executeUpdate(sql1);
-                        con.close();
+                        for (int i = 0; i < rows.length; i++) {
+                            int viewRow = jTable1.convertRowIndexToModel(rows[i]);
+                            String date = jTable1.getModel().getValueAt(viewRow, gdate).toString();
+                            String subjName = jTable1.getModel().getValueAt(viewRow, gsubjName).toString();
+                            String stuID = jTable1.getModel().getValueAt(viewRow, gstuID).toString();
 
-                    } catch (Exception e) {
+                            String sql1 = "DELETE FROM `attndance_table` WHERE `Date`='" + date + "' AND `Subj_Name`='" + subjName + "' AND `Std_ID`=" + stuID;
+
+                            dst.executeUpdate(sql1);
+                        }
                     }
+                } catch (SQLException exc) {
+                    JOptionPane.showMessageDialog(null, "Error: " + exc.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
                 }
+
                 Connection con2;
                 con2 = DBConnect.connect();
                 try {
@@ -2147,26 +2154,28 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             int reply = JOptionPane.showConfirmDialog(null,
                     "Do you want to delete?", "Deleting", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
-                for (int i = 0; i < rows.length; i++) {
-                    String Sid1 = jTable2.getModel().getValueAt(rows[i], cSid).toString();
-                    String subjName1 = jTable2.getModel().getValueAt(rows[i], csubjName).toString();
-                    String Month1 = jTable2.getModel().getValueAt(rows[i], cMonth).toString();
-                    String date1 = jTable2.getModel().getValueAt(rows[i], cPDate).toString();
 
-                    try {
-                        Connection con;
-                        con = DBConnect.connect();
+                try {
+                    try (Connection conD = DBConnect.connect()) {
+                        Statement dst = conD.createStatement();
 
-                        Statement dst = con.createStatement();
-                        String sql1 = "DELETE FROM payment_table WHERE `Std_ID` =" + Sid1 + " AND `Month` = '" + Month1 + "' AND `Date_paid` = '" + date1 + "' AND `Subj_Names` LIKE  '%" + subjName1 + "%';";
+                        for (int i = 0; i < rows.length; i++) {
+                            // Get the view index of the selected row
+                            int viewRow = jTable2.convertRowIndexToModel(rows[i]);
 
-                        dst.executeUpdate(sql1);
-                        con.close();
+                            // Retrieve the values from the sorted and filtered model
+                            String Sid1 = jTable2.getModel().getValueAt(viewRow, cSid).toString();
+                            String subjName1 = jTable2.getModel().getValueAt(viewRow, csubjName).toString();
+                            String Month1 = jTable2.getModel().getValueAt(viewRow, cMonth).toString();
+                            String date1 = jTable2.getModel().getValueAt(viewRow, cPDate).toString();
 
-                    } catch (SQLException exc) {
-                        JOptionPane.showMessageDialog(null, "Error :" + exc.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
+                            String sql1 = "DELETE FROM payment_table WHERE `Std_ID` =" + Sid1 + " AND `Month` = '" + Month1 + "' AND `Date_paid` = '" + date1 + "' AND `Subj_Names` LIKE  '%" + subjName1 + "%';";
 
+                            dst.executeUpdate(sql1);
+                        }
                     }
+                } catch (SQLException exc) {
+                    JOptionPane.showMessageDialog(null, "Error: " + exc.getMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
@@ -2216,7 +2225,6 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             if (rCount == 0) {
                 JOptionPane.showMessageDialog(null, "Please Select one or more rows to export", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
             } else {
-                pymtSearchField.setText("");
                 TableModel model1 = jTable2.getModel();
 
                 int[] indexs = jTable2.getSelectedRows();
@@ -2227,21 +2235,15 @@ public class HomeWindowV2 extends javax.swing.JFrame {
                 DefaultTableModel model2 = (DefaultTableModel) exportpayment.paymntExpoTbl.getModel();
 
                 for (int i = 0; i < indexs.length; i++) {
-                    row[0] = model1.getValueAt(indexs[i], 0);
-
-                    row[1] = model1.getValueAt(indexs[i], 1);
-
-                    row[2] = model1.getValueAt(indexs[i], 2);
-
-                    row[3] = model1.getValueAt(indexs[i], 3);
-
-                    row[4] = model1.getValueAt(indexs[i], 4);
-
-                    row[5] = model1.getValueAt(indexs[i], 5);
-
-                    row[6] = model1.getValueAt(indexs[i], 6);
-
-                    row[7] = model1.getValueAt(indexs[i], 7);
+                    int viewIndex = jTable2.convertRowIndexToModel(indexs[i]);
+                    row[0] = model1.getValueAt(viewIndex, 0);
+                    row[1] = model1.getValueAt(viewIndex, 1);
+                    row[2] = model1.getValueAt(viewIndex, 2);
+                    row[3] = model1.getValueAt(viewIndex, 3);
+                    row[4] = model1.getValueAt(viewIndex, 4);
+                    row[5] = model1.getValueAt(viewIndex, 5);
+                    row[6] = model1.getValueAt(viewIndex, 6);
+                    row[7] = model1.getValueAt(viewIndex, 7);
                     model2.addRow(row);
                 }
 
@@ -2270,7 +2272,6 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         if (rCount == 0) {
             JOptionPane.showMessageDialog(null, "Please Select one or more rows to export", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
         } else {
-            tchrSearchField.setText("");
             TableModel model1 = jTable4.getModel();
 
             int[] indexs = jTable4.getSelectedRows();
@@ -2281,26 +2282,17 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             DefaultTableModel model2 = (DefaultTableModel) exportTchr.tchrExportTbl.getModel();
 
             for (int i = 0; i < indexs.length; i++) {
-                row[0] = model1.getValueAt(indexs[i], 0);
-
-                row[1] = model1.getValueAt(indexs[i], 1);
-
-                row[2] = model1.getValueAt(indexs[i], 2);
-
-                row[3] = model1.getValueAt(indexs[i], 3);
-
-                row[4] = model1.getValueAt(indexs[i], 4);
-
-                row[5] = model1.getValueAt(indexs[i], 5);
-
-                row[6] = model1.getValueAt(indexs[i], 6);
-
-                row[7] = model1.getValueAt(indexs[i], 7);
-
-                row[8] = model1.getValueAt(indexs[i], 8);
-
-                row[9] = model1.getValueAt(indexs[i], 9);
-
+                int viewIndex = jTable4.convertRowIndexToModel(indexs[i]);
+                row[0] = model1.getValueAt(viewIndex, 0);
+                row[1] = model1.getValueAt(viewIndex, 1);
+                row[2] = model1.getValueAt(viewIndex, 2);
+                row[3] = model1.getValueAt(viewIndex, 3);
+                row[4] = model1.getValueAt(viewIndex, 4);
+                row[5] = model1.getValueAt(viewIndex, 5);
+                row[6] = model1.getValueAt(viewIndex, 6);
+                row[7] = model1.getValueAt(viewIndex, 7);
+                row[8] = model1.getValueAt(viewIndex, 8);
+                row[9] = model1.getValueAt(viewIndex, 9);
                 model2.addRow(row);
             }
 
@@ -2319,7 +2311,6 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         if (rCount == 0) {
             JOptionPane.showMessageDialog(null, "Please Select one or more rows to export", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
         } else {
-            stdSearchField.setText("");
             TableModel model1 = jTable3.getModel();
 
             int[] indexs = jTable3.getSelectedRows();
@@ -2330,28 +2321,18 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             DefaultTableModel model2 = (DefaultTableModel) exportstd.expoStdInfoTbl.getModel();
 
             for (int i = 0; i < indexs.length; i++) {
-                row[0] = model1.getValueAt(indexs[i], 0);
-
-                row[1] = model1.getValueAt(indexs[i], 1);
-
-                row[2] = model1.getValueAt(indexs[i], 2);
-
-                row[3] = model1.getValueAt(indexs[i], 3);
-
-                row[4] = model1.getValueAt(indexs[i], 4);
-
-                row[5] = model1.getValueAt(indexs[i], 5);
-
-                row[6] = model1.getValueAt(indexs[i], 6);
-
-                row[7] = model1.getValueAt(indexs[i], 7);
-
-                row[8] = model1.getValueAt(indexs[i], 8);
-
-                row[9] = model1.getValueAt(indexs[i], 9);
-
-                row[10] = model1.getValueAt(indexs[i], 10);
-
+                int viewIndex = jTable3.convertRowIndexToModel(indexs[i]);
+                row[0] = model1.getValueAt(viewIndex, 0);
+                row[1] = model1.getValueAt(viewIndex, 1);
+                row[2] = model1.getValueAt(viewIndex, 2);
+                row[3] = model1.getValueAt(viewIndex, 3);
+                row[4] = model1.getValueAt(viewIndex, 4);
+                row[5] = model1.getValueAt(viewIndex, 5);
+                row[6] = model1.getValueAt(viewIndex, 6);
+                row[7] = model1.getValueAt(viewIndex, 7);
+                row[8] = model1.getValueAt(viewIndex, 8);
+                row[9] = model1.getValueAt(viewIndex, 9);
+                row[10] = model1.getValueAt(viewIndex, 10);
                 model2.addRow(row);
             }
 
@@ -2369,7 +2350,7 @@ public class HomeWindowV2 extends javax.swing.JFrame {
         if (rCount == 0) {
             JOptionPane.showMessageDialog(null, "Please Select one or more rows to export", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
         } else {
-            attnSearchField.setText("");
+//            attnSearchField.setText("");
             TableModel model1 = jTable1.getModel();
 
             int[] indexs = jTable1.getSelectedRows();
@@ -2380,22 +2361,15 @@ public class HomeWindowV2 extends javax.swing.JFrame {
             DefaultTableModel model2 = (DefaultTableModel) exportstdAtn.stdAttnExpoTbl.getModel();
 
             for (int i = 0; i < indexs.length; i++) {
-                row[0] = model1.getValueAt(indexs[i], 0);
-
-                row[1] = model1.getValueAt(indexs[i], 1);
-
-                row[2] = model1.getValueAt(indexs[i], 2);
-
-                row[3] = model1.getValueAt(indexs[i], 3);
-
-                row[4] = model1.getValueAt(indexs[i], 4);
-
-                row[5] = model1.getValueAt(indexs[i], 5);
-
-                row[6] = model1.getValueAt(indexs[i], 6);
-
-                row[7] = model1.getValueAt(indexs[i], 7);
-
+                int viewIndex = jTable1.convertRowIndexToModel(indexs[i]);
+                row[0] = model1.getValueAt(viewIndex, 0);
+                row[1] = model1.getValueAt(viewIndex, 1);
+                row[2] = model1.getValueAt(viewIndex, 2);
+                row[3] = model1.getValueAt(viewIndex, 3);
+                row[4] = model1.getValueAt(viewIndex, 4);
+                row[5] = model1.getValueAt(viewIndex, 5);
+                row[6] = model1.getValueAt(viewIndex, 6);
+                row[7] = model1.getValueAt(viewIndex, 7);
                 model2.addRow(row);
             }
 

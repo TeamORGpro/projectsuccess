@@ -91,7 +91,7 @@ public class StdAttnExpo extends javax.swing.JFrame {
             stdAttnExpoTbl.getColumnModel().getColumn(4).setPreferredWidth(100);
         }
 
-        exportAttnInfoBtn.setText("Export to Excel File");
+        exportAttnInfoBtn.setText("Export as Excel File");
         exportAttnInfoBtn.setMaximumSize(new java.awt.Dimension(155, 30));
         exportAttnInfoBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

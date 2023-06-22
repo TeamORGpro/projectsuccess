@@ -10,6 +10,10 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.time.LocalDate;
 //import java.awt.event.WindowAdapter;
 //import java.awt.event.WindowEvent;
 
@@ -179,32 +183,70 @@ public class Login extends javax.swing.JFrame {
 
 
     private void btnLinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLinActionPerformed
-
-        int msg = JOptionPane.showConfirmDialog(null, "<html><h3><font color=\"red\">Is the date and time on your system correct?</font></h3></html>", "Check Data and Time", JOptionPane.YES_NO_OPTION);
+        int msg = JOptionPane.showConfirmDialog(null, "<html><h3><font color=\"red\">Is the date and time on your system correct?</font></h3></html>", "Check Date and Time", JOptionPane.YES_NO_OPTION);
         if (msg == JOptionPane.YES_OPTION) {
             String username = uNameTxt.getText();
             String password = String.valueOf(passWordArea.getPassword());
-
 
             if (username.equals("Success higher educational institute") && password.equals("ADMINpwd141414")) {
                 this.dispose();
                 HomeWindowV2 h1 = new HomeWindowV2();
                 h1.setVisible(true);
+
                 try {
                     String xamppPath = "C:\\xampp";
                     ProcessBuilder pb = new ProcessBuilder(xamppPath + "\\mysql\\bin\\mysqld.exe");
                     pb.directory(new File(xamppPath));
-                    Process processes = pb.start();
+                    Process process = pb.start();
 
-                } catch (IOException e) {
-                    JOptionPane.showMessageDialog(this, "DB Connection error : " + e.getMessage() + " error or internet error", "Error", JOptionPane.ERROR_MESSAGE);
+                    // Wait for the process to start
+                    int retries = 0;
+                    while (retries < 10) {
+                        if (process.isAlive()) {
+                            break;
+                        }
+                        Thread.sleep(1000); // Wait for 1 second
+                        retries++;
+                    }
+
+                    if (process.isAlive()) {
+                        // Attendance and Payments cleaning
+                        try (Connection conForDelete = DBConnect.connect()) {
+                            // Get the date for January 1st of the previous year
+                            LocalDate cutoffDate = LocalDate.now().minusYears(1).withMonth(1).withDayOfMonth(1);
+                            // Define the SQL statements for deleting records
+                            String deleteAttendanceQuery = "DELETE FROM attndance_table WHERE Date < ?";
+                            String deletePaymentQuery = "DELETE FROM payment_table WHERE Date_paid < ?";
+                            try (PreparedStatement attendanceStatement = conForDelete.prepareStatement(deleteAttendanceQuery);
+                                    PreparedStatement paymentStatement = conForDelete.prepareStatement(deletePaymentQuery)) {
+                                // Set the parameter values for the prepared statements
+                                attendanceStatement.setDate(1, java.sql.Date.valueOf(cutoffDate));
+                                paymentStatement.setDate(1, java.sql.Date.valueOf(cutoffDate));
+                                // Execute the delete statements
+                                int attendanceDeletedRows = attendanceStatement.executeUpdate();
+                                int paymentDeletedRows = paymentStatement.executeUpdate();
+
+                                // Check if any rows were deleted
+                                if (attendanceDeletedRows > 0 || paymentDeletedRows > 0) {
+                                    JOptionPane.showMessageDialog(this, "Older Attendance and Payments data cleanup completed successfully. Deleted rows: " + (attendanceDeletedRows + paymentDeletedRows));
+                                } else {
+                                    
+                                }
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Failed to start MySQL server.");
+                    }
+                } catch (IOException | InterruptedException | SQLException e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
                 Component frame = null;
-                JOptionPane.showMessageDialog(frame, "invaild username or password");
+                JOptionPane.showMessageDialog(frame, "Invalid username or password.");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Update your system date and time");
+            JOptionPane.showMessageDialog(null, "Update your system date and time.");
             this.dispose();
         }
 

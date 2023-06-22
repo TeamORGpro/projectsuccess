@@ -402,6 +402,7 @@ public final class TcherRegForm extends javax.swing.JFrame {
 
                             pstmt.execute();
                             JOptionPane.showMessageDialog(null, "Successfully saved");
+                            newBtn.doClick();
                         }
                         con.close();
                     } catch (HeadlessException | SQLException e) {
