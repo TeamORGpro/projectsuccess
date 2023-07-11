@@ -93,7 +93,7 @@ public class TchrExpo extends javax.swing.JFrame {
         tchrExportTbl.setRowSelectionAllowed(false);
         jScrollPane1.setViewportView(tchrExportTbl);
 
-        exportTchrInfoBtn.setText("Export to Excel File");
+        exportTchrInfoBtn.setText("Export as Excel File");
         exportTchrInfoBtn.setMaximumSize(new java.awt.Dimension(155, 30));
         exportTchrInfoBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

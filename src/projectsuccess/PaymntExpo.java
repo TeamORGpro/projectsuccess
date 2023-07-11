@@ -88,7 +88,7 @@ public class PaymntExpo extends javax.swing.JFrame {
         paymntExpoTbl.setRowSelectionAllowed(false);
         jScrollPane1.setViewportView(paymntExpoTbl);
 
-        exportPaymntInfoBtn.setText("Export to Excel File");
+        exportPaymntInfoBtn.setText("Export as Excel File");
         exportPaymntInfoBtn.setMaximumSize(new java.awt.Dimension(155, 30));
         exportPaymntInfoBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

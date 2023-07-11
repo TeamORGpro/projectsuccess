@@ -326,9 +326,16 @@ public class StdAtten extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane2.setViewportView(jTable1);
@@ -402,7 +409,7 @@ public class StdAtten extends javax.swing.JFrame {
 
             txtStatuslb.setText(c);
             txtStatuslb.setEnabled(false);
-            
+
             //Disable Marking Absent methods if present button selected
             cbGrades.setEnabled(false);
             absntBtn.setEnabled(false);
@@ -410,9 +417,7 @@ public class StdAtten extends javax.swing.JFrame {
             searchBtn01.setEnabled(true);
             txtNotes.setEnabled(true);
             createBtn.setEnabled(true);
-            
 
-            
         }
 
     }//GEN-LAST:event_presentRBActionPerformed
@@ -474,6 +479,11 @@ public class StdAtten extends javax.swing.JFrame {
                     dtm.addRow(columns);
                     pstmt2.close();
                     con.close();
+
+
+                    txtStdID.requestFocus(true);
+                    txtStdID.setText("");
+                    txtStdID.setCaretPosition(0);
                 } catch (SQLException e) {
                     JOptionPane.showMessageDialog(null, "Error:" + e.getLocalizedMessage(), "Error Occurred!", JOptionPane.ERROR_MESSAGE);
 //                    System.out.println(e.getMessage());
@@ -508,6 +518,15 @@ public class StdAtten extends javax.swing.JFrame {
                 presentRB.setSelected(true);
                 String c = "Present";
                 txtStatuslb.setText(c);
+
+                //Disable Marking Absent methods if present button selected
+                cbGrades.setEnabled(false);
+                absntBtn.setEnabled(false);
+                /*                txtStdID.setEnabled(true);
+                searchBtn01.setEnabled(true);
+                txtNotes.setEnabled(true);
+                createBtn.setEnabled(true);*/
+
             } else {
                 JOptionPane.showMessageDialog(null, "Please Enter Valid Student ID");
                 newBtn.doClick();
@@ -648,7 +667,7 @@ public class StdAtten extends javax.swing.JFrame {
 
             txtStatuslb.setText(b);
             txtStatuslb.setEnabled(false);
-            
+
             txtStdID.setEnabled(false);
             searchBtn01.setEnabled(false);
             txtNotes.setEnabled(false);

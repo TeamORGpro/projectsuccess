@@ -673,7 +673,7 @@ public final class PaymentDetails extends javax.swing.JFrame {
                         String id1 = Integer.toString(id);
 
 //                        File f = new File("src/projectsuccess/receipt.jrxml"); // get file relative path of my pc
-                        File f = new File("PrintBuilder/receipt.jrxml"); // get file relative path
+                        File f = new File("PrintBuilder/receipt.jrxml"); // get file relative path for setup 
                         String reportSource = f.getAbsolutePath(); //get absolute path according to that relative path
 
                         Map<String, Object> param = new HashMap<String, Object>();
@@ -697,6 +697,8 @@ public final class PaymentDetails extends javax.swing.JFrame {
 
                     }
                     newBtn.doClick(); //clicking new btn after save
+                    txtstdID.requestFocus(true);
+                    txtstdID.setCaretPosition(0);
                     pstmt2.close();
                 }
 

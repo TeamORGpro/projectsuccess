@@ -590,6 +590,7 @@ public class StdRegForm extends javax.swing.JFrame {
 
 //                                    System.out.println("QR code downloaded successfully");
                                     JOptionPane.showMessageDialog(this, "QR code downloaded successfully");
+                                    newBtn.doClick();
                                 } catch (IOException e) {
                                     e.printStackTrace();
 //                                    JOptionPane.showMessageDialog(null, "There is a Probleme to download QR Code", "Error Occurred!", JOptionPane.ERROR_MESSAGE);
