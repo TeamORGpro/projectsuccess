@@ -5,5 +5,5 @@
 - Jasper Report Library
 - Excel File Write Library
 
-  You can get a better understanding of this software by going through the two documents placed in the following folder :
+  You can get a better understanding of this software by going through the documents placed in the following folder :
   > Instruction Manual for the Software folder.
