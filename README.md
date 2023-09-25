@@ -9,3 +9,5 @@
   > Instruction Manual for the Software folder.
   > 
   > https://drive.google.com/file/d/1SXsWj9dqajtZNka4810yEem6EVMiyw-t/view?usp=sharing
+
+**Please note that this project contains both object-oriented and procedural code as it was created for one of my assignments. But this is a real-world project. All the functionalities are working as expected.*
