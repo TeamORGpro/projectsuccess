@@ -555,7 +555,8 @@ public class StdRegForm extends javax.swing.JFrame {
                             String qrText = txtStdID.getText();
 
                             // Generate the URL for the QR code image using the Google Charts API
-                            String url = "https://chart.googleapis.com/chart?cht=qr&chl=" + qrText + "&chs=200x200";
+                            String url = "https://qrcode.tec-it.com/API/QRCode?data=" + qrText + "&backcolor=%23ffffff&size=small&quietzone=1&errorcorrection=H";
+                            //String url = "https://chart.googleapis.com/chart?cht=qr&chl=" + qrText + "&chs=200x200";
 
                             // Show a file chooser dialog to let the user choose where to save the QR code image
                             JFileChooser fileChooser = new JFileChooser();
